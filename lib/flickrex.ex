@@ -3,16 +3,25 @@ defmodule Flickrex do
   Documentation for Flickrex.
   """
 
+  alias Flickrex.API
+
   @doc """
-  Hello world.
-
-  ## Examples
-
-      iex> Flickrex.hello
-      :world
-
+  TODO
   """
-  def hello do
-    :world
-  end
+  defdelegate new, to: Flickrex.Config
+
+  @doc """
+  TODO
+  use this to override application config Flickrex.new |> Flickrex.config(tokens)
+  """
+  defdelegate config(config, params), to: Flickrex.Config, as: :merge
+
+  defdelegate get_request_token(auth), to: API.Auth
+
+  defdelegate get_authorize_url(request_token), to: API.Auth
+
+  defdelegate fetch_access(auth, request_token, verify), to: API.Auth
+
+  defdelegate call(auth, method, args \\ []), to: API.Auth
+
 end

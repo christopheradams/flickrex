@@ -23,12 +23,12 @@ defmodule Flickrex do
   """
   defdelegate config(config, params), to: Flickrex.Config, as: :merge
 
-  defdelegate get_request_token(auth), to: API.Auth
+  defdelegate get_request_token(config), to: API.Auth
 
   defdelegate get_authorize_url(request_token), to: API.Auth
 
   defdelegate fetch_access_token(config, request_token, verify), to: API.Auth
 
-  defdelegate call(auth, method, args \\ []), to: API.Auth
+  defdelegate call(config, method, args \\ []), to: API.Auth
 
 end

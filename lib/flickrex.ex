@@ -6,9 +6,16 @@ defmodule Flickrex do
   alias Flickrex.API
 
   @doc """
-  TODO
+  Create a Flickrex client using application config
   """
-  defdelegate new, to: Flickrex.Config
+  def new do
+    new(Application.get_env(:flickrex, :oauth))
+  end
+
+  @doc """
+  Create a Flickrex client using the specified config
+  """
+  defdelegate new(params), to: Flickrex.Config
 
   @doc """
   TODO

@@ -7,7 +7,7 @@ defmodule Flickrex.Config do
   TODO
   """
   def new do
-    new(Application.get_env(:flickrex, :oauth))
+    %Config{}
   end
 
   @doc """

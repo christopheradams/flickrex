@@ -4,7 +4,11 @@ defmodule Flickrex.ConfigTest do
   alias Flickrex.Config
 
   test "new config" do
-    assert %Config{} = Config.new
+    config = Config.new
+    assert Map.has_key?(config, :consumer_key)
+    assert Map.has_key?(config, :consumer_secret)
+    assert Map.has_key?(config, :access_token)
+    assert Map.has_key?(config, :access_token_secret)
   end
 
   test "new config with params" do

@@ -38,7 +38,7 @@ defmodule Flickrex.API.Auth do
     put_access_token(config, access_token)
   end
 
-  def get_access_token(%Config{consumer_key: consumer_key, consumer_secret: consumer_secret},
+  defp get_access_token(%Config{consumer_key: consumer_key, consumer_secret: consumer_secret},
       %RequestToken{oauth_token: access_token, oauth_token_secret: access_token_secret},
       oauth_verifier) do
     params = [oauth_verifier: oauth_verifier]
@@ -53,7 +53,7 @@ defmodule Flickrex.API.Auth do
                  username: token["username"]}
   end
 
-  def put_access_token(%Config{} = auth, %AccessToken{oauth_token: token, oauth_token_secret: secret}) do
+  defp put_access_token(%Config{} = auth, %AccessToken{oauth_token: token, oauth_token_secret: secret}) do
     auth |> Config.put(:access_token, token) |> Config.put(:access_token_secret, secret)
   end
 

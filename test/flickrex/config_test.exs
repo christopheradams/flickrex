@@ -22,7 +22,11 @@ defmodule Flickrex.ConfigTest do
   end
 
   test "put config" do
-    config = Config.new |> Config.put(:consumer_key, "test")
-    assert config.consumer_key == "test"
+    config =
+      Config.new
+      |> Config.put(:consumer_key, "key")
+      |> Config.put(:consumer_secret, "secret")
+    assert config.consumer_key == "key"
+    assert config.consumer_secret == "secret"
   end
 end

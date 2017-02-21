@@ -3,6 +3,8 @@ defmodule Flickrex.API.Auth do
   alias Flickrex.AccessToken
   alias Flickrex.RequestToken
 
+  @oauther Application.get_env(:flickrex, :oauther) || Flickrex.OAuth
+
   @oauth_callback "oob"
 
   @end_point "https://api.flickr.com/services"
@@ -15,7 +17,7 @@ defmodule Flickrex.API.Auth do
   # token = Flickrex.API.Auth.get_request_token(flickrex, oauth_callback: "http://example.com")
   def get_request_token(%Config{consumer_key: consumer_key, consumer_secret: consumer_secret}, params \\ []) do
     params = Keyword.merge([oauth_callback: @oauth_callback], params)
-    result = Flickrex.OAuth.request(:get, @flickr_oauth_request_token, params, consumer_key,
+    result = @oauther.request(:get, @flickr_oauth_request_token, params, consumer_key,
       consumer_secret, nil, nil)
     {:ok, {_response, _header, body}} = result
     token = URI.decode_query(to_string(body), %{})
@@ -40,7 +42,7 @@ defmodule Flickrex.API.Auth do
       %RequestToken{oauth_token: access_token, oauth_token_secret: access_token_secret},
       oauth_verifier) do
     params = [oauth_verifier: oauth_verifier]
-    result = Flickrex.OAuth.request(:get, @flickr_oauth_access_token, params, consumer_key,
+    result = @oauther.request(:get, @flickr_oauth_access_token, params, consumer_key,
       consumer_secret, access_token, access_token_secret)
     {:ok, {_response, _header, body}} = result
     token = URI.decode_query(to_string(body), %{})
@@ -58,7 +60,7 @@ defmodule Flickrex.API.Auth do
   def call(%Config{consumer_key: consumer_key, consumer_secret: consumer_secret, access_token: access_token,
                    access_token_secret: access_token_secret}, method, args \\ []) do
     params = Keyword.merge([method: method, format: "json", nojsoncallback: 1], args)
-    result = Flickrex.OAuth.request(:get, @rest_path_secure, params, consumer_key,
+    result = @oauther.request(:get, @rest_path_secure, params, consumer_key,
       consumer_secret, access_token, access_token_secret)
     {:ok, {_response, _header, body}} = result
     Poison.decode!(body)

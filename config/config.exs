@@ -6,3 +6,7 @@ config :flickrex, :oauth, [
   access_token:        System.get_env("FLICKR_ACCESS_TOKEN"),
   access_token_secret: System.get_env("FLICKR_ACCESS_SECRET")
 ]
+
+if Mix.env == :test do
+  config :flickrex, :oauther, Flickrex.OAuth.Mock
+end

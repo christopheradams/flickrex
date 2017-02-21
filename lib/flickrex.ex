@@ -27,7 +27,7 @@ defmodule Flickrex do
 
   defdelegate get_authorize_url(request_token), to: API.Auth
 
-  defdelegate fetch_access(auth, request_token, verify), to: API.Auth
+  defdelegate fetch_access_token(config, request_token, verify), to: API.Auth
 
   defdelegate call(auth, method, args \\ []), to: API.Auth
 

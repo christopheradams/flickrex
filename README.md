@@ -51,7 +51,7 @@ auth_url = Flickrex.get_authorize_url(token)
 
 # Open the URL in your browser, authorize the app, and get the verify token
 verify = "..."
-flickrex = Flickrex.fetch_access(flickrex, token, verify)
+flickrex = Flickrex.fetch_access_token(flickrex, token, verify)
 login = Flickrex.call(flickrex, "flickr.test.login")
 
 # save flickrex.access_token and flickrex.access_token_secret for this user

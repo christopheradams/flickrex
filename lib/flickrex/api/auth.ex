@@ -33,7 +33,7 @@ defmodule Flickrex.API.Auth do
     URI.to_string(%{ uri | query: query})
   end
 
-  def fetch_access(%Config{} = config, %RequestToken{} = request_token, oauth_verifier) do
+  def fetch_access_token(%Config{} = config, %RequestToken{} = request_token, oauth_verifier) do
     access_token = get_access_token(config, request_token, oauth_verifier)
     put_access_token(config, access_token)
   end

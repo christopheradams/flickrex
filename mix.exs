@@ -30,6 +30,7 @@ defmodule Flickrex.Mixfile do
     [{:oauther, "~> 1.0"},
      {:dialyxir, "~> 0.4", only: [:dev], runtime: false},
      {:credo, "~> 0.5", only: [:dev, :test], runtime: false},
+     {:ex_doc, ">= 0.0.0", only: :dev},
      {:poison, "~> 3.0"}]
   end
 

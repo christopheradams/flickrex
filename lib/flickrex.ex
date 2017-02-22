@@ -41,5 +41,5 @@ defmodule Flickrex do
   @doc """
   TODO
   """
-  defdelegate call(config, method, args \\ []), to: API.Auth
+  defdelegate call(config, method, args \\ []), to: API.Base
 end

@@ -11,6 +11,13 @@ defmodule Flickrex.OAuth.Mock do
     {:ok, {nil, nil, body}}
   end
 
+  def request(:get, "https://api.flickr.com/services/rest", params, _, _, _, _) do
+    method = Keyword.get(params, :method)
+    param = Keyword.get(params, :param)
+    body = "{\"method\": \"#{method}\", \"param\": \"#{param}\"}"
+    {:ok, {nil, nil, body}}
+  end
+
   def request(method, url, params, ck, cs, at, ats) do
     args = [method: method, url: url, ck: ck, cs: cs, at: at, ats: ats]
     query = Keyword.merge(args, params)

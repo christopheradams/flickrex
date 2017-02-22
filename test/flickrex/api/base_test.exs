@@ -3,6 +3,12 @@ defmodule Flickrex.API.BaseTest do
 
   import Flickrex.API.Base
 
+  test "call" do
+    flickrex = Flickrex.new
+    response = call(flickrex, "TEST", [param: "PARAM"])
+    assert response == %{"method" => "TEST", "param" => "PARAM"}
+  end
+
   test "request" do
     config = [consumer_key: "CK", consumer_secret: "CS", access_token: "AC", access_token_secret: "ATS"]
     flickrex = Flickrex.new(config)

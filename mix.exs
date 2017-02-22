@@ -18,6 +18,7 @@ defmodule Flickrex.Mixfile do
   defp deps do
     [{:oauther, "~> 1.0"},
      {:dialyxir, "~> 0.4", only: [:dev], runtime: false},
+     {:credo, "~> 0.5", only: [:dev, :test], runtime: false},
      {:poison, "~> 3.0"}]
   end
 end

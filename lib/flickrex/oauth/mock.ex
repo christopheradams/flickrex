@@ -1,6 +1,11 @@
 defmodule Flickrex.OAuth.Mock do
   @moduledoc false
 
+  @behaviour Flickrex.OAuth
+
+  @type token :: Flickrex.OAuth.token
+
+  @spec request(:get | :post, binary, Keyword.t, token, token, token, token) :: tuple
   def request(:get, "https://api.flickr.com/services/oauth/request_token", _, _, _, _, _) do
     body = "oauth_callback_confirmed=true&oauth_token=REQUEST_TOKEN&oauth_token_secret=REQUEST_TOKEN_SECRET"
     {:ok, {nil, nil, body}}

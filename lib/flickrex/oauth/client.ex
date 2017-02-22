@@ -1,4 +1,4 @@
-defmodule Flickrex.OAuth do
+defmodule Flickrex.OAuth.Client do
   @moduledoc """
   Provide a wrapper for OAuther request methods.
   """

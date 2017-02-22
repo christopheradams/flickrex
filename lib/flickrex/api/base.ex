@@ -2,7 +2,7 @@ defmodule Flickrex.API.Base do
   alias Flickrex.Config
 
   @end_point "https://api.flickr.com/services"
-  @oauther Application.get_env(:flickrex, :oauther) || Flickrex.OAuth
+  @oauther Application.get_env(:flickrex, :oauther) || Flickrex.OAuth.Client
 
   @doc """
   Call Flickr API with an API method and optional arguments.

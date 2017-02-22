@@ -31,7 +31,7 @@ defmodule Flickrex.API.Auth do
   def get_authorize_url(%RequestToken{oauth_token: oauth_token}, params \\ []) do
     query = params |> Map.new |> Map.put(:oauth_token, oauth_token) |> URI.encode_query
     uri = :authorize |> auth_url |>  URI.parse
-    URI.to_string(%{ uri | query: query})
+    URI.to_string(%{uri | query: query})
   end
 
   @doc """

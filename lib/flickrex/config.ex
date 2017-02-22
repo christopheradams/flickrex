@@ -48,4 +48,3 @@ defmodule Flickrex.Config do
     struct(config, [{key, value}])
   end
 end
-

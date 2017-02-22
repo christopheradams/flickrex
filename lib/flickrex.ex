@@ -4,10 +4,13 @@ defmodule Flickrex do
   """
 
   alias Flickrex.API
+  alias Flickrex.Config
+  alias Flickrex.RequestToken
 
   @doc """
   Creates a Flickrex client using the application config
   """
+  @spec new :: Config.t
   def new do
     new(Application.get_env(:flickrex, :oauth))
   end
@@ -22,6 +25,7 @@ defmodule Flickrex do
     * `:access_token` - Per-user access token
     * `:access_token_secret` - Per-user access token secret
   """
+  @spec new(Keyword.t) :: Config.t
   defdelegate new(params), to: Flickrex.Config
 
   @doc ~S"""
@@ -32,6 +36,7 @@ defmodule Flickrex do
     tokens = [access_token: "...", access_token_secret: "..."]
     flickrex = Flickrex.new |> Flickrex.config(tokens)
   """
+  @spec config(Config.t, Keyword.t) :: Config.t
   defdelegate config(config, params), to: Flickrex.Config, as: :merge
 
   @doc """
@@ -42,6 +47,7 @@ defmodule Flickrex do
   * `oauth_callback` - For web apps, the URL to redirect the user back to after
     authentication.
   """
+  @spec get_request_token(Config.t, Keyword.t) :: RequestToken.t
   defdelegate get_request_token(config, params \\ []), to: API.Auth
 
   @doc """
@@ -52,7 +58,8 @@ defmodule Flickrex do
     token = Flickrex.get_request_token(flickrex)
     auth_url = Flickrex.get_authorize_url(token)
   """
-  defdelegate get_authorize_url(request_token), to: API.Auth
+  @spec get_authorize_url(RequestToken.t, Keyword.t) :: binary
+  defdelegate get_authorize_url(request_token, params \\ []), to: API.Auth
 
   @doc """
   Fetches an access token from Flickr and updates the config
@@ -64,6 +71,7 @@ defmodule Flickrex do
 
     flickrex = Flickrex.fetch_access_token(flickrex, token, verify)
   """
+  @spec fetch_access_token(Config.t, RequestToken.t, binary) :: Config.t
   defdelegate fetch_access_token(config, request_token, verify), to: API.Auth
 
   @doc """
@@ -73,5 +81,6 @@ defmodule Flickrex do
 
     list = Flickrex.call(flickrex, "flickr.photos.getRecent", per_page: 5)
   """
+  @spec call(Config.t, binary, Keyword.t) :: %{}
   defdelegate call(config, method, args \\ []), to: API.Base
 end

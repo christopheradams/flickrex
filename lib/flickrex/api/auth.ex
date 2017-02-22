@@ -14,6 +14,7 @@ defmodule Flickrex.API.Auth do
   @doc """
   Gets a temporary token to authenticate the user to your application
   """
+  @spec get_request_token(Config.t, Keyword.t) :: RequestToken.t
   def get_request_token(config, params \\ []) do
     params = Keyword.merge([oauth_callback: @oauth_callback], params)
     body = request(config, :get, auth_url(:request_token), params)
@@ -26,6 +27,7 @@ defmodule Flickrex.API.Auth do
   @doc """
   Generates a Flickr authorization page URL for a user
   """
+  @spec get_authorize_url(RequestToken.t, Keyword.t) :: binary
   def get_authorize_url(%RequestToken{oauth_token: oauth_token}, params \\ []) do
     query = params |> Map.new |> Map.put(:oauth_token, oauth_token) |> URI.encode_query
     uri = :authorize |> auth_url |>  URI.parse
@@ -35,11 +37,13 @@ defmodule Flickrex.API.Auth do
   @doc """
   Fetches an access token from Flickr and updates the config
   """
+  @spec fetch_access_token(Config.t, RequestToken.t, binary) :: Config.t
   def fetch_access_token(%Config{} = config, %RequestToken{} = request_token, oauth_verifier) do
     access_token = get_access_token(config, request_token, oauth_verifier)
     put_access_token(config, access_token)
   end
 
+  @spec get_access_token(Config.t, RequestToken.t, binary) :: AccessToken.t
   defp get_access_token(config, request_token, oauth_verifier) do
     config = put_access_token(config, request_token)
     params = [oauth_verifier: oauth_verifier]
@@ -52,7 +56,8 @@ defmodule Flickrex.API.Auth do
                  username: token["username"]}
   end
 
-  defp put_access_token(auth, %{oauth_token: token, oauth_token_secret: secret}) do
-    auth |> Config.put(:access_token, token) |> Config.put(:access_token_secret, secret)
+  @spec put_access_token(Config.t, AccessToken.t | RequestToken.t) :: Config.t
+  defp put_access_token(config, %{oauth_token: token, oauth_token_secret: secret}) do
+    config |> Config.put(:access_token, token) |> Config.put(:access_token_secret, secret)
   end
 end

@@ -23,12 +23,23 @@ defmodule Flickrex do
   """
   defdelegate config(config, params), to: Flickrex.Config, as: :merge
 
+  @doc """
+  TODO
+  """
   defdelegate get_request_token(config), to: API.Auth
 
+  @doc """
+  TODO
+  """
   defdelegate get_authorize_url(request_token), to: API.Auth
 
+  @doc """
+  TODO
+  """
   defdelegate fetch_access_token(config, request_token, verify), to: API.Auth
 
+  @doc """
+  TODO
+  """
   defdelegate call(config, method, args \\ []), to: API.Auth
-
 end

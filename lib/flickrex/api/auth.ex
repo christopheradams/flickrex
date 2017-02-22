@@ -15,11 +15,9 @@ defmodule Flickrex.API.Auth do
   @rest_path_secure "#{@end_point}/rest"
 
   # token = Flickrex.API.Auth.get_request_token(flickrex, oauth_callback: "http://example.com")
-  def get_request_token(%Config{consumer_key: consumer_key, consumer_secret: consumer_secret}, params \\ []) do
+  def get_request_token(config, params \\ []) do
     params = Keyword.merge([oauth_callback: @oauth_callback], params)
-    result = @oauther.request(:get, @flickr_oauth_request_token, params, consumer_key,
-      consumer_secret, nil, nil)
-    {:ok, {_response, _header, body}} = result
+    body = request(config, :get, @flickr_oauth_request_token, params)
     token = URI.decode_query(to_string(body), %{})
     %RequestToken{oauth_callback_confirmed: token["oauth_callback_confirmed"],
                   oauth_token: token["oauth_token"],
@@ -38,13 +36,10 @@ defmodule Flickrex.API.Auth do
     put_access_token(config, access_token)
   end
 
-  defp get_access_token(%Config{consumer_key: consumer_key, consumer_secret: consumer_secret},
-      %RequestToken{oauth_token: access_token, oauth_token_secret: access_token_secret},
-      oauth_verifier) do
+  defp get_access_token(config, request_token, oauth_verifier) do
+    config = put_access_token(config, request_token)
     params = [oauth_verifier: oauth_verifier]
-    result = @oauther.request(:get, @flickr_oauth_access_token, params, consumer_key,
-      consumer_secret, access_token, access_token_secret)
-    {:ok, {_response, _header, body}} = result
+    body = request(config, :get, @flickr_oauth_access_token, params)
     token = URI.decode_query(to_string(body), %{})
     %AccessToken{fullname: token["fullname"],
                  oauth_token: token["oauth_token"],
@@ -53,16 +48,20 @@ defmodule Flickrex.API.Auth do
                  username: token["username"]}
   end
 
-  defp put_access_token(%Config{} = auth, %AccessToken{oauth_token: token, oauth_token_secret: secret}) do
+  defp put_access_token(auth, %{oauth_token: token, oauth_token_secret: secret}) do
     auth |> Config.put(:access_token, token) |> Config.put(:access_token_secret, secret)
   end
 
-  def call(%Config{consumer_key: consumer_key, consumer_secret: consumer_secret, access_token: access_token,
-                   access_token_secret: access_token_secret}, method, args \\ []) do
+  def call(%Config{} = config, method, args \\ []) do
     params = Keyword.merge([method: method, format: "json", nojsoncallback: 1], args)
-    result = @oauther.request(:get, @rest_path_secure, params, consumer_key,
-      consumer_secret, access_token, access_token_secret)
-    {:ok, {_response, _header, body}} = result
+    body = request(config, :get, @rest_path_secure, params)
     Poison.decode!(body)
+  end
+
+  defp request(config, method, url, params) do
+    result = @oauther.request(method, url, params, config.consumer_key,
+      config.consumer_secret, config.access_token, config.access_token_secret)
+    {:ok, {_response, _header, body}} = result
+    body
   end
 end

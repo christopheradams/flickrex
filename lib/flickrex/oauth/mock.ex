@@ -19,7 +19,9 @@ defmodule Flickrex.OAuth.Mock do
   def request(:get, "https://api.flickr.com/services/rest", params, _, _, _, _) do
     method = Keyword.get(params, :method)
     param = Keyword.get(params, :param)
-    body = "{\"method\": \"#{method}\", \"param\": \"#{param}\"}"
+    format = Keyword.get(params, :format)
+    no_json = Keyword.get(params, :nojsoncallback)
+    body = "{\"param\":\"#{param}\",\"nojsoncallback\":#{no_json},\"method\":\"#{method}\",\"format\":\"#{format}\"}"
     {:ok, {nil, nil, body}}
   end
 

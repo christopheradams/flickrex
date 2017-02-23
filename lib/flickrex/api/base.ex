@@ -16,11 +16,10 @@ defmodule Flickrex.API.Base do
     flickrex = Flickrex.new
     list = Flickrex.call(flickrex, "flickr.photos.getRecent", per_page: 5)
   """
-  @spec call(Config.t, binary, Keyword.t) :: %{}
+  @spec call(Config.t, binary, Keyword.t) :: binary
   def call(%Config{} = config, method, args \\ []) do
     params = Keyword.merge([method: method, format: "json", nojsoncallback: 1], args)
-    body = request(config, :get, rest_url(), params)
-    Poison.decode!(body)
+    request(config, :get, rest_url(), params)
   end
 
   @doc false

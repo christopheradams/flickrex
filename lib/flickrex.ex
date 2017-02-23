@@ -82,5 +82,7 @@ defmodule Flickrex do
     list = Flickrex.call(flickrex, "flickr.photos.getRecent", per_page: 5)
   """
   @spec call(Config.t, binary, Keyword.t) :: %{}
-  defdelegate call(config, method, args \\ []), to: API.Base
+  def call(config, method, args \\ []) do
+    config |> API.Base.call(method, args) |> Poison.decode!
+  end
 end

@@ -26,7 +26,7 @@ defmodule Flickrex.OAuth.Mock do
     param = Keyword.get(params, :param)
     format = Keyword.get(params, :format)
     no_json = Keyword.get(params, :nojsoncallback)
-    body = '{"param":"#{param}","nojsoncallback":#{no_json},"method":"#{method}","format":"#{format}"}'
+    body = '{"param":"#{param}","nojsoncallback":#{no_json},"method":"#{method}","format":"#{format}","stat":"ok"}'
     {:ok, {nil, nil, body}}
   end
 

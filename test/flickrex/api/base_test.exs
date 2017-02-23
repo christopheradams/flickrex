@@ -6,7 +6,7 @@ defmodule Flickrex.API.BaseTest do
   test "call" do
     flickrex = Flickrex.new
     response = call(flickrex, "TEST", [param: "PARAM"])
-    assert response== "{\"param\":\"PARAM\",\"nojsoncallback\":1,\"method\":\"TEST\",\"format\":\"json\"}"
+    assert response== "{\"param\":\"PARAM\",\"nojsoncallback\":1,\"method\":\"TEST\",\"format\":\"json\",\"stat\":\"ok\"}"
   end
 
   test "request" do

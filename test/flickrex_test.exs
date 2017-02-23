@@ -23,7 +23,6 @@ defmodule FlickrexTest do
     flickrex = Flickrex.new
     response = Flickrex.call(flickrex, "TEST", [param: "PARAM"])
     assert response == %{"method" => "TEST", "param" => "PARAM",
-                         "format" => "json", "nojsoncallback" => 1,
-                         "stat" => "ok"}
+                         "format" => "json", "nojsoncallback" => 1}
   end
 end

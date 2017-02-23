@@ -5,7 +5,10 @@ defmodule Flickrex do
 
   alias Flickrex.API
   alias Flickrex.Config
+  alias Flickrex.Parser
   alias Flickrex.RequestToken
+
+  @type response :: Parser.response
 
   @doc """
   Creates a Flickrex client using the application config
@@ -81,8 +84,8 @@ defmodule Flickrex do
 
     list = Flickrex.call(flickrex, "flickr.photos.getRecent", per_page: 5)
   """
-  @spec call(Config.t, binary, Keyword.t) :: %{}
+  @spec call(Config.t, binary, Keyword.t) :: response
   def call(config, method, args \\ []) do
-    config |> API.Base.call(method, args) |> Poison.decode!
+    config |> API.Base.call(method, args) |> Parser.parse
   end
 end

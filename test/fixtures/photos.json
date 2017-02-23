@@ -1,0 +1,33 @@
+{
+  "photos": {
+    "page": 1,
+    "pages": 635,
+    "perpage": 2,
+    "total": "1270",
+    "photo": [
+      {
+        "id": "477842380",
+        "owner": "35034362831@N01",
+        "secret": "ee69046f6f",
+        "server": "200",
+        "farm": 1,
+        "title": "Joi with backyard bamboo",
+        "ispublic": 1,
+        "isfriend": 0,
+        "isfamily": 0
+      },
+      {
+        "id": "477860905",
+        "owner": "35034362831@N01",
+        "secret": "4888a2f4d6",
+        "server": "230",
+        "farm": 1,
+        "title": "Joi with bamboo",
+        "ispublic": 1,
+        "isfriend": 0,
+        "isfamily": 0
+      }
+    ]
+  },
+  "stat": "ok"
+}

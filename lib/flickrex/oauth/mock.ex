@@ -7,12 +7,12 @@ defmodule Flickrex.OAuth.Mock do
 
   @spec request(:get | :post, binary, Keyword.t, token, token, token, token) :: tuple
   def request(:get, "https://api.flickr.com/services/oauth/request_token", _, _, _, _, _) do
-    body = "oauth_callback_confirmed=true&oauth_token=REQUEST_TOKEN&oauth_token_secret=REQUEST_TOKEN_SECRET"
+    body = 'oauth_callback_confirmed=true&oauth_token=REQUEST_TOKEN&oauth_token_secret=REQUEST_TOKEN_SECRET'
     {:ok, {nil, nil, body}}
   end
 
   def request(:get, "https://api.flickr.com/services/oauth/access_token", _, _, _, _, _) do
-    body = "fullname=FULLNAME&oauth_token=ACCESS_TOKEN&oauth_token_secret=ACCESS_TOKEN_SECRET&user_nsid=USER_NSID&username=USERNAME"
+    body = 'fullname=FULLNAME&oauth_token=ACCESS_TOKEN&oauth_token_secret=ACCESS_TOKEN_SECRET&user_nsid=USER_NSID&username=USERNAME'
     {:ok, {nil, nil, body}}
   end
 
@@ -21,7 +21,7 @@ defmodule Flickrex.OAuth.Mock do
     param = Keyword.get(params, :param)
     format = Keyword.get(params, :format)
     no_json = Keyword.get(params, :nojsoncallback)
-    body = "{\"param\":\"#{param}\",\"nojsoncallback\":#{no_json},\"method\":\"#{method}\",\"format\":\"#{format}\"}"
+    body = '{"param":"#{param}","nojsoncallback":#{no_json},"method":"#{method}","format":"#{format}"}'
     {:ok, {nil, nil, body}}
   end
 

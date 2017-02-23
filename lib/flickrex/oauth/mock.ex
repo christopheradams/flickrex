@@ -7,12 +7,17 @@ defmodule Flickrex.OAuth.Mock do
 
   @spec request(:get | :post, binary, Keyword.t, token, token, token, token) :: tuple
   def request(:get, "https://api.flickr.com/services/oauth/request_token", _, _, _, _, _) do
-    body = 'oauth_callback_confirmed=true&oauth_token=REQUEST_TOKEN&oauth_token_secret=REQUEST_TOKEN_SECRET'
+    terms = %{oauth_callback_confirmed: true, oauth_token: "REQUEST_TOKEN",
+              oauth_token_secret: "REQUEST_TOKEN_SECRET"}
+    body = terms |> URI.encode_query |> String.to_char_list
     {:ok, {nil, nil, body}}
   end
 
   def request(:get, "https://api.flickr.com/services/oauth/access_token", _, _, _, _, _) do
-    body = 'fullname=FULLNAME&oauth_token=ACCESS_TOKEN&oauth_token_secret=ACCESS_TOKEN_SECRET&user_nsid=USER_NSID&username=USERNAME'
+    terms = %{fullname: "FULLNAME", oauth_token: "ACCESS_TOKEN",
+              oauth_token_secret: "ACCESS_TOKEN_SECRET",
+              user_nsid: "USER_NSID", username: "USERNAME"}
+    body = terms |> URI.encode_query |> String.to_char_list
     {:ok, {nil, nil, body}}
   end
 

@@ -1,6 +1,13 @@
 # Flickrex
 
+[![Build Status](https://travis-ci.org/christopheradams/flickrex.svg?branch=master)](https://travis-ci.org/christopheradams/flickrex)
+[![Hex Version](https://img.shields.io/hexpm/v/flickrex.svg)](https://hex.pm/packages/flickrex)
+
 Flickr client library for Elixir.
+
+[Documentation for Flickrex is available on hexdocs](http://hexdocs.pm/flickrex/).<br/>
+[Source code is available on Github](https://github.com/christopheradams/flickrex).<br/>
+[Package is available on hex](https://hex.pm/packages/flickrex).
 
 ## Installation
 

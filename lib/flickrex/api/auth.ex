@@ -18,7 +18,7 @@ defmodule Flickrex.API.Auth do
   def get_request_token(config, params \\ []) do
     params = Keyword.merge([oauth_callback: @oauth_callback], params)
     body = request(config, :get, auth_url(:request_token), params)
-    token = URI.decode_query(to_string(body), %{})
+    token = URI.decode_query(body, %{})
     %RequestToken{oauth_callback_confirmed: token["oauth_callback_confirmed"],
                   oauth_token: token["oauth_token"],
                   oauth_token_secret: token["oauth_token_secret"]}
@@ -48,7 +48,7 @@ defmodule Flickrex.API.Auth do
     config = put_access_token(config, request_token)
     params = [oauth_verifier: oauth_verifier]
     body = request(config, :get, auth_url(:access_token), params)
-    token = URI.decode_query(to_string(body), %{})
+    token = URI.decode_query(body, %{})
     %AccessToken{fullname: token["fullname"],
                  oauth_token: token["oauth_token"],
                  oauth_token_secret: token["oauth_token_secret"],

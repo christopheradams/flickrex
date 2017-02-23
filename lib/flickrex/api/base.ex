@@ -24,12 +24,12 @@ defmodule Flickrex.API.Base do
   end
 
   @doc false
-  @spec request(Config.t, :get | :post, binary, Keyword.t) :: iolist
+  @spec request(Config.t, :get | :post, binary, Keyword.t) :: binary
   def request(%Config{} = config, method, url, params) do
     result = @oauther.request(method, url, params, config.consumer_key,
       config.consumer_secret, config.access_token, config.access_token_secret)
     {:ok, {_response, _header, body}} = result
-    body
+    IO.iodata_to_binary(body)
   end
 
   @doc false

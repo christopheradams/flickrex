@@ -22,7 +22,7 @@ defmodule Flickrex.Mixfile do
   end
 
   def application do
-    [extra_applications: [:inets, :logger],
+    [applications: [:inets, :logger],
      mod: {Flickrex.Application, []}]
   end
 

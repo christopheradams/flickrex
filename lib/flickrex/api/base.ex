@@ -13,13 +13,12 @@ defmodule Flickrex.API.Base do
 
   Example:
 
-    flickrex = Flickrex.new
-    list = Flickrex.call(flickrex, "flickr.photos.getRecent", per_page: 5)
+    response = Flickrex.call(flickrex, :get, "flickr.photos.getRecent", per_page: 5)
   """
-  @spec call(Config.t, binary, Keyword.t) :: binary
-  def call(%Config{} = config, method, args \\ []) do
-    params = Keyword.merge([method: method, format: "json", nojsoncallback: 1], args)
-    request(config, :get, rest_url(), params)
+  @spec call(Config.t, :get | :post, binary, Keyword.t) :: binary
+  def call(%Config{} = config, http_method, api_method, args \\ []) do
+    params = Keyword.merge([method: api_method, format: "json", nojsoncallback: 1], args)
+    request(config, http_method, rest_url(), params)
   end
 
   @doc false

@@ -86,6 +86,6 @@ defmodule Flickrex do
   """
   @spec call(Config.t, binary, Keyword.t) :: response
   def call(config, method, args \\ []) do
-    config |> API.Base.call(method, args) |> Parser.parse
+    config |> API.Base.call(:get, method, args) |> Parser.parse
   end
 end

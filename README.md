@@ -71,3 +71,21 @@ tokens = [access_token: "...", access_token_secret: "..."]
 flickrex = Flickrex.new |> Flickrex.config(tokens)
 login = Flickrex.get(flickrex, "flickr.test.login")
 ```
+
+## Testing
+
+Run the test suite:
+
+```sh
+mix test
+```
+
+To run a test that hits the Flickr API, set these environment variables to your
+real tokens: `FLICKR_CONSUMER_KEY`, `FLICKR_CONSUMER_SECRET`,
+`FLICKR_ACCESS_TOKEN`, `FLICKR_ACCESS_SECRET`.
+
+Run the test with:
+
+```sh
+mix test --only flickr_api
+```

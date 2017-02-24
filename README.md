@@ -43,9 +43,9 @@ config :flickrex, :oauth, [
 
 ```elixir
 flickrex = Flickrex.new
-list = Flickrex.call(flickrex, "flickr.photos.getRecent")
-id = list["photos"]["photo"] |> List.first |> Map.get("id")
-info = Flickrex.call(flickrex, "flickr.photos.getInfo", photo_id: id)
+response = Flickrex.get(flickrex, "flickr.photos.getRecent")
+id = response["photos"]["photo"] |> List.first |> Map.get("id")
+info = Flickrex.get(flickrex, "flickr.photos.getInfo", photo_id: id)
 title = info["photo"]["title"]["_content"]
 ```
 
@@ -59,7 +59,7 @@ auth_url = Flickrex.get_authorize_url(token)
 # Open the URL in your browser, authorize the app, and get the verify token
 verify = "..."
 flickrex = Flickrex.fetch_access_token(flickrex, token, verify)
-login = Flickrex.call(flickrex, "flickr.test.login")
+login = Flickrex.get(flickrex, "flickr.test.login")
 
 # save flickrex.access_token and flickrex.access_token_secret for this user
 ```
@@ -69,5 +69,5 @@ If the user has already been authenticated, you can reuse the access token and a
 ```elixir
 tokens = [access_token: "...", access_token_secret: "..."]
 flickrex = Flickrex.new |> Flickrex.config(tokens)
-login = Flickrex.call(flickrex, "flickr.test.login")
+login = Flickrex.get(flickrex, "flickr.test.login")
 ```

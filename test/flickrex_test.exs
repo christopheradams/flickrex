@@ -19,9 +19,9 @@ defmodule FlickrexTest do
     assert flickrex.consumer_key == "test"
   end
 
-  test "call" do
+  test "get" do
     flickrex = Flickrex.new
-    response = Flickrex.call(flickrex, "TEST", [param: "PARAM"])
+    response = Flickrex.get(flickrex, "TEST", [param: "PARAM"])
     assert response == %{"method" => "TEST", "param" => "PARAM",
                          "format" => "json", "nojsoncallback" => 1,
                          "verb" => "get"}

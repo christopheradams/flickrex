@@ -78,14 +78,14 @@ defmodule Flickrex do
   defdelegate fetch_access_token(config, request_token, verify), to: API.Auth
 
   @doc """
-  Calls Flickr API with an API method and optional arguments
+  Makes a GET request to the Flickr REST endpoint
 
   ## Examples:
 
-    list = Flickrex.call(flickrex, "flickr.photos.getRecent", per_page: 5)
+    response = Flickrex.get(flickrex, "flickr.photos.getRecent", per_page: 5)
   """
-  @spec call(Config.t, binary, Keyword.t) :: response
-  def call(config, method, args \\ []) do
+  @spec get(Config.t, binary, Keyword.t) :: response
+  def get(config, method, args \\ []) do
     config |> API.Base.call(:get, method, args) |> Parser.parse
   end
 end

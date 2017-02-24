@@ -9,6 +9,12 @@ defmodule Flickrex.API.BaseTest do
     assert response == "{\"verb\":\"get\",\"param\":\"PARAM\",\"nojsoncallback\":1,\"method\":\"TEST\",\"format\":\"json\",\"stat\":\"ok\"}"
   end
 
+  test "call post" do
+    flickrex = Flickrex.new
+    response = call(flickrex, :post, "TEST", [param: "PARAM"])
+    assert Regex.match?(~r/post/, response)
+  end
+
   test "request" do
     config = [consumer_key: "CK", consumer_secret: "CS", access_token: "AC", access_token_secret: "ATS"]
     flickrex = Flickrex.new(config)

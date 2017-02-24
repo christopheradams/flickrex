@@ -88,4 +88,16 @@ defmodule Flickrex do
   def get(config, method, args \\ []) do
     config |> API.Base.call(:get, method, args) |> Parser.parse
   end
+
+  @doc ~s"""
+  Makes a POST request to the Flickr REST endpoint
+
+  ## Examples:
+
+    response = Flickrex.post(flickrex, "flickr.photos.addTags", photo_id: photo_id, tags: "tag1,tag2")
+  """
+  @spec post(Config.t, binary, Keyword.t) :: response
+  def post(config, method, args \\ []) do
+    config |> API.Base.call(:post, method, args) |> Parser.parse
+  end
 end

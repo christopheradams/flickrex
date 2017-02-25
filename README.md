@@ -5,9 +5,21 @@
 
 Flickr client library for Elixir.
 
+The package has two main modules:
+
+* `Flickrex` - handles configuration and authentication for the API.
+* `Flickr` - mirrors the Flickr API method namespace.
+
 [Documentation for Flickrex is available on hexdocs](http://hexdocs.pm/flickrex/).<br/>
 [Source code is available on Github](https://github.com/christopheradams/flickrex).<br/>
 [Package is available on hex](https://hex.pm/packages/flickrex).
+
+## Hello World
+
+```elixir
+flickrex = Flickrex.new
+photos = Flickr.Photos.get_recent(flickrex)
+```
 
 ## Installation
 
@@ -26,9 +38,7 @@ end
 ## Configuration
 
 [Create an application](https://www.flickr.com/services/apps/create/apply/) on
-Flickr and make note of the API Key and Secret.
-
-Add the API keys to your Mix config file:
+Flickr and add the API keys to your Mix config file:
 
 ```elixir
 config :flickrex, :oauth, [
@@ -39,14 +49,26 @@ config :flickrex, :oauth, [
 
 ## Usage
 
-### Simple
+### Create a Flickrex config
 
 ```elixir
 flickrex = Flickrex.new
-response = Flickrex.get(flickrex, "flickr.photos.getRecent")
-id = response["photos"]["photo"] |> List.first |> Map.get("id")
-info = Flickrex.get(flickrex, "flickr.photos.getInfo", photo_id: id)
+```
+
+### Module API
+
+```elixir
+photos = Flickr.Photos.get_recent(flickrex)
+id = photos["photos"]["photo"] |> List.first |> Map.get("id")
+info = Flickr.Photos.get_info(flickrex, photo_id: id)
 title = info["photo"]["title"]["_content"]
+```
+
+### Manual API
+
+```
+photos = Flickrex.get(flickrex, "flickr.photos.getRecent")
+info = Flickrex.get(flickrex, "flickr.photos.getInfo", photo_id: id)
 ```
 
 ### Authentication
@@ -59,7 +81,7 @@ auth_url = Flickrex.get_authorize_url(token)
 # Open the URL in your browser, authorize the app, and get the verify token
 verify = "..."
 flickrex = Flickrex.fetch_access_token(flickrex, token, verify)
-login = Flickrex.get(flickrex, "flickr.test.login")
+login = Flickr.Test.login(flickrex)
 
 # save flickrex.access_token and flickrex.access_token_secret for this user
 ```
@@ -69,7 +91,7 @@ If the user has already been authenticated, you can reuse the access token and a
 ```elixir
 tokens = [access_token: "...", access_token_secret: "..."]
 flickrex = Flickrex.new |> Flickrex.config(tokens)
-login = Flickrex.get(flickrex, "flickr.test.login")
+login = Flickr.Test.login(flickrex)
 ```
 
 ## Testing

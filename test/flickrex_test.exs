@@ -22,7 +22,7 @@ defmodule FlickrexTest do
   test "get" do
     flickrex = Flickrex.new
     response = Flickrex.get(flickrex, "TEST", [param: "PARAM"])
-    assert response == %{"method" => "TEST", "param" => "PARAM",
+    assert response == %{"method" => "TEST", "param" => "param:PARAM",
                          "format" => "json", "nojsoncallback" => 1,
                          "verb" => "get"}
   end
@@ -30,7 +30,7 @@ defmodule FlickrexTest do
   test "post" do
     flickrex = Flickrex.new
     response = Flickrex.post(flickrex, "TEST", [param: "PARAM"])
-    assert response == %{"method" => "TEST", "param" => "PARAM",
+    assert response == %{"method" => "TEST", "param" => "param:PARAM",
                          "format" => "json", "nojsoncallback" => 1,
                          "verb" => "post"}
   end

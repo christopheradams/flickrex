@@ -1,6 +1,24 @@
 defmodule Flickrex do
   @moduledoc """
   Flickr client library for Elixir.
+
+  ## Configuration
+
+      config :flickrex, :oauth, [
+        consumer_key:    "...",
+        consumer_secret: "...",
+      ]
+
+  ## Examples
+
+      flickrex = Flickrex.new
+      token = Flickrex.get_request_token(flickrex)
+      auth_url = Flickrex.get_authorize_url(token)
+
+      # Open the URL in your browser, authorize the app, and get the verify token
+      verify = "..."
+      flickrex = Flickrex.fetch_access_token(flickrex, token, verify)
+      login = Flickr.Test.login(flickrex)
   """
 
   alias Flickrex.API
@@ -36,8 +54,8 @@ defmodule Flickrex do
 
   ## Examples:
 
-    tokens = [access_token: "...", access_token_secret: "..."]
-    flickrex = Flickrex.new |> Flickrex.config(tokens)
+      tokens = [access_token: "...", access_token_secret: "..."]
+      flickrex = Flickrex.new |> Flickrex.config(tokens)
   """
   @spec config(Config.t, Keyword.t) :: Config.t
   defdelegate config(config, params), to: Flickrex.Config, as: :merge
@@ -58,8 +76,8 @@ defmodule Flickrex do
 
   ## Examples:
 
-    token = Flickrex.get_request_token(flickrex)
-    auth_url = Flickrex.get_authorize_url(token)
+      token = Flickrex.get_request_token(flickrex)
+      auth_url = Flickrex.get_authorize_url(token)
   """
   @spec get_authorize_url(RequestToken.t, Keyword.t) :: binary
   defdelegate get_authorize_url(request_token, params \\ []), to: API.Auth
@@ -72,7 +90,7 @@ defmodule Flickrex do
 
   ## Examples:
 
-    flickrex = Flickrex.fetch_access_token(flickrex, token, verify)
+      flickrex = Flickrex.fetch_access_token(flickrex, token, verify)
   """
   @spec fetch_access_token(Config.t, RequestToken.t, binary) :: Config.t
   defdelegate fetch_access_token(config, request_token, verify), to: API.Auth
@@ -82,7 +100,7 @@ defmodule Flickrex do
 
   ## Examples:
 
-    response = Flickrex.get(flickrex, "flickr.photos.getRecent", per_page: 5)
+      response = Flickrex.get(flickrex, "flickr.photos.getRecent", per_page: 5)
   """
   @spec get(Config.t, binary, Keyword.t) :: response
   def get(config, method, args \\ []) do
@@ -94,7 +112,7 @@ defmodule Flickrex do
 
   ## Examples:
 
-    response = Flickrex.post(flickrex, "flickr.photos.addTags", photo_id: photo_id, tags: "tag1,tag2")
+      response = Flickrex.post(flickrex, "flickr.photos.addTags", photo_id: photo_id, tags: "tag1,tag2")
   """
   @spec post(Config.t, binary, Keyword.t) :: response
   def post(config, method, args \\ []) do

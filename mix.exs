@@ -14,6 +14,7 @@ defmodule Flickrex.Mixfile do
      elixir: "~> 1.3 or ~> 1.4",
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
+     dialyzer: [plt_add_apps: [:mix, :eex]],
      docs: docs(),
      description: @project_description,
      source_url: @source_url,

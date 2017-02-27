@@ -1,0 +1,108 @@
+{
+  "stat": "ok",
+  "method": {
+    "response": {
+      "_content": "<places total=\"100\" date_start=\"1246320000\" date_stop=\"1246406399\">\n   <place place_id=\"4KO02SibApitvSBieQ\" woeid=\"23424977\"\n       latitude=\"48.890\" longitude=\"-116.982\" \n       place_url=\"/United+States\" place_type=\"country\" \n       place_type_id=\"12\" photo_count=\"23371\">United States</place>\n   <!-- and so on... -->\n</places>"
+    },
+    "requiredperms": 0,
+    "needssigning": 0,
+    "needslogin": 0,
+    "name": "flickr.places.getTopPlacesList",
+    "description": {
+      "_content": "Return the top 100 most geotagged places for a day."
+    }
+  },
+  "errors": {
+    "error": [
+      {
+        "message": "Required parameter missing",
+        "code": "1",
+        "_content": "One or more required parameters with missing from your request."
+      },
+      {
+        "message": "Not a valid place type.",
+        "code": "2",
+        "_content": "An unknown or unsupported place type ID was passed with your request."
+      },
+      {
+        "message": "Not a valid date.",
+        "code": "3",
+        "_content": "The date argument passed with your request is invalid."
+      },
+      {
+        "message": "Not a valid Place ID",
+        "code": "4",
+        "_content": "An invalid Places (or WOE) identifier was included with your request."
+      },
+      {
+        "message": "Invalid API Key",
+        "code": 100,
+        "_content": "The API key passed was not valid or has expired."
+      },
+      {
+        "message": "Service currently unavailable",
+        "code": 105,
+        "_content": "The requested service is temporarily unavailable."
+      },
+      {
+        "message": "Write operation failed",
+        "code": 106,
+        "_content": "The requested operation failed due to a temporary issue."
+      },
+      {
+        "message": "Format \"xxx\" not found",
+        "code": 111,
+        "_content": "The requested response format was not found."
+      },
+      {
+        "message": "Method \"xxx\" not found",
+        "code": 112,
+        "_content": "The requested method was not found."
+      },
+      {
+        "message": "Invalid SOAP envelope",
+        "code": 114,
+        "_content": "The SOAP envelope send in the request could not be parsed."
+      },
+      {
+        "message": "Invalid XML-RPC Method Call",
+        "code": 115,
+        "_content": "The XML-RPC request document could not be parsed."
+      },
+      {
+        "message": "Bad URL found",
+        "code": 116,
+        "_content": "One or more arguments contained a URL that has been used for abuse on Flickr."
+      }
+    ]
+  },
+  "arguments": {
+    "argument": [
+      {
+        "optional": 0,
+        "name": "api_key",
+        "_content": "Your API application key. <a href=\"/services/api/misc.api_keys.html\">See here</a> for more details."
+      },
+      {
+        "optional": "0",
+        "name": "place_type_id",
+        "_content": "The numeric ID for a specific place type to cluster photos by. <br /><br />\n\nValid place type IDs are :\n\n<ul>\n<li><strong>22</strong>: neighbourhood</li>\n<li><strong>7</strong>: locality</li>\n<li><strong>8</strong>: region</li>\n<li><strong>12</strong>: country</li>\n<li><strong>29</strong>: continent</li>\n</ul>"
+      },
+      {
+        "optional": "1",
+        "name": "date",
+        "_content": "A valid date in YYYY-MM-DD format. The default is yesterday."
+      },
+      {
+        "optional": "1",
+        "name": "woe_id",
+        "_content": "Limit your query to only those top places belonging to a specific Where on Earth (WOE) identifier."
+      },
+      {
+        "optional": "1",
+        "name": "place_id",
+        "_content": "Limit your query to only those top places belonging to a specific Flickr Places identifier."
+      }
+    ]
+  }
+}

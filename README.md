@@ -89,3 +89,15 @@ Run the test with:
 ```sh
 mix test --only flickr_api
 ```
+
+## Development
+
+The `Flickr` modules are generated using data from the Flickr APIs reflection
+methods. If the API ever changes, new data can be fetched with the Mix task:
+
+```
+mix flickrex.reflect
+```
+
+The data files are commited to the repository so that network and API access is
+not required to compile this library.

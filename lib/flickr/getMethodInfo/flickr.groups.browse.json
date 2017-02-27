@@ -1,0 +1,106 @@
+{
+  "stat": "ok",
+  "method": {
+    "response": {
+      "_content": "<category name=\"Alt\" path=\"/Alt\" pathids=\"/63\">\n\t<subcat id=\"80\" name=\"18+\" count=\"0\" /> \n\t<subcat id=\"82\" name=\"Absurd\" count=\"4\" /> \n\t<group nsid=\"34955637532@N01\" name=\"Cal's Public Test Group\"\n\t\tmembers=\"13\" online=\"1\" chatnsid=\"34955637533@N01\" inchat=\"0\" /> \n\t<group nsid=\"34158032587@N01\" name=\"Eric's Alt Group Test\"\n\t\tmembers=\"3\" online=\"0\" chatnsid=\"34158032588@N01\" inchat=\"0\" /> \n</category>\n"
+    },
+    "requiredperms": "1",
+    "needssigning": 1,
+    "needslogin": 1,
+    "name": "flickr.groups.browse",
+    "explanation": {
+      "_content": "<p>The <code>count</code> attribute of the <code>subcat</code> element gives the number of groups inside the subcat.</p>\n\n<p>The <code>members</code> attribute of the <code>group</code> element gives the total number of members in the group. The <code>online</code> attribute gives a count of the members who are currently online. The <code>inchat</code> attribute gives a count of the number of people in the group's chat, regardless of whether they are members of the group.</p>"
+    },
+    "description": {
+      "_content": "Browse the group category tree, finding groups and sub-categories."
+    }
+  },
+  "errors": {
+    "error": [
+      {
+        "message": "Category not found",
+        "code": "1",
+        "_content": "The value passed for cat_id was not a valid category id."
+      },
+      {
+        "message": "SSL is required",
+        "code": 95,
+        "_content": "SSL is required to access the Flickr API."
+      },
+      {
+        "message": "Invalid signature",
+        "code": 96,
+        "_content": "The passed signature was invalid."
+      },
+      {
+        "message": "Missing signature",
+        "code": 97,
+        "_content": "The call required signing but no signature was sent."
+      },
+      {
+        "message": "Login failed / Invalid auth token",
+        "code": 98,
+        "_content": "The login details or auth token passed were invalid."
+      },
+      {
+        "message": "User not logged in / Insufficient permissions",
+        "code": 99,
+        "_content": "The method requires user authentication but the user was not logged in, or the authenticated method call did not have the required permissions."
+      },
+      {
+        "message": "Invalid API Key",
+        "code": 100,
+        "_content": "The API key passed was not valid or has expired."
+      },
+      {
+        "message": "Service currently unavailable",
+        "code": 105,
+        "_content": "The requested service is temporarily unavailable."
+      },
+      {
+        "message": "Write operation failed",
+        "code": 106,
+        "_content": "The requested operation failed due to a temporary issue."
+      },
+      {
+        "message": "Format \"xxx\" not found",
+        "code": 111,
+        "_content": "The requested response format was not found."
+      },
+      {
+        "message": "Method \"xxx\" not found",
+        "code": 112,
+        "_content": "The requested method was not found."
+      },
+      {
+        "message": "Invalid SOAP envelope",
+        "code": 114,
+        "_content": "The SOAP envelope send in the request could not be parsed."
+      },
+      {
+        "message": "Invalid XML-RPC Method Call",
+        "code": 115,
+        "_content": "The XML-RPC request document could not be parsed."
+      },
+      {
+        "message": "Bad URL found",
+        "code": 116,
+        "_content": "One or more arguments contained a URL that has been used for abuse on Flickr."
+      }
+    ]
+  },
+  "arguments": {
+    "argument": [
+      {
+        "optional": 0,
+        "name": "api_key",
+        "_content": "Your API application key. <a href=\"/services/api/misc.api_keys.html\">See here</a> for more details."
+      },
+      {
+        "optional": "1",
+        "name": "cat_id",
+        "_content": "The category id to fetch a list of groups and sub-categories for. If not specified, it defaults to zero, the root of the category tree."
+      }
+    ]
+  }
+}

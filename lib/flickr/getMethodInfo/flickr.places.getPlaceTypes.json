@@ -1,0 +1,68 @@
+{
+  "stat": "ok",
+  "method": {
+    "response": {
+      "_content": "<place_types>\n   <place_type place_type_id=\"22\">neighbourhood</place_type>\n   <place_type place_type_id=\"7\">locality</place_type>\n   <place_type place_type_id=\"9\">county</place_type>\n   <place_type place_type_id=\"8\">region</place_type>\n   <place_type place_type_id=\"12\">country</place_type>\n   <place_type place_type_id=\"29\">continent</place_type>\n</place_types>"
+    },
+    "requiredperms": 0,
+    "needssigning": 0,
+    "needslogin": 0,
+    "name": "flickr.places.getPlaceTypes",
+    "description": {
+      "_content": "Fetches a list of available place types for Flickr."
+    }
+  },
+  "errors": {
+    "error": [
+      {
+        "message": "Invalid API Key",
+        "code": 100,
+        "_content": "The API key passed was not valid or has expired."
+      },
+      {
+        "message": "Service currently unavailable",
+        "code": 105,
+        "_content": "The requested service is temporarily unavailable."
+      },
+      {
+        "message": "Write operation failed",
+        "code": 106,
+        "_content": "The requested operation failed due to a temporary issue."
+      },
+      {
+        "message": "Format \"xxx\" not found",
+        "code": 111,
+        "_content": "The requested response format was not found."
+      },
+      {
+        "message": "Method \"xxx\" not found",
+        "code": 112,
+        "_content": "The requested method was not found."
+      },
+      {
+        "message": "Invalid SOAP envelope",
+        "code": 114,
+        "_content": "The SOAP envelope send in the request could not be parsed."
+      },
+      {
+        "message": "Invalid XML-RPC Method Call",
+        "code": 115,
+        "_content": "The XML-RPC request document could not be parsed."
+      },
+      {
+        "message": "Bad URL found",
+        "code": 116,
+        "_content": "One or more arguments contained a URL that has been used for abuse on Flickr."
+      }
+    ]
+  },
+  "arguments": {
+    "argument": [
+      {
+        "optional": 0,
+        "name": "api_key",
+        "_content": "Your API application key. <a href=\"/services/api/misc.api_keys.html\">See here</a> for more details."
+      }
+    ]
+  }
+}

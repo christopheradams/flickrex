@@ -1,0 +1,93 @@
+{
+  "stat": "ok",
+  "method": {
+    "response": {
+      "_content": "<group id=\"34427465497@N01\" iconserver=\"1\" iconfarm=\"1\" lang=\"en-us\" ispoolmoderated=\"0\">\n\t<name>GNEverybody</name>\n\t<description>The group for GNE players</description>\n\t<members>69</members>\n\t<privacy>3</privacy>\n\t<throttle count=\"10\" mode=\"month\" remaining=\"3\"/>\n        <restrictions photos_ok=\"1\" videos_ok=\"1\" images_ok=\"1\" screens_ok=\"1\" art_ok=\"1\" safe_ok=\"1\" moderate_ok=\"0\" restricted_ok=\"0\" has_geo=\"0\" />\n</group>"
+    },
+    "requiredperms": 0,
+    "needssigning": 0,
+    "needslogin": 0,
+    "name": "flickr.groups.getInfo",
+    "description": {
+      "_content": "Get information about a group."
+    }
+  },
+  "errors": {
+    "error": [
+      {
+        "message": "Group not found",
+        "code": "1",
+        "_content": "The group NSID passed did not refer to a group that the calling user can see - either an invalid group is or a group that can't be seen by the calling user."
+      },
+      {
+        "message": "Group is private",
+        "code": "2",
+        "_content": "This is a private group."
+      },
+      {
+        "message": "Invalid API Key",
+        "code": 100,
+        "_content": "The API key passed was not valid or has expired."
+      },
+      {
+        "message": "Service currently unavailable",
+        "code": 105,
+        "_content": "The requested service is temporarily unavailable."
+      },
+      {
+        "message": "Write operation failed",
+        "code": 106,
+        "_content": "The requested operation failed due to a temporary issue."
+      },
+      {
+        "message": "Format \"xxx\" not found",
+        "code": 111,
+        "_content": "The requested response format was not found."
+      },
+      {
+        "message": "Method \"xxx\" not found",
+        "code": 112,
+        "_content": "The requested method was not found."
+      },
+      {
+        "message": "Invalid SOAP envelope",
+        "code": 114,
+        "_content": "The SOAP envelope send in the request could not be parsed."
+      },
+      {
+        "message": "Invalid XML-RPC Method Call",
+        "code": 115,
+        "_content": "The XML-RPC request document could not be parsed."
+      },
+      {
+        "message": "Bad URL found",
+        "code": 116,
+        "_content": "One or more arguments contained a URL that has been used for abuse on Flickr."
+      }
+    ]
+  },
+  "arguments": {
+    "argument": [
+      {
+        "optional": 0,
+        "name": "api_key",
+        "_content": "Your API application key. <a href=\"/services/api/misc.api_keys.html\">See here</a> for more details."
+      },
+      {
+        "optional": "0",
+        "name": "group_id",
+        "_content": "The NSID of the group to fetch information for."
+      },
+      {
+        "optional": "1",
+        "name": "group_path_alias",
+        "_content": "The path alias of the group. One of this or the group_id param is required"
+      },
+      {
+        "optional": "1",
+        "name": "lang",
+        "_content": "The language of the group name and description to fetch.  If the language is not found, the primary language of the group will be returned.\n\nValid values are the same as <a href=\"/services/feeds/\">in feeds</a>."
+      }
+    ]
+  }
+}

@@ -1,0 +1,83 @@
+{
+  "stat": "ok",
+  "method": {
+    "response": {
+      "_content": "<location place_id=\"kH8dLOubBZRvX_YZ\" woeid=\"2487956\" \n                latitude=\"37.779\" longitude=\"-122.420\"\n                place_url=\"/United+States/California/San+Francisco\"\n                place_type=\"locality\">\n   <locality place_id=\"kH8dLOubBZRvX_YZ\" woeid=\"2487956\"\n                 latitude=\"37.779\" longitude=\"-122.420\" \n                 place_url=\"/United+States/California/San+Francisco\">San Francisco</locality>\n   <county place_id=\"hCca8XSYA5nn0X1Sfw\" woeid=\"12587707\"\n                 latitude=\"37.759\" longitude=\"-122.435\" \n                 place_url=\"/hCca8XSYA5nn0X1Sfw\">San Francisco</county>\n   <region place_id=\"SVrAMtCbAphCLAtP\" woeid=\"2347563\" \n                latitude=\"37.271\" longitude=\"-119.270\" \n                place_url=\"/United+States/California\">California</region>\n   <country place_id=\"4KO02SibApitvSBieQ\" woeid=\"23424977\"\n                  latitude=\"48.890\" longitude=\"-116.982\" \n                  place_url=\"/United+States\">United States</country>\n</location>"
+    },
+    "requiredperms": 0,
+    "needssigning": 0,
+    "needslogin": 0,
+    "name": "flickr.places.resolvePlaceURL",
+    "description": {
+      "_content": "Find Flickr Places information by Place URL.<br /><br />\nThis method has been deprecated. It won't be removed but you should use <a href=\"/services/api/flickr.places.getInfoByUrl.html\">flickr.places.getInfoByUrl</a> instead.\n"
+    }
+  },
+  "errors": {
+    "error": [
+      {
+        "message": "Place URL required.",
+        "code": "2",
+        "_content": ""
+      },
+      {
+        "message": "Place not found.",
+        "code": "3",
+        "_content": ""
+      },
+      {
+        "message": "Invalid API Key",
+        "code": 100,
+        "_content": "The API key passed was not valid or has expired."
+      },
+      {
+        "message": "Service currently unavailable",
+        "code": 105,
+        "_content": "The requested service is temporarily unavailable."
+      },
+      {
+        "message": "Write operation failed",
+        "code": 106,
+        "_content": "The requested operation failed due to a temporary issue."
+      },
+      {
+        "message": "Format \"xxx\" not found",
+        "code": 111,
+        "_content": "The requested response format was not found."
+      },
+      {
+        "message": "Method \"xxx\" not found",
+        "code": 112,
+        "_content": "The requested method was not found."
+      },
+      {
+        "message": "Invalid SOAP envelope",
+        "code": 114,
+        "_content": "The SOAP envelope send in the request could not be parsed."
+      },
+      {
+        "message": "Invalid XML-RPC Method Call",
+        "code": 115,
+        "_content": "The XML-RPC request document could not be parsed."
+      },
+      {
+        "message": "Bad URL found",
+        "code": 116,
+        "_content": "One or more arguments contained a URL that has been used for abuse on Flickr."
+      }
+    ]
+  },
+  "arguments": {
+    "argument": [
+      {
+        "optional": 0,
+        "name": "api_key",
+        "_content": "Your API application key. <a href=\"/services/api/misc.api_keys.html\">See here</a> for more details."
+      },
+      {
+        "optional": "0",
+        "name": "url",
+        "_content": "A Flickr Places URL.  \n<br /><br />\nFlickr Place URLs are of the form /country/region/city"
+      }
+    ]
+  }
+}

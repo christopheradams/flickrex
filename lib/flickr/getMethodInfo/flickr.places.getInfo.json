@@ -1,0 +1,96 @@
+{
+  "stat": "ok",
+  "method": {
+    "response": {
+      "_content": "<place place_id=\"4hLQygSaBJ92\" woeid=\"3534\"\n   latitude=\"45.512\" longitude=\"-73.554\"\n   place_url=\"/Canada/Quebec/Montreal\" place_type=\"locality\"\n   has_shapedata=\"1\" timezone=\"America/Toronto\">\n   <locality place_id=\"4hLQygSaBJ92\" woeid=\"3534\"\n      latitude=\"45.512\" longitude=\"-73.554\"\n      place_url=\"/Canada/Quebec/Montreal\">Montreal</locality>\n   <county place_id=\"cFBi9x6bCJ8D5rba1g\" woeid=\"29375198\"\n      latitude=\"45.551\" longitude=\"-73.600\" \n      place_url=\"/cFBi9x6bCJ8D5rba1g\">Montréal</county>\n   <region place_id=\"CrZUvXebApjI0.72\" woeid=\"2344924\" \n      latitude=\"53.890\" longitude=\"-68.429\"\n      place_url=\"/Canada/Quebec\">Quebec</region>\n   <country place_id=\"EESRy8qbApgaeIkbsA\" woeid=\"23424775\"\n      latitude=\"62.358\" longitude=\"-96.582\" \n      place_url=\"/Canada\">Canada</country>\n   <shapedata created=\"1223513357\" alpha=\"0.012359619140625\"\n      count_points=\"34778\" count_edges=\"52\"\n      has_donuthole=\"1\" is_donuthole=\"1\">\n      <polylines>\n         <polyline>\n            45.427627563477,-73.589645385742 45.428966522217,-73.587898254395, etc...\n         </polyline>\n      </polylines>\n      <urls>\n         <shapefile>\n         http://farm4.static.flickr.com/3228/shapefiles/3534_20081111_0a8afe03c5.tar.gz\n         </shapefile>\n      </urls>\n   </shapedata>\n</place>"
+    },
+    "requiredperms": 0,
+    "needssigning": 0,
+    "needslogin": 0,
+    "name": "flickr.places.getInfo",
+    "explanation": {
+      "_content": "  "
+    },
+    "description": {
+      "_content": "Get informations about a place."
+    }
+  },
+  "errors": {
+    "error": [
+      {
+        "message": "Required parameter missing",
+        "code": "1",
+        "_content": "One or more required parameter is missing from the API call."
+      },
+      {
+        "message": "Not a valid Places ID",
+        "code": "2",
+        "_content": "An invalid Places (or WOE) ID was passed with the API call."
+      },
+      {
+        "message": "Place not found",
+        "code": "3",
+        "_content": "No place could be found for the Places (or WOE) ID passed to the API call."
+      },
+      {
+        "message": "Invalid API Key",
+        "code": 100,
+        "_content": "The API key passed was not valid or has expired."
+      },
+      {
+        "message": "Service currently unavailable",
+        "code": 105,
+        "_content": "The requested service is temporarily unavailable."
+      },
+      {
+        "message": "Write operation failed",
+        "code": 106,
+        "_content": "The requested operation failed due to a temporary issue."
+      },
+      {
+        "message": "Format \"xxx\" not found",
+        "code": 111,
+        "_content": "The requested response format was not found."
+      },
+      {
+        "message": "Method \"xxx\" not found",
+        "code": 112,
+        "_content": "The requested method was not found."
+      },
+      {
+        "message": "Invalid SOAP envelope",
+        "code": 114,
+        "_content": "The SOAP envelope send in the request could not be parsed."
+      },
+      {
+        "message": "Invalid XML-RPC Method Call",
+        "code": 115,
+        "_content": "The XML-RPC request document could not be parsed."
+      },
+      {
+        "message": "Bad URL found",
+        "code": 116,
+        "_content": "One or more arguments contained a URL that has been used for abuse on Flickr."
+      }
+    ]
+  },
+  "arguments": {
+    "argument": [
+      {
+        "optional": 0,
+        "name": "api_key",
+        "_content": "Your API application key. <a href=\"/services/api/misc.api_keys.html\">See here</a> for more details."
+      },
+      {
+        "optional": "1",
+        "name": "place_id",
+        "_content": "A Flickr Places ID. <span style=\"font-style:italic;\">(While optional, you must pass either a valid Places ID or a WOE ID.)</span>"
+      },
+      {
+        "optional": "1",
+        "name": "woe_id",
+        "_content": "A Where On Earth (WOE) ID. <span style=\"font-style:italic;\">(While optional, you must pass either a valid Places ID or a WOE ID.)</span>"
+      }
+    ]
+  }
+}

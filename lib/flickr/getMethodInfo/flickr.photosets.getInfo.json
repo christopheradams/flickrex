@@ -1,0 +1,88 @@
+{
+  "stat": "ok",
+  "method": {
+    "response": {
+      "_content": "<photoset id=\"72157624618609504\" owner=\"34427469121@N01\" primary=\"4847770787\" secret=\"6abd09a292\" server=\"4153\" farm=\"5\" photos=\"55\" count_views=\"523\" count_comments=\"1\" count_photos=\"43\" count_videos=\"12\" can_comment=\"1\" date_create=\"1280530593\" date_update=\"1308091378\">\n    <title>Mah Kittehs</title>\n    <description>Sixty and Niner. Born on the 3rd of May, 2010, or thereabouts. Came to my place on Thursday, July 29, 2010.</description>\n</photoset>"
+    },
+    "requiredperms": 0,
+    "needssigning": 0,
+    "needslogin": 0,
+    "name": "flickr.photosets.getInfo",
+    "description": {
+      "_content": "Gets information about a photoset."
+    }
+  },
+  "errors": {
+    "error": [
+      {
+        "message": "Photoset not found",
+        "code": "1",
+        "_content": "The photoset id was not valid."
+      },
+      {
+        "message": "User not found",
+        "code": "2",
+        "_content": ""
+      },
+      {
+        "message": "Invalid API Key",
+        "code": 100,
+        "_content": "The API key passed was not valid or has expired."
+      },
+      {
+        "message": "Service currently unavailable",
+        "code": 105,
+        "_content": "The requested service is temporarily unavailable."
+      },
+      {
+        "message": "Write operation failed",
+        "code": 106,
+        "_content": "The requested operation failed due to a temporary issue."
+      },
+      {
+        "message": "Format \"xxx\" not found",
+        "code": 111,
+        "_content": "The requested response format was not found."
+      },
+      {
+        "message": "Method \"xxx\" not found",
+        "code": 112,
+        "_content": "The requested method was not found."
+      },
+      {
+        "message": "Invalid SOAP envelope",
+        "code": 114,
+        "_content": "The SOAP envelope send in the request could not be parsed."
+      },
+      {
+        "message": "Invalid XML-RPC Method Call",
+        "code": 115,
+        "_content": "The XML-RPC request document could not be parsed."
+      },
+      {
+        "message": "Bad URL found",
+        "code": 116,
+        "_content": "One or more arguments contained a URL that has been used for abuse on Flickr."
+      }
+    ]
+  },
+  "arguments": {
+    "argument": [
+      {
+        "optional": 0,
+        "name": "api_key",
+        "_content": "Your API application key. <a href=\"/services/api/misc.api_keys.html\">See here</a> for more details."
+      },
+      {
+        "optional": "0",
+        "name": "photoset_id",
+        "_content": "The ID of the photoset to fetch information for."
+      },
+      {
+        "optional": "0",
+        "name": "user_id",
+        "_content": "The user_id here is the owner of the set passed in photoset_id. This is optional, but passing this gives better performance. "
+      }
+    ]
+  }
+}

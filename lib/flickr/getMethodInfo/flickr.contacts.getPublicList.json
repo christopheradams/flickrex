@@ -1,0 +1,91 @@
+{
+  "stat": "ok",
+  "method": {
+    "response": {
+      "_content": "<contacts page=\"1\" pages=\"1\" perpage=\"1000\" total=\"3\">\n\t<contact nsid=\"12037949629@N01\" username=\"Eric\" iconserver=\"1\" ignored=\"1\" /> \n\t<contact nsid=\"12037949631@N01\" username=\"neb\" iconserver=\"1\" ignored=\"0\" /> \n\t<contact nsid=\"41578656547@N01\" username=\"cal_abc\" iconserver=\"1\" ignored=\"0\" />\n</contacts>"
+    },
+    "requiredperms": 0,
+    "needssigning": 0,
+    "needslogin": 0,
+    "name": "flickr.contacts.getPublicList",
+    "explanation": {
+      "_content": "<p>See <a href=\"/services/api/flickr.contacts.getList.html\">flickr.contacts.getList</a> for an explanation of the response.</p>"
+    },
+    "description": {
+      "_content": "Get the contact list for a user."
+    }
+  },
+  "errors": {
+    "error": [
+      {
+        "message": "User not found",
+        "code": "1",
+        "_content": "The specified user NSID was not a valid user."
+      },
+      {
+        "message": "Invalid API Key",
+        "code": 100,
+        "_content": "The API key passed was not valid or has expired."
+      },
+      {
+        "message": "Service currently unavailable",
+        "code": 105,
+        "_content": "The requested service is temporarily unavailable."
+      },
+      {
+        "message": "Write operation failed",
+        "code": 106,
+        "_content": "The requested operation failed due to a temporary issue."
+      },
+      {
+        "message": "Format \"xxx\" not found",
+        "code": 111,
+        "_content": "The requested response format was not found."
+      },
+      {
+        "message": "Method \"xxx\" not found",
+        "code": 112,
+        "_content": "The requested method was not found."
+      },
+      {
+        "message": "Invalid SOAP envelope",
+        "code": 114,
+        "_content": "The SOAP envelope send in the request could not be parsed."
+      },
+      {
+        "message": "Invalid XML-RPC Method Call",
+        "code": 115,
+        "_content": "The XML-RPC request document could not be parsed."
+      },
+      {
+        "message": "Bad URL found",
+        "code": 116,
+        "_content": "One or more arguments contained a URL that has been used for abuse on Flickr."
+      }
+    ]
+  },
+  "arguments": {
+    "argument": [
+      {
+        "optional": 0,
+        "name": "api_key",
+        "_content": "Your API application key. <a href=\"/services/api/misc.api_keys.html\">See here</a> for more details."
+      },
+      {
+        "optional": "0",
+        "name": "user_id",
+        "_content": "The NSID of the user to fetch the contact list for."
+      },
+      {
+        "optional": "1",
+        "name": "page",
+        "_content": "The page of results to return. If this argument is omitted, it defaults to 1."
+      },
+      {
+        "optional": "1",
+        "name": "per_page",
+        "_content": "Number of photos to return per page. If this argument is omitted, it defaults to 1000. The maximum allowed value is 1000."
+      }
+    ]
+  }
+}

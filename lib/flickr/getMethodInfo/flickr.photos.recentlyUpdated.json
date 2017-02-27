@@ -1,0 +1,126 @@
+{
+  "stat": "ok",
+  "method": {
+    "response": {
+      "_content": "<photos page=\"1\" pages=\"1\" perpage=\"100\" total=\"2\">\n        <photo id=\"169885459\" owner=\"35034348999@N01\" \n               secret=\"c85114c195\" server=\"46\" title=\"Doubting Michael\"\n               ispublic=\"1\" isfriend=\"0\" isfamily=\"0\" lastupdate=\"1150755888\" />\n        <photo id=\"85022332\" owner=\"35034348999@N01\"\n               secret=\"23de6de0c0\" server=\"41\"\n               title=\"&quot;Do you think we're allowed to tape stuff to the walls?&quot;\"\n               ispublic=\"1\" isfriend=\"0\" isfamily=\"0\" lastupdate=\"1150564974\" />\n</photos>"
+    },
+    "requiredperms": "1",
+    "needssigning": 1,
+    "needslogin": 1,
+    "name": "flickr.photos.recentlyUpdated",
+    "explanation": {
+      "_content": "<p>Photos are sorted by their date updated timestamp, in descending order.</p>"
+    },
+    "description": {
+      "_content": "<p>Return a list of your photos that have been recently created or which have been recently modified.</p>\n\n<p>Recently modified may mean that the photo's metadata (title, description, tags) may have been changed or a comment has been added (or just modified somehow :-)</p>"
+    }
+  },
+  "errors": {
+    "error": [
+      {
+        "message": "Required argument missing.",
+        "code": "1",
+        "_content": "Some or all of the required arguments were not supplied."
+      },
+      {
+        "message": "Not a valid date",
+        "code": "2",
+        "_content": "The date argument did not pass validation."
+      },
+      {
+        "message": "SSL is required",
+        "code": 95,
+        "_content": "SSL is required to access the Flickr API."
+      },
+      {
+        "message": "Invalid signature",
+        "code": 96,
+        "_content": "The passed signature was invalid."
+      },
+      {
+        "message": "Missing signature",
+        "code": 97,
+        "_content": "The call required signing but no signature was sent."
+      },
+      {
+        "message": "Login failed / Invalid auth token",
+        "code": 98,
+        "_content": "The login details or auth token passed were invalid."
+      },
+      {
+        "message": "User not logged in / Insufficient permissions",
+        "code": 99,
+        "_content": "The method requires user authentication but the user was not logged in, or the authenticated method call did not have the required permissions."
+      },
+      {
+        "message": "Invalid API Key",
+        "code": 100,
+        "_content": "The API key passed was not valid or has expired."
+      },
+      {
+        "message": "Service currently unavailable",
+        "code": 105,
+        "_content": "The requested service is temporarily unavailable."
+      },
+      {
+        "message": "Write operation failed",
+        "code": 106,
+        "_content": "The requested operation failed due to a temporary issue."
+      },
+      {
+        "message": "Format \"xxx\" not found",
+        "code": 111,
+        "_content": "The requested response format was not found."
+      },
+      {
+        "message": "Method \"xxx\" not found",
+        "code": 112,
+        "_content": "The requested method was not found."
+      },
+      {
+        "message": "Invalid SOAP envelope",
+        "code": 114,
+        "_content": "The SOAP envelope send in the request could not be parsed."
+      },
+      {
+        "message": "Invalid XML-RPC Method Call",
+        "code": 115,
+        "_content": "The XML-RPC request document could not be parsed."
+      },
+      {
+        "message": "Bad URL found",
+        "code": 116,
+        "_content": "One or more arguments contained a URL that has been used for abuse on Flickr."
+      }
+    ]
+  },
+  "arguments": {
+    "argument": [
+      {
+        "optional": 0,
+        "name": "api_key",
+        "_content": "Your API application key. <a href=\"/services/api/misc.api_keys.html\">See here</a> for more details."
+      },
+      {
+        "optional": "0",
+        "name": "min_date",
+        "_content": "A Unix timestamp or any English textual datetime description indicating the date from which modifications should be compared."
+      },
+      {
+        "optional": 1,
+        "name": "extras",
+        "_content": "A comma-delimited list of extra information to fetch for each returned record. Currently supported fields are: <code>description</code>, <code>license</code>, <code>date_upload</code>, <code>date_taken</code>, <code>owner_name</code>, <code>icon_server</code>, <code>original_format</code>, <code>last_update</code>, <code>geo</code>, <code>tags</code>, <code>machine_tags</code>, <code>o_dims</code>, <code>views</code>, <code>media</code>, <code>path_alias</code>, <code>url_sq</code>, <code>url_t</code>, <code>url_s</code>, <code>url_q</code>, <code>url_m</code>, <code>url_n</code>, <code>url_z</code>, <code>url_c</code>, <code>url_l</code>, <code>url_o</code>"
+      },
+      {
+        "optional": 1,
+        "name": "per_page",
+        "_content": "Number of photos to return per page. If this argument is omitted, it defaults to 100. The maximum allowed value is 500."
+      },
+      {
+        "optional": 1,
+        "name": "page",
+        "_content": "The page of results to return. If this argument is omitted, it defaults to 1."
+      }
+    ]
+  }
+}

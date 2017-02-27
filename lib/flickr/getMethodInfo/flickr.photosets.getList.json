@@ -1,0 +1,96 @@
+{
+  "stat": "ok",
+  "method": {
+    "response": {
+      "_content": "<photosets page=\"1\" pages=\"1\" perpage=\"30\" total=\"2\" cancreate=\"1\">\n    <photoset id=\"72157626216528324\" primary=\"5504567858\" secret=\"017804c585\" server=\"5174\" farm=\"6\" photos=\"22\" videos=\"0\" count_views=\"137\" count_comments=\"0\" can_comment=\"1\" date_create=\"1299514498\" date_update=\"1300335009\">\n      <title>Avis Blanche</title>\n      <description>My Grandma's Recipe File.</description>\n    </photoset>\n    <photoset id=\"72157624618609504\" primary=\"4847770787\" secret=\"6abd09a292\" server=\"4153\" farm=\"5\" photos=\"43\" videos=\"12\" count_views=\"523\" count_comments=\"1\" can_comment=\"1\" date_create=\"1280530593\" date_update=\"1308091378\">\n      <title>Mah Kittehs</title>\n      <description>Sixty and Niner. Born on the 3rd of May, 2010, or thereabouts. Came to my place on Thursday, July 29, 2010.</description>\n    </photoset>\n</photosets>"
+    },
+    "requiredperms": 0,
+    "needssigning": 0,
+    "needslogin": 0,
+    "name": "flickr.photosets.getList",
+    "explanation": {
+      "_content": "<p>Photosets are returned in the user's specified order, which may not mean the newest set is first. Applications displaying photosets should respect the user's ordering.</p>"
+    },
+    "description": {
+      "_content": "Returns the photosets belonging to the specified user."
+    }
+  },
+  "errors": {
+    "error": [
+      {
+        "message": "User not found",
+        "code": "1",
+        "_content": "The user NSID passed was not a valid user NSID and the calling user was not logged in.\n"
+      },
+      {
+        "message": "Invalid API Key",
+        "code": 100,
+        "_content": "The API key passed was not valid or has expired."
+      },
+      {
+        "message": "Service currently unavailable",
+        "code": 105,
+        "_content": "The requested service is temporarily unavailable."
+      },
+      {
+        "message": "Write operation failed",
+        "code": 106,
+        "_content": "The requested operation failed due to a temporary issue."
+      },
+      {
+        "message": "Format \"xxx\" not found",
+        "code": 111,
+        "_content": "The requested response format was not found."
+      },
+      {
+        "message": "Method \"xxx\" not found",
+        "code": 112,
+        "_content": "The requested method was not found."
+      },
+      {
+        "message": "Invalid SOAP envelope",
+        "code": 114,
+        "_content": "The SOAP envelope send in the request could not be parsed."
+      },
+      {
+        "message": "Invalid XML-RPC Method Call",
+        "code": 115,
+        "_content": "The XML-RPC request document could not be parsed."
+      },
+      {
+        "message": "Bad URL found",
+        "code": 116,
+        "_content": "One or more arguments contained a URL that has been used for abuse on Flickr."
+      }
+    ]
+  },
+  "arguments": {
+    "argument": [
+      {
+        "optional": 0,
+        "name": "api_key",
+        "_content": "Your API application key. <a href=\"/services/api/misc.api_keys.html\">See here</a> for more details."
+      },
+      {
+        "optional": "1",
+        "name": "user_id",
+        "_content": "The NSID of the user to get a photoset list for. If none is specified, the calling user is assumed."
+      },
+      {
+        "optional": "1",
+        "name": "page",
+        "_content": "The page of results to get. Currently, if this is not provided, all sets are returned, but this behaviour may change in future."
+      },
+      {
+        "optional": "1",
+        "name": "per_page",
+        "_content": "The number of sets to get per page. If paging is enabled, the maximum number of sets per page is 500."
+      },
+      {
+        "optional": "1",
+        "name": "primary_photo_extras",
+        "_content": "A comma-delimited list of extra information to fetch for the primary photo. Currently supported fields are: license, date_upload, date_taken, owner_name, icon_server, original_format, last_update, geo, tags, machine_tags, o_dims, views, media, path_alias, url_sq, url_t, url_s, url_m, url_o"
+      }
+    ]
+  }
+}

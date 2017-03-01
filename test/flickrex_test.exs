@@ -10,8 +10,12 @@ defmodule FlickrexTest do
   end
 
   test "new client with config" do
-    flickrex = Flickrex.new([consumer_key: "test"])
-    assert flickrex.consumer_key == "test"
+    flickrex =
+      [consumer_key: "test", consumer_secret: "test"]
+      |> Flickrex.new
+      |> Flickrex.config([consumer_key: "new"])
+    assert flickrex.consumer_key == "new"
+    assert flickrex.consumer_secret == "test"
   end
 
   test "update config" do

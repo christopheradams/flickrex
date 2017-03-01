@@ -37,7 +37,7 @@ defmodule Flickrex.Config do
   """
   @spec merge(t, Keyword.t) :: t
   def merge(config, params) do
-    Map.merge(config, struct(Config, params))
+    Map.merge(config, Map.new(params))
   end
 
   @doc """

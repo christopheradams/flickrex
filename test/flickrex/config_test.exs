@@ -17,8 +17,12 @@ defmodule Flickrex.ConfigTest do
   end
 
   test "merge config" do
-    config = Config.new([consumer_key: "test"]) |> Config.merge([consumer_key: "new"])
+    config =
+      [consumer_key: "test", consumer_secret: "test"]
+      |> Config.new
+      |> Config.merge([consumer_key: "new"])
     assert config.consumer_key == "new"
+    assert config.consumer_secret == "test"
   end
 
   test "put config" do

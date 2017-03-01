@@ -86,7 +86,7 @@ defmodule Flickrex do
   defdelegate new(params), to: Flickrex.Config
 
   @doc ~S"""
-  Updates the config of a Flickrex client.
+  Updates the config of a Flickrex client
 
   Parameters will be merged with the existing config.
 

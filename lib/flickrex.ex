@@ -9,7 +9,11 @@ defmodule Flickrex do
         consumer_secret: "...",
       ]
 
-  ## Examples
+  The configuration also accepts values for `access_token` and
+  `access_token_secret`, but it is highly recommended to store these values
+  separately for each authenticated user, rather than setting them globally.
+
+  ## Manual Verification
 
       flickrex = Flickrex.new
       token = Flickrex.get_request_token(flickrex)
@@ -18,7 +22,39 @@ defmodule Flickrex do
       # Open the URL in your browser, authorize the app, and get the verify token
       verify = "..."
       flickrex = Flickrex.fetch_access_token(flickrex, token, verify)
-      login = Flickr.Test.login(flickrex)
+
+  ## Callback Verification
+
+  Specify a callback URL when generating the request token:
+
+      flickrex = Flickrex.new
+      token = Flickrex.get_request_token(flickrex, oauth_callback: "https://example.com/check")
+      auth_url = Flickrex.get_authorize_url(token)
+
+  Either keep track of the `token` struct in a process, or persist the values of
+  `token.oauth_token` and `token.oauth_token_secret`.
+
+  After following the `auth_url` and authorizing your app, the user will be redirected to:
+
+  ```sh
+  https://example.com/check?oauth_token=FOO&oauth_verifier=BAZ
+  ```
+
+  Retrieve the `token` from the previous step or recreate it from persisted
+  values, then use it and the verifier code to fetch an acess token:
+
+      token = %Flickrex.RequestToken{oauth_token: "FOO", oauth_token_secret: "BAZ"}
+      flickrex = Flickrex.fetch_access_token(flickrex, token, oauth_verifier)
+
+  Finally, save `flickrex.access_token` and `flickrex.access_token_secret` for this user.
+
+  ## Re-authenticating
+
+  Look up the `access_token` and `access_token_secret` you have saved for the
+  user, and use them to generate a new config:
+
+      tokens = [access_token: "...", access_token_secret: "..."]
+      flickrex = Flickrex.new |> Flickrex.config(tokens)
   """
 
   alias Flickrex.API
@@ -50,12 +86,21 @@ defmodule Flickrex do
   defdelegate new(params), to: Flickrex.Config
 
   @doc ~S"""
-  Updates the config of a Flickrex client
+  Updates the config of a Flickrex client.
+
+  Parameters will be merged with the existing config.
 
   ## Examples:
 
       tokens = [access_token: "...", access_token_secret: "..."]
       flickrex = Flickrex.new |> Flickrex.config(tokens)
+
+  The accepted parameters are:
+
+    * `:consumer_token` - Flickr API key
+    * `:consumer_secret` - Flicrkr API shared secret
+    * `:access_token` - Per-user access token
+    * `:access_token_secret` - Per-user access token secret
   """
   @spec config(Config.t, Keyword.t) :: Config.t
   defdelegate config(config, params), to: Flickrex.Config, as: :merge
@@ -65,8 +110,10 @@ defmodule Flickrex do
 
   ## Options
 
-  * `oauth_callback` - For web apps, the URL to redirect the user back to after
-    authentication.
+  * `oauth_callback` - For web apps, the URL to redirect the user to after completing the
+    authorization sequence. The URL will include query params `oauth_token`
+    and `oauth_verifier`. If this option is not set, the user will be presented with
+    a verification code that they must present to your application manually.
   """
   @spec get_request_token(Config.t, Keyword.t) :: RequestToken.t
   defdelegate get_request_token(config, params \\ []), to: API.Auth

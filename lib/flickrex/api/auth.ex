@@ -1,6 +1,8 @@
 defmodule Flickrex.API.Auth do
   @moduledoc """
   Provides authentication access to Flickr API.
+
+  See `Flickrex` for more documentation.
   """
 
   import Flickrex.API.Base
@@ -13,6 +15,13 @@ defmodule Flickrex.API.Auth do
 
   @doc """
   Gets a temporary token to authenticate the user to your application
+
+  ## Options
+
+  * `oauth_callback` - For web apps, the URL to redirect the user to after completing the
+    authorization sequence. The URL will include query params `oauth_token`
+    and `oauth_verifier`. If this option is not set, the user will be presented with
+    a verification code that they must present to your application manually.
   """
   @spec get_request_token(Config.t, Keyword.t) :: RequestToken.t
   def get_request_token(config, params \\ []) do

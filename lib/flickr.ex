@@ -13,7 +13,7 @@ defmodule Flickr do
 
   ```elixir
   flickrex = Flickrex.new
-  response = Flickr.Photos.get_recent(flickrex, per_page: 5)
+  {:ok, photos} = Flickr.Photos.get_recent(flickrex, per_page: 5)
   ```
   """
 

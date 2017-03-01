@@ -22,7 +22,7 @@ defmodule Mix.Tasks.Flickrex.Reflect do
     create_directory(@methods_dir)
 
     flickrex = Flickrex.new
-    methods_json = Flickrex.API.Base.call(flickrex, :get, "flickr.reflection.getMethods")
+    {:ok, methods_json} = Flickrex.API.Base.call(flickrex, :get, "flickr.reflection.getMethods")
     methods = Poison.decode!(methods_json)
     pretty_methods_json = Poison.encode!(methods, pretty: true)
     File.write(methods_file, pretty_methods_json)
@@ -37,7 +37,7 @@ defmodule Mix.Tasks.Flickrex.Reflect do
   defp reflect(method) do
     info_file = Path.join(@methods_dir, "#{method}.json")
     flickrex = Flickrex.new
-    info_json = Flickrex.API.Base.call(flickrex, :get,
+    {:ok, info_json} = Flickrex.API.Base.call(flickrex, :get,
       "flickr.reflection.getMethodInfo", method_name: method)
     info = Poison.decode!(info_json)
     pretty_json = Poison.encode!(info, pretty: true)

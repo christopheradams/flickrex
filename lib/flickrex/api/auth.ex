@@ -23,14 +23,21 @@ defmodule Flickrex.API.Auth do
     and `oauth_verifier`. If this option is not set, the user will be presented with
     a verification code that they must present to your application manually.
   """
-  @spec get_request_token(Config.t, Keyword.t) :: RequestToken.t
+  @spec get_request_token(Config.t, Keyword.t) :: {:ok, RequestToken.t} | {:error, binary}
   def get_request_token(config, params \\ []) do
-    params = Keyword.merge([oauth_callback: @oauth_callback], params)
-    body = request(config, :get, auth_url(:request_token), params)
-    token = URI.decode_query(body, %{})
-    %RequestToken{oauth_callback_confirmed: token["oauth_callback_confirmed"],
-                  oauth_token: token["oauth_token"],
-                  oauth_token_secret: token["oauth_token_secret"]}
+    oauth_params = Keyword.merge([oauth_callback: @oauth_callback], params)
+    # Make sure the config does not have any access tokens
+    config = %Flickrex.Config{consumer_key: config.consumer_key,
+                              consumer_secret: config.consumer_secret}
+    case request(config, :get, auth_url(:request_token), oauth_params) do
+      {:ok, body} ->
+        token = URI.decode_query(body, %{})
+        {:ok, %RequestToken{oauth_callback_confirmed: token["oauth_callback_confirmed"],
+                            oauth_token: token["oauth_token"],
+                            oauth_token_secret: token["oauth_token_secret"]}}
+      {:error, reason} ->
+        {:error, reason}
+    end
   end
 
   @doc """
@@ -48,21 +55,28 @@ defmodule Flickrex.API.Auth do
   """
   @spec fetch_access_token(Config.t, RequestToken.t, binary) :: Config.t
   def fetch_access_token(%Config{} = config, %RequestToken{} = request_token, oauth_verifier) do
-    access_token = get_access_token(config, request_token, oauth_verifier)
-    put_access_token(config, access_token)
+    case get_access_token(config, request_token, oauth_verifier) do
+      {:error, reason} ->
+        {:error, reason}
+      access_token -> put_access_token(config, access_token)
+    end
   end
 
-  @spec get_access_token(Config.t, RequestToken.t, binary) :: AccessToken.t
+  @spec get_access_token(Config.t, RequestToken.t, binary) :: AccessToken.t | {:error, term}
   defp get_access_token(config, request_token, oauth_verifier) do
     config = put_access_token(config, request_token)
     params = [oauth_verifier: oauth_verifier]
-    body = request(config, :get, auth_url(:access_token), params)
-    token = URI.decode_query(body, %{})
-    %AccessToken{fullname: token["fullname"],
-                 oauth_token: token["oauth_token"],
-                 oauth_token_secret: token["oauth_token_secret"],
-                 user_nsid: token["user_nsid"],
-                 username: token["username"]}
+    case request(config, :get, auth_url(:access_token), params) do
+      {:ok, body} ->
+        token = URI.decode_query(body, %{})
+        %AccessToken{fullname: token["fullname"],
+                     oauth_token: token["oauth_token"],
+                     oauth_token_secret: token["oauth_token_secret"],
+                     user_nsid: token["user_nsid"],
+                     username: token["username"]}
+      {:error, reason} ->
+        {:error, reason}
+    end
   end
 
   @spec put_access_token(Config.t, AccessToken.t | RequestToken.t) :: Config.t

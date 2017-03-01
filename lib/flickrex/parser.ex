@@ -3,7 +3,7 @@ defmodule Flickrex.Parser do
   Parsers Flickr API JSON responses.
   """
 
-  @type response :: {:error, binary} | map
+  @type response :: {:ok, map} | {:error, binary}
 
   @spec parse(binary | map) :: response
   def parse(response) when is_binary(response) do
@@ -15,6 +15,6 @@ defmodule Flickrex.Parser do
   end
 
   def parse(%{"stat" => "ok"} = response) do
-    Map.delete(response, "stat")
+    {:ok, Map.delete(response, "stat")}
   end
 end

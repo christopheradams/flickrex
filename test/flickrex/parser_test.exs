@@ -29,31 +29,31 @@ defmodule Flickrex.ParserTest do
 
   test "null" do
     response = parse(@null_response_json)
-    assert response == %{}
+    assert response == {:ok, %{}}
   end
 
   test "user" do
     response = parse(@user_response_json)
     user = %{"user" => %{"id" => "35034362831@N01", "username" => %{"_content" => "Joi"},
                          "nsid" => "35034362831@N01"}}
-    assert response == user
+    assert response == {:ok, user}
   end
 
   test "photo" do
-    response = parse(@photo_response_json)
+    {:ok, response} = parse(@photo_response_json)
     assert response["photo"]["id"] == "477842380"
     assert response["photo"]["title"] == %{"_content" => "Joi with backyard bamboo"}
     assert List.first(response["photo"]["tags"]["tag"])["_content"] == "joiito"
   end
 
   test "photos" do
-    response = parse(@photos_response_json)
+    {:ok, response} = parse(@photos_response_json)
     assert response["photos"]["perpage"] == 2
     assert length(response["photos"]["photo"]) == 2
   end
 
   test "method" do
-    response = parse(@method_response_json)
+    {:ok, response} = parse(@method_response_json)
     assert Map.keys(response) == ["arguments", "errors", "method"]
     assert response["arguments"]["argument"] |> List.first |> Map.has_key?("name")
   end

@@ -26,16 +26,23 @@ defmodule FlickrexTest do
   test "get" do
     flickrex = Flickrex.new
     response = Flickrex.get(flickrex, "TEST", [param: "PARAM"])
-    assert response == %{"method" => "TEST", "param" => "param:PARAM",
-                         "format" => "json", "nojsoncallback" => 1,
-                         "verb" => "get"}
+    expected = {:ok, %{"method" => "TEST", "param" => "param:PARAM",
+                       "format" => "json", "nojsoncallback" => 1,
+                       "verb" => "get"}}
+    assert response == expected
   end
 
   test "post" do
     flickrex = Flickrex.new
     response = Flickrex.post(flickrex, "TEST", [param: "PARAM"])
-    assert response == %{"method" => "TEST", "param" => "param:PARAM",
-                         "format" => "json", "nojsoncallback" => 1,
-                         "verb" => "post"}
+    assert response == {:ok, %{"method" => "TEST", "param" => "param:PARAM",
+                               "format" => "json", "nojsoncallback" => 1,
+                               "verb" => "post"}}
+  end
+
+  test "error" do
+    flickrex = Flickrex.new
+    response = Flickrex.post(flickrex, "ERROR", [param: "PARAM"])
+    assert response == {:error, "Bad Request: call error"}
   end
 end

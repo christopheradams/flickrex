@@ -4,15 +4,18 @@ defmodule FlickrTest do
   test "get method" do
     flickrex = Flickrex.new
     response = Flickr.Photos.get_info(flickrex, photo_id: "1")
-    assert response == %{"format" => "json", "method" => "flickr.photos.getInfo",
-                         "nojsoncallback" => 1, "param" => "photo_id:1", "verb" => "get"}
+    expected = {:ok, %{"format" => "json", "method" => "flickr.photos.getInfo",
+                       "nojsoncallback" => 1, "param" => "photo_id:1",
+                       "verb" => "get"}}
+    assert response == expected
   end
 
   test "post method" do
     flickrex = Flickrex.new
     response = Flickr.Photos.add_tags(flickrex, photo_id: "1", tags: "tag1")
-    assert response == %{"format" => "json", "method" => "flickr.photos.addTags",
-                         "nojsoncallback" => 1, "param" => "photo_id:1,tags:tag1",
-                         "verb" => "post"}
+    expected = {:ok, %{"format" => "json", "method" => "flickr.photos.addTags",
+                       "nojsoncallback" => 1, "param" => "photo_id:1,tags:tag1",
+                       "verb" => "post"}}
+      assert response == expected
   end
 end

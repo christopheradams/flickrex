@@ -1,5 +1,5 @@
 defmodule Flickrex do
-  @moduledoc """
+  @moduledoc ~S"""
   Flickr client library for Elixir.
 
   ## Configuration
@@ -16,7 +16,7 @@ defmodule Flickrex do
   ## Manual Verification
 
       flickrex = Flickrex.new
-      token = Flickrex.get_request_token(flickrex)
+      {:ok, token} = Flickrex.get_request_token(flickrex)
       auth_url = Flickrex.get_authorize_url(token)
 
       # Open the URL in your browser, authorize the app, and get the verify token
@@ -28,7 +28,7 @@ defmodule Flickrex do
   Specify a callback URL when generating the request token:
 
       flickrex = Flickrex.new
-      token = Flickrex.get_request_token(flickrex, oauth_callback: "https://example.com/check")
+      {:ok, token} = Flickrex.get_request_token(flickrex, oauth_callback: "https://example.com/check")
       auth_url = Flickrex.get_authorize_url(token)
 
   Either keep track of the `token` struct in a process, or persist the values of
@@ -115,7 +115,7 @@ defmodule Flickrex do
     and `oauth_verifier`. If this option is not set, the user will be presented with
     a verification code that they must present to your application manually.
   """
-  @spec get_request_token(Config.t, Keyword.t) :: RequestToken.t
+  @spec get_request_token(Config.t, Keyword.t) :: {:ok, RequestToken.t} | {:error, binary}
   defdelegate get_request_token(config, params \\ []), to: API.Auth
 
   @doc """
@@ -147,11 +147,11 @@ defmodule Flickrex do
 
   ## Examples:
 
-      response = Flickrex.get(flickrex, "flickr.photos.getRecent", per_page: 5)
+      {:ok, response} = Flickrex.get(flickrex, "flickr.photos.getRecent", per_page: 5)
   """
   @spec get(Config.t, binary, Keyword.t) :: response
   def get(config, method, args \\ []) do
-    config |> API.Base.call(:get, method, args) |> Parser.parse
+    call(config, :get, method, args)
   end
 
   @doc ~s"""
@@ -159,10 +159,20 @@ defmodule Flickrex do
 
   ## Examples:
 
-      response = Flickrex.post(flickrex, "flickr.photos.addTags", photo_id: photo_id, tags: "tag1,tag2")
+      {:ok, response} =
+        Flickrex.post(flickrex, "flickr.photos.addTags",
+          photo_id: photo_id, tags: "tag1,tag2")
   """
   @spec post(Config.t, binary, Keyword.t) :: response
   def post(config, method, args \\ []) do
-    config |> API.Base.call(:post, method, args) |> Parser.parse
+    call(config, :post, method, args)
+  end
+
+  @spec call(Config.t, :get | :post, binary, Keyword.t) :: response
+  defp call(config, http_method, method, args) do
+    case API.Base.call(config, http_method, method, args) do
+      {:ok, result} -> Parser.parse(result)
+      result -> result
+    end
   end
 end

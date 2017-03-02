@@ -9,8 +9,8 @@ defmodule Flickrex.OAuth.ClientTest do
   test "test echo" do
     f = Flickrex.new
     params = ([method: "flickr.test.echo", format: "json", nojsoncallback: 1])
-    response = request(:get, @rest_url, params, f.consumer_key, f.consumer_secret,
-      f.access_token, f.access_token_secret)
+    response = request(:get, @rest_url, params, f.consumer.key, f.consumer.secret,
+      f.access.token, f.access.secret)
     {:ok, {_, _, body}} = response
     echo = IO.iodata_to_binary(body)
     assert echo =~ "flickr.test.echo"

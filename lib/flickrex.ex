@@ -9,65 +9,86 @@ defmodule Flickrex do
         consumer_secret: "...",
       ]
 
-  The configuration also accepts values for `access_token` and
-  `access_token_secret`, but it is highly recommended to store these values
-  separately for each authenticated user, rather than setting them globally.
+  The configuration also accepts `access_token` and `access_token_secret` keys,
+  but it is highly recommended to store these values separately for each
+  authenticated user, rather than setting them globally.
 
-  ## Manual Verification
+  ## Examples
 
       flickrex = Flickrex.new
-      {:ok, token} = Flickrex.get_request_token(flickrex)
-      auth_url = Flickrex.get_authorize_url(token)
+      {:ok, photos} = Flickrex.get(flickrex, "flickr.photos.getRecent", per_page: 5)
+
+  Instead of using `get/3` and `post/3` directly, refer to the `Flickr` Module API.
+
+  ## Authentication
+
+  Certain Flickr methods require authorization from a user account. You must
+  present an authorizaton URL to the user, and obtain a verification code that
+  can be exchanged for access tokens. You can store and re-use the access tokens
+  without having to repeat the authorization step.
+
+  ### Manual Verification
+
+      flickrex = Flickrex.new
+      {:ok, request} = Flickrex.fetch_request_token(flickrex)
+      auth_url = Flickrex.get_authorize_url(request)
 
       # Open the URL in your browser, authorize the app, and get the verify token
       verify = "..."
-      flickrex = Flickrex.fetch_access_token(flickrex, token, verify)
+      {:ok, access} = Flickrex.fetch_access_token(flickrex, request, verify)
+      flickrex = Flickrex.put_access_token(flickrex, access)
 
-  ## Callback Verification
+      # Test that the login was successful
+      {:ok, login} = Flickr.Test.login(flickrex)
+
+  ### Callback Verification
 
   Specify a callback URL when generating the request token:
 
       flickrex = Flickrex.new
-      {:ok, token} = Flickrex.get_request_token(flickrex, oauth_callback: "https://example.com/check")
-      auth_url = Flickrex.get_authorize_url(token)
+      url = "https://example.com/check"
+      {:ok, request} = Flickrex.fetch_request_token(flickrex, oauth_callback: url)
+      auth_url = Flickrex.get_authorize_url(request)
 
-  Either keep track of the `token` struct in a process, or persist the values of
-  `token.oauth_token` and `token.oauth_token_secret`.
+  Present the `auth_url` to the user and ask them to complete the authorization
+  process. Save the `request.token` and the `request.secret`.
 
-  After following the `auth_url` and authorizing your app, the user will be redirected to:
+  After following the `auth_url` and authorizing your app, the user will be re-directed to:
 
   ```sh
   https://example.com/check?oauth_token=FOO&oauth_verifier=BAZ
   ```
 
-  Retrieve the `token` from the previous step or recreate it from persisted
-  values, then use it and the verifier code to fetch an acess token:
+  The `oauth_token` in the URL query corresponds to the `request.token` from the
+  previous step, which you will need to recall the request token `secret`.
 
-      token = %Flickrex.RequestToken{oauth_token: "FOO", oauth_token_secret: "BAZ"}
-      flickrex = Flickrex.fetch_access_token(flickrex, token, oauth_verifier)
+      # use `oauth_token` to look up the request token and secret
+      {:ok, access} = Flickrex.fetch_access_token(flickrex, request_token, request_secret, oauth_verifier)
+      flickrex = Flickrex.put_access_token(flickrex, access)
 
-  Finally, save `flickrex.access_token` and `flickrex.access_token_secret` for this user.
+  Finally, save `flickrex.access.token` and `flickrex.access.secret` for this
+  user, which you can re-use.
 
   ## Re-authenticating
 
   Look up the `access_token` and `access_token_secret` you have saved for the
-  user, and use them to generate a new config:
+  user, and use them to generate a new client:
 
-      tokens = [access_token: "...", access_token_secret: "..."]
-      flickrex = Flickrex.new |> Flickrex.config(tokens)
+      flickrex = Flickrex.new |> Flickrex.put_access_token(access_token, access_token_secret)
   """
 
   alias Flickrex.API
-  alias Flickrex.Config
+  alias Flickrex.API.Auth
+  alias Flickrex.Client
   alias Flickrex.Parser
-  alias Flickrex.RequestToken
+  alias Flickrex.Schema
 
   @type response :: Parser.response
 
   @doc """
   Creates a Flickrex client using the application config
   """
-  @spec new :: Config.t
+  @spec new :: Client.t
   def new do
     new(Application.get_env(:flickrex, :oauth))
   end
@@ -82,31 +103,33 @@ defmodule Flickrex do
     * `:access_token` - Per-user access token
     * `:access_token_secret` - Per-user access token secret
   """
-  @spec new(Keyword.t) :: Config.t
-  defdelegate new(params), to: Flickrex.Config
-
-  @doc ~S"""
-  Updates the config of a Flickrex client
-
-  Parameters will be merged with the existing config.
-
-  ## Examples:
-
-      tokens = [access_token: "...", access_token_secret: "..."]
-      flickrex = Flickrex.new |> Flickrex.config(tokens)
-
-  The accepted parameters are:
-
-    * `:consumer_token` - Flickr API key
-    * `:consumer_secret` - Flicrkr API shared secret
-    * `:access_token` - Per-user access token
-    * `:access_token_secret` - Per-user access token secret
-  """
-  @spec config(Config.t, Keyword.t) :: Config.t
-  defdelegate config(config, params), to: Flickrex.Config, as: :merge
+  @spec new(Keyword.t) :: Client.t
+  defdelegate new(config), to: Client
 
   @doc """
-  Gets a temporary token to authenticate the user to your application
+  Updates a Flickrex client with a config value
+  """
+  @spec update(Client.t, atom, String.t) :: Client.t
+  defdelegate update(client, key, value), to: Client, as: :put
+
+  @doc """
+  Adds an access token to a client
+  """
+  @spec put_access_token(Client.t, Schema.Access.t) :: Client.t
+  def put_access_token(client, %Schema.Access{oauth_token: token, oauth_token_secret: secret}) do
+    put_access_token(client, token, secret)
+  end
+
+  @doc """
+  Adds an access token and secret to a client
+  """
+  @spec put_access_token(Client.t, String.t, String.t) :: Client.t
+  def put_access_token(client, token, secret) do
+    client |> Client.put(:access_token, token) |> Client.put(:access_token_secret, secret)
+  end
+
+  @doc """
+  Fetches a temporary token to authenticate the user to your application
 
   ## Options
 
@@ -115,32 +138,47 @@ defmodule Flickrex do
     and `oauth_verifier`. If this option is not set, the user will be presented with
     a verification code that they must present to your application manually.
   """
-  @spec get_request_token(Config.t, Keyword.t) :: {:ok, RequestToken.t} | {:error, binary}
-  defdelegate get_request_token(config, params \\ []), to: API.Auth
+  @spec fetch_request_token(Client.t, Keyword.t) :: {:ok, Client.Request.t} | {:error, binary}
+  def fetch_request_token(client, params \\ []) do
+    Auth.fetch_request_token(client, params)
+  end
 
   @doc """
   Generates a Flickr authorization page URL for a user
 
   ## Examples:
 
-      token = Flickrex.get_request_token(flickrex)
-      auth_url = Flickrex.get_authorize_url(token)
+      {:ok, request} = Flickrex.fetch_request_token(flickrex)
+      auth_url = Flickrex.get_authorize_url(request)
   """
-  @spec get_authorize_url(RequestToken.t, Keyword.t) :: binary
-  defdelegate get_authorize_url(request_token, params \\ []), to: API.Auth
+  @spec get_authorize_url(Client.Request.t, Keyword.t) :: binary
+  def get_authorize_url(request_token, params \\ []) do
+    Auth.get_authorize_url(request_token, params)
+  end
 
   @doc """
-  Fetches an access token from Flickr and updates the config
+  Fetches an access token from Flickr
 
-  The function takes an existing Flickrex config, a request token, and a verify
-  token generated by the Flickr authorization page.
+  The function takes an existing Flickrex client, a request token struct, and a
+  verify token generated by the Flickr authorization step.
 
   ## Examples:
 
-      flickrex = Flickrex.fetch_access_token(flickrex, token, verify)
+      {:ok, access} = Flickrex.fetch_access_token(flickrex, token, verify)
   """
-  @spec fetch_access_token(Config.t, RequestToken.t, binary) :: Config.t
-  defdelegate fetch_access_token(config, request_token, verify), to: API.Auth
+  @spec fetch_access_token(Client.t, Client.Request.t, binary) :: Schema.Access.t | {:error, term}
+  defdelegate fetch_access_token(client, request_token, verify), to: API.Auth
+
+  @doc """
+  Fetches an access token from Flickr
+
+  The function takes an existing Flickrex client, a request token and secret,
+  and a verify token generated by the Flickr authorization step.
+  """
+  @spec fetch_access_token(Client.t, String.t, String.t, binary) :: Schema.Access.t | {:error, term}
+  def fetch_access_token(client, token, secret, verify) do
+    fetch_access_token(client, %Client.Request{token: token, secret: secret}, verify)
+  end
 
   @doc """
   Makes a GET request to the Flickr REST endpoint
@@ -149,12 +187,12 @@ defmodule Flickrex do
 
       {:ok, response} = Flickrex.get(flickrex, "flickr.photos.getRecent", per_page: 5)
   """
-  @spec get(Config.t, binary, Keyword.t) :: response
-  def get(config, method, args \\ []) do
-    call(config, :get, method, args)
+  @spec get(Client.t, binary, Keyword.t) :: response
+  def get(client, method, args \\ []) do
+    call(client, :get, method, args)
   end
 
-  @doc ~s"""
+  @doc """
   Makes a POST request to the Flickr REST endpoint
 
   ## Examples:
@@ -163,14 +201,14 @@ defmodule Flickrex do
         Flickrex.post(flickrex, "flickr.photos.addTags",
           photo_id: photo_id, tags: "tag1,tag2")
   """
-  @spec post(Config.t, binary, Keyword.t) :: response
-  def post(config, method, args \\ []) do
-    call(config, :post, method, args)
+  @spec post(Client.t, binary, Keyword.t) :: response
+  def post(client, method, args \\ []) do
+    call(client, :post, method, args)
   end
 
-  @spec call(Config.t, :get | :post, binary, Keyword.t) :: response
-  defp call(config, http_method, method, args) do
-    case API.Base.call(config, http_method, method, args) do
+  @spec call(Client.t, :get | :post, binary, Keyword.t) :: response
+  defp call(client, http_method, method, args) do
+    case API.Base.call(client, http_method, method, args) do
       {:ok, result} -> Parser.parse(result)
       result -> result
     end

@@ -7,14 +7,13 @@ defmodule Flickrex.API.Auth do
 
   import Flickrex.API.Base
 
-  alias Flickrex.Config
-  alias Flickrex.AccessToken
-  alias Flickrex.RequestToken
+  alias Flickrex.Client
+  alias Flickrex.Schema
 
   @oauth_callback "oob"
 
   @doc """
-  Gets a temporary token to authenticate the user to your application
+  Fetches a temporary token to authenticate the user to your application
 
   ## Options
 
@@ -23,18 +22,16 @@ defmodule Flickrex.API.Auth do
     and `oauth_verifier`. If this option is not set, the user will be presented with
     a verification code that they must present to your application manually.
   """
-  @spec get_request_token(Config.t, Keyword.t) :: {:ok, RequestToken.t} | {:error, binary}
-  def get_request_token(config, params \\ []) do
+  @spec fetch_request_token(Client.t, Keyword.t) :: {:ok, Client.Request.t} | {:error, binary}
+  def fetch_request_token(%Client{consumer: consumer}, params \\ []) do
     oauth_params = Keyword.merge([oauth_callback: @oauth_callback], params)
-    # Make sure the config does not have any access tokens
-    config = %Flickrex.Config{consumer_key: config.consumer_key,
-                              consumer_secret: config.consumer_secret}
-    case request(config, :get, auth_url(:request_token), oauth_params) do
+    url = auth_url(:request_token)
+    case request(consumer, %Client.Access{}, :get, url, oauth_params) do
       {:ok, body} ->
-        token = URI.decode_query(body, %{})
-        {:ok, %RequestToken{oauth_callback_confirmed: token["oauth_callback_confirmed"],
-                            oauth_token: token["oauth_token"],
-                            oauth_token_secret: token["oauth_token_secret"]}}
+        oauth_token = URI.decode_query(body, %{})
+        token = oauth_token["oauth_token"]
+        secret = oauth_token["oauth_token_secret"]
+        {:ok, %Client.Request{token: token, secret: secret}}
       {:error, reason} ->
         {:error, reason}
     end
@@ -43,44 +40,30 @@ defmodule Flickrex.API.Auth do
   @doc """
   Generates a Flickr authorization page URL for a user
   """
-  @spec get_authorize_url(RequestToken.t, Keyword.t) :: binary
-  def get_authorize_url(%RequestToken{oauth_token: oauth_token}, params \\ []) do
+  @spec get_authorize_url(Client.Request.t, Keyword.t) :: binary
+  def get_authorize_url(%Client.Request{token: oauth_token}, params \\ []) do
     query = params |> Map.new |> Map.put(:oauth_token, oauth_token) |> URI.encode_query
     uri = :authorize |> auth_url |>  URI.parse
     URI.to_string(%{uri | query: query})
   end
 
   @doc """
-  Fetches an access token from Flickr and updates the config
+  Fetches an access token from Flickr
   """
-  @spec fetch_access_token(Config.t, RequestToken.t, binary) :: Config.t
-  def fetch_access_token(%Config{} = config, %RequestToken{} = request_token, oauth_verifier) do
-    case get_access_token(config, request_token, oauth_verifier) do
-      {:error, reason} ->
-        {:error, reason}
-      access_token -> put_access_token(config, access_token)
-    end
-  end
-
-  @spec get_access_token(Config.t, RequestToken.t, binary) :: AccessToken.t | {:error, term}
-  defp get_access_token(config, request_token, oauth_verifier) do
-    config = put_access_token(config, request_token)
+  @spec fetch_access_token(Client.t, Client.Request.t, binary) :: Schema.Access.t | {:error, term}
+  def fetch_access_token(%Client{consumer: consumer}, request, oauth_verifier) do
     params = [oauth_verifier: oauth_verifier]
-    case request(config, :get, auth_url(:access_token), params) do
+    url = auth_url(:access_token)
+    case request(consumer, request, :get, url, params) do
       {:ok, body} ->
         token = URI.decode_query(body, %{})
-        %AccessToken{fullname: token["fullname"],
-                     oauth_token: token["oauth_token"],
-                     oauth_token_secret: token["oauth_token_secret"],
-                     user_nsid: token["user_nsid"],
-                     username: token["username"]}
+        {:ok, %Schema.Access{fullname: token["fullname"],
+                             oauth_token: token["oauth_token"],
+                             oauth_token_secret: token["oauth_token_secret"],
+                             user_nsid: token["user_nsid"],
+                             username: token["username"]}}
       {:error, reason} ->
         {:error, reason}
     end
-  end
-
-  @spec put_access_token(Config.t, AccessToken.t | RequestToken.t) :: Config.t
-  defp put_access_token(config, %{oauth_token: token, oauth_token_secret: secret}) do
-    config |> Config.put(:access_token, token) |> Config.put(:access_token_secret, secret)
   end
 end

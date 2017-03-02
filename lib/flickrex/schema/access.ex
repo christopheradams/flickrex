@@ -1,6 +1,6 @@
-defmodule Flickrex.AccessToken do
+defmodule Flickrex.Schema.Access do
   @moduledoc """
-  A struct to represent Flickr access token.
+  A struct to represent Flickr access token
   """
 
   defstruct [:fullname, :oauth_token, :oauth_token_secret, :user_nsid, :username]

@@ -3,7 +3,10 @@ defmodule Flickrex.API.Base do
   Provides base access to Flickr API.
   """
 
-  alias Flickrex.Config
+  alias Flickrex.Client
+  alias Flickrex.Client.Access
+  alias Flickrex.Client.Request
+  alias Flickrex.Client.Consumer
 
   @end_point "https://api.flickr.com/services"
   @oauther Application.get_env(:flickrex, :oauther) || Flickrex.OAuth.Client
@@ -13,19 +16,19 @@ defmodule Flickrex.API.Base do
 
   Example:
 
-    response = Flickrex.call(flickrex, :get, "flickr.photos.getRecent", per_page: 5)
+    response = Flickrex.API.Base.call(flickrex, :get, "flickr.photos.getRecent", per_page: 5)
   """
-  @spec call(Config.t, :get | :post, binary, Keyword.t) :: {:ok | :error, binary}
-  def call(%Config{} = config, http_method, api_method, args \\ []) do
+  @spec call(Client.t, :get | :post, binary, Keyword.t) :: {:ok | :error, binary}
+  def call(%Client{} = client, http_method, api_method, args \\ []) do
     params = Keyword.merge([method: api_method, format: "json", nojsoncallback: 1], args)
-    request(config, http_method, rest_url(), params)
+    request(client.consumer, client.access, http_method, rest_url(), params)
   end
 
   @doc false
-  @spec request(Config.t, :get | :post, binary, Keyword.t) :: {:ok | :error, binary}
-  def request(%Config{} = config, method, url, params) do
-    result = @oauther.request(method, url, params, config.consumer_key,
-      config.consumer_secret, config.access_token, config.access_token_secret)
+  @spec request(Consumer.t, Access.t | Request.t, :get | :post, binary, Keyword.t) :: {:ok | :error, binary}
+  def request(consumer, token, method, url, params) do
+    result = @oauther.request(method, url, params, consumer.key, consumer.secret,
+      token.token, token.secret)
     case result do
       {:ok, {{_, 200, _}, _header, body}} ->
         {:ok, IO.iodata_to_binary(body)}

@@ -3,14 +3,17 @@ defmodule Flickrex.OAuth.Mock do
 
   @behaviour Flickrex.OAuth
 
+  @type consumer_key :: Flickrex.OAuth.consumer_key
+  @type consumer_secret :: Flickrex.OAuth.consumer_secret
   @type token :: Flickrex.OAuth.token
+  @type token_secret :: Flickrex.OAuth.token_secret
 
   @ok {'HTTP/1.1', 200, 'OK'}
   @bad_request {'HTTP/1.1', 400, 'Bad Request'}
   @unauthorized {'HTTP/1.1', 401, 'Unauthorized'}
 
   # Send a bad consumer key/secret
-  @spec request(:get | :post, binary, Keyword.t, token, token, token, token) :: tuple
+  @spec request(:get | :post, binary, Keyword.t, consumer_key, consumer_secret, token, token_secret) :: tuple
   def request(:get, _url, _, "BAD_KEY", "BAD_SECRET", _, _) do
     {:ok, {@unauthorized, nil, "oauth_problem=consumer_key_unknown"}}
   end
@@ -34,7 +37,7 @@ defmodule Flickrex.OAuth.Mock do
     end
   end
 
-  # Get an access token successfully
+  # Request an access token
   def request(:get, "https://api.flickr.com/services/oauth/access_token", params, _, _, _, _) do
     case params[:oauth_verifier] do
       "BAD_VERIFIER" ->

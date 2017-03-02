@@ -46,7 +46,7 @@ defmodule Flickr do
       |> Module.concat
 
     defmodule module do
-      @type config :: Flickrex.Config.t
+      @type client :: Flickrex.Client.t
       @type args :: Keyword.t
       @type response :: Flickrex.Parser.response
 
@@ -132,10 +132,10 @@ defmodule Flickr do
           end
 
         @doc doc
-        @spec unquote(function)(config, args) :: response
+        @spec unquote(function)(client, args) :: response
         # FIXME: This line crashes Credo.
-        def unquote(function)(config, args \\ []) do
-          Flickrex.unquote(verb)(config, unquote(method), args)
+        def unquote(function)(client, args \\ []) do
+          Flickrex.unquote(verb)(client, unquote(method), args)
         end
       end
     end

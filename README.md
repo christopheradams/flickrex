@@ -18,7 +18,7 @@ The package has two main modules:
 
 ```elixir
 flickrex = Flickrex.new
-photos = Flickr.Photos.get_recent(flickrex)
+{:ok, photos} = Flickr.Photos.get_recent(flickrex)
 ```
 
 ## Installation
@@ -31,7 +31,7 @@ def application do
 end
 
 def deps do
-  [{:flickrex, "~> 0.2.0"}]
+  [{:flickrex, "~> 0.3.0"}]
 end
 ```
 
@@ -49,7 +49,7 @@ config :flickrex, :oauth, [
 
 ## Usage
 
-### Create a Flickrex config
+### Create a Flickrex client
 
 ```elixir
 flickrex = Flickrex.new
@@ -58,40 +58,40 @@ flickrex = Flickrex.new
 ### Module API
 
 ```elixir
-photos = Flickr.Photos.get_recent(flickrex)
+{:ok, photos} = Flickr.Photos.get_recent(flickrex)
 id = photos["photos"]["photo"] |> List.first |> Map.get("id")
-info = Flickr.Photos.get_info(flickrex, photo_id: id)
+{:ok, info} = Flickr.Photos.get_info(flickrex, photo_id: id)
 title = info["photo"]["title"]["_content"]
 ```
 
 ### Manual API
 
 ```
-photos = Flickrex.get(flickrex, "flickr.photos.getRecent")
-info = Flickrex.get(flickrex, "flickr.photos.getInfo", photo_id: id)
+{:ok, info} = Flickrex.get(flickrex, "flickr.photos.getInfo", photo_id: id)
 ```
 
 ### Authentication
 
 ```elixir
 flickrex = Flickrex.new
-token = Flickrex.get_request_token(flickrex)
-auth_url = Flickrex.get_authorize_url(token)
+{:ok, request} = Flickrex.fetch_request_token(flickrex)
+auth_url = Flickrex.get_authorize_url(request)
 
 # Open the URL in your browser, authorize the app, and get the verify token
 verify = "..."
-flickrex = Flickrex.fetch_access_token(flickrex, token, verify)
-login = Flickr.Test.login(flickrex)
+{:ok, access} = Flickrex.fetch_access_token(flickrex, request, verify)
+flickrex = Flickrex.put_access_token(flickrex, access)
 
-# save flickrex.access_token and flickrex.access_token_secret for this user
+# You can now call methods that require authorization
+{:ok, login} = Flickr.Test.login(flickrex)
 ```
 
-If the user has already been authenticated, you can reuse the access token and access secret:
+You can save `flickrex.access.token` and `flickrex.access.secret`, then later
+create a new client with the saved tokens:
 
 ```elixir
-tokens = [access_token: "...", access_token_secret: "..."]
-flickrex = Flickrex.new |> Flickrex.config(tokens)
-login = Flickr.Test.login(flickrex)
+# fetch `access_token` and `access_token_secret` from disk or memory
+flickrex = Flickrex.new |> Flickrex.put_access_token(access_token, access_token_secret)
 ```
 
 ## Testing
@@ -103,8 +103,7 @@ mix test
 ```
 
 To run a test that hits the Flickr API, set these environment variables to your
-real tokens: `FLICKR_CONSUMER_KEY`, `FLICKR_CONSUMER_SECRET`,
-`FLICKR_ACCESS_TOKEN`, `FLICKR_ACCESS_SECRET`.
+API keys: `FLICKR_CONSUMER_KEY`, `FLICKR_CONSUMER_SECRET`.
 
 Run the test with:
 

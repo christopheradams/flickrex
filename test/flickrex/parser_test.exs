@@ -3,12 +3,15 @@ defmodule Flickrex.ParserTest do
 
   import Flickrex.Parser
 
-  @fail_response_json File.read!("test/fixtures/fail.json")
-  @null_response_json File.read!("test/fixtures/null.json")
-  @user_response_json File.read!("test/fixtures/user.json")
-  @photo_response_json File.read!("test/fixtures/photo.json")
-  @photos_response_json File.read!("test/fixtures/photos.json")
-  @method_response_json File.read!("test/fixtures/method.json")
+  setup_all do
+    context = [fail: File.read!("test/fixtures/fail.json"),
+               null: File.read!("test/fixtures/null.json"),
+               user: File.read!("test/fixtures/user.json"),
+               photo: File.read!("test/fixtures/photo.json"),
+               photos: File.read!("test/fixtures/photos.json"),
+               method: File.read!("test/fixtures/method.json")]
+    {:ok, context}
+  end
 
   test "syntax error" do
     assert_raise Poison.SyntaxError, fn ->
@@ -22,38 +25,38 @@ defmodule Flickrex.ParserTest do
     end
   end
 
-  test "fail" do
-    response = parse(@fail_response_json)
+  test "fail", context do
+    response = parse(context[:fail])
     assert response == {:error, "Method \"flickr.fakeMethod\" not found"}
   end
 
-  test "null" do
-    response = parse(@null_response_json)
+  test "null", context do
+    response = parse(context[:null])
     assert response == {:ok, %{}}
   end
 
-  test "user" do
-    response = parse(@user_response_json)
+  test "user", context do
+    response = parse(context[:user])
     user = %{"user" => %{"id" => "35034362831@N01", "username" => %{"_content" => "Joi"},
                          "nsid" => "35034362831@N01"}}
     assert response == {:ok, user}
   end
 
-  test "photo" do
-    {:ok, response} = parse(@photo_response_json)
+  test "photo", context do
+    {:ok, response} = parse(context[:photo])
     assert response["photo"]["id"] == "477842380"
     assert response["photo"]["title"] == %{"_content" => "Joi with backyard bamboo"}
     assert List.first(response["photo"]["tags"]["tag"])["_content"] == "joiito"
   end
 
-  test "photos" do
-    {:ok, response} = parse(@photos_response_json)
+  test "photos", context do
+    {:ok, response} = parse(context[:photos])
     assert response["photos"]["perpage"] == 2
     assert length(response["photos"]["photo"]) == 2
   end
 
-  test "method" do
-    {:ok, response} = parse(@method_response_json)
+  test "method", context do
+    {:ok, response} = parse(context[:method])
     assert Map.keys(response) == ["arguments", "errors", "method"]
     assert response["arguments"]["argument"] |> List.first |> Map.has_key?("name")
   end

@@ -44,9 +44,8 @@ defmodule Flickrex.ParserTest do
 
   test "photo", context do
     {:ok, response} = parse(context[:photo])
-    assert response["photo"]["id"] == "477842380"
-    assert response["photo"]["title"] == %{"_content" => "Joi with backyard bamboo"}
-    assert List.first(response["photo"]["tags"]["tag"])["_content"] == "joiito"
+    assert response["photo"]["id"] == "8436466166"
+    assert response["photo"]["title"] == %{"_content" => "Skies over Boston"}
   end
 
   test "photos", context do

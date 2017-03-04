@@ -1,88 +1,79 @@
 {
+  "stat": "ok",
   "photo": {
-    "id": "477842380",
-    "secret": "ee69046f6f",
-    "server": "200",
-    "farm": 1,
-    "dateuploaded": "1177904855",
-    "isfavorite": 0,
-    "license": "4",
-    "safety_level": "0",
-    "rotation": 0,
-    "originalsecret": "d20542bad1",
-    "originalformat": "jpg",
-    "owner": {
-      "nsid": "35034362831@N01",
-      "username": "Joi",
-      "realname": "Joi Ito",
-      "location": "Cambridge, MA, USA",
-      "iconserver": "1",
-      "iconfarm": 1,
-      "path_alias": "joi"
-    },
-    "title": {
-      "_content": "Joi with backyard bamboo"
-    },
-    "description": {
-      "_content": "Photo my Mizuka"
-    },
     "visibility": {
       "ispublic": 1,
       "isfriend": 0,
       "isfamily": 0
     },
-    "dates": {
-      "posted": "1177904855",
-      "taken": "2007-04-30 12:09:23",
-      "takengranularity": "0",
-      "takenunknown": 0,
-      "lastupdate": "1454373025"
-    },
-    "views": "2321",
-    "editability": {
-      "cancomment": 1,
-      "canaddmeta": 1
-    },
-    "publiceditability": {
-      "cancomment": 1,
-      "canaddmeta": 0
-    },
+    "views": "1809",
     "usage": {
-      "candownload": 1,
-      "canblog": 1,
+      "canshare": 1,
       "canprint": 1,
-      "canshare": 1
-    },
-    "comments": {
-      "_content": "4"
-    },
-    "notes": {
-      "note": []
-    },
-    "people": {
-      "haspeople": 0
-    },
-    "tags": {
-      "tag": [
-        {
-          "id": "7242-477842380-63595",
-          "author": "35034362831@N01",
-          "authorname": "Joi",
-          "raw": "Joi Ito",
-          "_content": "joiito",
-          "machine_tag": 0
-        }
-      ]
+      "candownload": 1,
+      "canblog": 1
     },
     "urls": {
       "url": [
         {
           "type": "photopage",
-          "_content": "https:\\/\\/www.flickr.com\\/photos\\/joi\\/477842380\\/"
+          "_content": "https://www.flickr.com/photos/joi/8436466166/"
         }
       ]
     },
-    "media": "photo"
-  },
-  "stat": "ok"
+    "title": {
+      "_content": "Skies over Boston"
+    },
+    "tags": {
+      "tag": []
+    },
+    "server": "8056",
+    "secret": "e2dc3b83de",
+    "safety_level": "0",
+    "rotation": 0,
+    "publiceditability": {
+      "cancomment": 1,
+      "canaddmeta": 1
+    },
+    "people": {
+      "haspeople": 0
+    },
+    "owner": {
+      "username": "Joi",
+      "realname": "Joi Ito",
+      "path_alias": "joi",
+      "nsid": "35034362831@N01",
+      "location": "Cambridge, MA, USA",
+      "iconserver": "1",
+      "iconfarm": 1
+    },
+    "originalsecret": "e48f6db017",
+    "originalformat": "jpg",
+    "notes": {
+      "note": []
+    },
+    "media": "photo",
+    "license": "4",
+    "isfavorite": 0,
+    "id": "8436466166",
+    "farm": 9,
+    "editability": {
+      "cancomment": 1,
+      "canaddmeta": 1
+    },
+    "description": {
+      "_content": ""
+    },
+    "dateuploaded": "1359523092",
+    "dates": {
+      "takenunknown": "0",
+      "takengranularity": "0",
+      "taken": "2013-01-30 00:18:12",
+      "posted": "1359523092",
+      "lastupdate": "1417600331"
+    },
+    "comments": {
+      "_content": "0"
+    }
+  }
 }

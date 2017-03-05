@@ -10,4 +10,4 @@ matrix:
 sudo: false
 
 script:
-  - mix credo --strict
+  - mix credo

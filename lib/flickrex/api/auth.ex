@@ -39,6 +39,16 @@ defmodule Flickrex.API.Auth do
 
   @doc """
   Generates a Flickr authorization page URL for a user
+
+  ## Examples:
+
+      {:ok, request} = Flickrex.fetch_request_token(flickrex)
+      auth_url = Flickrex.get_authorize_url(request, perms: "delete")
+
+  ## Options
+
+  * `perms` - Ask for "read", "write", or "delete" privileges. Overrides the
+    setting defined in your application's authentication flow.
   """
   @spec get_authorize_url(Client.Request.t, Keyword.t) :: binary
   def get_authorize_url(%Client.Request{token: oauth_token}, params \\ []) do

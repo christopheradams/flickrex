@@ -149,7 +149,12 @@ defmodule Flickrex do
   ## Examples:
 
       {:ok, request} = Flickrex.fetch_request_token(flickrex)
-      auth_url = Flickrex.get_authorize_url(request)
+      auth_url = Flickrex.get_authorize_url(request, perms: "delete")
+
+  ## Options
+
+  * `perms` - Ask for "read", "write", or "delete" privileges. Overrides the
+    setting defined in your application's authentication flow.
   """
   @spec get_authorize_url(Client.Request.t, Keyword.t) :: binary
   def get_authorize_url(request_token, params \\ []) do

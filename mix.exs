@@ -12,6 +12,7 @@ defmodule Flickrex.Mixfile do
     [app: :flickrex,
      version: @version,
      elixir: "~> 1.3 or ~> 1.4",
+     elixirc_paths: elixirc_paths(Mix.env),
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
      dialyzer: [plt_add_apps: [:mix, :eex]],
@@ -26,6 +27,9 @@ defmodule Flickrex.Mixfile do
     [applications: [:inets, :logger, :oauther, :poison],
      mod: {Flickrex.Application, []}]
   end
+
+  defp elixirc_paths(:test), do: ["lib", "test/support"]
+  defp elixirc_paths(_),     do: ["lib"]
 
   defp deps do
     [{:oauther, "~> 1.0"},

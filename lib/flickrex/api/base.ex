@@ -9,6 +9,7 @@ defmodule Flickrex.API.Base do
   alias Flickrex.Client.Consumer
 
   @api_end_point "https://api.flickr.com/services"
+  @up_end_point "https://up.flickr.com/services"
   @oauther Application.get_env(:flickrex, :oauther) || Flickrex.OAuth.Client
 
   @doc """
@@ -55,5 +56,17 @@ defmodule Flickrex.API.Base do
   @spec request_url(atom | binary) :: binary
   def request_url(path) do
     "#{@api_end_point}/#{path}"
+  end
+
+  @doc false
+  @spec upload_photo_url() :: binary
+  def upload_photo_url do
+    "#{@up_end_point}/upload/"
+  end
+
+  @doc false
+  @spec replace_photo_url() :: binary
+  def replace_photo_url do
+    "#{@up_end_point}/replace/"
   end
 end

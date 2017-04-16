@@ -69,4 +69,12 @@ defmodule Flickrex.API.BaseTest do
   test "request URL" do
     assert request_url("test") == "https://api.flickr.com/services/test"
   end
+
+  test "upload photo URL" do
+    assert upload_photo_url() == "https://up.flickr.com/services/upload/"
+  end
+
+  test "replace photo URL" do
+    assert replace_photo_url() == "https://up.flickr.com/services/replace/"
+  end
 end

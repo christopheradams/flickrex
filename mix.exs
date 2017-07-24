@@ -24,7 +24,7 @@ defmodule Flickrex.Mixfile do
   end
 
   def application do
-    [applications: [:inets, :logger, :oauther, :poison],
+    [applications: [:inets, :logger, :oauther, :poison, :hackney],
      mod: {Flickrex.Application, []}]
   end
 
@@ -33,6 +33,7 @@ defmodule Flickrex.Mixfile do
 
   defp deps do
     [{:oauther, "~> 1.0"},
+     {:hackney, "~> 1.8"},
      {:dialyxir, "~> 0.5", only: [:dev], runtime: false},
      {:credo, "~> 0.7", only: [:dev, :test], runtime: false},
      {:ex_doc, ">= 0.0.0", only: :dev},

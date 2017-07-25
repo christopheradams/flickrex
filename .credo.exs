@@ -94,7 +94,7 @@
         {Credo.Check.Refactor.ABCSize},
         {Credo.Check.Refactor.CondStatements},
         {Credo.Check.Refactor.CyclomaticComplexity},
-        {Credo.Check.Refactor.FunctionArity, max_arity: 7},
+        {Credo.Check.Refactor.FunctionArity, max_arity: 9},
         {Credo.Check.Refactor.MatchInCondition},
         {Credo.Check.Refactor.NegatedConditionsInUnless},
         {Credo.Check.Refactor.NegatedConditionsWithElse},

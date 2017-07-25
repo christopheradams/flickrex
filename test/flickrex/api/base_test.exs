@@ -56,6 +56,41 @@ defmodule Flickrex.API.BaseTest do
     end
   end
 
+  test "upload photo" do
+    client = Client.new
+    photo = "upload.png"
+    assert {:ok, _body} = upload_photo(client, photo: photo)
+  end
+
+  test "replace photo" do
+    client = Client.new
+    photo = "replace.png"
+    assert {:ok, _body} = replace_photo(client, photo: photo, photo_id: "98765432109")
+  end
+
+  test "replace no photo specified" do
+    client = Client.new
+    photo = "replace.png"
+    assert {:ok, _body} = replace_photo(client, photo: photo, photo_id: nil)
+  end
+
+  test "upload photo error" do
+    client = Client.new
+    photo = "error.png"
+    assert_raise Flickrex.ConnectionError, fn ->
+      {:error, _reason} = upload_photo(client, photo: photo)
+    end
+  end
+
+  test "replace photo error" do
+    client = Client.new
+    photo = "error.png"
+    photo_id = "1234567890"
+    assert_raise Flickrex.ConnectionError, fn ->
+      {:error, _reason} = upload_photo(client, photo: photo, photo_id: photo_id)
+    end
+  end
+
   test "rest URL" do
     assert rest_url() == "https://api.flickr.com/services/rest"
   end

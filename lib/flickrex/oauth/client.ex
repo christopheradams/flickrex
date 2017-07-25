@@ -59,6 +59,27 @@ defmodule Flickrex.OAuth.Client do
     send_httpc_request(:post, request, options)
   end
 
+  @doc """
+  Post a file. Only `params` are signed, as per the Flickr API.
+  """
+  @spec oauth_post_file(binary, binary, binary, Keyword.t, consumer_key, consumer_secret, token, token_secret, list) :: tuple
+  def oauth_post_file(url, file, name, params, consumer_key, consumer_secret, token, token_secret, options \\ []) do
+    signed_params =
+      "post"
+      |> get_signed_params(url, params, consumer_key, consumer_secret, token, token_secret)
+      |> Enum.map(fn {k, v} -> {to_string(k), to_string(v)} end)
+
+    filename = Path.basename(file)
+    disposition = {"form-data", [{"name", "\"#{name}\""}, {"filename", "\"#{filename}\""}]}
+    file_param = {:file, file, disposition, []}
+
+    parts = signed_params ++ [file_param]
+
+    body = {:multipart, parts}
+
+    :hackney.post(url, [], body, options)
+  end
+
   @spec send_httpc_request(atom, tuple, list) :: tuple
   def send_httpc_request(method, request, options) do
     :httpc.request(method, request, [{:autoredirect, false}] ++ proxy_option(), options)

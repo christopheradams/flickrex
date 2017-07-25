@@ -81,6 +81,7 @@ defmodule Flickrex do
   alias Flickrex.API.Auth
   alias Flickrex.Client
   alias Flickrex.Parser
+  alias Flickrex.XmlParser
   alias Flickrex.Schema
 
   @type response :: Parser.response
@@ -216,6 +217,68 @@ defmodule Flickrex do
     case API.Base.call(client, http_method, method, args) do
       {:ok, result} -> Parser.parse(result)
       result -> result
+    end
+  end
+
+  @doc """
+  Upload a photo to the Flickr API
+
+  This method requires authentication with write permission.
+
+  ## Examples:
+
+      photo = "/path/to/photo.png"
+      {:ok, response} = Flickrex.upload(flickrex, photo: photo, is_public: 0)
+
+  ## Arguments
+
+  * `photo` - The file to upload. <small>**(required)**</small>
+  * `title` - The title of the photo.
+  * `description` - A description of the photo. May contain some limited HTML.
+  * `tags` - A space-seperated list of tags to apply to the photo.
+  * `is_public`, `is_friend`, `is_family` - Set to 0 for no, 1 for
+    yes. Specifies who can view the photo. If omitted permissions will be set to
+    user's default
+  * safety_level - Set to 1 for Safe, 2 for Moderate, or 3 for Restricted. If
+    omitted or an invalid value is passed, will be set to user's default
+  * content_type - Set to 1 for Photo, 2 for Screenshot, or 3 for Other. If
+    omitted , will be set to user's default
+  * hidden - Set to 1 to keep the photo in global search results, 2 to hide from
+    public searches. If omitted, will be set based to user's default
+  """
+  @spec upload(Client.t, Keyword.t) :: {:ok | :error, binary}
+  def upload(client, args \\ []) do
+    client |> API.Base.upload_photo(args) |> photo_result()
+  end
+
+  @doc """
+  Replace a photo on the Flickr API
+
+  This method requires authentication with write permission.
+
+  ## Examples:
+
+      photo = "/path/to/new.png"
+      {:ok, response} = Flickrex.replace(flickrex, photo: photo, photo_id: "...")
+
+
+  ## Arguments
+
+  * `photo` - The file to upload. <small>**(required)**</small>
+  * `photo_id` - The ID of the photo to replace. <small>**(required)**</small>
+  * `async`
+  """
+  @spec replace(Client.t, Keyword.t) :: {:ok | :error, binary}
+  def replace(client, args \\ []) do
+    client |> API.Base.replace_photo(args) |> photo_result()
+  end
+
+  defp photo_result(result) do
+    case result do
+      {:ok, response} ->
+        XmlParser.parse(response)
+      result ->
+        result
     end
   end
 end

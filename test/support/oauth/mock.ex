@@ -86,4 +86,31 @@ defmodule Flickrex.OAuth.Mock do
     body = URI.encode_query(query)
     {:ok, {@ok, nil, body}}
   end
+
+  def oauth_post_file(url, file, name, params, c_k, c_s, t, t_s, opts \\ [])
+
+  def oauth_post_file(_url, "upload.png", "photo", _params, _c_k, _c_s, _t, _t_s, _opts) do
+    {:ok, 200, [], "<?xml version=\"1.0\" encoding=\"utf-8\" ?>\n<rsp stat=\"ok\">\n<photoid>98765432109</photoid>\n</rsp>\n"}
+  end
+
+  def oauth_post_file(_url, "replace.png", "photo", params, _c_k, _c_s, _t, _t_s, _opts) do
+    body =
+      case Keyword.get(params, :photo_id) do
+        nil ->
+          "<?xml version=\"1.0\" encoding=\"utf-8\" ?>\n<rsp stat=\"fail\">\n\t<err code=\"2\" msg=\"No photo specified\" />\n</rsp>\n"
+        _photo_id ->
+          "<?xml version=\"1.0\" encoding=\"utf-8\" ?>\n<rsp stat=\"ok\">\n<photoid secret=\"3f2ec5297e\" originalsecret=\"4b728a2949\">98765432109</photoid>\n</rsp>\n"
+      end
+
+    {:ok, 200, [], body}
+  end
+
+  def oauth_post_file(_url, "no_photo.png", "photo", _params, _c_k, _c_s, _t, _t_s, _opts) do
+    {:ok, 200, [], }
+  end
+
+  # Upload photo error
+  def oauth_post_file(_url, "error.png", _name, _params, _c_k, _c_s, _t, _t_s, _opts) do
+    {:error, :not_implemented}
+  end
 end

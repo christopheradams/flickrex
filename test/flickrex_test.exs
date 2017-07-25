@@ -79,4 +79,31 @@ defmodule FlickrexTest do
     response = Flickrex.post(flickrex, "ERROR", [param: "PARAM"])
     assert response == {:error, "Bad Request: call error"}
   end
+
+  test "upload photo" do
+    flickrex = Flickrex.new
+    photo = "upload.png"
+    response = Flickrex.upload(flickrex, photo: photo)
+
+    assert response == {:ok, [{"photoid", [], ["98765432109"]}]}
+  end
+
+  test "replace photo" do
+    flickrex = Flickrex.new
+    photo = "replace.png"
+    response = Flickrex.replace(flickrex, photo: photo, photo_id: "98765432109")
+
+    assert response ==
+    {:ok, [{"photoid", [{"secret", "3f2ec5297e"}, {"originalsecret", "4b728a2949"}],
+              ["98765432109"]}]}
+  end
+
+  test "replace no photo specified" do
+    flickrex = Flickrex.new
+    photo = "replace.png"
+    response = Flickrex.replace(flickrex, photo: photo, photo_id: nil)
+
+    assert response ==
+      {:error, [{"err", [{"code", "2"}, {"msg", "No photo specified"}], []}]}
+  end
 end

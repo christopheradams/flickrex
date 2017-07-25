@@ -25,6 +25,36 @@ defmodule Flickrex.API.Base do
     request(client.consumer, client.access, http_method, rest_url(), params)
   end
 
+  @spec upload_photo(Client.t, Keyword.t) :: {:ok | :error, binary}
+  def upload_photo(client, args \\ []) do
+    post_photo(client, upload_photo_url(), args)
+  end
+
+  @spec replace_photo(Client.t, Keyword.t) :: {:ok | :error, binary}
+  def replace_photo(client, args \\ []) do
+    post_photo(client, replace_photo_url(), args)
+  end
+
+  @spec post_photo(Client.t, String.t, Keyword.t) :: {:ok | :error, binary}
+  defp post_photo(%Client{consumer: consumer, access: token}, url, args) do
+    photo = Keyword.fetch!(args, :photo)
+    params = Keyword.delete(args, :photo)
+
+    http_opts = [with_body: true]
+
+    result =  @oauther.oauth_post_file(url, photo, "photo", params,
+      consumer.key, consumer.secret, token.token, token.secret, http_opts)
+
+    case result do
+      {:ok, 200, _headers, body} ->
+        {:ok, body}
+      {:ok, status, _headers, _body} ->
+        {:error, to_string(status)}
+      {:error, _reason} ->
+        raise Flickrex.ConnectionError
+    end
+  end
+
   @doc false
   @spec request(Consumer.t, Access.t | Request.t, :get | :post, binary, Keyword.t) :: {:ok | :error, binary}
   def request(consumer, token, method, url, params) do

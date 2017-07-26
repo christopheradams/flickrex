@@ -87,6 +87,17 @@ defmodule Flickrex do
   @type response :: Parser.response
 
   @doc """
+  Performs a Flickr request.
+
+  """
+  @spec request(Flickrex.Operation.t) :: term
+  @spec request(Flickrex.Operation.t, Keyword.t) :: {:ok, term} | {:error, term}
+  def request(operation, opts \\ []) do
+    config = Flickrex.Config.new(operation.service, opts)
+    Flickrex.Operation.perform(operation, config)
+  end
+
+  @doc """
   Creates a Flickrex client using the application config
   """
   @spec new :: Client.t

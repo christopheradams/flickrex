@@ -1,3 +1,4 @@
 defprotocol Flickrex.Operation do
-  def perform(operation, config)
+  def prepare(operation, config)
+  def perform(operation, request)
 end

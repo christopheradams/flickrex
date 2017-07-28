@@ -25,16 +25,7 @@ defmodule Flickrex.Request do
     request(req.method, req.url, req.body, req.headers, req.http_opts)
   end
 
-  def request(method, url, body \\ "", headers \\ [], http_opts \\ []) do
-    opts = http_opts ++ [:with_body]
-
-    case :hackney.request(method, url, headers, body, opts) do
-      {:ok, status, headers} ->
-        {:ok, %{status_code: status, headers: headers}}
-      {:ok, status, headers, body} ->
-        {:ok, %{status_code: status, headers: headers, body: body}}
-      {:error, reason} ->
-        {:error, %{reason: reason}}
-    end
+  defp request(method, url, body, headers, http_opts) do
+    Request.Hackney.request(method, url, body, headers, http_opts)
   end
 end

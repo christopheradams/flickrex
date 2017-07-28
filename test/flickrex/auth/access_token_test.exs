@@ -5,19 +5,21 @@ defmodule Flickrex.Auth.AccessTokenTest do
 
   setup [:flickr_config]
 
-  test "prepare an access token request", %{config: opts} do
+  test "request an access token", %{config: opts} do
     operation = Flickrex.Auth.access_token("TOKEN", "SECRET", "VERIFIER")
 
-    config = Flickrex.Config.new(operation.service, opts)
-    request = Flickrex.Operation.prepare(operation, config)
+    {:ok, response} = Flickrex.request(operation, opts)
 
-    %Flickrex.Request{body: "", headers: [], http_opts: [], method: "get", url: url} = request
-
-    uri = URI.parse(url)
-    query = URI.decode_query(uri.query)
-
-    assert uri.path == "/services/oauth/access_token"
-
-    assert %{"oauth_consumer_key" => "CONSUMER_KEY", "oauth_verifier" => "VERIFIER"} = query
+    assert response == %{
+      body: %{
+        fullname: "FULL NAME",
+        oauth_token: "TOKEN",
+        oauth_token_secret: "SECRET",
+        user_nsid: "NSID",
+        username: "USERNAME"
+      },
+      headers: [],
+      status_code: 200
+    }
   end
 end

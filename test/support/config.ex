@@ -9,6 +9,7 @@ defmodule Flickrex.Support.Config do
       access_token: "TOKEN",
       access_token_secret: "TOKEN_SECRET",
       url: "http://localhost:#{port}",
+      http_client: Flickrex.Support.MockHTTPClient,
     ]
 
     [config: config]

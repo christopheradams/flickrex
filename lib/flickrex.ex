@@ -94,7 +94,11 @@ defmodule Flickrex do
   @spec request(Flickrex.Operation.t, Keyword.t) :: {:ok, term} | {:error, term}
   def request(operation, opts \\ []) do
     config = Flickrex.Config.new(operation.service, opts)
-    request = Flickrex.Operation.prepare(operation, config)
+
+    request =
+      operation
+      |> Flickrex.Operation.prepare(config)
+      |> Map.put(:http_client, config.http_client)
 
     Flickrex.Operation.perform(operation, request)
   end

@@ -16,16 +16,14 @@ defmodule Flickrex.Request do
   defstruct [
     :method,
     :url,
+    :http_client,
     body: "",
     headers: [],
     http_opts: [],
   ]
 
   def request(req) do
-    request(req.method, req.url, req.body, req.headers, req.http_opts)
-  end
-
-  defp request(method, url, body, headers, http_opts) do
-    Request.Hackney.request(method, url, body, headers, http_opts)
+    http_client = req.http_client
+    http_client.request(req.method, req.url, req.body, req.headers, req.http_opts)
   end
 end

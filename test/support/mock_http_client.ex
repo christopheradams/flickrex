@@ -6,6 +6,7 @@ defmodule Flickrex.Support.MockHTTPClient do
   @behaviour Flickrex.Request.HttpClient
 
   @json_headers [{"content-type", "application/json; charset=utf-8"}]
+  @xml_headers [{"content-type", "text/xml; charset=UTF-8"}]
 
   def request(method, url, body \\ "", headers \\ [], http_opts \\ []) do
     do_request(method, URI.parse(url), body, headers, http_opts)
@@ -46,7 +47,34 @@ defmodule Flickrex.Support.MockHTTPClient do
     {:ok, %{status_code: status, headers: headers, body: body}}
   end
 
-  defp fixture(doc) do
-    File.read!("test/fixtures/#{doc}.json")
+  def do_request("post", %{path: "/services/upload"} = _uri, _, _, _) do
+    status = 200
+    headers = @xml_headers
+
+    body = fixture(:upload, :xml)
+
+    {:ok, %{status_code: status, headers: headers, body: body}}
+  end
+
+  def do_request("post", %{path: "/services/replace"} = _uri, req_body, _, _) do
+    status = 200
+    headers = @xml_headers
+
+    {:multipart, parts} = req_body
+    photo_id = Enum.find(parts, fn {"photo_id", _} -> true; _ -> false end)
+
+    resp_body =
+      case photo_id do
+        {"photo_id", "35467821184"} ->
+          fixture(:replace, :xml)
+        nil ->
+          fixture(:error, :xml)
+      end
+
+    {:ok, %{status_code: status, headers: headers, body: resp_body}}
+  end
+
+  defp fixture(doc, format \\ :json) do
+    File.read!("test/fixtures/#{doc}.#{format}")
   end
 end

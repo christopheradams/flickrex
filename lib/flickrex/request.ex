@@ -8,7 +8,7 @@ defmodule Flickrex.Request do
   @type t :: %Request{
     method: String.t,
     url: String.t,
-    body: iodata,
+    body: iodata | tuple,
     headers: [{binary, binary}],
     http_opts: Keyword.t,
   }

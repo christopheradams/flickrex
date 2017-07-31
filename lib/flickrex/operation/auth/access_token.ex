@@ -6,7 +6,7 @@ defmodule Flickrex.Operation.Auth.AccessToken do
   @type t :: %__MODULE__{}
 
   defstruct [
-    parser: &Flickrex.Auth.Parsers.parse_access_token/1,
+    parser: &Flickrex.Parsers.Auth.parse_access_token/1,
     path: "services/oauth/access_token",
     request_token: nil,
     request_secret: nil,

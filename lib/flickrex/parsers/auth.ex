@@ -1,4 +1,4 @@
-defmodule Flickrex.Auth.Parsers do
+defmodule Flickrex.Parsers.Auth do
 
   @moduledoc false
 

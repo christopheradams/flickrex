@@ -8,7 +8,7 @@ defmodule Flickrex.Operation.Auth.RequestToken do
   @type t :: %__MODULE__{}
 
   defstruct [
-    parser: &Flickrex.Auth.Parsers.parse_request_token/1,
+    parser: &Flickrex.Parsers.Auth.parse_request_token/1,
     path: "services/oauth/request_token",
     params: %{oauth_callback: @oauth_callback},
     service: :api

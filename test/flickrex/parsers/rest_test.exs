@@ -35,11 +35,11 @@ defmodule Flickrex.Parsers.RestTest do
     assert body == @html_doc
   end
 
-  test "parse/1 does not parse xml bodies" do
+  test "parse/1 parses a REST XML response" do
     response = {:ok, %{body: @xml_doc, headers: @xml_headers, status_code: 200}}
     {:ok, %{body: body}} = Parsers.Rest.parse(response)
 
-    assert body == @xml_doc
+    assert body == {"_", [], []}
   end
 
   test "parse/1 passes errors through" do

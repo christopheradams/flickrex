@@ -18,6 +18,10 @@ defmodule Flickrex.Parsers.Rest do
     Poison.decode!(body)
   end
 
+  defp parse_body({"text", "xml", _}, body) do
+    :parsexml.parse(body)
+  end
+
   defp parse_body(_content_type, body) do
     body
   end

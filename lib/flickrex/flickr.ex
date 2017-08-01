@@ -1,8 +1,39 @@
-defmodule Flickr do
-  @moduledoc false
+defmodule Flickrex.Flickr do
+  @moduledoc """
+  Flickr API Modules.
+
+  These modules and functions map to the methods from the Flickr [API
+  Documentation](https://www.flickr.com/services/api/).
+
+  Each function takes a keyword list of API arguments and returns an operation
+  that can be executed with `Flickrex.request/1`.
+
+  Some Flickr methods require user access tokens that were granted read, write,
+  or delete permissions.
+
+  ## Examples
+
+  Get the five most recent public photos:
+
+  ```elixir
+  get_recent = Flickrex.Flickr.Photos.get_recent(per_page: 5)
+  {:ok, resp} = Flickrex.request(get_recent)
+
+  %{"photos" => photos} = resp.body
+  ```
+
+  Test logging in as a user, by configuring the tokens for the request:
+
+  ```elixir
+  login = Flickrex.Flickr.Test.login()
+  {:ok, resp} = Flickrex.request(login, access_token: "...", access_token_secret: "...")
+
+  %{"user" => user} = resp.body
+  ```
+  """
 
   # Flickr directory
-  flickr_dir = Path.join([__DIR__], "flickr")
+  flickr_dir = Path.join(File.cwd!(), "/lib/flickr")
 
   # A local copy of "flickr.reflection.getMethods"
   methods_file = Path.join(flickr_dir, "flickr.reflection.getMethods.json")
@@ -20,9 +51,10 @@ defmodule Flickr do
     |> Enum.map(fn %{"_content" => m} -> m end)
     |> Enum.group_by(fn m -> m |> String.split(".") |> List.delete_at(-1) end)
 
-  for {aliases, methods} <- methods_modules do
+  for {[_ | namespaces], methods} <- methods_modules do
     # Generate a module name for each method namespace, e.g.
     # `Flickr.Photos.People` for "flickr.photos.people"
+    aliases = ["flickrex", "flickr"] ++ namespaces
     module =
       aliases
       |> Enum.map(&String.capitalize/1)
@@ -30,10 +62,8 @@ defmodule Flickr do
       |> Module.concat
 
     defmodule module do
-      @moduledoc false
-      @type client :: Flickrex.Client.t
       @type args :: Keyword.t
-      @type response :: Flickrex.Parser.response
+      @type response :: Flickrex.Operation.Rest.t
 
       for method <- methods do
         # Generate the function name from the method, e.g. `get_list` for
@@ -117,10 +147,9 @@ defmodule Flickr do
           end
 
         @doc doc
-        @spec unquote(function)(client, args) :: response
-        # FIXME: This line crashes Credo.
-        def unquote(function)(client, args \\ []) do
-          Flickrex.unquote(verb)(client, unquote(method), args)
+        @spec unquote(function)(args) :: response
+        def unquote(function)(args \\ []) do
+          Flickrex.Rest.unquote(verb)(unquote(method), args)
         end
       end
     end

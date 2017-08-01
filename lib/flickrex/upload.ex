@@ -1,6 +1,20 @@
 defmodule Flickrex.Upload do
   @moduledoc """
   Operations on Flickr Upload Service.
+
+  ## Examples
+
+      photo = "path/to/photo.png"
+
+      {:ok, resp} =
+        photo
+        |> Flickrex.Upload.upload(is_public: 0)
+        |> Flickrex.request()
+
+  Because response content type of photo uploads are always in XML, the body is
+  parsed as a list of tuples that represent the document, e.g:
+
+      {"rsp", [{"stat", "ok"}], [{"photoid", [], ["35467821184"]}]}
   """
 
   alias Flickrex.Operation
@@ -10,9 +24,8 @@ defmodule Flickrex.Upload do
 
   This method requires authentication with write permission.
 
-  ## Arguments
+  ## Options
 
-  * `photo` - The file to upload. <small>**(required)**</small>
   * `title` - The title of the photo.
   * `description` - A description of the photo. May contain some limited HTML.
   * `tags` - A space-seperated list of tags to apply to the photo.
@@ -33,9 +46,8 @@ defmodule Flickrex.Upload do
   @doc """
   Replace a photo on the Flickr API.
 
-  ## Arguments
+  ## Options
 
-  * `photo` - The file to upload. <small>**(required)**</small>
   * `photo_id` - The ID of the photo to replace. <small>**(required)**</small>
   * `async`
   """

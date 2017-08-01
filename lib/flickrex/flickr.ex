@@ -6,7 +6,7 @@ defmodule Flickrex.Flickr do
   Documentation](https://www.flickr.com/services/api/).
 
   Each function takes a keyword list of API arguments and returns an operation
-  that can be executed with `Flickrex.request/1`.
+  that can be executed with `Flickrex.request/2`.
 
   Some Flickr methods require user access tokens that were granted read, write,
   or delete permissions.
@@ -15,21 +15,17 @@ defmodule Flickrex.Flickr do
 
   Get the five most recent public photos:
 
-  ```elixir
-  get_recent = Flickrex.Flickr.Photos.get_recent(per_page: 5)
-  {:ok, resp} = Flickrex.request(get_recent)
+      get_recent = Flickrex.Flickr.Photos.get_recent(per_page: 5)
+      {:ok, resp} = Flickrex.request(get_recent)
 
-  %{"photos" => photos} = resp.body
-  ```
+      %{"photos" => photos} = resp.body
 
   Test logging in as a user, by configuring the tokens for the request:
 
-  ```elixir
-  login = Flickrex.Flickr.Test.login()
-  {:ok, resp} = Flickrex.request(login, access_token: "...", access_token_secret: "...")
+      config = [oauth_token: "...", oauth_token_secret: "..."]
+      {:ok, resp} = Flickrex.Flickr.Test.login() |> Flickrex.request(config)
 
-  %{"user" => user} = resp.body
-  ```
+      %{"user" => user} = resp.body
   """
 
   # Flickr directory

@@ -5,10 +5,13 @@
 
 Flickr client library for Elixir.
 
-The package has two main modules:
+The package's main modules are:
 
-* `Flickrex` - handles configuration and authentication for the API.
-* `Flickr` - mirrors the Flickr API method namespace.
+* `Flickrex` - performs API requests.
+* `Flickrex.Auth` - handles authentication.
+* `Flickrex.Flickr` - mirrors the Flickr API method namespace.
+* `Flickrex.Upload` - handles photo uploads.
+* `Flickrex.URL` - generates Flickr URLs for photos, etc.
 
 [Documentation for Flickrex is available on hexdocs](http://hexdocs.pm/flickrex/).<br/>
 [Source code is available on Github](https://github.com/christopheradams/flickrex).<br/>
@@ -17,8 +20,9 @@ The package has two main modules:
 ## Hello World
 
 ```elixir
-flickrex = Flickrex.new
-{:ok, photos} = Flickr.Photos.get_recent(flickrex)
+{:ok, resp} = Flickrex.Flickr.Photos.get_recent() |> Flickrex.request()
+
+%{"photos" => photos} = resp.body
 ```
 
 ## Installation
@@ -47,51 +51,56 @@ config :flickrex, :oauth, [
 ]
 ```
 
+The configuration also accepts `access_token` and `access_token_secret` keys,
+but it is highly recommended to store these values separately for each
+authenticated user, rather than setting them globally.
+
 ## Usage
 
-### Create a Flickrex client
+### Flickr API
 
 ```elixir
-flickrex = Flickrex.new
+operation = Flickrex.Flickr.Photos.get_recent(per_page: 5)
+{:ok, resp} = Flickrex.request(operation)
+
+%{"photos" => photos} = resp.body
 ```
 
-### Module API
+### Configuration Override
 
 ```elixir
-{:ok, photos} = Flickr.Photos.get_recent(flickrex)
-id = photos["photos"]["photo"] |> List.first |> Map.get("id")
-{:ok, info} = Flickr.Photos.get_info(flickrex, photo_id: id)
-title = info["photo"]["title"]["_content"]
-```
-
-### Manual API
-
-```
-{:ok, info} = Flickrex.get(flickrex, "flickr.photos.getInfo", photo_id: id)
+config = [consumer_key: "...", consumer_secret: "..."]
+{:ok, resp} = Flickrex.request(operation, config)
 ```
 
 ### Authentication
 
 ```elixir
-flickrex = Flickrex.new
-{:ok, request} = Flickrex.fetch_request_token(flickrex)
-auth_url = Flickrex.get_authorize_url(request)
+{:ok, %{body: request}} = Flickrex.Auth.request_token() |> Flickrex.request()
+
+auth_url =
+  request.oauth_token
+  |> Flickrex.Auth.authorize_url()
+  |> Flickrex.request()
 
 # Open the URL in your browser, authorize the app, and get the verify token
-verify = "..."
-{:ok, access} = Flickrex.fetch_access_token(flickrex, request, verify)
-flickrex = Flickrex.put_access_token(flickrex, access)
+verifier = "..."
+
+{:ok, %{body: access}} =
+  request.oauth_token
+  |> Flickrex.Auth.access_token(request.oauth_token_secret, verifier)
+  |> Flickrex.request()
 
 # You can now call methods that require authorization
-{:ok, login} = Flickr.Test.login(flickrex)
+{:ok, resp} = Flickrex.Flickr.Test.login() |> Flickrex.request(access)
 ```
 
-You can save `flickrex.access.token` and `flickrex.access.secret`, then later
-create a new client with the saved tokens:
+Save `access.oauth_token` and `access.oauth_token_secret`, then later use them
+to configure a request:
 
 ```elixir
-# fetch `access_token` and `access_token_secret` from disk or memory
-flickrex = Flickrex.new |> Flickrex.put_access_token(access_token, access_token_secret)
+config = [oauth_token: "...", oauth_token_secret: "..."]
+{:ok, resp} = Flickrex.Flickr.Test.login() |> Flickrex.request(config)
 ```
 
 ## Testing

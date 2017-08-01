@@ -1,6 +1,11 @@
 defmodule Flickrex.Rest do
   @moduledoc """
   Operations on Flickr REST Service.
+
+  ## Examples
+
+      operation = Flickrex.Rest.get("flickr.photos.getInfo", photo_id: id)
+      {:ok, resp} = Flickrex.request(operation)
   """
 
   alias Flickrex.Operation

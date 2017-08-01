@@ -1,80 +1,13 @@
 defmodule Flickrex do
   @moduledoc ~S"""
-  Flickr client library for Elixir.
+  Performs Flickr API requests.
 
-  ## Configuration
+  # Examples
 
-      config :flickrex, :oauth, [
-        consumer_key:    "...",
-        consumer_secret: "...",
-      ]
+      operation = Flickrex.Flickr.Photos.get_recent(per_page: 5)
+      config = [url: "https://flickr-proxy.example.com"]
 
-  The configuration also accepts `access_token` and `access_token_secret` keys,
-  but it is highly recommended to store these values separately for each
-  authenticated user, rather than setting them globally.
-
-  ## Examples
-
-      flickrex = Flickrex.new
-      {:ok, photos} = Flickrex.get(flickrex, "flickr.photos.getRecent", per_page: 5)
-
-  Instead of using `get/3` and `post/3` directly, refer to the `Flickr` Module API.
-
-  ## Authentication
-
-  Certain Flickr methods require authorization from a user account. You must
-  present an authorizaton URL to the user, and obtain a verification code that
-  can be exchanged for access tokens. You can store and re-use the access tokens
-  without having to repeat the authorization step.
-
-  ### Manual Verification
-
-      flickrex = Flickrex.new
-      {:ok, request} = Flickrex.fetch_request_token(flickrex)
-      auth_url = Flickrex.get_authorize_url(request)
-
-      # Open the URL in your browser, authorize the app, and get the verify token
-      verify = "..."
-      {:ok, access} = Flickrex.fetch_access_token(flickrex, request, verify)
-      flickrex = Flickrex.put_access_token(flickrex, access)
-
-      # Test that the login was successful
-      {:ok, login} = Flickr.Test.login(flickrex)
-
-  ### Callback Verification
-
-  Specify a callback URL when generating the request token:
-
-      flickrex = Flickrex.new
-      url = "https://example.com/check"
-      {:ok, request} = Flickrex.fetch_request_token(flickrex, oauth_callback: url)
-      auth_url = Flickrex.get_authorize_url(request)
-
-  Present the `auth_url` to the user and ask them to complete the authorization
-  process. Save the `request.token` and the `request.secret`.
-
-  After following the `auth_url` and authorizing your app, the user will be re-directed to:
-
-  ```sh
-  https://example.com/check?oauth_token=FOO&oauth_verifier=BAZ
-  ```
-
-  The `oauth_token` in the URL query corresponds to the `request.token` from the
-  previous step, which you will need to recall the request token `secret`.
-
-      # use `oauth_token` to look up the request token and secret
-      {:ok, access} = Flickrex.fetch_access_token(flickrex, request_token, request_secret, oauth_verifier)
-      flickrex = Flickrex.put_access_token(flickrex, access)
-
-  Finally, save `flickrex.access.token` and `flickrex.access.secret` for this
-  user, which you can re-use.
-
-  ## Re-authenticating
-
-  Look up the `access_token` and `access_token_secret` you have saved for the
-  user, and use them to generate a new client:
-
-      flickrex = Flickrex.new |> Flickrex.put_access_token(access_token, access_token_secret)
+      {:ok, resp} = Flickrex.request(operation, config)
   """
 
   alias Flickrex.API
@@ -87,8 +20,16 @@ defmodule Flickrex do
   @type response :: Parser.response
 
   @doc """
-  Performs a Flickr request.
+  Performs a Flickr API request.
 
+  ## Options
+
+  * `consumer_key` - Flickr API consumer key.
+  * `consumer_secret` - Flickr API consumer secret.
+  * `oauth_token` - Flicker user access token.
+  * `oauth_token_secret` - Flicker user access token secret.
+  * `url` - API Endpoint URL.
+  * `http_client` - HTTP client function. See `Flickrex.Request.HttpClient`.
   """
   @spec request(Flickrex.Operation.t) :: term
   @spec request(Flickrex.Operation.t, Keyword.t) :: {:ok, term} | {:error, term}

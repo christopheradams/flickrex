@@ -1,19 +1,19 @@
 defmodule Flickrex.URL do
   @moduledoc """
   Generate Flickr URLs for photos, profiles, and photostreams
+
+  ## Examples
+
+      get_info = Flickrex.Flickr.Photos.get_info(photo_id: "...")
+      {:ok, %{body: info}} = Flickrex.request(get_info)
+
+      photo = info["photo"]
+      medium_url = Flickrex.URL.url(photo)
   """
 
   require EEx
 
-  @typedoc """
-  A photo returned by the Flickr API
-
-  ## Examples
-
-      {:ok, info} = Flickr.Photos.get_info(client, photo_id: photo_id)
-      photo = info["photo"]
-      medium_url = Flickrex.URL.url(photo)
-  """
+  @typedoc "A photo returned by the Flickr API"
   @type photo :: map
 
   @profile_url "https://www.flickr.com/people/<%= user_id %>/"

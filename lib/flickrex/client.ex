@@ -1,7 +1,5 @@
 defmodule Flickrex.Client do
-  @moduledoc """
-  Flickrex Client configuration
-  """
+  @moduledoc false
 
   alias __MODULE__, as: Client
   alias Flickrex.Client.Consumer

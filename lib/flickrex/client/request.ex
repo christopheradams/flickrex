@@ -1,7 +1,5 @@
 defmodule Flickrex.Client.Request do
-  @moduledoc """
-  A struct to represent Flickr temporary request token and secret
-  """
+  @moduledoc false
 
   defstruct [:token, :secret]
 

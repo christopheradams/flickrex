@@ -1,7 +1,5 @@
 defmodule Flickrex.API.Base do
-  @moduledoc """
-  Provides base access to Flickr API.
-  """
+  @moduledoc false
 
   alias Flickrex.Client
   alias Flickrex.Client.Access

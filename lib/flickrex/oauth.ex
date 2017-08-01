@@ -1,7 +1,5 @@
 defmodule Flickrex.OAuth do
-  @moduledoc """
-  Specifies OAuther client behaviour.
-  """
+  @moduledoc false
 
   @type consumer_key :: String.t
   @type consumer_secret :: String.t

@@ -1,7 +1,5 @@
 defmodule Flickrex.XmlParser do
-  @moduledoc """
-  Parses Flickr API XML responses.
-  """
+  @moduledoc false
 
   def parse(response) when is_binary(response) do
     response |> :parsexml.parse() |> parse()

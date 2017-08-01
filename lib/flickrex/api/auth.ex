@@ -1,9 +1,5 @@
 defmodule Flickrex.API.Auth do
-  @moduledoc """
-  Provides authentication access to Flickr API.
-
-  See `Flickrex` for more documentation.
-  """
+  @moduledoc false
 
   import Flickrex.API.Base
 

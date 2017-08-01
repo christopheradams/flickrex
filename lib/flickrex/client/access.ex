@@ -1,7 +1,5 @@
 defmodule Flickrex.Client.Access do
-  @moduledoc """
-  A struct to represent Flickr access token and secret
-  """
+  @moduledoc false
 
   defstruct [:token, :secret]
 

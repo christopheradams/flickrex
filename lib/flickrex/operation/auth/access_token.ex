@@ -8,8 +8,8 @@ defmodule Flickrex.Operation.Auth.AccessToken do
   defstruct [
     parser: &Flickrex.Parsers.Auth.parse_access_token/1,
     path: "services/oauth/access_token",
-    request_token: nil,
-    request_secret: nil,
+    oauth_token: nil,
+    oauth_token_secret: nil,
     verifier: nil,
     service: :api,
   ]
@@ -21,8 +21,8 @@ defmodule Flickrex.Operation.Auth.AccessToken do
 
       key = config.consumer_key
       secret = config.consumer_secret
-      token = operation.request_token
-      token_secret = operation.request_secret
+      token = operation.oauth_token
+      token_secret = operation.oauth_token_secret
 
       uri =
         config.url

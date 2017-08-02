@@ -1,5 +1,4 @@
 defmodule Flickrex.Parsers.Auth do
-
   @moduledoc false
 
   def parse_request_token({:ok, %{body: body} = resp}) do
@@ -16,9 +15,9 @@ defmodule Flickrex.Parsers.Auth do
       end
 
     parsed_body = %{
-      token: token,
-      secret: secret,
-      callback_confirmed: callback_confirmed,
+      oauth_token: token,
+      oauth_token_secret: secret,
+      oauth_callback_confirmed: callback_confirmed,
     }
 
     {:ok, %{resp | body: parsed_body}}

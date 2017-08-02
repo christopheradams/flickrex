@@ -53,8 +53,8 @@ defmodule Flickrex.Auth do
   @spec access_token(binary, binary, binary) :: %Operation.Auth.AccessToken{}
   def access_token(token, secret, verifier) do
     %Operation.Auth.AccessToken{
-      request_token: token,
-      request_secret: secret,
+      oauth_token: token,
+      oauth_token_secret: secret,
       verifier: verifier,
     }
   end

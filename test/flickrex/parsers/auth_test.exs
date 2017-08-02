@@ -12,7 +12,11 @@ defmodule Flickrex.Parsers.AuthTest do
 
     {:ok, %{status_code: 200, headers: [], body: token}} = parsed_response
 
-    assert token == %{token: "TOKEN", secret: "TOKEN_SECRET", callback_confirmed: true}
+    assert token == %{
+      oauth_token: "TOKEN",
+      oauth_token_secret: "TOKEN_SECRET",
+      oauth_callback_confirmed: true
+    }
   end
 
   test "parse_request_token/1 passes through responses with no body" do

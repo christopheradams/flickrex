@@ -31,8 +31,8 @@ defmodule Flickrex.Operation.Rest do
 
       key = config.consumer_key
       secret = config.consumer_secret
-      token = config.access_token
-      token_secret = config.access_token_secret
+      token = config.oauth_token
+      token_secret = config.oauth_token_secret
 
       uri =
         config.url

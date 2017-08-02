@@ -45,8 +45,8 @@ defmodule Flickrex.AuthTest do
     request = Auth.access_token("REQUEST_TOKEN", "REQUEST_SECRET", "VERIFIER")
 
     operation = %Operation.Auth.AccessToken{
-      request_token: "REQUEST_TOKEN",
-      request_secret: "REQUEST_SECRET",
+      oauth_token: "REQUEST_TOKEN",
+      oauth_token_secret: "REQUEST_SECRET",
       verifier: "VERIFIER",
     }
 

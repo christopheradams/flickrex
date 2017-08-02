@@ -1,5 +1,4 @@
 defmodule Flickrex.Config do
-
   @moduledoc false
 
   alias __MODULE__, as: Config
@@ -18,8 +17,8 @@ defmodule Flickrex.Config do
   defstruct [
     :consumer_key,
     :consumer_secret,
-    :access_token,
-    :access_token_secret,
+    :oauth_token,
+    :oauth_token_secret,
     :url,
     http_client: Flickrex.Request.Hackney,
   ]
@@ -43,13 +42,21 @@ defmodule Flickrex.Config do
   end
 
   # Gets the environment configuration.
-  def get_env(config) do
+  defp get_env(config) do
     env =
       :flickrex
       |> Application.get_env(:oauth)
-      |> Map.new()
+      |> cast_keys()
 
     Map.merge(config, env)
   end
+
+  defp cast_keys(env) do
+    Map.new(env, &cast_key/1)
+  end
+
+  defp cast_key({:access_token, t}), do: {:oauth_token, t}
+  defp cast_key({:access_token_secret, s}), do: {:oauth_token_secret, s}
+  defp cast_key(kv), do: kv
 end
 

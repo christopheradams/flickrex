@@ -120,6 +120,28 @@ Run the test with:
 mix test --only flickr_api
 ```
 
+### Bypass and Mocks
+
+If you are using the Flickrex package in your own application, you have the
+option of bypassing the endpoint URLs or mocking the HTTP client, either in your
+config file or in options passed to `Flickrex.request/2`.
+
+An HTTP client mock needs to implement the `Flickrex.Request.HttpClient`
+behaviour.
+
+```elixir
+# test.exs
+config :flickrex, :http_client, MyApp.Flickrex.MockClient
+```
+
+If bypassing the endpoints, the URLs are set separately for each service:
+
+```elixir
+# test.exs
+config :flickrex, :api, url: "http://localhost/api"
+config :flickrex, :upload, url: "http://localhost/upload"
+```
+
 ## Development
 
 The `Flickr` modules are generated using data from the Flickr APIs reflection

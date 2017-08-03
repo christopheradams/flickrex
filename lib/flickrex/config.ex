@@ -30,7 +30,7 @@ defmodule Flickrex.Config do
     config =
       service
       |> get_defaults()
-      |> get_env()
+      |> get_env(service)
       |> Map.merge(overrides)
 
     struct(Config, config)
@@ -42,13 +42,27 @@ defmodule Flickrex.Config do
   end
 
   # Gets the environment configuration.
-  defp get_env(config) do
-    env =
+  defp get_env(config, service) do
+    oauth_config =
       :flickrex
       |> Application.get_env(:oauth)
       |> cast_keys()
 
-    Map.merge(config, env)
+    service_config =
+      :flickrex
+      |> Application.get_env(service, [])
+      |> Map.new()
+
+    client_config =
+      case  Application.get_env(:flickrex, :http_client) do
+        nil -> %{}
+        client -> %{http_client: client}
+      end
+
+    config
+    |> Map.merge(oauth_config)
+    |> Map.merge(service_config)
+    |> Map.merge(client_config)
   end
 
   defp cast_keys(env) do

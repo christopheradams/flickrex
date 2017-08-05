@@ -19,10 +19,32 @@ defmodule Flickrex.Parsers.Rest do
   end
 
   defp parse_body({"text", "xml", _}, body) do
-    :parsexml.parse(body)
+    body
+    |> :parsexml.parse()
+    |> parse_tag()
   end
 
   defp parse_body(_content_type, body) do
     body
+  end
+
+  defp parse_tag({tag, attrs, content}) do
+    value = parse_content(content)
+    values = Enum.into(attrs, value)
+
+    %{tag => values}
+  end
+
+  defp parse_tag(content) when is_binary(content) do
+    %{"_content" => content}
+  end
+
+  defp parse_content(content) do
+    content
+    |> Enum.map(&parse_tag/1)
+    |> Enum.map(fn e -> e |> Map.to_list() |> List.first() end)
+    |> Enum.group_by(fn {k, _v} -> k end, fn {_k, v} -> v end)
+    |> Enum.map(fn {k, v} when length(v) == 1 -> {k,List.first(v)}; kv -> kv end)
+    |> Enum.into(%{})
   end
 end

@@ -29,7 +29,13 @@ defmodule Flickrex.Upload.UploadsTest do
       |> Flickrex.Upload.upload()
       |> Flickrex.request(config)
 
-    assert body == {"rsp", [{"stat", "ok"}], [{"photoid", [], ["35467821184"]}]}
+    assert body == %{
+      "rsp" => %{
+        "photoid" => %{"_content" => "35467821184"},
+        "stat" => "ok"
+      }
+    }
+
   end
 
   test "replace a photo", %{config: config} do
@@ -40,10 +46,16 @@ defmodule Flickrex.Upload.UploadsTest do
       |> Flickrex.Upload.replace(photo_id: "35467821184")
       |> Flickrex.request(config)
 
-    assert body == {"rsp", [{"stat", "ok"}],
-                    [{"photoid", [{"secret", "ca957348bc"},
-                                  {"originalsecret", "cd55de71dc"}],
-                      ["35467821184"]}]}
+    assert body == %{
+      "rsp" => %{
+        "photoid" => %{
+          "_content" => "35467821184",
+          "originalsecret" => "cd55de71dc",
+          "secret" => "ca957348bc"
+        },
+        "stat" => "ok"
+      }
+    }
   end
 
   test "replace a photo with no photo specified", %{config: config} do
@@ -54,8 +66,14 @@ defmodule Flickrex.Upload.UploadsTest do
       |> Flickrex.Upload.replace()
       |> Flickrex.request(config)
 
-    assert body == {"rsp", [{"stat", "fail"}],
-                    [{"err", [{"code", "2"},
-                              {"msg", "No photo specified"}], []}]}
+    assert body == %{
+      "rsp" => %{
+        "err" => %{
+          "code" => "2",
+          "msg" => "No photo specified"
+        },
+        "stat" => "fail"
+      }
+    }
   end
 end

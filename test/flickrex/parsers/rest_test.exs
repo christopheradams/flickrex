@@ -11,6 +11,37 @@ defmodule Flickrex.Parsers.RestTest do
   @html_doc "<!DOCTYPE html><html></html>"
   @xml_doc "<?xml version='1.0'?><_/>"
 
+  @rest_objects [
+    {
+      ~S(<foo bar="baz" />),
+      ~S({"foo": {"bar": "baz"}})
+    },
+    {
+      ~S(<foo bar="baz"> <woo yay="hoopla" /> </foo>),
+      ~S({"foo": {"bar": "baz", "woo": {"yay": "hoopla"}}})
+    },
+    {
+      ~S(<foo>text here!</foo>),
+      ~S({"foo": {"_content": "text here!"}})
+    },
+    {
+      ~S(<outer> <photo id="1" /> <photo id="2" /> </outer>),
+      ~S({"outer": {"photo": [{"id": "1"}, {"id": "2"}]}})
+    },
+  ]
+
+  test "compare REST XML and JSON responses parsing" do
+    Enum.each(@rest_objects, fn {xml_doc, json_doc} ->
+      json_resp = {:ok, %{body: json_doc, headers: @json_headers, status_code: 200}}
+      xml_resp = {:ok, %{body: xml_doc, headers: @xml_headers, status_code: 200}}
+
+      {:ok, %{body: json_body}} = Parsers.Rest.parse(json_resp)
+      {:ok, %{body: xml_body}} = Parsers.Rest.parse(xml_resp)
+
+      assert json_body == xml_body
+    end)
+  end
+
   test "parse/1 parses a Rest JSON response" do
     response = {:ok, %{body: @json_doc, headers: @json_headers, status_code: 200}}
 
@@ -39,7 +70,7 @@ defmodule Flickrex.Parsers.RestTest do
     response = {:ok, %{body: @xml_doc, headers: @xml_headers, status_code: 200}}
     {:ok, %{body: body}} = Parsers.Rest.parse(response)
 
-    assert body == {"_", [], []}
+    assert body == %{"_" => %{}}
   end
 
   test "parse/1 passes errors through" do

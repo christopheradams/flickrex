@@ -10,6 +10,6 @@ defmodule Flickrex.Parsers.UploadTest do
     response = {:ok, %{body: @xml_doc, headers: @xml_headers, status_code: 200}}
     {:ok, %{body: body}} = Parsers.Upload.parse(response)
 
-    assert body == {"_", [], []}
+    assert body == %{"_" => %{}}
   end
 end

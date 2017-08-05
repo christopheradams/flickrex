@@ -30,10 +30,8 @@ defmodule Flickrex.Upload.UploadsTest do
       |> Flickrex.request(config)
 
     assert body == %{
-      "rsp" => %{
-        "photoid" => %{"_content" => "35467821184"},
-        "stat" => "ok"
-      }
+      "photoid" => %{"_content" => "35467821184"},
+      "stat" => "ok"
     }
 
   end
@@ -47,14 +45,12 @@ defmodule Flickrex.Upload.UploadsTest do
       |> Flickrex.request(config)
 
     assert body == %{
-      "rsp" => %{
-        "photoid" => %{
-          "_content" => "35467821184",
-          "originalsecret" => "cd55de71dc",
-          "secret" => "ca957348bc"
-        },
-        "stat" => "ok"
-      }
+      "photoid" => %{
+        "_content" => "35467821184",
+        "originalsecret" => "cd55de71dc",
+        "secret" => "ca957348bc"
+      },
+      "stat" => "ok"
     }
   end
 
@@ -67,13 +63,11 @@ defmodule Flickrex.Upload.UploadsTest do
       |> Flickrex.request(config)
 
     assert body == %{
-      "rsp" => %{
-        "err" => %{
-          "code" => "2",
-          "msg" => "No photo specified"
-        },
-        "stat" => "fail"
-      }
+      "err" => %{
+        "code" => "2",
+        "msg" => "No photo specified"
+      },
+      "stat" => "fail"
     }
   end
 end

@@ -30,6 +30,10 @@ defmodule Flickrex.Parsers.RestTest do
       ~S(<outer> <photo id="1" /> <photo id="2" /> </outer>),
       ~S({"outer": {"photo": [{"id": "1"}, {"id": "2"}]}})
     },
+    {
+      ~S(<rsp stat="ok"> <photo id="1"> <title>Title</title> </photo> </rsp>),
+      ~S({"stat": "ok", "photo": {"id": "1", "title": {"_content": "Title"}}})
+    }
   ]
 
   test "compare REST XML and JSON responses parsing" do

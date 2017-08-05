@@ -22,6 +22,7 @@ defmodule Flickrex.Parsers.Rest do
     body
     |> :parsexml.parse()
     |> parse_tag()
+    |> extract_resp()
   end
 
   defp parse_body(_content_type, body) do
@@ -47,4 +48,7 @@ defmodule Flickrex.Parsers.Rest do
     |> Enum.map(fn {k, v} when length(v) == 1 -> {k,List.first(v)}; kv -> kv end)
     |> Enum.into(%{})
   end
+
+  defp extract_resp(%{"rsp" => rsp}), do: rsp
+  defp extract_resp(rsp), do: rsp
 end

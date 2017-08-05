@@ -5,6 +5,8 @@ defmodule Flickrex.Support.MockHTTPClient do
 
   @behaviour Flickrex.Request.HttpClient
 
+  import Flickrex.Support.Fixtures
+
   @json_headers [{"content-type", "application/json; charset=utf-8"}]
   @xml_headers [{"content-type", "text/xml; charset=UTF-8"}]
 
@@ -72,9 +74,5 @@ defmodule Flickrex.Support.MockHTTPClient do
       end
 
     {:ok, %{status_code: status, headers: headers, body: resp_body}}
-  end
-
-  defp fixture(doc, format \\ :json) do
-    File.read!("test/fixtures/#{doc}.#{format}")
   end
 end

@@ -1,6 +1,8 @@
 defmodule Flickrex.Parsers.RestTest do
   use ExUnit.Case
 
+  import Flickrex.Support.Fixtures
+
   alias Flickrex.Parsers
 
   @json_headers [{"content-type", "application/json; charset=utf-8"}]
@@ -128,9 +130,5 @@ defmodule Flickrex.Parsers.RestTest do
 
   def do_response(doc, headers, status_code) do
     {:ok, %{body: fixture(doc), headers: headers, status_code: status_code}}
-  end
-
-  def fixture(doc) do
-    File.read!("test/fixtures/#{doc}.json")
   end
 end

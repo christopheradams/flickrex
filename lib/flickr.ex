@@ -120,6 +120,7 @@ defmodule Flickr do
         @spec unquote(function)(client, args) :: response
         # FIXME: This line crashes Credo.
         def unquote(function)(client, args \\ []) do
+          IO.warn("#{unquote(function)} is deprecated.")
           Flickrex.unquote(verb)(client, unquote(method), args)
         end
       end

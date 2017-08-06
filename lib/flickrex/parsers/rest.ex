@@ -9,6 +9,19 @@ defmodule Flickrex.Parsers.Rest do
 
   def parse(val), do: val
 
+  def parse_status({:ok, resp}) do
+    parsed_resp = %{resp | body: parse_body(resp)}
+    code_ok = parsed_resp.status_code == 200
+    stat_ok = parsed_resp.body["stat"] == "ok"
+
+    case code_ok && stat_ok do
+      true ->
+        {:ok, parsed_resp}
+      false ->
+        {:error, parsed_resp}
+    end
+  end
+
   defp parse_body(%{headers: headers, body: body}) do
     content_type = :hackney_headers.parse("content-type", headers)
     parse_body(content_type, body)

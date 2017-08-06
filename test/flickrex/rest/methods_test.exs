@@ -21,7 +21,7 @@ defmodule Flickrex.Rest.MethodsTest do
 
     operation = Flickrex.Rest.get(method)
 
-    {:ok, response} = Flickrex.request(operation, opts)
+    assert {:error, response} = Flickrex.request(operation, opts)
 
     assert response.body == %{
       "stat" => "fail",

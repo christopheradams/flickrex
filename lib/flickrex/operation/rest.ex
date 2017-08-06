@@ -9,7 +9,7 @@ defmodule Flickrex.Operation.Rest do
 
   defstruct [
     path: "services/rest",
-    parser: &Flickrex.Parsers.Rest.parse/1,
+    parser: &Flickrex.Parsers.Rest.parse_status/1,
     params: %{},
     method: nil,
     http_method: nil,

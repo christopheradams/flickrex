@@ -22,7 +22,7 @@ defmodule Flickrex.RestTest do
       http_method: to_string(http_method),
       method: method,
       params: %{test: "test"},
-      parser: &Flickrex.Parsers.Rest.parse/1,
+      parser: &Flickrex.Parsers.Rest.parse_status/1,
       path: "services/rest", service: :api
     }
 

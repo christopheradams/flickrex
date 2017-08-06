@@ -132,6 +132,25 @@ defmodule Flickrex.Parsers.RestTest do
     assert body["arguments"]["argument"] |> List.first() |> Map.has_key?("name")
   end
 
+  test "parse_status/1 returns error for non-200 status codes" do
+    error_resp = {:ok, %{body: @json_doc, headers: @json_headers, status_code: 500}}
+
+    assert {:error, %{body: body}} = Parsers.Rest.parse_status(error_resp)
+    assert body == %{}
+  end
+
+  test "parse_status/1 returns error for response stat fail" do
+    error_resp = do_response(:fail, @json_headers, 200)
+
+    assert {:error, %{body: body}} = Parsers.Rest.parse_status(error_resp)
+
+    assert body == %{
+      "stat" => "fail",
+      "code" => 112,
+      "message" => "Method \"flickr.fakeMethod\" not found"
+    }
+  end
+
   def do_response(doc, headers, status_code) do
     {:ok, %{body: fixture(doc), headers: headers, status_code: status_code}}
   end

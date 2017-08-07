@@ -4,6 +4,7 @@ defmodule Flickrex.Request do
   """
 
   alias __MODULE__, as: Request
+  alias Flickrex.Request.HttpClient
 
   @type t :: %Request{
     method: String.t,
@@ -12,6 +13,9 @@ defmodule Flickrex.Request do
     headers: [{binary, binary}],
     http_opts: Keyword.t,
   }
+
+  @type success_t :: HttpClient.success_t
+  @type error_t :: HttpClient.error_t
 
   defstruct [
     :method,
@@ -22,6 +26,7 @@ defmodule Flickrex.Request do
     http_opts: [],
   ]
 
+  @spec request(t) :: success_t | error_t
   def request(req) do
     http_client = req.http_client
     http_client.request(req.method, req.url, req.body, req.headers, req.http_opts)

@@ -42,6 +42,25 @@ defmodule Flickrex do
     Flickrex.Operation.perform(operation, request)
   end
 
+  @doc """
+  Performs a Flickr API request. Raises on failure.
+
+  See `request/2`.
+  """
+  @spec request!(Flickrex.Operation.t, Keyword.t) :: term | no_return
+  def request!(operation, opts \\ []) do
+    case request(operation, opts) do
+      {:ok, result} ->
+        result
+      error ->
+        raise Flickrex.Error, """
+        Flickrex Request Error
+
+        #{inspect error}
+        """
+    end
+  end
+
   @doc false
   @spec new :: Client.t
   def new do

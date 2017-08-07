@@ -4,6 +4,24 @@ defmodule FlickrexTest do
   alias Flickrex.Client
   alias Flickrex.Schema
 
+  import Flickrex.Support.Config
+
+  setup [:flickr_config]
+
+  test "request/2 performs a request", %{config: opts} do
+    operation = %Flickrex.Support.Operation{path: "/test"}
+    {:ok, resp} = Flickrex.request(operation, opts)
+
+    assert resp == %{body: "Test", headers: [], status_code: 200}
+  end
+
+  test "request/2 performs can return an error", %{config: opts} do
+    operation = %Flickrex.Support.Operation{path: "/error"}
+    {:error, error} = Flickrex.request(operation, opts)
+
+    assert error == %{reason: :error}
+  end
+
   test "new client" do
     flickrex = Flickrex.new
     assert Client.config(flickrex) == Application.get_env(:flickrex, :oauth)

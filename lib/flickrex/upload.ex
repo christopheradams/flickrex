@@ -4,17 +4,23 @@ defmodule Flickrex.Upload do
 
   ## Examples
 
-      photo = "path/to/photo.png"
+  Upload a photo:
 
       {:ok, resp} =
-        photo
+        "path/to/photo.png"
         |> Flickrex.Upload.upload(is_public: 0)
         |> Flickrex.request()
 
-  Because response content type of photo uploads are always in XML, the body is
-  parsed as a list of tuples that represent the document, e.g:
+      resp.body #=> %{"photoid" => %{"_content" => "99999999999"}, "stat" => "ok"}
 
-      {"rsp", [{"stat", "ok"}], [{"photoid", [], ["35467821184"]}]}
+  Replace a photo:
+
+      {:ok, resp} =
+        "path/to/replace/photo.png"
+        |> Flickrex.Upload.replace(photo_id: "99999999999")
+        |> Flickrex.request()
+
+      resp.body #=> %{"photoid" => %{"_content" => "99999999999", ...}, "stat" => "ok"}
   """
 
   alias Flickrex.Operation

@@ -78,7 +78,7 @@ config = [consumer_key: "...", consumer_secret: "..."]
 ```elixir
 {:ok, %{body: request}} = Flickrex.Auth.request_token() |> Flickrex.request()
 
-auth_url =
+{:ok, auth_url} =
   request.oauth_token
   |> Flickrex.Auth.authorize_url()
   |> Flickrex.request()

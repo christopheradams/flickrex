@@ -13,7 +13,7 @@ defmodule Flickrex.Auth do
 
       {:ok, %{body: request}} = Flickrex.Auth.request_token() |> Flickrex.request()
 
-      auth_url =
+      {:ok, auth_url} =
         request.oauth_token
         |> Flickrex.Auth.authorize_url()
         |> Flickrex.request()
@@ -40,7 +40,7 @@ defmodule Flickrex.Auth do
         |> Flickrex.Auth.request_token()
         |> Flickrex.request()
 
-      auth_url =
+      {:ok, auth_url} =
         request.oauth_token
         |> Flickrex.Auth.authorize_url()
         |> Flickrex.request()

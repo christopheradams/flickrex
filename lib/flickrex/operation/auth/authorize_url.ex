@@ -36,7 +36,7 @@ defmodule Flickrex.Operation.Auth.AuthorizeUrl do
     end
 
     def perform(_operation, request) do
-      request.url
+      {:ok, request.url}
     end
   end
 end

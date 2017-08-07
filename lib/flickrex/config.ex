@@ -45,7 +45,7 @@ defmodule Flickrex.Config do
   defp get_env(config, service) do
     oauth_config =
       :flickrex
-      |> Application.get_env(:oauth)
+      |> Application.get_env(:oauth, [])
       |> cast_keys()
 
     service_config =

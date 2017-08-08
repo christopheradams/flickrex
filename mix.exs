@@ -47,6 +47,7 @@ defmodule Flickrex.Mixfile do
   defp docs() do
     [
       source_ref: "v#{@version}",
+      logo: "logo.png",
       main: "readme",
       extras: [
         "README.md": [title: "README"]

@@ -157,3 +157,5 @@ not required to compile this library.
 ## License
 
 Flickrex copyright &copy; 2017, [Christopher Adams](https://github.com/christopheradams)
+
+Flickrex logo based on Venn Diagram CC-by Eddy Ymeri

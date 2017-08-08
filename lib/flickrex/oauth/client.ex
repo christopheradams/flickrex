@@ -1,7 +1,5 @@
 defmodule Flickrex.OAuth.Client do
-  @moduledoc """
-  Provide a wrapper for OAuther request methods.
-  """
+  @moduledoc false
 
   @behaviour Flickrex.OAuth
 

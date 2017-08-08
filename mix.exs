@@ -5,7 +5,7 @@ defmodule Flickrex.Mixfile do
   Flickr API client library for Elixir
   """
 
-  @version "0.3.0"
+  @version "0.4.0-dev"
   @source_url "https://github.com/christopheradams/flickrex"
 
   def project do
@@ -15,7 +15,10 @@ defmodule Flickrex.Mixfile do
      elixirc_paths: elixirc_paths(Mix.env),
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
-     dialyzer: [plt_add_apps: [:mix, :eex]],
+     dialyzer: [
+       plt_add_apps: [:mix, :eex],
+       ignore_warnings: "dialyzer.ignore-warnings"
+     ],
      docs: docs(),
      description: @project_description,
      source_url: @source_url,

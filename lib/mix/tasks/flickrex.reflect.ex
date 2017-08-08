@@ -18,12 +18,16 @@ defmodule Mix.Tasks.Flickrex.Reflect do
 
   @spec run(any) :: list
   def run(_args) do
+    {:ok, _started} = Application.ensure_all_started(:hackney)
+
     methods_file = Path.join(@flickr_dir, "flickr.reflection.getMethods.json")
     create_directory(@methods_dir)
 
-    flickrex = Flickrex.new
-    {:ok, methods_json} = Flickrex.API.Base.call(flickrex, :get, "flickr.reflection.getMethods")
-    methods = Poison.decode!(methods_json)
+    %{body: methods} =
+      "flickr.reflection.getMethods"
+      |> Flickrex.Rest.get()
+      |> Flickrex.request!()
+
     pretty_methods_json = Poison.encode!(methods, pretty: true)
     File.write(methods_file, pretty_methods_json)
 
@@ -36,10 +40,12 @@ defmodule Mix.Tasks.Flickrex.Reflect do
   @spec reflect(binary) :: :ok
   defp reflect(method) do
     info_file = Path.join(@methods_dir, "#{method}.json")
-    flickrex = Flickrex.new
-    {:ok, info_json} = Flickrex.API.Base.call(flickrex, :get,
-      "flickr.reflection.getMethodInfo", method_name: method)
-    info = Poison.decode!(info_json)
+
+    %{body: info} =
+      "flickr.reflection.getMethodInfo"
+      |> Flickrex.Rest.get(method_name: method)
+      |> Flickrex.request!()
+
     pretty_json = Poison.encode!(info, pretty: true)
     Mix.shell.info("Saving #{info_file}")
     File.write(info_file, pretty_json)

@@ -1,7 +1,5 @@
 defmodule Flickrex.Parser do
-  @moduledoc """
-  Parsers Flickr API JSON responses.
-  """
+  @moduledoc false
 
   @type response :: {:ok, map} | {:error, binary}
 

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<rsp stat="ok">
+<photo id="8436466166" secret="e2dc3b83de" server="8056" farm="9" dateuploaded="1359523092" isfavorite="0" license="4" safety_level="0" rotation="0" originalsecret="e48f6db017" originalformat="jpg" views="1914" media="photo">
+	<owner nsid="35034362831@N01" username="Joi" realname="Joi Ito" location="Cambridge, MA, USA" iconserver="1" iconfarm="1" path_alias="joi" />
+	<title>Skies over Boston</title>
+	<description />
+	<visibility ispublic="1" isfriend="0" isfamily="0" />
+	<dates posted="1359523092" taken="2013-01-30 00:18:12" takengranularity="0" takenunknown="0" lastupdate="1417600331" />
+	<editability cancomment="1" canaddmeta="1" />
+	<publiceditability cancomment="1" canaddmeta="1" />
+	<usage candownload="1" canblog="1" canprint="1" canshare="1" />
+	<comments>0</comments>
+	<notes />
+	<people haspeople="0" />
+	<tags />
+	<urls>
+		<url type="photopage">https://www.flickr.com/photos/joi/8436466166/</url>
+	</urls>
+</photo>
+</rsp>

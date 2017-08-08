@@ -1,7 +1,5 @@
 defmodule Flickrex.Client.Consumer do
-  @moduledoc """
-  A struct to represent Flickr consumer key and secret
-  """
+  @moduledoc false
 
   defstruct [:key, :secret]
 

@@ -1,21 +1,5 @@
 defmodule Flickr do
-  @moduledoc """
-  Flickr API Modules.
-
-  These modules and functions map to the methods from the Flickr [API
-  Documentation](https://www.flickr.com/services/api/).
-
-  To use them, create a `Flickrex` client connection, and pass it to each
-  function with the desired params. Some Flickr methods require user access
-  tokens that were granted read, write, or delete permissions.
-
-  ## Examples
-
-  ```elixir
-  flickrex = Flickrex.new
-  {:ok, photos} = Flickr.Photos.get_recent(flickrex, per_page: 5)
-  ```
-  """
+  @moduledoc false
 
   # Flickr directory
   flickr_dir = Path.join([__DIR__], "flickr")
@@ -46,6 +30,7 @@ defmodule Flickr do
       |> Module.concat
 
     defmodule module do
+      @moduledoc false
       @type client :: Flickrex.Client.t
       @type args :: Keyword.t
       @type response :: Flickrex.Parser.response
@@ -135,6 +120,7 @@ defmodule Flickr do
         @spec unquote(function)(client, args) :: response
         # FIXME: This line crashes Credo.
         def unquote(function)(client, args \\ []) do
+          IO.warn("#{unquote(function)} is deprecated.")
           Flickrex.unquote(verb)(client, unquote(method), args)
         end
       end

@@ -1,6 +1,6 @@
 # Changelog
 
-## v0.4.0-dev
+## v0.4.0 (2017-08-08)
 
 * Enhancements
   * [Flickrex] New API for creating Flickr API operations and performing requests.

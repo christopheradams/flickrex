@@ -35,7 +35,7 @@ def application do
 end
 
 def deps do
-  [{:flickrex, "~> 0.3.0"}]
+  [{:flickrex, "~> 0.4"}]
 end
 ```
 

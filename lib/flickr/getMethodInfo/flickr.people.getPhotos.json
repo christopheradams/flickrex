@@ -22,6 +22,11 @@
         "_content": "A user_id was passed which did not match a valid flickr user."
       },
       {
+        "message": "User deleted",
+        "code": "5",
+        "_content": "The user id passed did not match a Flickr user."
+      },
+      {
         "message": "Invalid API Key",
         "code": 100,
         "_content": "The API key passed was not valid or has expired."

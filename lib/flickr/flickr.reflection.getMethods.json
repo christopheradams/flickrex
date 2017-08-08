@@ -609,6 +609,45 @@
         "_content": "flickr.test.null"
       },
       {
+        "_content": "flickr.testimonials.addTestimonial"
+      },
+      {
+        "_content": "flickr.testimonials.approveTestimonial"
+      },
+      {
+        "_content": "flickr.testimonials.deleteTestimonial"
+      },
+      {
+        "_content": "flickr.testimonials.editTestimonial"
+      },
+      {
+        "_content": "flickr.testimonials.getAllTestimonialsAbout"
+      },
+      {
+        "_content": "flickr.testimonials.getAllTestimonialsAboutBy"
+      },
+      {
+        "_content": "flickr.testimonials.getAllTestimonialsBy"
+      },
+      {
+        "_content": "flickr.testimonials.getPendingTestimonialsAbout"
+      },
+      {
+        "_content": "flickr.testimonials.getPendingTestimonialsAboutBy"
+      },
+      {
+        "_content": "flickr.testimonials.getPendingTestimonialsBy"
+      },
+      {
+        "_content": "flickr.testimonials.getTestimonialsAbout"
+      },
+      {
+        "_content": "flickr.testimonials.getTestimonialsAboutBy"
+      },
+      {
+        "_content": "flickr.testimonials.getTestimonialsBy"
+      },
+      {
         "_content": "flickr.urls.getGroup"
       },
       {

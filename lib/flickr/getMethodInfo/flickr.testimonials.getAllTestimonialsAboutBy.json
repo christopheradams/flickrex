@@ -1,23 +1,50 @@
 {
   "stat": "ok",
   "method": {
-    "response": {
-      "_content": "<profile\n    id=\"85826296@N00\"\n    nsid=\"85826296@N00\"\n    showcase_set=\"12357488850955295\"\n    first_name=\"Hal\"\n    last_name=\"Cenderson\"\n    description=\"This is me, this is my story\"\n    website=\"http://example.org\"\n    occupation=\"Super Conductor\"\n    hometown=\"Melbourne, Australia\"\n    city=\"San Francisco\"\n    country=\"USA\"\n/>"
-    },
-    "requiredperms": 0,
-    "needssigning": 0,
-    "needslogin": 0,
-    "name": "flickr.profile.getProfile",
+    "requiredperms": "1",
+    "needssigning": 1,
+    "needslogin": 1,
+    "name": "flickr.testimonials.getAllTestimonialsAboutBy",
     "description": {
-      "_content": "Returns specified user's profile info, respecting profile privacy settings"
+      "_content": "Get the testimonial by the currently logged-in user about the given user, regardless of approval status. Note that at most 1 testimonial will be returned"
     }
   },
   "errors": {
     "error": [
       {
-        "message": "Invalid NSID provided",
+        "message": "user_id",
         "code": "1",
-        "_content": "An invalid NSID was passed"
+        "_content": "ID of the user to get testimonials about"
+      },
+      {
+        "message": "Invalid status value provided",
+        "code": "2",
+        "_content": ""
+      },
+      {
+        "message": "SSL is required",
+        "code": 95,
+        "_content": "SSL is required to access the Flickr API."
+      },
+      {
+        "message": "Invalid signature",
+        "code": 96,
+        "_content": "The passed signature was invalid."
+      },
+      {
+        "message": "Missing signature",
+        "code": 97,
+        "_content": "The call required signing but no signature was sent."
+      },
+      {
+        "message": "Login failed / Invalid auth token",
+        "code": 98,
+        "_content": "The login details or auth token passed were invalid."
+      },
+      {
+        "message": "User not logged in / Insufficient permissions",
+        "code": 99,
+        "_content": "The method requires user authentication but the user was not logged in, or the authenticated method call did not have the required permissions."
       },
       {
         "message": "Invalid API Key",
@@ -71,7 +98,7 @@
       {
         "optional": "0",
         "name": "user_id",
-        "_content": "The NSID of the user to fetch profile information for."
+        "_content": "ID of the user to get testimonials about"
       }
     ]
   }

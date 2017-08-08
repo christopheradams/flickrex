@@ -5,6 +5,7 @@
 * Enhancements
   * [Flickrex] New API for creating Flickr API operations and performing requests.
   * [Upload] Added photo upload and replace support.
+  * [Flickr] Testimonials module
 
 * Deprecations
   * [Flickrex] Client, config, and get/post request functions are deprecated in

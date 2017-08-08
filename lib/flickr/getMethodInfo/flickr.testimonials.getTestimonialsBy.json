@@ -4,20 +4,20 @@
     "requiredperms": 0,
     "needssigning": 0,
     "needslogin": 0,
-    "name": "flickr.photos.getPopular",
+    "name": "flickr.testimonials.getTestimonialsBy",
     "description": {
-      "_content": "Returns a list of popular photos"
+      "_content": "Get approved testimonials written by the given user"
     }
   },
   "errors": {
     "error": [
       {
-        "message": "Invalid user id",
+        "message": "Invalid NSID provided",
         "code": "1",
-        "_content": "An invalid NSID was passed"
+        "_content": ""
       },
       {
-        "message": "Popular photos disabled by user",
+        "message": "Invalid status value provided",
         "code": "2",
         "_content": ""
       },
@@ -71,29 +71,19 @@
         "_content": "Your API application key. <a href=\"/services/api/misc.api_keys.html\">See here</a> for more details."
       },
       {
-        "optional": "1",
+        "optional": "0",
         "name": "user_id",
-        "_content": "The NSID of the user to get a galleries list for. If none is specified, the calling user is assumed."
+        "_content": "ID of the user to get testimonials written by"
       },
       {
         "optional": "1",
-        "name": "sort",
-        "_content": "The sort order. One of <code>faves</code>, <code>views</code>, <code>comments</code> or <code>interesting</code>. Deafults to <code>interesting</code>."
-      },
-      {
-        "optional": 1,
-        "name": "extras",
-        "_content": "A comma-delimited list of extra information to fetch for each returned record. Currently supported fields are: <code>description</code>, <code>license</code>, <code>date_upload</code>, <code>date_taken</code>, <code>owner_name</code>, <code>icon_server</code>, <code>original_format</code>, <code>last_update</code>, <code>geo</code>, <code>tags</code>, <code>machine_tags</code>, <code>o_dims</code>, <code>views</code>, <code>media</code>, <code>path_alias</code>, <code>url_sq</code>, <code>url_t</code>, <code>url_s</code>, <code>url_q</code>, <code>url_m</code>, <code>url_n</code>, <code>url_z</code>, <code>url_c</code>, <code>url_l</code>, <code>url_o</code>"
-      },
-      {
-        "optional": 1,
-        "name": "per_page",
-        "_content": "Number of photos to return per page. If this argument is omitted, it defaults to 100. The maximum allowed value is 500."
-      },
-      {
-        "optional": 1,
         "name": "page",
-        "_content": "The page of results to return. If this argument is omitted, it defaults to 1."
+        "_content": "Page number. Default is 0"
+      },
+      {
+        "optional": "1",
+        "name": "per_page",
+        "_content": "Number of testimonials to return per page. Default is 10, maximum is 50"
       }
     ]
   }

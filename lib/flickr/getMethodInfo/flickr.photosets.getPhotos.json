@@ -25,6 +25,11 @@
         "_content": ""
       },
       {
+        "message": "Conflicting photoset IDs received",
+        "code": "3",
+        "_content": "Both share_code and photoset_id are provided, and the photoset_id doesn't match the photoset ID referred to by the share_code"
+      },
+      {
         "message": "Invalid API Key",
         "code": 100,
         "_content": "The API key passed was not valid or has expired."

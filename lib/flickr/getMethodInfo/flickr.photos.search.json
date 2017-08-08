@@ -35,6 +35,11 @@
         "_content": "The logged in user (if any) does not have permission to view the pool for this group."
       },
       {
+        "message": "User deleted",
+        "code": "5",
+        "_content": "The user id passed did not match a Flickr user."
+      },
+      {
         "message": "Sorry, the Flickr search API is not currently available.",
         "code": "10",
         "_content": "The Flickr API search databases are temporarily unavailable."

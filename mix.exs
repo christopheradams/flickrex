@@ -34,7 +34,7 @@ defmodule Flickrex.Mixfile do
   defp deps do
     [{:oauther, "~> 1.0"},
      {:hackney, "~> 1.8"},
-     {:parsexml, github: "maxlapshin/parsexml"},
+     {:parsexml, "~> 1.0"},
      {:dialyxir, "~> 0.5", only: [:dev], runtime: false},
      {:credo, "~> 0.7", only: [:dev, :test], runtime: false},
      {:ex_doc, ">= 0.0.0", only: :dev},

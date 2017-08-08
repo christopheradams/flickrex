@@ -153,3 +153,7 @@ mix flickrex.reflect
 
 The data files are commited to the repository so that network and API access is
 not required to compile this library.
+
+## License
+
+Flickrex copyright &copy; 2017, [Christopher Adams](https://github.com/christopheradams)

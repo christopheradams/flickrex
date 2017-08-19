@@ -56,18 +56,13 @@ defmodule Flickrex.Parsers.Rest do
   defp parse_content(content) do
     content
     |> Enum.map(&parse_tag/1)
-    |> get_first_tag_as_list()
     |> group_by_tag()
     |> Enum.map(&unlist_single_element/1)
     |> Enum.into(%{})
   end
 
-  defp get_first_tag_as_list(content) do
-    Enum.map(content, fn tag -> tag |> Map.to_list() |> List.first() end)
-  end
-
   defp group_by_tag(content) do
-    Enum.group_by(content, fn {k, _v} -> k end, fn {_k, v} -> v end)
+    Enum.group_by(content, &hd(Map.keys(&1)), &hd(Map.values(&1)))
   end
 
   defp unlist_single_element({k, v}) when length(v) == 1, do: {k, List.first(v)}

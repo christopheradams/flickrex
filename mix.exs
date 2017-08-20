@@ -39,7 +39,7 @@ defmodule Flickrex.Mixfile do
      {:hackney, "~> 1.8"},
      {:parsexml, "~> 1.0"},
      {:dialyxir, "~> 0.5", only: [:dev], runtime: false},
-     {:credo, "~> 0.7", only: [:dev, :test], runtime: false},
+     {:credo, "~> 0.8", only: [:dev, :test], runtime: false},
      {:ex_doc, ">= 0.0.0", only: :dev},
      {:poison, "~> 3.0"}]
   end

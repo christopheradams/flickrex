@@ -10,6 +10,5 @@ defmodule Flickrex.Request.HttpClient do
   @type success_t :: {:ok, http_response}
   @type error_t :: {:error, %{reason: any}}
 
-  @callback request(method :: http_method, url :: binary, req_body :: binary, headers :: http_headers, http_opts :: term) ::
-    success_t | error_t
+  @callback request(http_method, binary, binary, http_headers, term) :: success_t | error_t
 end

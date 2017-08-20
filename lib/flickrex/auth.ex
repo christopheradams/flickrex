@@ -83,7 +83,7 @@ defmodule Flickrex.Auth do
   out-of-band verification.
   """
   @spec request_token() :: %Operation.Auth.RequestToken{}
-  def request_token() do
+  def request_token do
     %Operation.Auth.RequestToken{}
   end
 

@@ -45,4 +45,3 @@ defmodule Flickrex.Operation.Auth.RequestToken do
     end
   end
 end
-

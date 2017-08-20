@@ -73,4 +73,3 @@ defmodule Flickrex.Config do
   defp cast_key({:access_token_secret, s}), do: {:oauth_token_secret, s}
   defp cast_key(kv), do: kv
 end
-

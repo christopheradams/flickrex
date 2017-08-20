@@ -27,7 +27,7 @@ defmodule Flickrex.Mixfile do
   end
 
   def application do
-    [applications: [:inets, :logger, :oauther, :poison, :hackney],
+    [applications: [:inets, :logger, :oauther, :poison, :hackney, :parsexml],
      mod: {Flickrex.Application, []}]
   end
 

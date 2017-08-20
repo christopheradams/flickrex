@@ -23,7 +23,7 @@ defmodule Flickrex.Upload do
       resp.body #=> %{"photoid" => %{"_content" => "99999999999", ...}, "stat" => "ok"}
   """
 
-  alias Flickrex.Operation
+  alias Flickrex.Operation.Upload
 
   @doc """
   Upload a photo to the Flickr API.
@@ -46,7 +46,7 @@ defmodule Flickrex.Upload do
     public searches. If omitted, will be set based to user's default
   """
   def upload(photo, opts \\ []) do
-    Operation.Upload.new(:upload, photo, opts)
+    Upload.new(:upload, photo, opts)
   end
 
   @doc """
@@ -58,6 +58,6 @@ defmodule Flickrex.Upload do
   * `async`
   """
   def replace(photo, opts \\ []) do
-    Operation.Upload.new(:replace, photo, opts)
+    Upload.new(:replace, photo, opts)
   end
 end

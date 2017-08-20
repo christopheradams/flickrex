@@ -3,6 +3,8 @@ defmodule Mix.Tasks.Flickrex.Reflect do
 
   import Mix.Generator
 
+  alias Flickrex.Rest
+
   @shortdoc "Saves Flickr API reflection data locally"
 
   @moduledoc """
@@ -25,7 +27,7 @@ defmodule Mix.Tasks.Flickrex.Reflect do
 
     %{body: methods} =
       "flickr.reflection.getMethods"
-      |> Flickrex.Rest.get()
+      |> Rest.get()
       |> Flickrex.request!()
 
     pretty_methods_json = Poison.encode!(methods, pretty: true)
@@ -43,7 +45,7 @@ defmodule Mix.Tasks.Flickrex.Reflect do
 
     %{body: info} =
       "flickr.reflection.getMethodInfo"
-      |> Flickrex.Rest.get(method_name: method)
+      |> Rest.get(method_name: method)
       |> Flickrex.request!()
 
     pretty_json = Poison.encode!(info, pretty: true)

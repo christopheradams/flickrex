@@ -10,6 +10,12 @@ defmodule Flickrex do
       {:ok, resp} = Flickrex.request(operation, config)
   """
 
+  alias Flickrex.{
+    Config,
+    Error,
+    Operation,
+  }
+
   @doc """
   Performs a Flickr API request.
 
@@ -22,17 +28,17 @@ defmodule Flickrex do
   * `url` - API Endpoint URL.
   * `http_client` - HTTP client function. See `Flickrex.Request.HttpClient`.
   """
-  @spec request(Flickrex.Operation.t) :: term
-  @spec request(Flickrex.Operation.t, Keyword.t) :: {:ok, term} | {:error, term}
+  @spec request(Operation.t) :: term
+  @spec request(Operation.t, Keyword.t) :: {:ok, term} | {:error, term}
   def request(operation, opts \\ []) do
-    config = Flickrex.Config.new(operation.service, opts)
+    config = Config.new(operation.service, opts)
 
     request =
       operation
-      |> Flickrex.Operation.prepare(config)
+      |> Operation.prepare(config)
       |> Map.put(:http_client, config.http_client)
 
-    Flickrex.Operation.perform(operation, request)
+    Operation.perform(operation, request)
   end
 
   @doc """
@@ -40,13 +46,13 @@ defmodule Flickrex do
 
   See `request/2`.
   """
-  @spec request!(Flickrex.Operation.t, Keyword.t) :: term | no_return
+  @spec request!(Operation.t, Keyword.t) :: term | no_return
   def request!(operation, opts \\ []) do
     case request(operation, opts) do
       {:ok, result} ->
         result
       error ->
-        raise Flickrex.Error, """
+        raise Error, """
         Flickrex Request Error
 
         #{inspect error}

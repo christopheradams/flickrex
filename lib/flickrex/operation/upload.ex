@@ -3,6 +3,13 @@ defmodule Flickrex.Operation.Upload do
   Holds data necessary for an operation on the Flickr Upload service.
   """
 
+  alias Flickrex.{
+    OAuth,
+    Operation,
+    Parsers,
+    Request,
+  }
+
   @type t :: %__MODULE__{}
 
   @upload_path "services/upload"
@@ -10,7 +17,7 @@ defmodule Flickrex.Operation.Upload do
 
   defstruct [
     path: @upload_path,
-    parser: &Flickrex.Parsers.Upload.parse/1,
+    parser: &Parsers.Upload.parse/1,
     params: %{},
     photo: nil,
     service: :upload
@@ -34,7 +41,7 @@ defmodule Flickrex.Operation.Upload do
     }
   end
 
-  defimpl Flickrex.Operation do
+  defimpl Operation do
     def prepare(operation, config) do
       http_method = "post"
 
@@ -52,7 +59,7 @@ defmodule Flickrex.Operation.Upload do
 
       signed_params =
         http_method
-        |> Flickrex.OAuth.sign(to_string(uri), params, key, secret, token, token_secret)
+        |> OAuth.sign(to_string(uri), params, key, secret, token, token_secret)
         |> Enum.map(fn {k, v} -> {to_string(k), to_string(v)} end)
 
       name = "photo"
@@ -67,12 +74,12 @@ defmodule Flickrex.Operation.Upload do
 
       url = to_string(uri)
 
-      %Flickrex.Request{method: http_method, url: url, body: body}
+      %Request{method: http_method, url: url, body: body}
     end
 
     def perform(operation, request) do
       request
-      |> Flickrex.Request.request()
+      |> Request.request()
       |> operation.parser.()
     end
   end

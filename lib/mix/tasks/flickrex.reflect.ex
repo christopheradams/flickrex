@@ -29,7 +29,7 @@ defmodule Mix.Tasks.Flickrex.Reflect do
       |> Flickrex.request!()
 
     pretty_methods_json = Poison.encode!(methods, pretty: true)
-    File.write(methods_file, pretty_methods_json)
+    :ok = File.write(methods_file, pretty_methods_json)
 
     methods
     |> get_in(["methods", "method"])

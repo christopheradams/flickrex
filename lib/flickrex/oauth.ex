@@ -10,10 +10,10 @@ defmodule Flickrex.OAuth do
   @spec sign(binary, binary, Keyword.t, consumer_key, consumer_secret, token, token_secret) :: signed_params
   def sign(method, url, params, consumer_key, consumer_secret, token, token_secret) do
     credentials = OAuther.credentials(
-        consumer_key: consumer_key,
-        consumer_secret: consumer_secret,
-        token: token,
-        token_secret: token_secret
+      consumer_key: consumer_key,
+      consumer_secret: consumer_secret,
+      token: token,
+      token_secret: token_secret
     )
     OAuther.sign(method, url, params, credentials)
   end

@@ -27,6 +27,7 @@ defmodule Flickrex do
   * `oauth_token_secret` - Flicker user access token secret.
   * `url` - API Endpoint URL.
   * `http_client` - HTTP client function. See `Flickrex.Request.HttpClient`.
+  * `http_opts` - HTTP client options.
   """
   @spec request(Operation.t) :: term
   @spec request(Operation.t, Keyword.t) :: {:ok, term} | {:error, term}
@@ -37,6 +38,7 @@ defmodule Flickrex do
       operation
       |> Operation.prepare(config)
       |> Map.put(:http_client, config.http_client)
+      |> Map.put(:http_opts, config.http_opts)
 
     Operation.perform(operation, request)
   end

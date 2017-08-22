@@ -12,6 +12,14 @@ defmodule FlickrexTest do
     assert resp == %{body: "Test", headers: [], status_code: 200}
   end
 
+  test "request/2 can set http opts", %{config: opts} do
+    opts = Keyword.put(opts, :http_opts, test: "Opts")
+    operation = %Flickrex.Support.Operation{path: "/opts"}
+    {:ok, resp} = Flickrex.request(operation, opts)
+
+    assert resp == %{body: "Opts", headers: [], status_code: 200}
+  end
+
   test "request/2 performs can return an error", %{config: opts} do
     operation = %Flickrex.Support.Operation{path: "/error"}
     {:error, error} = Flickrex.request(operation, opts)

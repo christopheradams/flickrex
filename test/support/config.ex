@@ -10,6 +10,7 @@ defmodule Flickrex.Support.Config do
       oauth_token_secret: "TOKEN_SECRET",
       url: "http://localhost:#{port}",
       http_client: Flickrex.Support.MockHTTPClient,
+      http_opts: []
     ]
 
     [config: config]

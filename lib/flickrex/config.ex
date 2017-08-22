@@ -21,6 +21,7 @@ defmodule Flickrex.Config do
     :oauth_token_secret,
     :url,
     http_client: Flickrex.Request.Hackney,
+    http_opts: [],
   ]
 
   @spec new(atom, Keyword.t) :: t

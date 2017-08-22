@@ -54,7 +54,8 @@ defmodule Flickrex.URL do
   EEx.function_from_string(:def, :url_photoset, @photoset_url, [:user_id, :photoset_id])
 
   @spec url_photo_source(String.t, String.t, String.t, String.t, String.t, String.t) :: String.t
-  EEx.function_from_string(:defp, :url_photo_source, @photo_source_url, [:farm, :server, :id, :secret, :size, :format])
+  EEx.function_from_string(:defp, :url_photo_source, @photo_source_url,
+    [:farm, :server, :id, :secret, :size, :format])
 
   photo_sizes = %{"" => "Medium", "_b" => "Large", "_m" => "Small",
                   "_s" => "Square", "_t" => "Thumbnail",

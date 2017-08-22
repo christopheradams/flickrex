@@ -25,15 +25,15 @@ defmodule Flickrex.Operation.Upload do
 
   @doc false
   def new(:upload, photo, opts) do
-    make(@upload_path, photo, opts)
+    build(@upload_path, photo, opts)
   end
 
   @doc false
   def new(:replace, photo, opts) do
-    make(@replace_path, photo, opts)
+    build(@replace_path, photo, opts)
   end
 
-  def make(path, photo, opts) do
+  defp build(path, photo, opts) do
     %__MODULE__{
       path: path,
       params: Map.new(opts),

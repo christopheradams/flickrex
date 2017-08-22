@@ -151,6 +151,12 @@ defmodule Flickrex.Parsers.RestTest do
     }
   end
 
+  test "parse_status/1 passes errors through" do
+    response = {:error, %{reason: :error}}
+
+    assert Parsers.Rest.parse_status(response) == response
+  end
+
   def do_response(doc, headers, status_code) do
     {:ok, %{body: fixture(doc), headers: headers, status_code: status_code}}
   end

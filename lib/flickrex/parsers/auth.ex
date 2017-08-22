@@ -1,6 +1,9 @@
 defmodule Flickrex.Parsers.Auth do
   @moduledoc false
 
+  @type response :: {:ok, map} | {:error, term}
+
+  @spec parse_request_token(response) :: response
   def parse_request_token({:ok, %{status_code: 200, body: body} = resp}) do
     oauth_token = URI.decode_query(body, %{})
 
@@ -27,6 +30,7 @@ defmodule Flickrex.Parsers.Auth do
     parse_token(val)
   end
 
+  @spec parse_access_token(response) :: response
   def parse_access_token({:ok, %{status_code: 200, body: body} = resp}) do
     access_token = URI.decode_query(body, %{})
 

@@ -4,10 +4,8 @@ defmodule Flickrex.Operation.Rest do
   """
 
   alias Flickrex.{
-    OAuth,
     Operation,
     Parsers,
-    Request,
   }
 
   @json_params %{nojsoncallback: 1}
@@ -26,6 +24,15 @@ defmodule Flickrex.Operation.Rest do
   ]
 
   defimpl Operation do
+
+    alias Flickrex.{
+      Config,
+      OAuth,
+      Operation,
+      Request,
+    }
+
+    @spec prepare(Operation.Rest.t, Config.t) :: Request.t
     def prepare(operation, config) do
       http_method = operation.http_method
 
@@ -59,6 +66,7 @@ defmodule Flickrex.Operation.Rest do
       %Request{method: http_method, url: url}
     end
 
+    @spec perform(Operation.Rest.t, Request.t) :: term
     def perform(operation, request) do
       request
       |> Request.request()

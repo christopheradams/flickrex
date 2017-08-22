@@ -4,10 +4,8 @@ defmodule Flickrex.Operation.Auth.RequestToken do
   """
 
   alias Flickrex.{
-    OAuth,
     Operation,
     Parsers,
-    Request,
   }
 
   @oauth_callback "oob"
@@ -23,6 +21,14 @@ defmodule Flickrex.Operation.Auth.RequestToken do
 
   defimpl Operation do
 
+    alias Flickrex.{
+      Config,
+      OAuth,
+      Operation,
+      Request,
+    }
+
+    @spec prepare(Operation.Auth.RequestToken.t, Config.t) :: Request.t
     def prepare(operation, config) do
       http_method = "get"
       params = Keyword.new(operation.params)
@@ -45,6 +51,7 @@ defmodule Flickrex.Operation.Auth.RequestToken do
       %Request{method: http_method, url: url}
     end
 
+    @spec perform(Operation.Auth.RequestToken.t, Request.t) :: term
     def perform(operation, request) do
       request
       |> Request.request()

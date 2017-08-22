@@ -59,7 +59,7 @@ defmodule Flickrex.Flickr do
 
     defmodule module do
       @type args :: Keyword.t
-      @type response :: Flickrex.Operation.Rest.t
+      @type operation :: Flickrex.Operation.Rest.t
 
       for method <- methods do
         # Generate the function name from the method, e.g. `get_list` for
@@ -143,7 +143,7 @@ defmodule Flickrex.Flickr do
           end
 
         @doc doc
-        @spec unquote(function)(args) :: response
+        @spec unquote(function)(args) :: operation
         def unquote(function)(args \\ []) do
           Flickrex.Rest.unquote(verb)(unquote(method), args)
         end

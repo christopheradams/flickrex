@@ -3,6 +3,8 @@ defmodule Flickrex.Operation.Auth.AuthorizeUrl do
   Holds data necessary for an operation to get an authorization URL.
   """
 
+  alias Flickrex.Operation
+
   @type t :: %__MODULE__{}
 
   defstruct [
@@ -12,8 +14,15 @@ defmodule Flickrex.Operation.Auth.AuthorizeUrl do
     service: :api,
   ]
 
-  defimpl Flickrex.Operation do
+  defimpl Operation do
 
+    alias Flickrex.{
+      Config,
+      Operation,
+      Request,
+    }
+
+    @spec prepare(Operation.Auth.AuthorizeUrl.t, Config.t) :: Request.t
     def prepare(operation, config) do
       http_method = "get"
 
@@ -35,6 +44,7 @@ defmodule Flickrex.Operation.Auth.AuthorizeUrl do
       %Flickrex.Request{method: http_method, url: url}
     end
 
+    @spec perform(Operation.Auth.AuthorizeUrl.t, Request.t) :: term
     def perform(_operation, request) do
       {:ok, request.url}
     end

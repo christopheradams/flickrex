@@ -1,7 +1,9 @@
 defmodule Flickrex.Parsers.Rest do
-
   @moduledoc false
 
+  @type response :: {:ok, map} | {:error, term}
+
+  @spec parse(response) :: response
   def parse({:ok, resp}) do
     parsed_body = parse_body(resp)
     {:ok, %{resp | body: parsed_body}}
@@ -9,6 +11,7 @@ defmodule Flickrex.Parsers.Rest do
 
   def parse(val), do: val
 
+  @spec parse_status(response) :: response
   def parse_status({:ok, resp}) do
     parsed_resp = %{resp | body: parse_body(resp)}
     code_ok = parsed_resp.status_code == 200

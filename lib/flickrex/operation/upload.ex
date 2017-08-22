@@ -4,13 +4,12 @@ defmodule Flickrex.Operation.Upload do
   """
 
   alias Flickrex.{
-    OAuth,
     Operation,
     Parsers,
-    Request,
   }
 
   @type t :: %__MODULE__{}
+  @type photo :: String.t
 
   @upload_path "services/upload"
   @replace_path "services/replace"
@@ -24,11 +23,13 @@ defmodule Flickrex.Operation.Upload do
   ]
 
   @doc false
+  @spec new(:upload, photo, Keyword.t) :: t
   def new(:upload, photo, opts) do
     build(@upload_path, photo, opts)
   end
 
   @doc false
+  @spec new(:replace, photo, Keyword.t) :: t
   def new(:replace, photo, opts) do
     build(@replace_path, photo, opts)
   end
@@ -42,6 +43,15 @@ defmodule Flickrex.Operation.Upload do
   end
 
   defimpl Operation do
+
+    alias Flickrex.{
+      Config,
+      OAuth,
+      Operation,
+      Request,
+    }
+
+    @spec prepare(Operation.Upload.t, Config.t) :: Request.t
     def prepare(operation, config) do
       http_method = "post"
 
@@ -77,6 +87,7 @@ defmodule Flickrex.Operation.Upload do
       %Request{method: http_method, url: url, body: body}
     end
 
+    @spec perform(Operation.Upload.t, Request.t) :: term
     def perform(operation, request) do
       request
       |> Request.request()

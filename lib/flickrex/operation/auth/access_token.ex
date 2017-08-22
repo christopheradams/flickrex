@@ -4,10 +4,8 @@ defmodule Flickrex.Operation.Auth.AccessToken do
   """
 
   alias Flickrex.{
-    OAuth,
     Operation,
     Parsers,
-    Request,
   }
 
   @type t :: %__MODULE__{}
@@ -22,6 +20,15 @@ defmodule Flickrex.Operation.Auth.AccessToken do
   ]
 
   defimpl Operation do
+
+    alias Flickrex.{
+      Config,
+      OAuth,
+      Operation,
+      Request,
+    }
+
+    @spec prepare(Operation.Auth.AccessToken.t, Config.t) :: Request.t
     def prepare(operation, config) do
       http_method = "get"
       params = [oauth_verifier: operation.verifier]
@@ -49,6 +56,7 @@ defmodule Flickrex.Operation.Auth.AccessToken do
       %Request{method: http_method, url: url}
     end
 
+    @spec perform(Operation.Auth.AccessToken.t, Request.t) :: term
     def perform(operation, request) do
       request
       |> Request.request()

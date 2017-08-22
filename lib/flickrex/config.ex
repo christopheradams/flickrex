@@ -49,21 +49,27 @@ defmodule Flickrex.Config do
       |> Application.get_env(:oauth, [])
       |> cast_keys()
 
+    unless is_nil(Application.get_env(:flickrex, :oauth)) do
+      IO.warn """
+      Application :flickrex, :oauth is deprecated in favor of :flickrex, :config.
+      See the Flickrex package README for configuration options.
+      """
+    end
+
+    application_config =
+      :flickrex
+      |> Application.get_env(:config, [])
+      |> Map.new()
+
     service_config =
       :flickrex
       |> Application.get_env(service, [])
       |> Map.new()
 
-    client_config =
-      case  Application.get_env(:flickrex, :http_client) do
-        nil -> %{}
-        client -> %{http_client: client}
-      end
-
     config
     |> Map.merge(oauth_config)
+    |> Map.merge(application_config)
     |> Map.merge(service_config)
-    |> Map.merge(client_config)
   end
 
   defp cast_keys(env) do

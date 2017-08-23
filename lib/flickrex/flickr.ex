@@ -112,6 +112,14 @@ defmodule Flickrex.Flickr do
               false -> a
             end
           end)
+          |> Enum.map(fn argument ->
+            content =
+              argument
+              |> Map.get("_content")
+              |> String.replace("\n", " ")
+
+            Map.put(argument, "_content", content)
+          end)
 
         doc_source = """
         <%= @description %>
@@ -125,7 +133,7 @@ defmodule Flickrex.Flickr do
         ## Arguments
 
         <%= for arg <- @arguments do %>
-        * `<%= arg["name"] %>` - <%= if arg["optional"] == 0 do %> <small>**(required)**</small> <% end %> <%= String.replace(arg["_content"], "\n", " ") %>
+        * `<%= arg["name"] %>` - <%= if arg["optional"] == 0 do %> <small>**(required)**</small> <% end %> <%= arg["_content"] %>
         <% end %>
         """
 

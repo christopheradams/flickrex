@@ -84,7 +84,11 @@ defmodule Flickrex.Flickr do
               %{}
           end
 
-        description = get_in(method_info, ["method", "description", "_content"])
+        description =
+          method_info
+          |> get_in(["method", "description", "_content"])
+          |> String.replace("\"/services/api/", "\"https://www.flickr.com/services/api/")
+
         needs_login = get_in(method_info, ["method", "needslogin"])
 
         requiredperms = get_in(method_info, ["method", "requiredperms"])
@@ -117,6 +121,7 @@ defmodule Flickrex.Flickr do
               argument
               |> Map.get("_content")
               |> String.replace("\n", " ")
+              |> String.replace("\"/services/api/", "\"https://www.flickr.com/services/api/")
 
             Map.put(argument, "_content", content)
           end)

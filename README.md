@@ -35,7 +35,7 @@ def application do
 end
 
 def deps do
-  [{:flickrex, "~> 0.4"}]
+  [{:flickrex, "~> 0.5"}]
 end
 ```
 
@@ -45,15 +45,15 @@ end
 Flickr and add the API keys to your Mix config file:
 
 ```elixir
-config :flickrex, :oauth, [
+config :flickrex, :config, [
   consumer_key:    "...",
   consumer_secret: "...",
 ]
 ```
 
-The configuration also accepts `access_token` and `access_token_secret` keys,
-but it is highly recommended to store these values separately for each
-authenticated user, rather than setting them globally.
+The configuration also accepts `oauth_token` and `oauth_token_secret` keys, but
+it is highly recommended to store these values separately for each authenticated
+user, rather than setting them globally.
 
 ## Usage
 
@@ -131,7 +131,9 @@ behaviour.
 
 ```elixir
 # test.exs
-config :flickrex, :http_client, MyApp.Flickrex.MockClient
+config :flickrex, :config, [
+  http_client: MyApp.Flickrex.MockClient,
+]
 ```
 
 If bypassing the endpoints, the URLs are set separately for each service:

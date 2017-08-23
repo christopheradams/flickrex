@@ -1,5 +1,18 @@
 # Changelog
 
+## v0.5.0 (2017-08-23)
+
+* Enhancements
+  * [Flickrex] An `:http_opts` option has been added to `request/2` and
+    `request!/2`.
+
+* Deprecations
+  * [Config] The `:oauth` config key is deprecated.
+
+* Backwards incompatible changes
+  * [Flickrex] Client, config, and get/post functions have been removed.
+  * [Flickr] `Flickr` modules have been removed in favor of `Flickrex.Flickr`.
+
 ## v0.4.0 (2017-08-08)
 
 * Enhancements

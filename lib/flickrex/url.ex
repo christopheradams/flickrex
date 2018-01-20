@@ -16,6 +16,12 @@ defmodule Flickrex.URL do
   @typedoc "A photo returned by the Flickr API"
   @type photo :: map
 
+  @typedoc "A URL path parameter"
+  @type param :: String.t
+
+  @typedoc "A Flickr URL"
+  @type url :: String.t
+
   @profile_url "https://www.flickr.com/people/<%= user_id %>/"
   @photostream_url "https://www.flickr.com/photos/<%= user_id %>/"
   @photopage_url "https://www.flickr.com/photos/<%= user_id %>/<%= photo_id %>"
@@ -26,34 +32,34 @@ defmodule Flickrex.URL do
   @doc """
   URL for user profile
   """
-  @spec url_profile(String.t) :: String.t
+  @spec url_profile(param) :: url
   EEx.function_from_string(:def, :url_profile, @profile_url, [:user_id])
 
   @doc """
   URL for user photostream
   """
-  @spec url_photostream(String.t) :: String.t
+  @spec url_photostream(param) :: url
   EEx.function_from_string(:def, :url_photostream, @photostream_url, [:user_id])
 
   @doc """
   URL for individual photo page
   """
-  @spec url_photopage(String.t, String.t) :: String.t
+  @spec url_photopage(param, param) :: url
   EEx.function_from_string(:def, :url_photopage, @photopage_url, [:user_id, :photo_id])
 
   @doc """
   URL for user photo sets
   """
-  @spec url_photosets(String.t) :: String.t
+  @spec url_photosets(param) :: url
   EEx.function_from_string(:def, :url_photosets, @photosets_url, [:user_id])
 
   @doc """
   URL for individual photo set
   """
-  @spec url_photoset(String.t, String.t) :: String.t
+  @spec url_photoset(param, param) :: url
   EEx.function_from_string(:def, :url_photoset, @photoset_url, [:user_id, :photoset_id])
 
-  @spec url_photo_source(String.t, String.t, String.t, String.t, String.t, String.t) :: String.t
+  @spec url_photo_source(param, param, param, param, param, param) :: url
   EEx.function_from_string(:defp, :url_photo_source, @photo_source_url,
     [:farm, :server, :id, :secret, :size, :format])
 
@@ -67,16 +73,16 @@ defmodule Flickrex.URL do
     @doc """
     URL for #{doc} size photo
     """
-    @spec unquote(url_size)(photo) :: binary
-    def unquote(url_size)(r) do
-      url_photo_source(r, unquote(size), "jpg")
+    @spec unquote(url_size)(photo) :: url
+    def unquote(url_size)(photo) do
+      url_photo_source(photo, unquote(size), "jpg")
     end
   end
 
   @doc """
   URL for Original size photo
   """
-  @spec url_o(photo) :: binary
+  @spec url_o(photo) :: url
   def url_o(%{"farm" => farm, "server" => server, "id" => id,
               "originalsecret" => secret, "originalformat" => format} = _r) do
     url_photo_source(farm, server, id, secret, "_o", format)

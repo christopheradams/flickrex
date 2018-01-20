@@ -20,6 +20,7 @@ defmodule Flickrex.Parsers.Rest do
     case code_ok && stat_ok do
       true ->
         {:ok, parsed_resp}
+
       false ->
         {:error, parsed_resp}
     end

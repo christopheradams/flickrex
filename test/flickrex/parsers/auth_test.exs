@@ -15,11 +15,13 @@ defmodule Flickrex.Parsers.AuthTest do
 
     {:ok, %{status_code: 200, headers: [], body: token}} = parsed_response
 
-    assert token == %{
+    expected_token = %{
       oauth_token: "TOKEN",
       oauth_token_secret: "TOKEN_SECRET",
       oauth_callback_confirmed: true
     }
+
+    assert token == expected_token
   end
 
   test "parse_request_token/1 parses auth errors" do
@@ -29,10 +31,15 @@ defmodule Flickrex.Parsers.AuthTest do
 
     parsed_response = Parsers.Auth.parse_request_token(response)
 
-    assert parsed_response ==
-    {:error, %{body: %{"oauth_problem" => "consumer_key_unknown"},
-               headers: [{"content-type", "text/plain; charset=utf-8"}],
-               status_code: 401}}
+    expected_response =
+      {:error,
+       %{
+         body: %{"oauth_problem" => "consumer_key_unknown"},
+         headers: [{"content-type", "text/plain; charset=utf-8"}],
+         status_code: 401
+       }}
+
+    assert parsed_response == expected_response
   end
 
   test "parse_request_token/1 returns other errors" do
@@ -49,7 +56,9 @@ defmodule Flickrex.Parsers.AuthTest do
   end
 
   test "parse_access_token/1 parses an access token" do
-    body = "fullname=FULL%20NAME&oauth_token=TOKEN&oauth_token_secret=SECRET&user_nsid=NSID&username=USERNAME"
+    body =
+      "fullname=FULL%20NAME&oauth_token=TOKEN&oauth_token_secret=" <>
+        "SECRET&user_nsid=NSID&username=USERNAME"
 
     response = {:ok, %{status_code: 200, headers: [], body: body}}
 
@@ -57,13 +66,15 @@ defmodule Flickrex.Parsers.AuthTest do
 
     {:ok, %{status_code: 200, headers: [], body: token}} = parsed_response
 
-    assert token == %{
+    expected_token = %{
       fullname: "FULL NAME",
       oauth_token: "TOKEN",
       oauth_token_secret: "SECRET",
       user_nsid: "NSID",
       username: "USERNAME"
     }
+
+    assert token == expected_token
   end
 
   test "parse_access_token/1 parses auth errors" do
@@ -73,10 +84,15 @@ defmodule Flickrex.Parsers.AuthTest do
 
     parsed_response = Parsers.Auth.parse_access_token(response)
 
-    assert parsed_response ==
-    {:error, %{body: %{"oauth_problem" => "token_rejected"},
-               headers: [{"content-type", "text/plain; charset=utf-8"}],
-               status_code: 401}}
+    expected_response =
+      {:error,
+       %{
+         body: %{"oauth_problem" => "token_rejected"},
+         headers: [{"content-type", "text/plain; charset=utf-8"}],
+         status_code: 401
+       }}
+
+    assert parsed_response == expected_response
   end
 
   test "parse_access_token/1 returns other errors" do
@@ -86,4 +102,3 @@ defmodule Flickrex.Parsers.AuthTest do
     assert {:error, resp} == parsed_response
   end
 end
-

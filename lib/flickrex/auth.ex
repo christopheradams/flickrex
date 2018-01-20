@@ -98,7 +98,7 @@ defmodule Flickrex.Auth do
     and `oauth_verifier`. If this option is not set, the user will be presented with
     a verification code that they must present to your application manually.
   """
-  @spec request_token(Keyword.t) :: %Operation.Auth.RequestToken{}
+  @spec request_token(Keyword.t()) :: %Operation.Auth.RequestToken{}
   def request_token(opts) do
     %Operation.Auth.RequestToken{
       params: Map.new(opts)
@@ -113,7 +113,7 @@ defmodule Flickrex.Auth do
   * `perms` - Ask for "read", "write", or "delete" privileges. Overrides the
     setting defined in your application's authentication flow.
   """
-  @spec authorize_url(binary, Keyword.t) :: %Operation.Auth.AuthorizeUrl{}
+  @spec authorize_url(binary, Keyword.t()) :: %Operation.Auth.AuthorizeUrl{}
   def authorize_url(oauth_token, opts \\ []) do
     %Operation.Auth.AuthorizeUrl{
       oauth_token: oauth_token,
@@ -129,7 +129,7 @@ defmodule Flickrex.Auth do
     %Operation.Auth.AccessToken{
       oauth_token: token,
       oauth_token_secret: secret,
-      verifier: verifier,
+      verifier: verifier
     }
   end
 end

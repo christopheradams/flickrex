@@ -1,3 +1,3 @@
-ExUnit.configure exclude: [:flickr_api]
+ExUnit.configure(exclude: [:flickr_api])
 
 ExUnit.start()

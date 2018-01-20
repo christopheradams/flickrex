@@ -98,11 +98,13 @@ defmodule Flickrex.Parsers.RestTest do
 
     {:ok, %{body: body}} = Parsers.Rest.parse(response)
 
-    assert body == %{
+    expected_body = %{
       "stat" => "fail",
       "code" => 112,
       "message" => "Method \"flickr.fakeMethod\" not found"
     }
+
+    assert body == expected_body
   end
 
   test "parse photo" do
@@ -144,11 +146,13 @@ defmodule Flickrex.Parsers.RestTest do
 
     assert {:error, %{body: body}} = Parsers.Rest.parse_status(error_resp)
 
-    assert body == %{
+    expected_body = %{
       "stat" => "fail",
       "code" => 112,
       "message" => "Method \"flickr.fakeMethod\" not found"
     }
+
+    assert body == expected_body
   end
 
   test "parse_status/1 passes errors through" do

@@ -17,10 +17,10 @@ defmodule Flickrex.URL do
   @type photo :: map
 
   @typedoc "A URL path parameter"
-  @type param :: String.t
+  @type param :: String.t()
 
   @typedoc "A Flickr URL"
-  @type url :: String.t
+  @type url :: String.t()
 
   @profile_url "https://www.flickr.com/people/<%= user_id %>/"
   @photostream_url "https://www.flickr.com/photos/<%= user_id %>/"
@@ -59,13 +59,19 @@ defmodule Flickrex.URL do
   @spec url_photoset(param, param) :: url
   EEx.function_from_string(:def, :url_photoset, @photoset_url, [:user_id, :photoset_id])
 
-  @spec url_photo_source(param, param, param, param, param, param) :: url
-  EEx.function_from_string(:defp, :url_photo_source, @photo_source_url,
-    [:farm, :server, :id, :secret, :size, :format])
+  photo_source_params = [:farm, :server, :id, :secret, :size, :format]
 
-  photo_sizes = %{"" => "Medium", "_b" => "Large", "_m" => "Small",
-                  "_s" => "Square", "_t" => "Thumbnail",
-                  "_z" => "Medium 640"}
+  @spec url_photo_source(param, param, param, param, param, param) :: url
+  EEx.function_from_string(:defp, :url_photo_source, @photo_source_url, photo_source_params)
+
+  photo_sizes = %{
+    "" => "Medium",
+    "_b" => "Large",
+    "_m" => "Small",
+    "_s" => "Square",
+    "_t" => "Thumbnail",
+    "_z" => "Medium 640"
+  }
 
   for {size, doc} <- photo_sizes do
     url_size = String.to_atom("url#{size}")
@@ -83,12 +89,20 @@ defmodule Flickrex.URL do
   URL for Original size photo
   """
   @spec url_o(photo) :: url
-  def url_o(%{"farm" => farm, "server" => server, "id" => id,
-              "originalsecret" => secret, "originalformat" => format} = _r) do
+  def url_o(photo) do
+    %{
+      "farm" => farm,
+      "server" => server,
+      "id" => id,
+      "originalsecret" => secret,
+      "originalformat" => format
+    } = photo
+
     url_photo_source(farm, server, id, secret, "_o", format)
   end
 
-  defp url_photo_source(%{"farm" => farm, "server" => server, "id" => id, "secret" => secret}, size, format) do
+  defp url_photo_source(photo, size, format) do
+    %{"farm" => farm, "server" => server, "id" => id, "secret" => secret} = photo
     url_photo_source(farm, server, id, secret, size, format)
   end
 end

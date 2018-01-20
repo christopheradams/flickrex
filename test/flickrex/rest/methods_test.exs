@@ -23,10 +23,12 @@ defmodule Flickrex.Rest.MethodsTest do
 
     assert {:error, response} = Flickrex.request(operation, opts)
 
-    assert response.body == %{
+    expected_body = %{
       "stat" => "fail",
       "code" => 112,
       "message" => "Method \"flickr.fakeMethod\" not found"
     }
+
+    assert response.body == expected_body
   end
 end

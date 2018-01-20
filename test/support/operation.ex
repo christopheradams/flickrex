@@ -1,8 +1,6 @@
 defmodule Flickrex.Support.Operation do
-  defstruct [
-    path: nil,
-    service: :api
-  ]
+  defstruct path: nil,
+            service: :api
 
   defimpl Flickrex.Operation do
     def prepare(operation, config) do

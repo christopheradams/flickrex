@@ -18,7 +18,7 @@ defmodule Flickrex.Support.MockHTTPClient do
     {:ok, %{status_code: 200, headers: [], body: "Test"}}
   end
 
-  def do_request("get", %{path: "/opts"} = _uri, _, _, [test: value]) do
+  def do_request("get", %{path: "/opts"} = _uri, _, _, test: value) do
     {:ok, %{status_code: 200, headers: [], body: value}}
   end
 
@@ -37,7 +37,10 @@ defmodule Flickrex.Support.MockHTTPClient do
   def do_request("get", %{path: "/services/oauth/access_token"} = _uri, _, _, _) do
     status = 200
     headers = []
-    body = "fullname=FULL%20NAME&oauth_token=TOKEN&oauth_token_secret=SECRET&user_nsid=NSID&username=USERNAME"
+
+    body =
+      "fullname=FULL%20NAME&oauth_token=TOKEN&oauth_token_secret=" <>
+        "SECRET&user_nsid=NSID&username=USERNAME"
 
     {:ok, %{status_code: status, headers: headers, body: body}}
   end
@@ -75,12 +78,18 @@ defmodule Flickrex.Support.MockHTTPClient do
     headers = @xml_headers
 
     {:multipart, parts} = req_body
-    photo_id = Enum.find(parts, fn {"photo_id", _} -> true; _ -> false end)
+
+    photo_id =
+      Enum.find(parts, fn
+        {"photo_id", _} -> true
+        _ -> false
+      end)
 
     resp_body =
       case photo_id do
         {"photo_id", "35467821184"} ->
           fixture(:replace, :xml)
+
         nil ->
           fixture(:error, :xml)
       end

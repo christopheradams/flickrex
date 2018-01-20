@@ -6,8 +6,15 @@ defmodule Flickrex.URLTest do
   setup_all do
     sizes_file = "test/fixtures/sizes.json"
     photo_file = "test/fixtures/photo.json"
-    photo = photo_file |> File.read! |> Poison.decode! |> get_in(["photo"])
-    sizes = sizes_file |> File.read! |> Poison.decode! |> get_in(["sizes", "size"]) |> Enum.into(%{}, fn s -> {s["label"], s["source"]} end)
+    photo = photo_file |> File.read!() |> Poison.decode!() |> get_in(["photo"])
+
+    sizes =
+      sizes_file
+      |> File.read!()
+      |> Poison.decode!()
+      |> get_in(["sizes", "size"])
+      |> Enum.into(%{}, fn s -> {s["label"], s["source"]} end)
+
     {:ok, [photo: photo, sizes: sizes]}
   end
 
@@ -48,7 +55,8 @@ defmodule Flickrex.URLTest do
   end
 
   test "url_photopage" do
-    assert URL.url_photopage("USER_ID", "PHOTO_ID") == "https://www.flickr.com/photos/USER_ID/PHOTO_ID"
+    expected_url = "https://www.flickr.com/photos/USER_ID/PHOTO_ID"
+    assert URL.url_photopage("USER_ID", "PHOTO_ID") == expected_url
   end
 
   test "url_photosets" do
@@ -56,6 +64,7 @@ defmodule Flickrex.URLTest do
   end
 
   test "url_photoset" do
-    assert URL.url_photoset("USER_ID", "PHOTOSET_ID") == "https://www.flickr.com/photos/USER_ID/sets/PHOTOSET_ID"
+    expected_url = "https://www.flickr.com/photos/USER_ID/sets/PHOTOSET_ID"
+    assert URL.url_photoset("USER_ID", "PHOTOSET_ID") == expected_url
   end
 end

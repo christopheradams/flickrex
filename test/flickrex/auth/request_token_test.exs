@@ -10,7 +10,7 @@ defmodule Flickrex.Auth.RequestTokenTest do
 
     {:ok, response} = Flickrex.request(operation, opts)
 
-    assert response == %{
+    expected_response = %{
       body: %{
         oauth_callback_confirmed: true,
         oauth_token_secret: "TOKEN_SECRET",
@@ -19,5 +19,7 @@ defmodule Flickrex.Auth.RequestTokenTest do
       headers: [],
       status_code: 200
     }
+
+    assert response == expected_response
   end
 end

@@ -1,7 +1,6 @@
 defmodule Flickrex.Support.Config do
-
   def flickr_config(_) do
-    port = 567432
+    port = 567_432
 
     config = [
       consumer_key: "CONSUMER_KEY",

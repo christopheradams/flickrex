@@ -5,30 +5,27 @@ defmodule Flickrex.Operation.Auth.RequestToken do
 
   alias Flickrex.{
     Operation,
-    Parsers,
+    Parsers
   }
 
   @oauth_callback "oob"
 
   @type t :: %__MODULE__{}
 
-  defstruct [
-    parser: &Parsers.Auth.parse_request_token/1,
-    path: "services/oauth/request_token",
-    params: %{oauth_callback: @oauth_callback},
-    service: :api
-  ]
+  defstruct parser: &Parsers.Auth.parse_request_token/1,
+            path: "services/oauth/request_token",
+            params: %{oauth_callback: @oauth_callback},
+            service: :api
 
   defimpl Operation do
-
     alias Flickrex.{
       Config,
       OAuth,
       Operation,
-      Request,
+      Request
     }
 
-    @spec prepare(Operation.Auth.RequestToken.t, Config.t) :: Request.t
+    @spec prepare(Operation.Auth.RequestToken.t(), Config.t()) :: Request.t()
     def prepare(operation, config) do
       http_method = "get"
       params = Keyword.new(operation.params)
@@ -53,7 +50,7 @@ defmodule Flickrex.Operation.Auth.RequestToken do
       %Request{method: http_method, url: url}
     end
 
-    @spec perform(Operation.Auth.RequestToken.t, Request.t) :: term
+    @spec perform(Operation.Auth.RequestToken.t(), Request.t()) :: term
     def perform(operation, request) do
       request
       |> Request.request()

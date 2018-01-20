@@ -7,10 +7,10 @@ defmodule Flickrex.Config do
 
   @defaults %{
     api: %{
-      url: "https://api.flickr.com/",
+      url: "https://api.flickr.com/"
     },
     upload: %{
-      url: "https://up.flickr.com/",
+      url: "https://up.flickr.com/"
     }
   }
 
@@ -21,10 +21,10 @@ defmodule Flickrex.Config do
     :oauth_token_secret,
     :url,
     http_client: Flickrex.Request.Hackney,
-    http_opts: [],
+    http_opts: []
   ]
 
-  @spec new(atom, Keyword.t) :: t
+  @spec new(atom, Keyword.t()) :: t
   def new(service, opts \\ []) do
     overrides = Map.new(opts)
 
@@ -50,10 +50,10 @@ defmodule Flickrex.Config do
       |> cast_keys()
 
     unless is_nil(Application.get_env(:flickrex, :oauth)) do
-      IO.warn """
+      IO.warn("""
       Application :flickrex, :oauth is deprecated in favor of :flickrex, :config.
       See the Flickrex package README for configuration options.
-      """
+      """)
     end
 
     application_config =

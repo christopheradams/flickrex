@@ -11,10 +11,12 @@ defmodule Flickrex.Flickr.TestTest do
 
     assert %{status_code: 200, headers: _headers, body: body} = resp
 
-    assert %{"format" => %{"_content" => "json"},
+    assert %{
+             "format" => %{"_content" => "json"},
              "method" => %{"_content" => "flickr.test.echo"},
              "nojsoncallback" => %{"_content" => "1"},
              "stat" => "ok",
-             "test" => %{"_content" => "test"}} = body
+             "test" => %{"_content" => "test"}
+           } = body
   end
 end

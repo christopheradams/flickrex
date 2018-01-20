@@ -41,8 +41,8 @@ defmodule Flickrex.Flickr do
   # Group Flickr methods based on the module they will be included in
   methods_modules =
     methods_file
-    |> File.read!
-    |> Poison.decode!
+    |> File.read!()
+    |> Poison.decode!()
     |> get_in(["methods", "method"])
     |> Enum.map(fn %{"_content" => m} -> m end)
     |> Enum.group_by(fn m -> m |> String.split(".") |> List.delete_at(-1) end)
@@ -51,15 +51,16 @@ defmodule Flickrex.Flickr do
     # Generate a module name for each method namespace, e.g.
     # `Flickr.Photos.People` for "flickr.photos.people"
     aliases = ["flickrex", "flickr"] ++ namespaces
+
     module =
       aliases
       |> Enum.map(&String.capitalize/1)
       |> Enum.map(&String.to_atom/1)
-      |> Module.concat
+      |> Module.concat()
 
     defmodule module do
-      @type args :: Keyword.t
-      @type operation :: Flickrex.Operation.Rest.t
+      @type args :: Keyword.t()
+      @type operation :: Flickrex.Operation.Rest.t()
 
       for method <- methods do
         # Generate the function name from the method, e.g. `get_list` for
@@ -67,19 +68,21 @@ defmodule Flickrex.Flickr do
         function =
           method
           |> String.split(".")
-          |> Enum.reverse
-          |> List.first
-          |> Macro.underscore
-          |> String.to_atom
+          |> Enum.reverse()
+          |> List.first()
+          |> Macro.underscore()
+          |> String.to_atom()
 
         method_file = "#{method}.json"
+
         method_info =
           case method_file in methods_files do
             true ->
               methods_dir
               |> Path.join(method_file)
-              |> File.read!
-              |> Poison.decode!
+              |> File.read!()
+              |> Poison.decode!()
+
             false ->
               %{}
           end
@@ -93,6 +96,7 @@ defmodule Flickrex.Flickr do
         needs_login = get_in(method_info, ["method", "needslogin"])
 
         requiredperms = get_in(method_info, ["method", "requiredperms"])
+
         permission_code =
           if is_binary(requiredperms) do
             String.to_integer(requiredperms)
@@ -112,7 +116,8 @@ defmodule Flickrex.Flickr do
           method_info
           |> get_in(["arguments", "argument"])
           |> Enum.reject(fn a -> a["name"] == "api_key" end)
-          |> Enum.map(fn a -> case is_binary(a["optional"]) do
+          |> Enum.map(fn a ->
+            case is_binary(a["optional"]) do
               true -> Map.put(a, "optional", String.to_integer(a["optional"]))
               false -> a
             end
@@ -143,8 +148,12 @@ defmodule Flickrex.Flickr do
         <% end %>
         """
 
-        assigns = [description: description, arguments: arguments,
-                   needs_login: needs_login, permission: permission]
+        assigns = [
+          description: description,
+          arguments: arguments,
+          needs_login: needs_login,
+          permission: permission
+        ]
 
         doc = EEx.eval_string(doc_source, assigns: assigns)
 

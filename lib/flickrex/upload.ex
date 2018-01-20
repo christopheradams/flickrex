@@ -45,7 +45,7 @@ defmodule Flickrex.Upload do
   * `hidden` - Set to 1 to keep the photo in global search results, 2 to hide from
     public searches. If omitted, will be set based to user's default
   """
-  @spec upload(Path.t, Keyword.t) :: Upload.t
+  @spec upload(Path.t(), Keyword.t()) :: Upload.t()
   def upload(photo, opts \\ []) do
     Upload.new(:upload, photo, opts)
   end
@@ -58,7 +58,7 @@ defmodule Flickrex.Upload do
   * `photo_id` - The ID of the photo to replace. <small>**(required)**</small>
   * `async`
   """
-  @spec replace(binary, Keyword.t) :: Upload.t
+  @spec replace(binary, Keyword.t()) :: Upload.t()
   def replace(photo, opts \\ []) do
     Upload.new(:replace, photo, opts)
   end

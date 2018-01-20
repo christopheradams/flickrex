@@ -7,13 +7,15 @@ defmodule Flickrex.UploadTest do
     photo = "test/fixtures/photo.png"
     operation = Upload.upload(photo, is_public: 0)
 
-    assert operation == %Operation.Upload{
+    expected_operation = %Operation.Upload{
       params: %{is_public: 0},
       parser: &Flickrex.Parsers.Upload.parse/1,
       path: "services/upload",
       photo: "test/fixtures/photo.png",
       service: :upload
     }
+
+    assert operation == expected_operation
   end
 
   test "replace/2 returns an Upload operation to replace a photo" do
@@ -22,13 +24,14 @@ defmodule Flickrex.UploadTest do
 
     operation = Upload.replace(photo, photo_id: photo_id)
 
-    assert operation == %Operation.Upload{
+    expected_operation = %Operation.Upload{
       params: %{photo_id: photo_id},
       parser: &Flickrex.Parsers.Upload.parse/1,
       path: "services/replace",
       photo: "test/fixtures/photo.jpg",
       service: :upload
     }
+
+    assert operation == expected_operation
   end
 end
-

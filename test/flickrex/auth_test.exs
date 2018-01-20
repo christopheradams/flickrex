@@ -8,7 +8,7 @@ defmodule Flickrex.AuthTest do
 
     operation = %Operation.Auth.RequestToken{
       path: "services/oauth/request_token",
-      params: %{oauth_callback: "oob"},
+      params: %{oauth_callback: "oob"}
     }
 
     assert request == operation
@@ -21,7 +21,7 @@ defmodule Flickrex.AuthTest do
 
     operation = %Operation.Auth.RequestToken{
       path: "services/oauth/request_token",
-      params: %{oauth_callback: "http://example.com/test"},
+      params: %{oauth_callback: "http://example.com/test"}
     }
 
     assert request == operation
@@ -35,7 +35,7 @@ defmodule Flickrex.AuthTest do
     operation = %Operation.Auth.AuthorizeUrl{
       path: "services/oauth/authorize",
       params: %{perms: "write"},
-      oauth_token: "OAUTH_TOKEN",
+      oauth_token: "OAUTH_TOKEN"
     }
 
     assert request == operation
@@ -47,7 +47,7 @@ defmodule Flickrex.AuthTest do
     operation = %Operation.Auth.AccessToken{
       oauth_token: "REQUEST_TOKEN",
       oauth_token_secret: "REQUEST_SECRET",
-      verifier: "VERIFIER",
+      verifier: "VERIFIER"
     }
 
     assert request == operation

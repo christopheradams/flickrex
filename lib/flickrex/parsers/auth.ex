@@ -20,7 +20,7 @@ defmodule Flickrex.Parsers.Auth do
     parsed_body = %{
       oauth_token: token,
       oauth_token_secret: secret,
-      oauth_callback_confirmed: callback_confirmed,
+      oauth_callback_confirmed: callback_confirmed
     }
 
     {:ok, %{resp | body: parsed_body}}

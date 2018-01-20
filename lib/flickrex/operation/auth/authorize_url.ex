@@ -7,22 +7,19 @@ defmodule Flickrex.Operation.Auth.AuthorizeUrl do
 
   @type t :: %__MODULE__{}
 
-  defstruct [
-    path: "services/oauth/authorize",
-    oauth_token: nil,
-    params: %{},
-    service: :api,
-  ]
+  defstruct path: "services/oauth/authorize",
+            oauth_token: nil,
+            params: %{},
+            service: :api
 
   defimpl Operation do
-
     alias Flickrex.{
       Config,
       Operation,
-      Request,
+      Request
     }
 
-    @spec prepare(Operation.Auth.AuthorizeUrl.t, Config.t) :: Request.t
+    @spec prepare(Operation.Auth.AuthorizeUrl.t(), Config.t()) :: Request.t()
     def prepare(operation, config) do
       http_method = "get"
 
@@ -34,7 +31,7 @@ defmodule Flickrex.Operation.Auth.AuthorizeUrl do
       query =
         operation.params
         |> Map.put(:oauth_token, operation.oauth_token)
-        |> URI.encode_query
+        |> URI.encode_query()
 
       url =
         uri
@@ -44,7 +41,7 @@ defmodule Flickrex.Operation.Auth.AuthorizeUrl do
       %Flickrex.Request{method: http_method, url: url}
     end
 
-    @spec perform(Operation.Auth.AuthorizeUrl.t, Request.t) :: term
+    @spec perform(Operation.Auth.AuthorizeUrl.t(), Request.t()) :: term
     def perform(_operation, request) do
       {:ok, request.url}
     end

@@ -10,6 +10,8 @@ defmodule Flickrex.Auth.AuthorizeUrlTest do
 
     {:ok, authorize_url} = Flickrex.request(operation, config)
 
-    assert authorize_url == "http://localhost:567432/services/oauth/authorize?oauth_token=OAUTH_TOKEN&perms=write"
+    url = "http://localhost:567432/services/oauth/authorize?oauth_token=OAUTH_TOKEN&perms=write"
+
+    assert authorize_url == url
   end
 end

@@ -23,7 +23,8 @@ defmodule Flickrex.RestTest do
       method: method,
       params: %{test: "test"},
       parser: &Flickrex.Parsers.Rest.parse_status/1,
-      path: "services/rest", service: :api
+      path: "services/rest",
+      service: :api
     }
 
     actual = apply(Rest, http_method, [method, [test: "test"]])

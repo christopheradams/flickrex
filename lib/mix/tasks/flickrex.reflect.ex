@@ -49,7 +49,7 @@ defmodule Mix.Tasks.Flickrex.Reflect do
       |> Flickrex.request!()
 
     pretty_json = Poison.encode!(info, pretty: true)
-    Mix.shell.info("Saving #{info_file}")
+    Mix.shell().info("Saving #{info_file}")
     File.write(info_file, pretty_json)
   end
 end

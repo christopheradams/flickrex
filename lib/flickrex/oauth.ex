@@ -2,7 +2,7 @@ defmodule Flickrex.OAuth do
   @moduledoc false
 
   @type method :: String.t
-  @type url :: String.t
+  @type url :: String.t | URI.t
   @type params :: Keyword.t
   @type consumer_key :: String.t
   @type consumer_secret :: String.t

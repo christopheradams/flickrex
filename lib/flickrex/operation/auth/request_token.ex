@@ -38,8 +38,10 @@ defmodule Flickrex.Operation.Auth.RequestToken do
         |> URI.parse()
         |> URI.merge(operation.path)
 
-      signed_params = OAuth.sign(http_method, to_string(uri),
-        params, config.consumer_key, config.consumer_secret, nil, nil)
+      key = config.consumer_key
+      secret = config.consumer_secret
+
+      signed_params = OAuth.sign(http_method, uri, params, key, secret, nil, nil)
 
       query = URI.encode_query(signed_params)
 

@@ -69,7 +69,7 @@ defmodule Flickrex.Operation.Upload do
 
       signed_params =
         http_method
-        |> OAuth.sign(to_string(uri), params, key, secret, token, token_secret)
+        |> OAuth.sign(uri, params, key, secret, token, token_secret)
         |> Enum.map(fn {k, v} -> {to_string(k), to_string(v)} end)
 
       name = "photo"

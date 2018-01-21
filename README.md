@@ -14,7 +14,7 @@ The package's main modules are:
 * `Flickrex.URL` - generates Flickr URLs for photos, etc.
 
 [Documentation for Flickrex is available on hexdocs](http://hexdocs.pm/flickrex/).<br/>
-[Source code is available on Github](https://github.com/christopheradams/flickrex).<br/>
+[Source code is available on GitHub](https://github.com/christopheradams/flickrex).<br/>
 [Package is available on hex](https://hex.pm/packages/flickrex).
 
 ## Hello World
@@ -153,7 +153,7 @@ methods. If the API ever changes, new data can be fetched with the Mix task:
 mix flickrex.reflect
 ```
 
-The data files are commited to the repository so that network and API access is
+The data files are committed to the repository so that network and API access is
 not required to compile this library.
 
 ## License

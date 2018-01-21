@@ -111,8 +111,10 @@ Run the test suite:
 mix test
 ```
 
-To run a test that hits the Flickr API, set these environment variables to your
-API keys: `FLICKR_CONSUMER_KEY`, `FLICKR_CONSUMER_SECRET`.
+To run a test that hits the Flickr API, set these environment variables:
+
+* `FLICKR_CONSUMER_KEY`
+* `FLICKR_CONSUMER_SECRET`
 
 Run the test with:
 

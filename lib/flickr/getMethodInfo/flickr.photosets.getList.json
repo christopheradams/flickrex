@@ -20,7 +20,7 @@
       {
         "message": "User not found",
         "code": "1",
-        "_content": "The user NSID passed was not a valid user NSID and the calling user was not logged in.\n"
+        "_content": "The user NSID passed was not a valid user NSID and the calling user was not logged in.\r\n"
       },
       {
         "message": "Invalid API Key",
@@ -90,6 +90,11 @@
         "optional": "1",
         "name": "primary_photo_extras",
         "_content": "A comma-delimited list of extra information to fetch for the primary photo. Currently supported fields are: license, date_upload, date_taken, owner_name, icon_server, original_format, last_update, geo, tags, machine_tags, o_dims, views, media, path_alias, url_sq, url_t, url_s, url_m, url_o"
+      },
+      {
+        "optional": "1",
+        "name": "photo_ids",
+        "_content": "A comma-separated list of photo ids. If specified, each returned set will include a list of these photo ids that are present in the set as \"has_requested_photos\""
       }
     ]
   }

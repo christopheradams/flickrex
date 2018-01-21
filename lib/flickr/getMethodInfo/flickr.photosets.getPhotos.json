@@ -86,7 +86,7 @@
       {
         "optional": "0",
         "name": "user_id",
-        "_content": "The user_id here is the owner of the set passed in photoset_id. This is optional, but passing this gives better performance. "
+        "_content": "The user_id here is the owner of the set passed in photoset_id."
       },
       {
         "optional": "1",

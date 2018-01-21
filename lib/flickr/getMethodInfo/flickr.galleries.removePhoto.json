@@ -4,33 +4,13 @@
     "requiredperms": "2",
     "needssigning": 1,
     "needslogin": 1,
-    "name": "flickr.groups.discuss.topics.add",
+    "name": "flickr.galleries.removePhoto",
     "description": {
-      "_content": "Post a new discussion topic to a group."
+      "_content": "Remove a photo from a gallery."
     }
   },
   "errors": {
     "error": [
-      {
-        "message": "Group not found",
-        "code": "1",
-        "_content": "The group by that ID does not exist\r\n"
-      },
-      {
-        "message": "Cannot post to group",
-        "code": "2",
-        "_content": "Either this account is not a member of the group, or discussion in this group is disabled."
-      },
-      {
-        "message": "Message is too long",
-        "code": "3",
-        "_content": "The post message is too long."
-      },
-      {
-        "message": "Missing required arguments",
-        "code": "4",
-        "_content": "Subject and message are required."
-      },
       {
         "message": "SSL is required",
         "code": 95,
@@ -107,18 +87,18 @@
       },
       {
         "optional": "0",
-        "name": "group_id",
-        "_content": "The NSID or path alias of the group to add a topic to.\n"
+        "name": "gallery_id",
+        "_content": "The ID of the gallery to remove a photo from"
       },
       {
         "optional": "0",
-        "name": "subject",
-        "_content": "The topic subject."
+        "name": "photo_id",
+        "_content": "The ID of the photo to remove from the gallery"
       },
       {
         "optional": "0",
-        "name": "message",
-        "_content": "The topic message."
+        "name": "full_response",
+        "_content": "If specified, return updated details of the gallery the photo was removed from"
       }
     ]
   }

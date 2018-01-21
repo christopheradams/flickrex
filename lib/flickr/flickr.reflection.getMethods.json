@@ -105,6 +105,9 @@
         "_content": "flickr.galleries.getPhotos"
       },
       {
+        "_content": "flickr.galleries.removePhoto"
+      },
+      {
         "_content": "flickr.groups.browse"
       },
       {

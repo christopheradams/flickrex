@@ -55,6 +55,9 @@ defmodule Flickrex.Mixfile do
       source_ref: "v#{@version}",
       logo: "logo.png",
       main: "readme",
+      groups_for_modules: [
+        "Flickr API": ~r/Flickrex\.Flickr/
+      ],
       extras: [
         "README.md": [title: "README"]
       ]

@@ -44,18 +44,6 @@ defmodule Flickrex.Config do
 
   # Gets the environment configuration.
   defp get_env(config, service) do
-    oauth_config =
-      :flickrex
-      |> Application.get_env(:oauth, [])
-      |> cast_keys()
-
-    unless is_nil(Application.get_env(:flickrex, :oauth)) do
-      IO.warn("""
-      Application :flickrex, :oauth is deprecated in favor of :flickrex, :config.
-      See the Flickrex package README for configuration options.
-      """)
-    end
-
     application_config =
       :flickrex
       |> Application.get_env(:config, [])
@@ -67,16 +55,7 @@ defmodule Flickrex.Config do
       |> Map.new()
 
     config
-    |> Map.merge(oauth_config)
     |> Map.merge(application_config)
     |> Map.merge(service_config)
   end
-
-  defp cast_keys(env) do
-    Map.new(env, &cast_key/1)
-  end
-
-  defp cast_key({:access_token, t}), do: {:oauth_token, t}
-  defp cast_key({:access_token_secret, s}), do: {:oauth_token_secret, s}
-  defp cast_key(kv), do: kv
 end

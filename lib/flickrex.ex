@@ -23,8 +23,8 @@ defmodule Flickrex do
 
   * `consumer_key` - Flickr API consumer key.
   * `consumer_secret` - Flickr API consumer secret.
-  * `oauth_token` - Flicker user access token.
-  * `oauth_token_secret` - Flicker user access token secret.
+  * `oauth_token` - Flickr user access token.
+  * `oauth_token_secret` - Flickr user access token secret.
   * `url` - API Endpoint URL.
   * `http_client` - HTTP client function. See `Flickrex.Request.HttpClient`.
   * `http_opts` - HTTP client options.

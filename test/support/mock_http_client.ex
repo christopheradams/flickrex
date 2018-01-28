@@ -47,11 +47,19 @@ defmodule Flickrex.Support.MockHTTPClient do
 
   def do_request("get", %{path: "/services/rest"} = uri, _, _, _) do
     status = 200
-    headers = @json_headers
 
     query = URI.decode_query(uri.query)
 
-    %{"format" => "json", "method" => method, "nojsoncallback" => "1"} = query
+    %{"format" => format, "method" => method, "nojsoncallback" => "1"} = query
+
+    {doc_format, headers} =
+      case format do
+        "" ->
+          {:xml, @xml_headers}
+
+        "json" ->
+          {:json, @json_headers}
+      end
 
     doc =
       case method do
@@ -59,7 +67,7 @@ defmodule Flickrex.Support.MockHTTPClient do
         _ -> :fail
       end
 
-    body = fixture(doc)
+    body = fixture(doc, doc_format)
 
     {:ok, %{status_code: status, headers: headers, body: body}}
   end

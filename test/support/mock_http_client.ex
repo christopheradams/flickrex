@@ -64,9 +64,23 @@ defmodule Flickrex.Support.MockHTTPClient do
     {:ok, %{status_code: status, headers: headers, body: body}}
   end
 
-  def do_request("post", %{path: "/services/upload"} = _uri, _, _, _) do
+  def do_request("post", %{path: "/services/upload"} = _uri, req_body, _, _) do
     status = 200
     headers = @xml_headers
+
+    # Check the body is formatted correctly
+    {:multipart, parts} = req_body
+
+    file =
+      Enum.find(parts, fn
+        {:file, _, _, _} -> true
+        _ -> false
+      end)
+
+    photo = "test/fixtures/photo.png"
+    form_data = {"form-data", [{"name", "\"photo\""}, {"filename", "\"photo.png\""}]}
+
+    {:file, ^photo, ^form_data, []} = file
 
     body = fixture(:upload, :xml)
 

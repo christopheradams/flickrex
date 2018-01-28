@@ -29,8 +29,8 @@ defmodule Flickrex.Operation.Rest do
       Request
     }
 
-    @spec prepare(Operation.Rest.t(), Config.t()) :: Request.t()
-    def prepare(operation, config) do
+    @spec perform(Operation.Rest.t(), Config.t()) :: term
+    def perform(operation, config) do
       http_method = operation.http_method
 
       params =
@@ -59,11 +59,13 @@ defmodule Flickrex.Operation.Rest do
         |> Map.put(:query, query)
         |> to_string()
 
-      %Request{method: http_method, url: url}
-    end
+      request = %Request{
+        method: http_method,
+        url: url,
+        http_client: config.http_client,
+        http_opts: config.http_opts
+      }
 
-    @spec perform(Operation.Rest.t(), Request.t()) :: term
-    def perform(operation, request) do
       request
       |> Request.request()
       |> operation.parser.()

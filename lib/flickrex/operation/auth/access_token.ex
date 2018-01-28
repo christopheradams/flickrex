@@ -25,8 +25,8 @@ defmodule Flickrex.Operation.Auth.AccessToken do
       Request
     }
 
-    @spec prepare(Operation.Auth.AccessToken.t(), Config.t()) :: Request.t()
-    def prepare(operation, config) do
+    @spec perform(Operation.Auth.AccessToken.t(), Config.t()) :: term
+    def perform(operation, config) do
       http_method = "get"
       params = [oauth_verifier: operation.verifier]
 
@@ -49,11 +49,13 @@ defmodule Flickrex.Operation.Auth.AccessToken do
         |> Map.put(:query, query)
         |> to_string()
 
-      %Request{method: http_method, url: url}
-    end
+      request = %Request{
+        method: http_method,
+        url: url,
+        http_client: config.http_client,
+        http_opts: config.http_opts
+      }
 
-    @spec perform(Operation.Auth.AccessToken.t(), Request.t()) :: term
-    def perform(operation, request) do
       request
       |> Request.request()
       |> operation.parser.()

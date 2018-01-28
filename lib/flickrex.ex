@@ -33,14 +33,7 @@ defmodule Flickrex do
   @spec request(Operation.t(), Keyword.t()) :: {:ok, term} | {:error, term}
   def request(operation, opts \\ []) do
     config = Config.new(operation.service, opts)
-
-    request =
-      operation
-      |> Operation.prepare(config)
-      |> Map.put(:http_client, config.http_client)
-      |> Map.put(:http_opts, config.http_opts)
-
-    Operation.perform(operation, request)
+    Operation.perform(operation, config)
   end
 
   @doc """

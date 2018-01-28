@@ -5,26 +5,6 @@ defmodule Flickrex.Upload.UploadsTest do
 
   setup [:flickr_config]
 
-  test "set up an upload request", %{config: config} do
-    photo = "test/fixtures/photo.png"
-
-    operation = Flickrex.Upload.upload(photo, is_public: 0)
-
-    request = Flickrex.Operation.prepare(operation, Map.new(config))
-
-    {:multipart, parts} = request.body
-
-    file =
-      Enum.find(parts, fn
-        {:file, _, _, _} -> true
-        _ -> false
-      end)
-
-    form_data = {"form-data", [{"name", "\"photo\""}, {"filename", "\"photo.png\""}]}
-
-    assert file == {:file, photo, form_data, []}
-  end
-
   test "upload a photo", %{config: config} do
     photo = "test/fixtures/photo.png"
 

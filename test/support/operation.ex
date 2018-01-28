@@ -3,16 +3,23 @@ defmodule Flickrex.Support.Operation do
             service: :api
 
   defimpl Flickrex.Operation do
-    def prepare(operation, config) do
+    def perform(operation, config) do
+      http_method = "get"
+
       uri =
         config.url
         |> URI.parse()
         |> URI.merge(operation.path)
 
-      %Flickrex.Request{method: "get", url: to_string(uri)}
-    end
+      url = to_string(uri)
 
-    def perform(_operation, request) do
+      request = %Flickrex.Request{
+        method: http_method,
+        url: url,
+        http_client: config.http_client,
+        http_opts: config.http_opts
+      }
+
       Flickrex.Request.request(request)
     end
   end

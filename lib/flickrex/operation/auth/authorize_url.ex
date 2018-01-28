@@ -15,14 +15,11 @@ defmodule Flickrex.Operation.Auth.AuthorizeUrl do
   defimpl Operation do
     alias Flickrex.{
       Config,
-      Operation,
-      Request
+      Operation
     }
 
-    @spec prepare(Operation.Auth.AuthorizeUrl.t(), Config.t()) :: Request.t()
-    def prepare(operation, config) do
-      http_method = "get"
-
+    @spec perform(Operation.Auth.AuthorizeUrl.t(), Config.t()) :: term
+    def perform(operation, %Config{} = config) do
       uri =
         config.url
         |> URI.parse()
@@ -38,12 +35,7 @@ defmodule Flickrex.Operation.Auth.AuthorizeUrl do
         |> Map.put(:query, query)
         |> to_string()
 
-      %Flickrex.Request{method: http_method, url: url}
-    end
-
-    @spec perform(Operation.Auth.AuthorizeUrl.t(), Request.t()) :: term
-    def perform(_operation, request) do
-      {:ok, request.url}
+      {:ok, url}
     end
   end
 end

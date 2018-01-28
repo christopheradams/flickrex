@@ -48,8 +48,8 @@ defmodule Flickrex.Operation.Upload do
       Request
     }
 
-    @spec prepare(Operation.Upload.t(), Config.t()) :: Request.t()
-    def prepare(operation, config) do
+    @spec perform(Operation.Upload.t(), Config.t()) :: term
+    def perform(operation, config) do
       http_method = "post"
 
       params = Keyword.new(operation.params)
@@ -81,11 +81,14 @@ defmodule Flickrex.Operation.Upload do
 
       url = to_string(uri)
 
-      %Request{method: http_method, url: url, body: body}
-    end
+      request = %Request{
+        method: http_method,
+        url: url,
+        body: body,
+        http_client: config.http_client,
+        http_opts: config.http_opts
+      }
 
-    @spec perform(Operation.Upload.t(), Request.t()) :: term
-    def perform(operation, request) do
       request
       |> Request.request()
       |> operation.parser.()

@@ -49,13 +49,11 @@ defmodule Flickrex.Operation.Auth.RequestToken do
 
       request = %Request{
         method: http_method,
-        url: url,
-        http_client: config.http_client,
-        http_opts: config.http_opts
+        url: url
       }
 
       request
-      |> Request.request()
+      |> Request.request(config)
       |> operation.parser.()
     end
   end

@@ -15,12 +15,10 @@ defmodule Flickrex.Support.Operation do
 
       request = %Flickrex.Request{
         method: http_method,
-        url: url,
-        http_client: config.http_client,
-        http_opts: config.http_opts
+        url: url
       }
 
-      Flickrex.Request.request(request)
+      Flickrex.Request.request(request, config)
     end
   end
 end

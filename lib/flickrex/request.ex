@@ -4,14 +4,14 @@ defmodule Flickrex.Request do
   """
 
   alias __MODULE__, as: Request
+  alias Flickrex.Config
   alias Flickrex.Request.HttpClient
 
   @type t :: %Request{
           method: String.t(),
           url: String.t(),
           body: iodata | tuple,
-          headers: [{binary, binary}],
-          http_opts: Keyword.t()
+          headers: [{binary, binary}]
         }
 
   @type success_t :: HttpClient.success_t()
@@ -20,15 +20,13 @@ defmodule Flickrex.Request do
   defstruct [
     :method,
     :url,
-    :http_client,
     body: "",
-    headers: [],
-    http_opts: []
+    headers: []
   ]
 
-  @spec request(t) :: success_t | error_t
-  def request(req) do
-    http_client = req.http_client
-    http_client.request(req.method, req.url, req.body, req.headers, req.http_opts)
+  @spec request(t, Config.t()) :: success_t | error_t
+  def request(req, config) do
+    http_client = config.http_client
+    http_client.request(req.method, req.url, req.body, req.headers, config.http_opts)
   end
 end

@@ -84,13 +84,11 @@ defmodule Flickrex.Operation.Upload do
       request = %Request{
         method: http_method,
         url: url,
-        body: body,
-        http_client: config.http_client,
-        http_opts: config.http_opts
+        body: body
       }
 
       request
-      |> Request.request()
+      |> Request.request(config)
       |> operation.parser.()
     end
   end

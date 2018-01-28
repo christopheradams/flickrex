@@ -18,6 +18,7 @@ defmodule Flickrex.Operation.Upload do
             parser: &Parsers.Upload.parse/1,
             params: %{},
             photo: nil,
+            http_headers: %{},
             service: :upload
 
   @doc false
@@ -51,6 +52,7 @@ defmodule Flickrex.Operation.Upload do
     @spec perform(Operation.Upload.t(), Config.t()) :: term
     def perform(operation, config) do
       http_method = "post"
+      http_headers = Map.to_list(operation.http_headers)
 
       params = Keyword.new(operation.params)
 
@@ -83,6 +85,7 @@ defmodule Flickrex.Operation.Upload do
 
       request = %Request{
         method: http_method,
+        headers: http_headers,
         url: url,
         body: body
       }

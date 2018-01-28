@@ -17,6 +17,7 @@ defmodule Flickrex.Operation.Rest do
             params: %{},
             method: nil,
             http_method: nil,
+            http_headers: %{},
             format: "json",
             extra_params: @json_params,
             service: :api
@@ -32,6 +33,7 @@ defmodule Flickrex.Operation.Rest do
     @spec perform(Operation.Rest.t(), Config.t()) :: term
     def perform(operation, config) do
       http_method = operation.http_method
+      http_headers = Map.to_list(operation.http_headers)
 
       params =
         operation.extra_params
@@ -61,6 +63,7 @@ defmodule Flickrex.Operation.Rest do
 
       request = %Request{
         method: http_method,
+        headers: http_headers,
         url: url
       }
 

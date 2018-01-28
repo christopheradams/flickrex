@@ -15,6 +15,7 @@ defmodule Flickrex.Operation.Auth.RequestToken do
   defstruct parser: &Parsers.Auth.parse_request_token/1,
             path: "services/oauth/request_token",
             params: %{oauth_callback: @oauth_callback},
+            http_headers: %{},
             service: :api
 
   defimpl Operation do
@@ -28,6 +29,7 @@ defmodule Flickrex.Operation.Auth.RequestToken do
     @spec perform(Operation.Auth.RequestToken.t(), Config.t()) :: term
     def perform(operation, config) do
       http_method = "get"
+      http_headers = Map.to_list(operation.http_headers)
       params = Keyword.new(operation.params)
 
       uri =
@@ -49,6 +51,7 @@ defmodule Flickrex.Operation.Auth.RequestToken do
 
       request = %Request{
         method: http_method,
+        headers: http_headers,
         url: url
       }
 

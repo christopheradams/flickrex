@@ -15,6 +15,7 @@ defmodule Flickrex.Operation.Auth.AccessToken do
             oauth_token: nil,
             oauth_token_secret: nil,
             verifier: nil,
+            http_headers: %{},
             service: :api
 
   defimpl Operation do
@@ -28,6 +29,7 @@ defmodule Flickrex.Operation.Auth.AccessToken do
     @spec perform(Operation.Auth.AccessToken.t(), Config.t()) :: term
     def perform(operation, config) do
       http_method = "get"
+      http_headers = Map.to_list(operation.http_headers)
       params = [oauth_verifier: operation.verifier]
 
       key = config.consumer_key
@@ -51,6 +53,7 @@ defmodule Flickrex.Operation.Auth.AccessToken do
 
       request = %Request{
         method: http_method,
+        headers: http_headers,
         url: url
       }
 

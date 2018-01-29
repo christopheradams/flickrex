@@ -29,6 +29,7 @@ defmodule Flickrex.Parsers.Rest do
   def parse_status(val), do: val
 
   defp parse_body(%{headers: headers, body: body}) do
+    # TODO: Replace hackney usage.
     content_type = :hackney_headers.parse("content-type", headers)
     parse_body(content_type, body)
   end

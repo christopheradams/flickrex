@@ -4,7 +4,7 @@ defmodule Flickrex.OAuthTest do
   alias Flickrex.OAuth
 
   test "sign/7 signs request params" do
-    method = "get"
+    method = :get
     url = "http://example.com/test"
     params = [param: "test"]
     key = "CONSUMER_KEY"

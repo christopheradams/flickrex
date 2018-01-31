@@ -8,7 +8,7 @@ defmodule Flickrex.Request do
   alias Flickrex.Request.HttpClient
 
   @type t :: %Request{
-          method: String.t(),
+          method: atom,
           url: String.t(),
           body: iodata | tuple,
           headers: [{binary, binary}]

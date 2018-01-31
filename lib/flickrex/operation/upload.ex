@@ -51,7 +51,7 @@ defmodule Flickrex.Operation.Upload do
 
     @spec perform(Operation.Upload.t(), Config.t()) :: term
     def perform(operation, config) do
-      http_method = "post"
+      http_method = :post
       http_headers = Map.to_list(operation.http_headers)
 
       params = Keyword.new(operation.params)

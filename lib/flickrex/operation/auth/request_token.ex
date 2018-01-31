@@ -28,7 +28,7 @@ defmodule Flickrex.Operation.Auth.RequestToken do
 
     @spec perform(Operation.Auth.RequestToken.t(), Config.t()) :: term
     def perform(operation, config) do
-      http_method = "get"
+      http_method = :get
       http_headers = Map.to_list(operation.http_headers)
       params = Keyword.new(operation.params)
 

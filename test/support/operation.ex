@@ -4,7 +4,7 @@ defmodule Flickrex.Support.Operation do
 
   defimpl Flickrex.Operation do
     def perform(operation, config) do
-      http_method = "get"
+      http_method = :get
 
       uri =
         config.url

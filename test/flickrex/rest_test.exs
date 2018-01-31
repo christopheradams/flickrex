@@ -19,7 +19,7 @@ defmodule Flickrex.RestTest do
         nojsoncallback: 1
       },
       format: "json",
-      http_method: to_string(http_method),
+      http_method: http_method,
       method: method,
       params: %{test: "test"},
       parser: &Flickrex.Parsers.Rest.parse_status/1,

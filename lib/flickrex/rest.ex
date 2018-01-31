@@ -17,7 +17,7 @@ defmodule Flickrex.Rest do
   """
   @spec get(method, Keyword.t()) :: term
   def get(method, opts \\ []) do
-    call("get", method, opts)
+    call(:get, method, opts)
   end
 
   @doc """
@@ -25,7 +25,7 @@ defmodule Flickrex.Rest do
   """
   @spec post(method, Keyword.t()) :: term
   def post(method, opts \\ []) do
-    call("post", method, opts)
+    call(:post, method, opts)
   end
 
   defp call(http_method, method, opts) do

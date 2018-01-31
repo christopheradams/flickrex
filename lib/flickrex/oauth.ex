@@ -1,7 +1,7 @@
 defmodule Flickrex.OAuth do
   @moduledoc false
 
-  @type method :: String.t()
+  @type method :: atom | String.t()
   @type url :: String.t() | URI.t()
   @type params :: Keyword.t()
   @type consumer_key :: String.t()
@@ -20,6 +20,6 @@ defmodule Flickrex.OAuth do
         token_secret: token_secret
       )
 
-    OAuther.sign(method, url, params, credentials)
+    OAuther.sign(to_string(method), url, params, credentials)
   end
 end

@@ -30,7 +30,7 @@ defmodule Flickrex.Mixfile do
 
   def application do
     [
-      applications: [:inets, :logger, :oauther, :poison, :parsexml],
+      applications: [:httpotion, :inets, :logger, :oauther, :poison, :parsexml],
       mod: {Flickrex.Application, []}
     ]
   end
@@ -41,6 +41,7 @@ defmodule Flickrex.Mixfile do
   defp deps do
     [
       {:oauther, "~> 1.0"},
+      {:httpotion, "~> 3.0.2"},
       {:hackney, "~> 1.8.6 or ~> 1.9 or ~> 1.10", optional: true},
       {:parsexml, "~> 1.0"},
       {:dialyxir, "~> 0.5", only: [:dev], runtime: false},

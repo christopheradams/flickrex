@@ -3,7 +3,7 @@ defmodule Flickrex.Request.HttpClient do
   Specifies HTTP client behaviour.
   """
 
-  @type method :: atom | binary
+  @type method :: :get | :post | :put | :delete
   @type url :: binary
   @type body :: binary | nil
   @type headers :: [{binary, binary}]

@@ -5,6 +5,7 @@ defmodule Flickrex.Flickr.TestTest do
 
   test "test echo/1 in XML" do
     test_format("", %{}, "text/xml; charset=utf-8")
+    test_format("rest", %{"_content" => "rest"}, "text/xml; charset=utf-8")
   end
 
   test "test echo/1 in JSON" do

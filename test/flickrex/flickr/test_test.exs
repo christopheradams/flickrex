@@ -21,10 +21,8 @@ defmodule Flickrex.Flickr.TestTest do
 
     assert %{status_code: 200, headers: headers, body: body} = resp
 
-    content_type =
-      headers
-      |> Map.new()
-      |> Map.get("Content-Type")
+    new_headers = :hackney_headers_new.new(headers)
+    content_type = :hackney_headers_new.get_value("content-type", new_headers)
 
     assert content_type == resp_content_type
 

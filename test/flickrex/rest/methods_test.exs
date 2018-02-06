@@ -6,11 +6,11 @@ defmodule Flickrex.Rest.MethodsTest do
   setup [:flickr_config]
 
   test "request photo info in XML", %{config: opts} do
-    test_info("", opts)
+    test_info(nil, opts)
   end
 
   test "request photo info in JSON", %{config: opts} do
-    test_info("json", opts)
+    test_info(:json, opts)
   end
 
   def test_info(format, opts) do
@@ -28,11 +28,11 @@ defmodule Flickrex.Rest.MethodsTest do
   end
 
   test "request fake method in XML", %{config: opts} do
-    test_fake("", opts)
+    test_fake(nil, opts)
   end
 
   test "request fake method in JSON", %{config: opts} do
-    test_fake("json", opts)
+    test_fake(:json, opts)
   end
 
   def test_fake(format, opts) do
@@ -47,13 +47,13 @@ defmodule Flickrex.Rest.MethodsTest do
 
     expected_body =
       case format do
-        "" ->
+        nil ->
           %{
             "stat" => "fail",
             "err" => %{"code" => "112", "msg" => "Method &quot;flickr.fakeMethod&quot; not found"}
           }
 
-        "json" ->
+        :json ->
           %{
             "stat" => "fail",
             "code" => 112,

@@ -18,7 +18,7 @@ defmodule Flickrex.Operation.Rest do
             method: nil,
             http_method: nil,
             http_headers: %{},
-            format: "json",
+            format: :json,
             extra_params: @json_params,
             service: :api
 

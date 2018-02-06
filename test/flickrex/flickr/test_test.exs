@@ -4,12 +4,12 @@ defmodule Flickrex.Flickr.TestTest do
   @moduletag :flickr_api
 
   test "test echo/1 in XML" do
-    test_format("", %{}, "text/xml; charset=utf-8")
-    test_format("rest", %{"_content" => "rest"}, "text/xml; charset=utf-8")
+    test_format(nil, %{}, "text/xml; charset=utf-8")
+    test_format(:rest, %{"_content" => "rest"}, "text/xml; charset=utf-8")
   end
 
   test "test echo/1 in JSON" do
-    test_format("json", %{"_content" => "json"}, "application/json")
+    test_format(:json, %{"_content" => "json"}, "application/json")
   end
 
   def test_format(req_format, resp_format_content, resp_content_type) do

@@ -18,7 +18,7 @@ defmodule Flickrex.RestTest do
       extra_params: %{
         nojsoncallback: 1
       },
-      format: "json",
+      format: :json,
       http_method: http_method,
       method: method,
       params: %{test: "test"},

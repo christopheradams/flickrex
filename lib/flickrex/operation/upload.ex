@@ -90,9 +90,19 @@ defmodule Flickrex.Operation.Upload do
         body: body
       }
 
-      request
-      |> Request.request(config)
-      |> operation.parser.()
+      response = Request.request(request, config)
+      parser = operation.parser
+
+      cond do
+        is_function(parser, 1) ->
+          parser.(response)
+
+        is_function(parser, 2) ->
+          parser.(response, config)
+
+        true ->
+          response
+      end
     end
   end
 end

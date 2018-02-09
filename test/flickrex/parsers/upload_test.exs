@@ -3,7 +3,7 @@ defmodule Flickrex.Parsers.UploadTest do
 
   alias Flickrex.Parsers
 
-  @xml_headers [{"content-type", "text/xml; charset=UTF-8"}]
+  @xml_headers [{"Content-Type", "text/xml; charset=utf-8"}]
   @xml_doc "<?xml version='1.0'?><_/>"
 
   test "parse/1 parses a REST XML response" do

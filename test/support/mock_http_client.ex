@@ -9,8 +9,8 @@ defmodule Flickrex.Support.MockHTTPClient do
 
   alias Flickrex.Response
 
-  @json_headers [{"content-type", "application/json; charset=utf-8"}]
-  @xml_headers [{"content-type", "text/xml; charset=UTF-8"}]
+  @json_headers [{"Content-Type", "application/json; charset=utf-8"}]
+  @xml_headers [{"Content-Type", "text/xml; charset=utf-8"}]
 
   def request(method, url, body \\ "", headers \\ [], http_opts \\ []) do
     do_request(method, URI.parse(url), body, headers, http_opts)

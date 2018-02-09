@@ -5,9 +5,9 @@ defmodule Flickrex.Parsers.RestTest do
 
   alias Flickrex.Parsers
 
-  @json_headers [{"content-type", "application/json; charset=utf-8"}]
-  @html_headers [{"content-type", "text/html; charset=UTF-8"}]
-  @xml_headers [{"content-type", "text/xml; charset=UTF-8"}]
+  @json_headers [{"Content-Type", "application/json; charset=utf-8"}]
+  @html_headers [{"Content-Type", "text/html; charset=utf-8"}]
+  @xml_headers [{"Content-Type", "text/xml; charset=utf-8"}]
 
   @json_doc "{}"
   @html_doc "<!DOCTYPE html><html></html>"

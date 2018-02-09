@@ -3,8 +3,8 @@ defmodule Flickrex.Parsers.AuthTest do
 
   alias Flickrex.Parsers
 
-  @text_headers [{"content-type", "text/plain; charset=utf-8"}]
-  @html_headers [{"content-type", "text/html; charset=utf-8"}]
+  @text_headers [{"Content-Type", "text/plain; charset=utf-8"}]
+  @html_headers [{"Content-Type", "text/html; charset=utf-8"}]
 
   test "parse_request_token/1 parses a request token" do
     body = "oauth_callback_confirmed=true&oauth_token=TOKEN&oauth_token_secret=TOKEN_SECRET"
@@ -35,7 +35,7 @@ defmodule Flickrex.Parsers.AuthTest do
       {:error,
        %{
          body: %{"oauth_problem" => "consumer_key_unknown"},
-         headers: [{"content-type", "text/plain; charset=utf-8"}],
+         headers: [{"Content-Type", "text/plain; charset=utf-8"}],
          status_code: 401
        }}
 
@@ -88,7 +88,7 @@ defmodule Flickrex.Parsers.AuthTest do
       {:error,
        %{
          body: %{"oauth_problem" => "token_rejected"},
-         headers: [{"content-type", "text/plain; charset=utf-8"}],
+         headers: [{"Content-Type", "text/plain; charset=utf-8"}],
          status_code: 401
        }}
 

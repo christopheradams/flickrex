@@ -3,7 +3,7 @@ defmodule Flickrex.Parsers.IdentityTest do
 
   alias Flickrex.Parsers
 
-  @json_headers [{"content-type", "application/json; charset=utf-8"}]
+  @json_headers [{"Content-Type", "application/json; charset=utf-8"}]
   @json_doc "{}"
 
   test "parse/1 returns identical value" do

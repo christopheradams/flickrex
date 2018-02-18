@@ -12,7 +12,7 @@ defmodule Flickrex.Mixfile do
     [
       app: :flickrex,
       version: @version,
-      elixir: "~> 1.3 or ~> 1.4",
+      elixir: "~> 1.4",
       elixirc_paths: elixirc_paths(Mix.env()),
       build_embedded: Mix.env() == :prod,
       start_permanent: Mix.env() == :prod,
@@ -30,7 +30,7 @@ defmodule Flickrex.Mixfile do
 
   def application do
     [
-      applications: [:inets, :logger, :oauther, :poison, :hackney, :parsexml],
+      extra_applications: [:inets, :logger],
       mod: {Flickrex.Application, []}
     ]
   end

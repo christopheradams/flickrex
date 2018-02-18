@@ -1,7 +1,9 @@
 defmodule Flickrex.Parsers.Auth do
   @moduledoc false
 
-  @type response :: {:ok, map} | {:error, term}
+  alias Flickrex.Response
+
+  @type response :: {:ok, Response.t()} | {:error, term}
 
   @spec parse_request_token(response) :: response
   def parse_request_token({:ok, %{status_code: 200, body: body} = resp}) do

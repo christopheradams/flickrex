@@ -7,6 +7,8 @@ defmodule Flickrex.Support.MockHTTPClient do
 
   import Flickrex.Support.Fixtures
 
+  alias Flickrex.Response
+
   @json_headers [{"content-type", "application/json; charset=utf-8"}]
   @xml_headers [{"content-type", "text/xml; charset=UTF-8"}]
 
@@ -15,11 +17,11 @@ defmodule Flickrex.Support.MockHTTPClient do
   end
 
   def do_request(:get, %{path: "/test"} = _uri, _, _, _) do
-    {:ok, %{status_code: 200, headers: [], body: "Test"}}
+    {:ok, %Response{status_code: 200, headers: [], body: "Test"}}
   end
 
   def do_request(:get, %{path: "/opts"} = _uri, _, _, test: value) do
-    {:ok, %{status_code: 200, headers: [], body: value}}
+    {:ok, %Response{status_code: 200, headers: [], body: value}}
   end
 
   def do_request(:get, %{path: "/error"} = _uri, _, _, _) do
@@ -31,7 +33,7 @@ defmodule Flickrex.Support.MockHTTPClient do
     headers = []
     body = "oauth_callback_confirmed=true&oauth_token=TOKEN&oauth_token_secret=TOKEN_SECRET"
 
-    {:ok, %{status_code: status, headers: headers, body: body}}
+    {:ok, %Response{status_code: status, headers: headers, body: body}}
   end
 
   def do_request(:get, %{path: "/services/oauth/access_token"} = _uri, _, _, _) do
@@ -42,7 +44,7 @@ defmodule Flickrex.Support.MockHTTPClient do
       "fullname=FULL%20NAME&oauth_token=TOKEN&oauth_token_secret=" <>
         "SECRET&user_nsid=NSID&username=USERNAME"
 
-    {:ok, %{status_code: status, headers: headers, body: body}}
+    {:ok, %Response{status_code: status, headers: headers, body: body}}
   end
 
   def do_request(:get, %{path: "/services/rest"} = uri, _, _, _) do
@@ -72,7 +74,7 @@ defmodule Flickrex.Support.MockHTTPClient do
 
     body = fixture(doc, doc_format)
 
-    {:ok, %{status_code: status, headers: headers, body: body}}
+    {:ok, %Response{status_code: status, headers: headers, body: body}}
   end
 
   def do_request(:post, %{path: "/services/upload"} = _uri, req_body, _, _) do
@@ -95,7 +97,7 @@ defmodule Flickrex.Support.MockHTTPClient do
 
     body = fixture(:upload, :xml)
 
-    {:ok, %{status_code: status, headers: headers, body: body}}
+    {:ok, %Response{status_code: status, headers: headers, body: body}}
   end
 
   def do_request(:post, %{path: "/services/replace"} = _uri, req_body, _, _) do
@@ -119,6 +121,6 @@ defmodule Flickrex.Support.MockHTTPClient do
           fixture(:error, :xml)
       end
 
-    {:ok, %{status_code: status, headers: headers, body: resp_body}}
+    {:ok, %Response{status_code: status, headers: headers, body: resp_body}}
   end
 end

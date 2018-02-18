@@ -3,13 +3,15 @@ defmodule FlickrexTest do
 
   import Flickrex.Support.Config
 
+  alias Flickrex.Response
+
   setup [:flickr_config]
 
   test "request/2 performs a request", %{config: opts} do
     operation = %Flickrex.Support.Operation{path: "/test"}
     {:ok, resp} = Flickrex.request(operation, opts)
 
-    assert resp == %{body: "Test", headers: [], status_code: 200}
+    assert resp == %Response{body: "Test", headers: [], status_code: 200}
   end
 
   test "request/2 can set http opts", %{config: opts} do
@@ -17,7 +19,7 @@ defmodule FlickrexTest do
     operation = %Flickrex.Support.Operation{path: "/opts"}
     {:ok, resp} = Flickrex.request(operation, opts)
 
-    assert resp == %{body: "Opts", headers: [], status_code: 200}
+    assert resp == %Response{body: "Opts", headers: [], status_code: 200}
   end
 
   test "request/2 performs can return an error", %{config: opts} do
@@ -31,7 +33,7 @@ defmodule FlickrexTest do
     operation = %Flickrex.Support.Operation{path: "/test"}
     resp = Flickrex.request!(operation, opts)
 
-    assert resp == %{body: "Test", headers: [], status_code: 200}
+    assert resp == %Response{body: "Test", headers: [], status_code: 200}
   end
 
   test "request!/2 performs can raise an error", %{config: opts} do

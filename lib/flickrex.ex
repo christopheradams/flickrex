@@ -13,7 +13,8 @@ defmodule Flickrex do
   alias Flickrex.{
     Config,
     Error,
-    Operation
+    Operation,
+    Response
   }
 
   @doc """
@@ -30,7 +31,7 @@ defmodule Flickrex do
   * `http_opts` - HTTP client options.
   """
   @spec request(Operation.t()) :: term
-  @spec request(Operation.t(), Keyword.t()) :: {:ok, term} | {:error, term}
+  @spec request(Operation.t(), Keyword.t()) :: {:ok, Response.t()} | {:error, term}
   def request(operation, opts \\ []) do
     config = Config.new(operation.service, opts)
     Operation.perform(operation, config)

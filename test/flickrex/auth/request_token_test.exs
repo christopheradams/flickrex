@@ -3,6 +3,8 @@ defmodule Flickrex.Auth.RequestTokenTest do
 
   import Flickrex.Support.Config
 
+  alias Flickrex.Response
+
   setup [:flickr_config]
 
   test "request a request token", %{config: opts} do
@@ -10,7 +12,7 @@ defmodule Flickrex.Auth.RequestTokenTest do
 
     {:ok, response} = Flickrex.request(operation, opts)
 
-    expected_response = %{
+    expected_response = %Response{
       body: %{
         oauth_callback_confirmed: true,
         oauth_token_secret: "TOKEN_SECRET",

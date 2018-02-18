@@ -6,12 +6,12 @@ defmodule Flickrex.Request.Hackney do
   @behaviour Flickrex.Request.HttpClient
 
   alias Flickrex.Request.HttpClient
+  alias Flickrex.Response
 
   @type method :: HttpClient.method()
   @type url :: HttpClient.url()
   @type body :: HttpClient.body()
   @type headers :: HttpClient.headers()
-  @type status :: HttpClient.status()
   @type http_opts :: HttpClient.http_opts()
   @type success_t :: HttpClient.success_t()
   @type error_t :: HttpClient.error_t()
@@ -22,10 +22,10 @@ defmodule Flickrex.Request.Hackney do
 
     case :hackney.request(method, url, headers, body, opts) do
       {:ok, status, headers} ->
-        {:ok, %{status_code: status, headers: headers, body: nil}}
+        {:ok, %Response{status_code: status, headers: headers}}
 
       {:ok, status, headers, body} ->
-        {:ok, %{status_code: status, headers: headers, body: body}}
+        {:ok, %Response{status_code: status, headers: headers, body: body}}
 
       {:error, reason} ->
         {:error, %{reason: reason}}

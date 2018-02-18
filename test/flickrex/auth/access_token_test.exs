@@ -3,6 +3,8 @@ defmodule Flickrex.Auth.AccessTokenTest do
 
   import Flickrex.Support.Config
 
+  alias Flickrex.Response
+
   setup [:flickr_config]
 
   test "request an access token", %{config: opts} do
@@ -10,7 +12,7 @@ defmodule Flickrex.Auth.AccessTokenTest do
 
     {:ok, response} = Flickrex.request(operation, opts)
 
-    expected_response = %{
+    expected_response = %Response{
       body: %{
         fullname: "FULL NAME",
         oauth_token: "TOKEN",

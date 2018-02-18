@@ -6,10 +6,12 @@ defmodule Flickrex.Parsers.RestTest do
   alias Flickrex.Parsers
 
   @json_headers [{"Content-Type", "application/json; charset=utf-8"}]
+  @javascript_headers [{"Content-Type", "text/javascript; charset=utf-8"}]
   @html_headers [{"Content-Type", "text/html; charset=utf-8"}]
   @xml_headers [{"Content-Type", "text/xml; charset=utf-8"}]
 
   @json_doc "{}"
+  @javascript_doc "jsonFlickrApi({})"
   @html_doc "<!DOCTYPE html><html></html>"
   @xml_doc "<?xml version='1.0'?><_/>"
 
@@ -50,6 +52,16 @@ defmodule Flickrex.Parsers.RestTest do
 
   test "parse/1 parses a Rest JSON response" do
     response = {:ok, %{body: @json_doc, headers: @json_headers, status_code: 200}}
+
+    {:ok, %{body: body}} = Parsers.Rest.parse(response)
+
+    assert body == %{}
+
+    assert {:ok, %{body: body, headers: @json_headers, status_code: 200}}
+  end
+
+  test "parse/1 parses a Rest JSON response with callback" do
+    response = {:ok, %{body: @javascript_doc, headers: @javascript_headers, status_code: 200}}
 
     {:ok, %{body: body}} = Parsers.Rest.parse(response)
 

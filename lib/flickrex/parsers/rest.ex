@@ -39,6 +39,12 @@ defmodule Flickrex.Parsers.Rest do
     decode(response, config.json_decoder)
   end
 
+  # Body has a "jsonFlickrApi(...)" callback
+  defp parse_type(response, "text/javascript" <> _rest, config) do
+    body = String.slice(response.body, 14..-2)
+    decode(%{response | body: body}, config.json_decoder)
+  end
+
   defp parse_type(response, _type, _config) do
     {:ok, response.body}
   end

@@ -7,7 +7,7 @@ defmodule Flickrex.Request.HttpClient do
 
   @type method :: :get | :post | :put | :delete
   @type url :: binary
-  @type body :: binary | nil
+  @type body :: iodata | tuple | nil
   @type headers :: [{binary, binary}]
   @type http_opts :: list
   @type success_t :: {:ok, Response.t()}

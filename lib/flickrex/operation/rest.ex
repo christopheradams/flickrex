@@ -52,9 +52,10 @@ defmodule Flickrex.Operation.Rest do
         |> URI.parse()
         |> URI.merge(operation.path)
 
-      signed_params = OAuth.sign(http_method, uri, params, key, secret, token, token_secret)
-
-      query = URI.encode_query(signed_params)
+      query =
+        http_method
+        |> OAuth.sign(uri, params, key, secret, token, token_secret)
+        |> URI.encode_query()
 
       url =
         uri

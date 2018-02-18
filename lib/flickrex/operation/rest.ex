@@ -1,6 +1,9 @@
 defmodule Flickrex.Operation.Rest do
   @moduledoc """
   Holds data necessary for an operation on the Flickr REST service.
+
+  The `:format` must be one of `:json` or `:rest`, the latter returning XML. The
+  default is `:json`.
   """
 
   alias Flickrex.{
@@ -10,7 +13,27 @@ defmodule Flickrex.Operation.Rest do
 
   @json_params %{nojsoncallback: 1}
 
-  @type t :: %__MODULE__{}
+  @type path :: String.t()
+  @type parser :: fun
+  @type params :: map
+  @type method :: String.t()
+  @type http_method :: atom
+  @type http_headers :: map
+  @type format :: :json | :rest
+  @type extra_params :: map
+  @type service :: atom
+
+  @type t :: %__MODULE__{
+          path: path(),
+          parser: parser(),
+          params: params(),
+          method: method(),
+          http_method: http_method(),
+          http_headers: http_headers(),
+          format: format(),
+          extra_params: extra_params(),
+          service: service()
+        }
 
   defstruct path: "services/rest",
             parser: &Parsers.Rest.parse/2,

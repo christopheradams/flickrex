@@ -8,8 +8,21 @@ defmodule Flickrex.Operation.Upload do
     Parsers
   }
 
-  @type t :: %__MODULE__{}
+  @type path :: String.t()
+  @type parser :: fun
+  @type params :: map
   @type photo :: String.t()
+  @type http_headers :: map
+  @type service :: atom
+
+  @type t :: %__MODULE__{
+          path: path(),
+          parser: parser(),
+          params: params(),
+          photo: photo(),
+          http_headers: http_headers(),
+          service: service()
+        }
 
   @upload_path "services/upload"
   @replace_path "services/replace"

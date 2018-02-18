@@ -65,9 +65,9 @@ defmodule Flickrex.Parsers.RestTest do
     assert body == @html_doc
   end
 
-  test "parse/1 turns non-200 responses as-is" do
+  test "parse/1 returns an error for 404 response" do
     response = {:ok, %{body: @html_doc, headers: @html_headers, status_code: 404}}
-    {:ok, %{body: body}} = Parsers.Rest.parse(response)
+    {:error, %{body: body}} = Parsers.Rest.parse(response)
 
     assert body == @html_doc
   end
@@ -96,7 +96,7 @@ defmodule Flickrex.Parsers.RestTest do
   test "parse fail" do
     response = do_response(:fail, @json_headers, 200)
 
-    {:ok, %{body: body}} = Parsers.Rest.parse(response)
+    {:error, %{body: body}} = Parsers.Rest.parse(response)
 
     expected_body = %{
       "stat" => "fail",

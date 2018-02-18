@@ -44,7 +44,7 @@ defmodule Flickrex.Upload.UploadsTest do
   test "replace a photo with no photo specified", %{config: config} do
     photo = "test/fixtures/photo.jpg"
 
-    {:ok, %{body: body}} =
+    {:error, %{body: body}} =
       photo
       |> Flickrex.Upload.replace()
       |> Flickrex.request(config)

@@ -1,17 +1,58 @@
 defmodule Flickrex.Parsers.Rest do
   @moduledoc false
 
-  @type response :: {:ok, map} | {:error, term}
+  alias Flickrex.{Config, Request}
 
-  @spec parse(response) :: response
-  def parse({:ok, resp}) do
-    parsed_body = parse_body(resp)
-    {:ok, %{resp | body: parsed_body}}
+  @type decoder :: atom
+  @type headers :: Request.HttpClient.headers()
+  @type results :: {:ok, map} | {:error, term}
+
+  @spec parse(results, Config.t()) :: results
+  def parse(results, config \\ %Config{})
+
+  def parse({:error, _} = results, _), do: results
+
+  def parse({:ok, %{status_code: code} = response}, _) when code >= 400 do
+    {:error, response}
   end
 
-  def parse(val), do: val
+  def parse({:ok, response}, config) do
+    {stat, body} = parse_content(response, config)
 
-  @spec parse_status(response) :: response
+    {stat, %{response | body: body}}
+  end
+
+  def parse(result, _config) do
+    result
+  end
+
+  defp parse_content(response, config) do
+    content_type = get_content_type(response.headers)
+    parse_type(response, content_type, config)
+  end
+
+  defp parse_type(response, "text/xml" <> _rest, config) do
+    decode(response, config.rest_decoder)
+  end
+
+  defp parse_type(response, "application/json" <> _rest, config) do
+    decode(response, config.json_decoder)
+  end
+
+  defp parse_type(response, _type, _config) do
+    {:ok, response.body}
+  end
+
+  defp decode(response, decoder) do
+    decoder.decode(response.body)
+  end
+
+  defp get_content_type(headers) do
+    {_, ct} = List.keyfind(headers, "content-type", 0, List.keyfind(headers, "Content-Type", 0))
+    ct
+  end
+
+  @spec parse_status(results) :: results
   def parse_status({:ok, resp}) do
     parsed_resp = %{resp | body: parse_body(resp)}
     code_ok = parsed_resp.status_code == 200

@@ -57,6 +57,9 @@ defmodule Flickrex.Support.MockHTTPClient do
         "" ->
           {:xml, @xml_headers}
 
+        "rest" ->
+          {:xml, @xml_headers}
+
         "json" ->
           {:json, @json_headers}
       end

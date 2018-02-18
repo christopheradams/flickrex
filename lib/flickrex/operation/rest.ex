@@ -13,7 +13,7 @@ defmodule Flickrex.Operation.Rest do
   @type t :: %__MODULE__{}
 
   defstruct path: "services/rest",
-            parser: &Parsers.Rest.parse_status/1,
+            parser: &Parsers.Rest.parse/2,
             params: %{},
             method: nil,
             http_method: nil,

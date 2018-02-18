@@ -20,6 +20,8 @@ defmodule Flickrex.Config do
     :oauth_token,
     :oauth_token_secret,
     :url,
+    json_decoder: Flickrex.Decoder.JSON,
+    rest_decoder: Flickrex.Decoder.XML,
     http_client: Flickrex.Request.Hackney,
     http_opts: []
   ]

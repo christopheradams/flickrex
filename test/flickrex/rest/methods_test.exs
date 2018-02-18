@@ -28,7 +28,7 @@ defmodule Flickrex.Rest.MethodsTest do
   end
 
   test "request fake method in XML", %{config: opts} do
-    test_fake(nil, opts)
+    test_fake(:rest, opts)
   end
 
   test "request fake method in JSON", %{config: opts} do
@@ -47,7 +47,7 @@ defmodule Flickrex.Rest.MethodsTest do
 
     expected_body =
       case format do
-        nil ->
+        :rest ->
           %{
             "stat" => "fail",
             "err" => %{"code" => "112", "msg" => "Method &quot;flickr.fakeMethod&quot; not found"}

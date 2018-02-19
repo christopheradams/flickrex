@@ -20,7 +20,6 @@ defmodule Flickrex.Operation.Rest do
   @type http_method :: atom
   @type http_headers :: map
   @type format :: :json | :rest
-  @type extra_params :: map
   @type service :: atom
 
   @type t :: %__MODULE__{
@@ -31,7 +30,7 @@ defmodule Flickrex.Operation.Rest do
           http_method: http_method(),
           http_headers: http_headers(),
           format: format(),
-          extra_params: extra_params(),
+          default_params: params(),
           service: service()
         }
 
@@ -42,7 +41,7 @@ defmodule Flickrex.Operation.Rest do
             http_method: nil,
             http_headers: %{},
             format: :json,
-            extra_params: @json_params,
+            default_params: @json_params,
             service: :api
 
   defimpl Operation do
@@ -59,7 +58,7 @@ defmodule Flickrex.Operation.Rest do
       http_headers = Map.to_list(operation.http_headers)
 
       params =
-        operation.extra_params
+        operation.default_params
         |> Map.put(:method, operation.method)
         |> Map.put(:format, operation.format)
         |> Map.merge(operation.params)

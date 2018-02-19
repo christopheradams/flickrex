@@ -15,7 +15,7 @@ defmodule Flickrex.RestTest do
     method = "flickr.test.echo"
 
     expected = %Operation.Rest{
-      extra_params: %{
+      default_params: %{
         nojsoncallback: 1
       },
       format: :json,

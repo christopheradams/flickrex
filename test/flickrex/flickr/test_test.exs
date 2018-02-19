@@ -13,8 +13,8 @@ defmodule Flickrex.Flickr.TestTest do
   end
 
   test "test echo/1 in JSON with callback" do
-    extra_params = %{nojsoncallback: 0}
-    test_format(:json, %{"_content" => "json"}, "text/javascript; charset=utf-8", extra_params)
+    default_params = %{nojsoncallback: 0}
+    test_format(:json, %{"_content" => "json"}, "text/javascript; charset=utf-8", default_params)
     test_format(:json, %{"_content" => "json"}, "text/javascript; charset=utf-8", %{})
   end
 
@@ -34,13 +34,13 @@ defmodule Flickrex.Flickr.TestTest do
     assert content_type == "text/html; charset=UTF-8"
   end
 
-  def test_format(req_format, resp_format_content, resp_content_type, extra_params \\ nil) do
+  def test_format(req_format, resp_format_content, resp_content_type, default_params \\ nil) do
     {:ok, resp} =
       [test: "test"]
       |> Flickrex.Flickr.Test.echo()
       |> Map.put(:format, req_format)
-      |> Map.update!(:extra_params, fn value ->
-        case extra_params do
+      |> Map.update!(:default_params, fn value ->
+        case default_params do
           nil -> value
           extra -> extra
         end

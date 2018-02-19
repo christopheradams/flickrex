@@ -35,8 +35,13 @@ defmodule Flickrex.Mixfile do
     ]
   end
 
-  defp elixirc_paths(:test), do: ["lib", "test/support"]
-  defp elixirc_paths(_), do: ["lib"]
+  # Exclude lib/mix from paths so that the reflect task is only available for
+  # local development, and not for package users.
+  @lib_paths ["lib/flickr", "lib/flickrex", "lib/flickrex.ex"]
+
+  defp elixirc_paths(:dev), do: ["lib/mix" | @lib_paths]
+  defp elixirc_paths(:test), do: ["test/support" | @lib_paths]
+  defp elixirc_paths(_), do: @lib_paths
 
   defp deps do
     [
@@ -47,7 +52,7 @@ defmodule Flickrex.Mixfile do
       {:dialyxir, "~> 0.5", only: [:dev], runtime: false},
       {:credo, "~> 0.8", only: [:dev, :test], runtime: false},
       {:ex_doc, ">= 0.0.0", only: :dev},
-      {:poison, "~> 3.0", only: [:dev, :test]}
+      {:poison, "~> 3.0", only: :dev}
     ]
   end
 

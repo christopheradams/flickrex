@@ -42,11 +42,12 @@ defmodule Flickrex.Mixfile do
     [
       {:oauther, "~> 1.0"},
       {:hackney, "~> 1.8.6 or ~> 1.9 or ~> 1.10"},
+      {:jason, "~> 1.0"},
       {:parsexml, "~> 1.0"},
       {:dialyxir, "~> 0.5", only: [:dev], runtime: false},
       {:credo, "~> 0.8", only: [:dev, :test], runtime: false},
       {:ex_doc, ">= 0.0.0", only: :dev},
-      {:poison, "~> 3.0"}
+      {:poison, "~> 3.0", only: [:dev, :test]}
     ]
   end
 

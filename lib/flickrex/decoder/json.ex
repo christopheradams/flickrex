@@ -13,7 +13,7 @@ defmodule Flickrex.Decoder.JSON do
 
   @spec decode(data()) :: success_t() | error_t()
   def decode(data) do
-    case Poison.decode(data) do
+    case Jason.decode(data) do
       {:ok, result} ->
         {stat(result), result}
 

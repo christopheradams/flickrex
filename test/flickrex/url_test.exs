@@ -6,12 +6,12 @@ defmodule Flickrex.URLTest do
   setup_all do
     sizes_file = "test/fixtures/sizes.json"
     photo_file = "test/fixtures/photo.json"
-    photo = photo_file |> File.read!() |> Poison.decode!() |> get_in(["photo"])
+    photo = photo_file |> File.read!() |> Jason.decode!() |> get_in(["photo"])
 
     sizes =
       sizes_file
       |> File.read!()
-      |> Poison.decode!()
+      |> Jason.decode!()
       |> get_in(["sizes", "size"])
       |> Enum.into(%{}, fn s -> {s["label"], s["source"]} end)
 

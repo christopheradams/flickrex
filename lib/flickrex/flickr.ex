@@ -42,7 +42,7 @@ defmodule Flickrex.Flickr do
   methods_modules =
     methods_file
     |> File.read!()
-    |> Poison.decode!()
+    |> Jason.decode!()
     |> get_in(["methods", "method"])
     |> Enum.map(fn %{"_content" => m} -> m end)
     |> Enum.group_by(fn m -> m |> String.split(".") |> List.delete_at(-1) end)
@@ -81,7 +81,7 @@ defmodule Flickrex.Flickr do
               methods_dir
               |> Path.join(method_file)
               |> File.read!()
-              |> Poison.decode!()
+              |> Jason.decode!()
 
             false ->
               %{}

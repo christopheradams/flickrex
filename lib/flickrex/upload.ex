@@ -41,7 +41,7 @@ defmodule Flickrex.Upload do
   * `safety_level` - Set to 1 for Safe, 2 for Moderate, or 3 for Restricted. If
     omitted or an invalid value is passed, will be set to user's default
   * `content_type` - Set to 1 for Photo, 2 for Screenshot, or 3 for Other. If
-    omitted , will be set to user's default
+    omitted, will be set to user's default
   * `hidden` - Set to 1 to keep the photo in global search results, 2 to hide from
     public searches. If omitted, will be set based to user's default
   * `async` - Set to 1 to use asynchronous uploading. The response will include

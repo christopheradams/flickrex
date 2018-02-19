@@ -26,6 +26,12 @@ defmodule Flickrex.Flickr do
       {:ok, resp} = Flickrex.Flickr.Test.login() |> Flickrex.request(config)
 
       %{"user" => user} = resp.body
+
+  The API methods will return an error tuple if there was a problem with the
+  request:
+
+      {:error, resp} = Flickrex.Flickr.Photos.get_info() |> Flickrex.request()
+      resp.body == %{"code" => 1, "message" => "Photo not found", "stat" => "fail"}
   """
 
   # Flickr directory

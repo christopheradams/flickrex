@@ -2,6 +2,11 @@ defmodule Flickrex.Rest do
   @moduledoc """
   Operations on Flickr REST Service.
 
+  Supports all methods listed in the [Flickr API](https://www.flickr.com/services/api/) docs.
+
+  Prefer to use the `Flickrex.Flickr` modules instead of calling these functions
+  directly.
+
   ## Examples
 
       operation = Flickrex.Rest.get("flickr.photos.getInfo", photo_id: id)
@@ -10,6 +15,7 @@ defmodule Flickrex.Rest do
 
   alias Flickrex.Operation
 
+  @typedoc "Name of the Flickr API Method"
   @type method :: binary
 
   @doc """

@@ -1,15 +1,24 @@
 defmodule Flickrex.Operation.Upload do
   @moduledoc """
   Holds data necessary for an operation on the Flickr Upload service.
+
+  The `parser` must be a 1- or 2-arity function, accepting an `:ok` or `:error`
+  response, and optionally a `Flickrex.Config` struct.
   """
 
   alias Flickrex.{
+    Config,
+    Request.HttpClient,
     Operation,
     Parsers
   }
 
+  @type success_t :: HttpClient.success_t()
+  @type error_t :: HttpClient.error_t()
+  @type config :: Config.t()
+  @type results :: success_t() | error_t()
   @type path :: String.t()
-  @type parser :: fun
+  @type parser :: (results() -> results()) | (results(), config() -> results())
   @type params :: map
   @type photo :: String.t()
   @type http_headers :: map

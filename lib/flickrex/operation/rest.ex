@@ -4,17 +4,26 @@ defmodule Flickrex.Operation.Rest do
 
   The `:format` must be one of `:json` or `:rest`, the latter returning XML. The
   default is `:json`.
+
+  The `parser` must be a 1- or 2-arity function, accepting an `:ok` or `:error`
+  response, and optionally a `Flickrex.Config` struct.
   """
 
   alias Flickrex.{
+    Config,
+    Request.HttpClient,
     Operation,
     Parsers
   }
 
   @json_params %{nojsoncallback: 1}
 
+  @type success_t :: HttpClient.success_t()
+  @type error_t :: HttpClient.error_t()
+  @type config :: Config.t()
+  @type results :: success_t() | error_t()
   @type path :: String.t()
-  @type parser :: fun
+  @type parser :: (results() -> results()) | (results(), config() -> results())
   @type params :: map
   @type method :: String.t()
   @type http_method :: atom

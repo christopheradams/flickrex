@@ -1,5 +1,26 @@
 # Changelog
 
+## v0.6.0 (2018-02-20)
+
+* Enhancements
+  * [Parsers] Switch to Jason for JSON decoding.
+  * [Parsers] Decode JSONP responses.
+  * [Parsers] 2-arity Rest and Upload parser functions will be given a
+    `Config` struct.
+  * [Response] Add `Response` struct to be returned for requests.
+  * [Operation] Add `http_headers` parameter to all operations.
+  * [Config] Add options for JSON and XML decoders.
+  * [ExDoc] Group Flickr API modules.
+
+* Fixes
+  * [Mix] Keep mix task private to the package.
+
+* Backwards incompatible changes
+  * [Rest] Use atoms for format and http method parameters.
+  * [Rest] Rename `extra_params` to `default_params`.
+  * [Config] Remove `:oauth` config key.
+  * [Elixir] Drop Elixir 1.3 support.
+
 ## v0.5.0 (2017-08-23)
 
 * Enhancements

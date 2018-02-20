@@ -1,7 +1,8 @@
 # Flickrex
 
+[![Hex.pm](https://img.shields.io/hexpm/v/flickrex.svg)](https://hex.pm/packages/flickrex)
+[![Hexdocs](https://img.shields.io/badge/hexdocs-prerelease-orange.svg)](http://hexdocs.pm/flickrex/)
 [![Build Status](https://travis-ci.org/christopheradams/flickrex.svg?branch=master)](https://travis-ci.org/christopheradams/flickrex)
-[![Hex Version](https://img.shields.io/hexpm/v/flickrex.svg)](https://hex.pm/packages/flickrex)
 
 Flickr client library for Elixir.
 

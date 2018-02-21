@@ -65,7 +65,7 @@ defmodule Flickrex.Flickr do
       |> Module.concat()
 
     defmodule module do
-      @type args :: Keyword.t()
+      @type args :: Flickrex.Rest.args()
       @type operation :: Flickrex.Operation.Rest.t()
 
       for method <- methods do

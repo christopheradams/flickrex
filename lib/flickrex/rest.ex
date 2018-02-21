@@ -16,29 +16,32 @@ defmodule Flickrex.Rest do
   alias Flickrex.Operation
 
   @typedoc "Name of the Flickr API Method"
-  @type method :: binary
+  @type method :: Flickrex.Operation.Rest.method()
+
+  @typedoc "Arguments for the Flickr API Method"
+  @type args :: Keyword.t()
 
   @doc """
   Creates a GET operation for the Flickr API.
   """
-  @spec get(method, Keyword.t()) :: term
-  def get(method, opts \\ []) do
-    call(:get, method, opts)
+  @spec get(method(), args()) :: Operation.Rest.t()
+  def get(method, args \\ []) do
+    call(:get, method, args)
   end
 
   @doc """
   Creates a POST operation for the Flickr API.
   """
-  @spec post(method, Keyword.t()) :: term
-  def post(method, opts \\ []) do
-    call(:post, method, opts)
+  @spec post(method(), args()) :: Operation.Rest.t()
+  def post(method, args \\ []) do
+    call(:post, method, args)
   end
 
-  defp call(http_method, method, opts) do
+  defp call(http_method, method, args) do
     %Operation.Rest{
       http_method: http_method,
       method: method,
-      params: Map.new(opts)
+      params: Map.new(args)
     }
   end
 end

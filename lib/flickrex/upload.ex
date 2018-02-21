@@ -25,12 +25,18 @@ defmodule Flickrex.Upload do
 
   alias Flickrex.Operation.Upload
 
+  @typedoc "A file path for a photo"
+  @type photo :: Path.t()
+
+  @typedoc "Arguments for the Flickr Upload or Replace Method"
+  @type args :: Keyword.t()
+
   @doc """
   Upload a photo to the Flickr API.
 
   This method requires authentication with write permission.
 
-  ## Options
+  ## Arguments
 
   * `title` - The title of the photo.
   * `description` - A description of the photo. May contain some limited HTML.
@@ -47,22 +53,22 @@ defmodule Flickrex.Upload do
   * `async` - Set to 1 to use asynchronous uploading. The response will include
     a `ticketid`. See `Flickrex.Flickr.Photos.Upload.check_tickets`.
   """
-  @spec upload(Path.t(), Keyword.t()) :: Upload.t()
-  def upload(photo, opts \\ []) do
-    Upload.new(:upload, photo, opts)
+  @spec upload(photo(), args()) :: Upload.t()
+  def upload(photo, args \\ []) do
+    Upload.new(:upload, photo, args)
   end
 
   @doc """
   Replace a photo on the Flickr API.
 
-  ## Options
+  ## Arguments
 
   * `photo_id` - The ID of the photo to replace. <small>**(required)**</small>
   * `async` - Set to 1 to use asynchronous uploading. The response will include
     a `ticketid`. See `Flickrex.Flickr.Photos.Upload.check_tickets/1`.
   """
-  @spec replace(binary, Keyword.t()) :: Upload.t()
-  def replace(photo, opts \\ []) do
-    Upload.new(:replace, photo, opts)
+  @spec replace(photo(), args()) :: Upload.t()
+  def replace(photo, args \\ []) do
+    Upload.new(:replace, photo, args)
   end
 end

@@ -44,6 +44,13 @@ defmodule Flickrex.Flickr do
   methods_dir = Path.join(flickr_dir, "getMethodInfo")
   methods_files = File.ls!(methods_dir)
 
+  # Recompile this module when the source files change
+  @external_resource methods_file
+
+  for method_file <- methods_files do
+    @external_resource Path.join(methods_dir, method_file)
+  end
+
   # Group Flickr methods based on the module they will be included in
   methods_modules =
     methods_file

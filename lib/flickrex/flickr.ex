@@ -9,6 +9,9 @@ defmodule Flickrex.Flickr do
   method accepts a number). Any additional `opts` will be set as params for the
   Rest operation.
 
+  For backwards compatibility, all functions with 2- or greater arity have an
+  undocumented 1-arity variant that accepts all arguments in a Keyword list.
+
   Each function returns an operation that can be executed with
   `Flickrex.request/2`.
 

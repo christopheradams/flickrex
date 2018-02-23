@@ -72,7 +72,8 @@ defmodule Flickrex.Flickr do
       |> Module.concat()
 
     defmodule module do
-      @type args :: Flickrex.Rest.args()
+      @type arg :: String.Chars.t()
+      @type opts :: Flickrex.Rest.args()
       @type operation :: Flickrex.Operation.Rest.t()
 
       for method <- methods do
@@ -145,6 +146,17 @@ defmodule Flickrex.Flickr do
             Map.put(argument, "_content", content)
           end)
 
+        {required_args, optional_args} =
+          Enum.split_with(arguments, fn
+            %{"optional" => 0} -> true
+            _ -> false
+          end)
+
+        args_names = Enum.map(required_args, fn %{"name" => name} -> String.to_atom(name) end)
+        args_vars = Enum.map(args_names, &Macro.var(&1, __MODULE__))
+        args_specs = Enum.map(args_names, fn _ -> Macro.var(:arg, __MODULE__) end)
+        args_params = Enum.zip(args_names, args_vars)
+
         doc_source = """
         <%= @description %>
 
@@ -154,16 +166,27 @@ defmodule Flickrex.Flickr do
         This method does not require authentication.
         <% end %>
 
+        <%= if length(@required_args) > 0 do %>
         ## Arguments
+        <% end %>
 
-        <%= for arg <- @arguments do %>
-        * `<%= arg["name"] %>` - <%= if arg["optional"] == 0 do %> <small>**(required)**</small> <% end %> <%= arg["_content"] %>
+        <%= for arg <- @required_args do %>
+        * `<%= arg["name"] %>` - <%= arg["_content"] %>
+        <% end %>
+
+        <%= if length(@optional_args) > 0 do %>
+        ## Options
+        <% end %>
+
+        <%= for arg <- @optional_args do %>
+        * `<%= arg["name"] %>` - <%= arg["_content"] %>
         <% end %>
         """
 
         assigns = [
           description: description,
-          arguments: arguments,
+          required_args: required_args,
+          optional_args: optional_args,
           needs_login: needs_login,
           permission: permission
         ]
@@ -178,10 +201,24 @@ defmodule Flickrex.Flickr do
             3 -> :post
           end
 
+        # If a function has required params, still allow a function call that
+        # takes all parameters as options
+        if length(required_args) > 0 do
+          @spec unquote(function)() :: operation
+          def unquote(function)() do
+            Flickrex.Rest.unquote(verb)(unquote(method))
+          end
+
+          @spec unquote(function)(opts) :: operation
+          def unquote(function)(opts) when is_list(opts) do
+            Flickrex.Rest.unquote(verb)(unquote(method), opts)
+          end
+        end
+
         @doc doc
-        @spec unquote(function)(args) :: operation
-        def unquote(function)(args \\ []) do
-          Flickrex.Rest.unquote(verb)(unquote(method), args)
+        @spec unquote(function)(unquote_splicing(args_specs), opts) :: operation
+        def unquote(function)(unquote_splicing(args_vars), opts \\ []) do
+          Flickrex.Rest.unquote(verb)(unquote(method), unquote(args_params) ++ opts)
         end
       end
     end

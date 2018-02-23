@@ -5,8 +5,12 @@ defmodule Flickrex.Flickr do
   These modules and functions map to the methods from the Flickr [API
   Documentation](https://www.flickr.com/services/api/).
 
-  Each function takes a keyword list of API arguments and returns an operation
-  that can be executed with `Flickrex.request/2`.
+  Arguments for the API methods should be strings, or integers (if the API
+  method accepts a number). Any additional `opts` will be set as params for the
+  Rest operation.
+
+  Each function returns an operation that can be executed with
+  `Flickrex.request/2`.
 
   Some Flickr methods require user access tokens that were granted read, write,
   or delete permissions.

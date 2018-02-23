@@ -208,11 +208,13 @@ defmodule Flickrex.Flickr do
         # If a function has required params, still allow a function call that
         # takes all parameters as options
         if length(required_args) > 0 do
+          @doc false
           @spec unquote(function)() :: operation
           def unquote(function)() do
             Flickrex.Rest.unquote(verb)(unquote(method))
           end
 
+          @doc false
           @spec unquote(function)(opts) :: operation
           def unquote(function)(opts) when is_list(opts) do
             Flickrex.Rest.unquote(verb)(unquote(method), opts)

@@ -4,7 +4,7 @@ defmodule Flickrex.URL do
 
   ## Examples
 
-      get_info = Flickrex.Flickr.Photos.get_info(photo_id: "...")
+      get_info = Flickrex.Flickr.Photos.get_info(photo_id)
       {:ok, %{body: info}} = Flickrex.request(get_info)
 
       photo = info["photo"]

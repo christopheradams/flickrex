@@ -24,10 +24,10 @@ defmodule Flickrex.Operation.Rest do
   @type results :: success_t() | error_t()
   @type path :: String.t()
   @type parser :: (results() -> results()) | (results(), config() -> results())
-  @type params :: map
+  @type params :: %{optional(String.Chars.t()) => String.Chars.t()}
   @type method :: String.t()
   @type http_method :: atom
-  @type http_headers :: map
+  @type http_headers :: %{optional(String.t()) => String.t()}
   @type format :: :json | :rest
   @type service :: atom
 

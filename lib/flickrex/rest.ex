@@ -19,7 +19,7 @@ defmodule Flickrex.Rest do
   @type method :: Flickrex.Operation.Rest.method()
 
   @typedoc "Arguments for the Flickr API Method"
-  @type args :: Keyword.t()
+  @type args :: Keyword.t(String.Chars.t())
 
   @doc """
   Creates a GET operation for the Flickr API.

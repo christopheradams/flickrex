@@ -9,9 +9,6 @@ defmodule Flickrex.Flickr do
   method accepts a number). Any additional `opts` will be set as params for the
   Rest operation.
 
-  For backwards compatibility, all functions with 2- or greater arity have an
-  undocumented 1-arity variant that accepts all arguments in a Keyword list.
-
   Each function returns an operation that can be executed with
   `Flickrex.request/2`.
 
@@ -207,22 +204,6 @@ defmodule Flickrex.Flickr do
             2 -> :post
             3 -> :post
           end
-
-        # If a function has required params, still allow a function call that
-        # takes all parameters as options
-        if length(required_args) > 0 do
-          @doc false
-          @spec unquote(function)() :: operation
-          def unquote(function)() do
-            Flickrex.Rest.unquote(verb)(unquote(method))
-          end
-
-          @doc false
-          @spec unquote(function)(opts) :: operation
-          def unquote(function)(opts) when is_list(opts) do
-            Flickrex.Rest.unquote(verb)(unquote(method), opts)
-          end
-        end
 
         @doc doc
         @spec unquote(function)(unquote_splicing(args_specs), opts) :: operation

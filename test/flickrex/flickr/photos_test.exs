@@ -6,15 +6,6 @@ defmodule Flickrex.Flickr.PhotosTest do
   @photo_id "8436466166"
   @secret "e2dc3b83de"
 
-  test "get_info/1 creates a photo info operation" do
-    operation = Flickrex.Flickr.Photos.get_info(photo_id: @photo_id, secret: @secret)
-
-    assert %Operation.Rest{params: params, method: method} = operation
-
-    assert method == "flickr.photos.getInfo"
-    assert params == %{photo_id: @photo_id, secret: @secret}
-  end
-
   test "get_info/2 creates a photo info operation" do
     operation = Flickrex.Flickr.Photos.get_info(@photo_id, secret: @secret)
 
@@ -22,15 +13,6 @@ defmodule Flickrex.Flickr.PhotosTest do
 
     assert method == "flickr.photos.getInfo"
     assert params == %{photo_id: @photo_id, secret: @secret}
-  end
-
-  test "add_tags/1 creates an add tags operation" do
-    operation = Flickrex.Flickr.Photos.add_tags(photo_id: @photo_id, tags: "t1,t2")
-
-    assert %Operation.Rest{params: params, method: method} = operation
-
-    assert method == "flickr.photos.addTags"
-    assert params == %{photo_id: @photo_id, tags: "t1,t2"}
   end
 
   test "add_tags/3 creates an add tags operation" do

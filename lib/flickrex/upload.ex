@@ -51,7 +51,7 @@ defmodule Flickrex.Upload do
   * `hidden` - Set to 1 to keep the photo in global search results, 2 to hide from
     public searches. If omitted, will be set based to user's default
   * `async` - Set to 1 to use asynchronous uploading. The response will include
-    a `ticketid`. See `Flickrex.Flickr.Photos.Upload.check_tickets`.
+    a `ticketid`. See `Flickrex.Flickr.Photos.Upload.check_tickets/1`.
   """
   @spec upload(photo(), args()) :: Upload.t()
   def upload(photo, args \\ []) do

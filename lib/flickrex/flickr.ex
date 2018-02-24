@@ -37,7 +37,7 @@ defmodule Flickrex.Flickr do
   The API methods will return an error tuple if there was a problem with the
   request:
 
-      {:error, resp} = Flickrex.Flickr.Photos.get_info() |> Flickrex.request()
+      {:error, resp} = Flickrex.Flickr.Photos.get_info(nil) |> Flickrex.request()
       resp.body == %{"code" => 1, "message" => "Photo not found", "stat" => "fail"}
   """
 

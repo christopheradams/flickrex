@@ -104,7 +104,7 @@ defmodule Flickrex.Flickr do
           method_info
           |> get_in(["method", "description", "_content"])
           |> String.replace("\"/services/api/", "\"https://www.flickr.com/services/api/")
-          |> String.replace("<br/>", " ")
+          |> String.replace(~r/<br\ ?\/>/, " ")
 
         needs_login = get_in(method_info, ["method", "needslogin"])
 

@@ -19,11 +19,11 @@ defmodule Flickrex.Auth do
         |> Flickrex.request()
 
       # Open the URL in your browser, authorize the app, and get the verify token
-      verifier = "..."
+      oauth_verifier = "..."
 
       {:ok, %{body: access}} =
         request.oauth_token
-        |> Flickrex.Auth.access_token(request.oauth_token_secret, verifier)
+        |> Flickrex.Auth.access_token(request.oauth_token_secret, oauth_verifier)
         |> Flickrex.request()
 
       # You can now call methods that require authorization
@@ -61,7 +61,7 @@ defmodule Flickrex.Auth do
 
       {:ok, %{body: access}} =
         oauth_token
-        |> Flickrex.Auth.access_token(oauth_token_secret, verifier)
+        |> Flickrex.Auth.access_token(oauth_token_secret, oauth_verifier)
         |> Flickrex.request()
 
   Finally, save `access.oauth_token` and `access.oauth_token_secret` for this
@@ -125,11 +125,11 @@ defmodule Flickrex.Auth do
   Requests an access token from Flickr.
   """
   @spec access_token(String.t(), String.t(), String.t()) :: Operation.Auth.AccessToken.t()
-  def access_token(token, secret, verifier) do
+  def access_token(oauth_token, oauth_token_secret, oauth_verifier) do
     %Operation.Auth.AccessToken{
-      oauth_token: token,
-      oauth_token_secret: secret,
-      verifier: verifier
+      oauth_token: oauth_token,
+      oauth_token_secret: oauth_token_secret,
+      verifier: oauth_verifier
     }
   end
 end

@@ -82,7 +82,7 @@ defmodule Flickrex.Auth do
   Requests a temporary token to authenticate the user to your application with
   out-of-band verification.
   """
-  @spec request_token() :: %Operation.Auth.RequestToken{}
+  @spec request_token() :: Operation.Auth.RequestToken.t()
   def request_token do
     %Operation.Auth.RequestToken{}
   end
@@ -98,7 +98,7 @@ defmodule Flickrex.Auth do
     and `oauth_verifier`. If this option is not set, the user will be presented with
     a verification code that they must present to your application manually.
   """
-  @spec request_token(Keyword.t()) :: %Operation.Auth.RequestToken{}
+  @spec request_token(Keyword.t()) :: Operation.Auth.RequestToken.t()
   def request_token(opts) do
     %Operation.Auth.RequestToken{
       params: Map.new(opts)
@@ -113,7 +113,7 @@ defmodule Flickrex.Auth do
   * `perms` - Ask for "read", "write", or "delete" privileges. Overrides the
     setting defined in your application's authentication flow.
   """
-  @spec authorize_url(binary, Keyword.t()) :: %Operation.Auth.AuthorizeUrl{}
+  @spec authorize_url(String.t(), Keyword.t()) :: Operation.Auth.AuthorizeUrl.t()
   def authorize_url(oauth_token, opts \\ []) do
     %Operation.Auth.AuthorizeUrl{
       oauth_token: oauth_token,
@@ -124,7 +124,7 @@ defmodule Flickrex.Auth do
   @doc """
   Requests an access token from Flickr.
   """
-  @spec access_token(binary, binary, binary) :: %Operation.Auth.AccessToken{}
+  @spec access_token(String.t(), String.t(), String.t()) :: Operation.Auth.AccessToken.t()
   def access_token(token, secret, verifier) do
     %Operation.Auth.AccessToken{
       oauth_token: token,

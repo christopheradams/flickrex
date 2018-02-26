@@ -33,10 +33,10 @@ defmodule Flickrex.Auth do
 
   Specify a callback URL when generating the request token:
 
-      opts = [oauth_callback: "https://example.com/check"]
+      oauth_callback = "https://example.com/check"
 
       {:ok, %{body: request}} =
-        opts
+        oauth_callback
         |> Flickrex.Auth.request_token()
         |> Flickrex.request()
 
@@ -91,15 +91,22 @@ defmodule Flickrex.Auth do
   Requests a temporary token to authenticate the user to your application with
   verification via a callback URL.
 
-  ## Options
+  ## Arguments
 
   * `oauth_callback` - For web apps, the URL to redirect the user to after completing the
     authorization sequence. The URL will include query params `oauth_token`
     and `oauth_verifier`. If this option is not set, the user will be presented with
     a verification code that they must present to your application manually.
   """
-  @spec request_token(Keyword.t()) :: Operation.Auth.RequestToken.t()
+  @spec request_token(String.t()) :: Operation.Auth.RequestToken.t()
+  def request_token(oauth_callback) when not is_list(oauth_callback) do
+    %Operation.Auth.RequestToken{
+      params: %{oauth_callback: oauth_callback}
+    }
+  end
+
   def request_token(opts) do
+    IO.warn("Calling request_token/1 with an options list is deprecated.")
     %Operation.Auth.RequestToken{
       params: Map.new(opts)
     }

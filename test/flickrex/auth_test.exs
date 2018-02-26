@@ -15,9 +15,9 @@ defmodule Flickrex.AuthTest do
   end
 
   test "request_token/1 returns a RequestToken operation" do
-    opts = [oauth_callback: "http://example.com/test"]
+    oauth_callback = "http://example.com/test"
 
-    request = Auth.request_token(opts)
+    request = Auth.request_token(oauth_callback)
 
     operation = %Operation.Auth.RequestToken{
       path: "services/oauth/request_token",

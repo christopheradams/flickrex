@@ -79,30 +79,19 @@ defmodule Flickrex.Auth do
   alias Flickrex.Operation
 
   @doc """
-  Requests a temporary token to authenticate the user to your application with
-  out-of-band verification.
-  """
-  @spec request_token() :: Operation.Auth.RequestToken.t()
-  def request_token do
-    %Operation.Auth.RequestToken{}
-  end
-
-  @doc """
-  Requests a temporary token to authenticate the user to your application with
-  verification via a callback URL.
+  Requests a temporary token to authenticate the user to your application.
 
   ## Options
 
-  * `oauth_callback` - For web apps, the URL to redirect the user to after completing the
-    authorization sequence. The URL will include query params `oauth_token`
-    and `oauth_verifier`. If this option is not set, the user will be presented with
-    a verification code that they must present to your application manually.
+  * `oauth_callback` - For web apps, the URL to redirect the user to after
+    completing the authorization sequence. The URL will include query params
+    `oauth_token` and `oauth_verifier`. If this option is not set, then
+    authentication will default to out-of-band verification.
   """
   @spec request_token(Keyword.t()) :: Operation.Auth.RequestToken.t()
-  def request_token(opts) do
-    %Operation.Auth.RequestToken{
-      params: Map.new(opts)
-    }
+  def request_token(opts \\ []) do
+    op = %Operation.Auth.RequestToken{}
+    %{op | params: Map.merge(op.params, Map.new(opts))}
   end
 
   @doc """

@@ -74,6 +74,9 @@ defmodule Flickrex.Auth do
 
       config = [oauth_token: "...", oauth_token_secret: "..."]
       {:ok, resp} = Flickrex.Flickr.Test.login() |> Flickrex.request(config)
+
+  See [User Authentication](https://www.flickr.com/services/api/auth.oauth.html)
+  on Flickr for more information.
   """
 
   alias Flickrex.Operation

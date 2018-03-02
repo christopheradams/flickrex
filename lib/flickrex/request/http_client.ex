@@ -1,5 +1,5 @@
 defmodule Flickrex.Request.HttpClient do
-  @moduledoc """
+  @moduledoc ~S"""
   Specifies HTTP client behaviour.
 
   The client must be able to handle multipart form-data. For photo uploads, the
@@ -17,7 +17,7 @@ defmodule Flickrex.Request.HttpClient do
      {"oauth_token", "TOKEN"},
      # other upload params with the format {binary(), binary()}
      {:file, "path/to/photo.jpg",
-      {"form-data", [{"name", "\\"photo\\""}, {"filename", "\\"photo.jpg\\""}]}, []}
+      {"form-data", [{"name", "\"photo\""}, {"filename", "\"photo.jpg\""}]}, []}
    ]}
 
   ```

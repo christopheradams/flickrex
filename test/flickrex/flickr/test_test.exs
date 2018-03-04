@@ -2,6 +2,7 @@ defmodule Flickrex.Flickr.TestTest do
   use ExUnit.Case
 
   @moduletag :flickr_api
+  @config [http_client: Flickrex.Request.Hackney]
 
   test "test echo/1 in XML" do
     test_format(nil, %{}, "text/xml; charset=utf-8")
@@ -24,7 +25,7 @@ defmodule Flickrex.Flickr.TestTest do
       |> Flickrex.Flickr.Test.echo()
       |> Map.put(:parser, &Flickrex.Parsers.Rest.parse/2)
       |> Map.put(:path, "services/test")
-      |> Flickrex.request()
+      |> Flickrex.request(@config)
 
     assert %{status_code: 404, headers: headers, body: _body} = resp
 
@@ -45,7 +46,7 @@ defmodule Flickrex.Flickr.TestTest do
           extra -> extra
         end
       end)
-      |> Flickrex.request()
+      |> Flickrex.request(@config)
 
     assert %{status_code: 200, headers: headers, body: body} = resp
 

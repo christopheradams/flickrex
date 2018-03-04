@@ -11,7 +11,6 @@ defmodule Flickrex.Support.Config do
       oauth_token: Fixtures.access_token(:oauth_token),
       oauth_token_secret: Fixtures.access_token(:oauth_token_secret),
       url: "http://localhost:#{port}",
-      http_client: Flickrex.Support.MockHTTPClient,
       http_opts: []
     ]
 

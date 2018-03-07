@@ -15,8 +15,8 @@ defmodule Flickrex.Auth.RequestTokenTest do
     expected_response = %Response{
       body: %{
         oauth_callback_confirmed: true,
-        oauth_token_secret: "TOKEN_SECRET",
-        oauth_token: "TOKEN"
+        oauth_token: "72157626737672178-022bbd2f4c2f3432",
+        oauth_token_secret: "fccb68c4e6103197"
       },
       headers: [],
       status_code: 200

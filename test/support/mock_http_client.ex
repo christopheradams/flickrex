@@ -31,7 +31,8 @@ defmodule Flickrex.Support.MockHTTPClient do
   def do_request(:get, %{path: "/services/oauth/request_token"} = _uri, _, _, _) do
     status = 200
     headers = []
-    body = "oauth_callback_confirmed=true&oauth_token=TOKEN&oauth_token_secret=TOKEN_SECRET"
+    request_token = request_token()
+    body = URI.encode_query(request_token)
 
     {:ok, %Response{status_code: status, headers: headers, body: body}}
   end
@@ -39,10 +40,9 @@ defmodule Flickrex.Support.MockHTTPClient do
   def do_request(:get, %{path: "/services/oauth/access_token"} = _uri, _, _, _) do
     status = 200
     headers = []
+    access_token = access_token()
 
-    body =
-      "fullname=FULL%20NAME&oauth_token=TOKEN&oauth_token_secret=" <>
-        "SECRET&user_nsid=NSID&username=USERNAME"
+    body = URI.encode_query(access_token)
 
     {:ok, %Response{status_code: status, headers: headers, body: body}}
   end

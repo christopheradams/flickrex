@@ -8,18 +8,17 @@ defmodule Flickrex.Request.HttpClient do
   ```elixir
   {:multipart,
    [
-     {"oauth_signature", "6WAWwg6NxMtMb8J/+vEaB6kH8Aw="},
-     {"oauth_consumer_key", "CONSUMER_KEY"},
-     {"oauth_nonce", "yOY1CvqgzOFaeeDr9lPCGgCfI14PFbTy"},
+     {"oauth_signature", "U6wKLIKO68To+Ay2Z7Sht5EYMWk="},
+     {"oauth_consumer_key", "653e7a6ecc1d528c516cc8f92cf98611"},
+     {"oauth_nonce", "+I7IVgaOrR18bowgSxDc0EQ6UK6aNumz"},
      {"oauth_signature_method", "HMAC-SHA1"},
-     {"oauth_timestamp", "1518934770"},
+     {"oauth_timestamp", "1520426995"},
      {"oauth_version", "1.0"},
-     {"oauth_token", "TOKEN"},
+     {"oauth_token", "72157626318069415-087bfc7b5816092c"},
      # other upload params with the format {binary(), binary()}
      {:file, "path/to/photo.jpg",
       {"form-data", [{"name", "\"photo\""}, {"filename", "\"photo.jpg\""}]}, []}
    ]}
-
   ```
 
   See [Uploading Photos](https://www.flickr.com/services/api/upload.example.html)

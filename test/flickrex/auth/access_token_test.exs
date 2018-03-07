@@ -14,11 +14,11 @@ defmodule Flickrex.Auth.AccessTokenTest do
 
     expected_response = %Response{
       body: %{
-        fullname: "FULL NAME",
-        oauth_token: "TOKEN",
-        oauth_token_secret: "SECRET",
-        user_nsid: "NSID",
-        username: "USERNAME"
+        fullname: "Jamal Fanaian",
+        oauth_token: "72157626318069415-087bfc7b5816092c",
+        oauth_token_secret: "a202d1f853ec69de",
+        user_nsid: "21207597@N07",
+        username: "jamalfanaian"
       },
       headers: [],
       status_code: 200

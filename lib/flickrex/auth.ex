@@ -84,6 +84,17 @@ defmodule Flickrex.Auth do
   @doc """
   Requests a temporary token to authenticate the user to your application.
 
+  ## Examples
+
+      iex> request_token = Flickrex.Auth.request_token(oauth_callback: "http://example.com")
+      iex> {:ok, response} = Flickrex.request(request_token)
+      iex> response.body
+      %{
+        oauth_callback_confirmed: true,
+        oauth_token: "72157626737672178-022bbd2f4c2f3432",
+        oauth_token_secret: "fccb68c4e6103197"
+      }
+
   ## Options
 
   * `oauth_callback` - For web apps, the URL to redirect the user to after
@@ -97,8 +108,16 @@ defmodule Flickrex.Auth do
     %{op | params: Map.merge(op.params, Map.new(opts))}
   end
 
-  @doc """
+  @doc ~S"""
   Generates a Flickr authorization URL.
+
+  ## Examples
+
+      iex> Flickrex.Auth.authorize_url("72157626737672178-022bbd2f4c2f3432") |> Flickrex.request!()
+      "https://api.flickr.com/services/oauth/authorize?oauth_token=72157626737672178-022bbd2f4c2f3432"
+
+      iex> Flickrex.Auth.authorize_url("72157626737672178-022bbd2f4c2f3432", perms: "write") |> Flickrex.request!()
+      "https://api.flickr.com/services/oauth/authorize?oauth_token=72157626737672178-022bbd2f4c2f3432&perms=write"
 
   ## Options
 
@@ -115,6 +134,22 @@ defmodule Flickrex.Auth do
 
   @doc """
   Requests an access token from Flickr.
+
+  ## Examples
+
+      iex> request_token = "72157626737672178-022bbd2f4c2f3432"
+      iex> request_token_secret = "fccb68c4e6103197"
+      iex> oauth_verifier = "5d1b96a26b494074"
+      iex> access_token = Flickrex.Auth.access_token(request_token, request_token_secret, oauth_verifier)
+      iex> {:ok, response} = Flickrex.request(access_token)
+      iex> response.body
+      %{
+        fullname: "Jamal Fanaian",
+        oauth_token: "72157626318069415-087bfc7b5816092c",
+        oauth_token_secret: "a202d1f853ec69de",
+        user_nsid: "21207597@N07",
+        username: "jamalfanaian"
+      }
   """
   @spec access_token(String.t(), String.t(), String.t()) :: Operation.Auth.AccessToken.t()
   def access_token(oauth_token, oauth_token_secret, oauth_verifier) do

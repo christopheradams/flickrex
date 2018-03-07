@@ -1,5 +1,6 @@
 defmodule Flickrex.AuthTest do
   use ExUnit.Case
+  doctest Flickrex.Auth
 
   alias Flickrex.{Auth, Operation}
 

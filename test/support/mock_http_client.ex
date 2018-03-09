@@ -118,6 +118,9 @@ defmodule Flickrex.Support.MockHTTPClient do
         {"photo_id", "35467821184"} ->
           fixture(:replace, :xml)
 
+        {"photo_id", ""} ->
+          fixture(:error, :xml)
+
         nil ->
           fixture(:error, :xml)
       end

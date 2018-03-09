@@ -18,14 +18,14 @@ defmodule Flickrex.UploadTest do
     assert operation == expected_operation
   end
 
-  test "replace/2 returns an Upload operation to replace a photo" do
+  test "replace/3 returns an Upload operation to replace a photo" do
     photo = "test/fixtures/photo.jpg"
     photo_id = "99999999999"
 
-    operation = Upload.replace(photo, photo_id: photo_id)
+    operation = Upload.replace(photo, photo_id, async: 1)
 
     expected_operation = %Operation.Upload{
-      params: %{photo_id: photo_id},
+      params: %{photo_id: photo_id, async: 1},
       parser: &Flickrex.Parsers.Upload.parse/1,
       path: "services/replace",
       photo: "test/fixtures/photo.jpg",

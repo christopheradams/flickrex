@@ -17,7 +17,7 @@ defmodule Flickrex.Upload do
 
       {:ok, resp} =
         "path/to/replace/photo.png"
-        |> Flickrex.Upload.replace(photo_id: "99999999999")
+        |> Flickrex.Upload.replace("99999999999")
         |> Flickrex.request()
 
       resp.body #=> %{"photoid" => %{"_content" => "99999999999", ...}, "stat" => "ok"}
@@ -27,6 +27,9 @@ defmodule Flickrex.Upload do
 
   @typedoc "A file path for a photo"
   @type photo :: Path.t()
+
+  @typedoc "A Flickr photo ID"
+  @type photo_id :: String.t()
 
   @typedoc "Options for a Flickr Upload API call"
   @type opts :: Keyword.t(String.Chars.t())
@@ -58,17 +61,34 @@ defmodule Flickrex.Upload do
     Upload.new(:upload, photo, opts)
   end
 
+  @doc false
+  @spec replace(photo()) :: Upload.t()
+  def replace(photo) do
+    replace(photo, [])
+  end
+
+  @doc false
+  @spec replace(photo(), opts()) :: Upload.t()
+  def replace(photo, opts) when is_list(opts) do
+    IO.warn(
+      "calling `Upload.replace/2` with the photo_id as an option is deprecated. " <>
+        "Use `Upload.replace(photo, photo_id, opts)` instead."
+    )
+
+    Upload.new(:replace, photo, opts)
+  end
+
   @doc """
   Replace a photo on the Flickr API.
 
   ## Options
 
-  * `photo_id` - The ID of the photo to replace. <small>**(required)**</small>
   * `async` - Set to 1 to use asynchronous uploading. The response will include
     a `ticketid`. See `Flickrex.Flickr.Photos.Upload.check_tickets/1`.
   """
-  @spec replace(photo(), opts()) :: Upload.t()
-  def replace(photo, opts \\ []) do
-    Upload.new(:replace, photo, opts)
+
+  @spec replace(photo(), photo_id(), opts()) :: Upload.t()
+  def replace(photo, photo_id, opts \\ []) do
+    Upload.new(:replace, photo, Keyword.put(opts, :photo_id, photo_id))
   end
 end

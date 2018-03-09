@@ -26,7 +26,7 @@ defmodule Flickrex.Upload.UploadsTest do
 
     {:ok, %{body: body}} =
       photo
-      |> Flickrex.Upload.replace(photo_id: "35467821184")
+      |> Flickrex.Upload.replace("35467821184")
       |> Flickrex.request(config)
 
     expected_body = %{
@@ -46,7 +46,7 @@ defmodule Flickrex.Upload.UploadsTest do
 
     {:error, %{body: body}} =
       photo
-      |> Flickrex.Upload.replace()
+      |> Flickrex.Upload.replace("")
       |> Flickrex.request(config)
 
     expected_body = %{

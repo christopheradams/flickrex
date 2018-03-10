@@ -10,6 +10,7 @@ defmodule Flickrex.Support.MockHTTPClient do
   alias Flickrex.Response
 
   @json_headers [{"Content-Type", "application/json; charset=utf-8"}]
+  @text_headers [{"Content-Type", "text/plain;charset=utf-8"}]
   @xml_headers [{"Content-Type", "text/xml; charset=utf-8"}]
 
   def request(method, url, body \\ "", headers \\ [], http_opts \\ []) do
@@ -30,7 +31,7 @@ defmodule Flickrex.Support.MockHTTPClient do
 
   def do_request(:get, %{path: "/services/oauth/request_token"} = _uri, _, _, _) do
     status = 200
-    headers = []
+    headers = @text_headers
     request_token = request_token()
     body = URI.encode_query(request_token)
 
@@ -39,7 +40,7 @@ defmodule Flickrex.Support.MockHTTPClient do
 
   def do_request(:get, %{path: "/services/oauth/access_token"} = _uri, _, _, _) do
     status = 200
-    headers = []
+    headers = @text_headers
     access_token = access_token()
 
     body = URI.encode_query(access_token)

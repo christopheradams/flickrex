@@ -17,12 +17,6 @@ defmodule Flickrex.Auth.AccessTokenTest do
 
     {:ok, response} = Flickrex.request(operation, opts)
 
-    expected_response = %Response{
-      body: @access_token,
-      headers: [],
-      status_code: 200
-    }
-
-    assert response == expected_response
+    assert %Response{body: @access_token, status_code: 200} = response
   end
 end

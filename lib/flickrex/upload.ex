@@ -35,9 +35,9 @@ defmodule Flickrex.Upload do
   @type opts :: Keyword.t(String.Chars.t())
 
   @doc """
-  Upload a photo to the Flickr API.
+  Uploads a photo to Flickr.
 
-  This method requires authentication with write permission.
+  This method requires authentication with 'write' permission.
 
   ## Options
 
@@ -79,7 +79,9 @@ defmodule Flickrex.Upload do
   end
 
   @doc """
-  Replace a photo on the Flickr API.
+  Replaces a photo on Flickr.
+
+  This method requires authentication with 'write' permission.
 
   ## Options
 

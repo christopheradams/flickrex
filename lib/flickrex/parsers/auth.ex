@@ -51,7 +51,7 @@ defmodule Flickrex.Parsers.Auth do
     parse_token(val)
   end
 
-  defp parse_token({:ok, %{status_code: 401, body: body} = resp}) do
+  defp parse_token({:ok, %{status_code: code, body: body} = resp}) when code in [400, 401] do
     {:error, %{resp | body: URI.decode_query(body)}}
   end
 

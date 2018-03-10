@@ -121,7 +121,7 @@ defmodule Flickrex.Auth do
     %Operation.Auth.AccessToken{
       oauth_token: oauth_token,
       oauth_token_secret: oauth_token_secret,
-      verifier: oauth_verifier
+      oauth_verifier: oauth_verifier
     }
   end
 end

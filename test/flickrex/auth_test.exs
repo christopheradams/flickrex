@@ -53,7 +53,7 @@ defmodule Flickrex.AuthTest do
     operation = %Operation.Auth.AccessToken{
       oauth_token: @request_token,
       oauth_token_secret: @request_secret,
-      verifier: @verifier
+      oauth_verifier: @verifier
     }
 
     assert request == operation

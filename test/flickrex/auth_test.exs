@@ -33,6 +33,11 @@ defmodule Flickrex.AuthTest do
     assert request == operation
   end
 
+  test "request_token/1 gets a default oauth_callback" do
+    request = Auth.request_token([])
+    assert request.params == %{oauth_callback: "oob"}
+  end
+
   test "authorize_url/2 returns an AuthorizeUrl operation" do
     opts = [perms: "write"]
 

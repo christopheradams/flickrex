@@ -3,22 +3,25 @@ defmodule Flickrex.OAuthTest do
 
   alias Flickrex.OAuth
 
+  import Flickrex.Support.Fixtures
+
+  @key consumer_key()
+  @secret consumer_secret()
+  @token access_token(:oauth_token)
+  @token_secret access_token(:oauth_token_secret)
+
   test "sign/7 signs request params" do
     method = :get
     url = "http://example.com/test"
     params = [param: "test"]
-    key = "CONSUMER_KEY"
-    secret = "CONSUMER_SECRET"
-    token = "TOKEN"
-    token_secret = "TOKEN_SECRET"
 
-    signed_params = OAuth.sign(method, url, params, key, secret, token, token_secret)
+    signed_params = OAuth.sign(method, url, params, @key, @secret, @token, @token_secret)
 
     signed = Map.new(signed_params)
 
     assert Map.get(signed, :param) == "test"
-    assert Map.get(signed, "oauth_token") == "TOKEN"
-    assert Map.get(signed, "oauth_consumer_key") == "CONSUMER_KEY"
+    assert Map.get(signed, "oauth_token") == @token
+    assert Map.get(signed, "oauth_consumer_key") == @key
 
     assert Map.has_key?(signed, "oauth_signature")
     assert Map.has_key?(signed, "oauth_nonce")

@@ -2,6 +2,10 @@ defmodule Flickrex.ConfigTest do
   use ExUnit.Case
 
   alias Flickrex.Config
+  alias Flickrex.Support.Fixtures
+
+  @consumer_key Fixtures.consumer_key()
+  @consumer_secret Fixtures.consumer_secret()
 
   test "new/0 returns a new config" do
     api_config = Config.new(:api)
@@ -13,12 +17,13 @@ defmodule Flickrex.ConfigTest do
 
   test "new/1 returns a custom config" do
     url = "https://localhost:1234"
-    config = Config.new(:api, consumer_key: "TOKEN", consumer_secret: "SECRET", url: url)
+    opts = [consumer_key: @consumer_key, consumer_secret: @consumer_secret, url: url]
+    config = Config.new(:api, opts)
 
     assert %Flickrex.Config{} = config
 
-    assert config.consumer_key == "TOKEN"
-    assert config.consumer_secret == "SECRET"
+    assert config.consumer_key == @consumer_key
+    assert config.consumer_secret == @consumer_secret
     assert config.url == url
   end
 end

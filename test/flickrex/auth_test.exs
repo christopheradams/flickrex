@@ -3,6 +3,12 @@ defmodule Flickrex.AuthTest do
 
   alias Flickrex.{Auth, Operation}
 
+  import Flickrex.Support.Fixtures
+
+  @request_token request_token(:oauth_token)
+  @request_secret request_token(:oauth_token_secret)
+  @verifier verifier()
+
   test "request_token/0 returns a RequestToken operation" do
     request = Auth.request_token()
 
@@ -30,24 +36,24 @@ defmodule Flickrex.AuthTest do
   test "authorize_url/2 returns an AuthorizeUrl operation" do
     opts = [perms: "write"]
 
-    request = Auth.authorize_url("OAUTH_TOKEN", opts)
+    request = Auth.authorize_url(@request_token, opts)
 
     operation = %Operation.Auth.AuthorizeUrl{
       path: "services/oauth/authorize",
       params: %{perms: "write"},
-      oauth_token: "OAUTH_TOKEN"
+      oauth_token: @request_token
     }
 
     assert request == operation
   end
 
   test "access_token/3 returns an AccessToken operation" do
-    request = Auth.access_token("REQUEST_TOKEN", "REQUEST_SECRET", "VERIFIER")
+    request = Auth.access_token(@request_token, @request_secret, @verifier)
 
     operation = %Operation.Auth.AccessToken{
-      oauth_token: "REQUEST_TOKEN",
-      oauth_token_secret: "REQUEST_SECRET",
-      verifier: "VERIFIER"
+      oauth_token: @request_token,
+      oauth_token_secret: @request_secret,
+      verifier: @verifier
     }
 
     assert request == operation

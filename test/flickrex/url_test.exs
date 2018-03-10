@@ -3,6 +3,10 @@ defmodule Flickrex.URLTest do
 
   alias Flickrex.URL
 
+  import Flickrex.Support.Fixtures
+
+  @user_id access_token(:user_nsid)
+
   setup_all do
     sizes_file = "test/fixtures/sizes.json"
     photo_file = "test/fixtures/photo.json"
@@ -47,24 +51,24 @@ defmodule Flickrex.URLTest do
   end
 
   test "url_profile" do
-    assert URL.url_profile("USER_ID") == "https://www.flickr.com/people/USER_ID/"
+    assert URL.url_profile(@user_id) == "https://www.flickr.com/people/#{@user_id}/"
   end
 
   test "url_photostream" do
-    assert URL.url_photostream("USER_ID") == "https://www.flickr.com/photos/USER_ID/"
+    assert URL.url_photostream(@user_id) == "https://www.flickr.com/photos/#{@user_id}/"
   end
 
   test "url_photopage" do
-    expected_url = "https://www.flickr.com/photos/USER_ID/PHOTO_ID"
-    assert URL.url_photopage("USER_ID", "PHOTO_ID") == expected_url
+    expected_url = "https://www.flickr.com/photos/#{@user_id}/99999999999"
+    assert URL.url_photopage(@user_id, "99999999999") == expected_url
   end
 
   test "url_photosets" do
-    assert URL.url_photosets("USER_ID") == "https://www.flickr.com/photos/USER_ID/sets/"
+    assert URL.url_photosets(@user_id) == "https://www.flickr.com/photos/#{@user_id}/sets/"
   end
 
   test "url_photoset" do
-    expected_url = "https://www.flickr.com/photos/USER_ID/sets/PHOTOSET_ID"
-    assert URL.url_photoset("USER_ID", "PHOTOSET_ID") == expected_url
+    expected_url = "https://www.flickr.com/photos/#{@user_id}/sets/99999999999"
+    assert URL.url_photoset(@user_id, "99999999999") == expected_url
   end
 end

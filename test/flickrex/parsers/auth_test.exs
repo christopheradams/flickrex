@@ -3,11 +3,13 @@ defmodule Flickrex.Parsers.AuthTest do
 
   alias Flickrex.Parsers
 
+  import Flickrex.Support.Fixtures
+
   @text_headers [{"Content-Type", "text/plain; charset=utf-8"}]
   @html_headers [{"Content-Type", "text/html; charset=utf-8"}]
 
   test "parse_request_token/1 parses a request token" do
-    body = "oauth_callback_confirmed=true&oauth_token=TOKEN&oauth_token_secret=TOKEN_SECRET"
+    body = URI.encode_query(request_token())
 
     response = {:ok, %{status_code: 200, headers: [], body: body}}
 
@@ -15,13 +17,7 @@ defmodule Flickrex.Parsers.AuthTest do
 
     {:ok, %{status_code: 200, headers: [], body: token}} = parsed_response
 
-    expected_token = %{
-      oauth_token: "TOKEN",
-      oauth_token_secret: "TOKEN_SECRET",
-      oauth_callback_confirmed: true
-    }
-
-    assert token == expected_token
+    assert token == request_token()
   end
 
   test "parse_request_token/1 parses auth errors" do
@@ -56,9 +52,7 @@ defmodule Flickrex.Parsers.AuthTest do
   end
 
   test "parse_access_token/1 parses an access token" do
-    body =
-      "fullname=FULL%20NAME&oauth_token=TOKEN&oauth_token_secret=" <>
-        "SECRET&user_nsid=NSID&username=USERNAME"
+    body = URI.encode_query(access_token())
 
     response = {:ok, %{status_code: 200, headers: [], body: body}}
 
@@ -66,15 +60,7 @@ defmodule Flickrex.Parsers.AuthTest do
 
     {:ok, %{status_code: 200, headers: [], body: token}} = parsed_response
 
-    expected_token = %{
-      fullname: "FULL NAME",
-      oauth_token: "TOKEN",
-      oauth_token_secret: "SECRET",
-      user_nsid: "NSID",
-      username: "USERNAME"
-    }
-
-    assert token == expected_token
+    assert token == access_token()
   end
 
   test "parse_access_token/1 parses auth errors" do

@@ -13,10 +13,14 @@ defmodule Flickrex.Support.Fixtures do
 
   def request_token do
     %{
-      oauth_callback_confirmed: "true",
+      oauth_callback_confirmed: true,
       oauth_token: "72157626737672178-022bbd2f4c2f3432",
       oauth_token_secret: "fccb68c4e6103197"
     }
+  end
+
+  def request_token(key) do
+    Map.get(request_token(), key)
   end
 
   def access_token do
@@ -31,5 +35,9 @@ defmodule Flickrex.Support.Fixtures do
 
   def access_token(key) do
     Map.get(access_token(), key)
+  end
+
+  def verifier do
+    "5d1b96a26b494074"
   end
 end

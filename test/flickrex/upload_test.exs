@@ -20,7 +20,7 @@ defmodule Flickrex.UploadTest do
 
   test "replace/2 returns an Upload operation to replace a photo" do
     photo = "test/fixtures/photo.jpg"
-    photo_id = "PHOTO_ID"
+    photo_id = "99999999999"
 
     operation = Upload.replace(photo, photo_id: photo_id)
 

@@ -3,8 +3,8 @@ defmodule Flickrex.Flickr.PhotosTest do
 
   alias Flickrex.Operation
 
-  @photo_id "PHOTOID"
-  @secret "SECRET"
+  @photo_id "8436466166"
+  @secret "e2dc3b83de"
 
   test "get_info/1 creates a photo info operation" do
     operation = Flickrex.Flickr.Photos.get_info(photo_id: @photo_id, secret: @secret)

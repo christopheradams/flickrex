@@ -91,7 +91,7 @@ defmodule Flickrex.Auth do
     `oauth_token` and `oauth_verifier`. If this option is not set, then
     authentication will default to out-of-band verification.
   """
-  @spec request_token(Keyword.t()) :: Operation.Auth.RequestToken.t()
+  @spec request_token(Keyword.t(String.t())) :: Operation.Auth.RequestToken.t()
   defdelegate request_token(opts \\ []), to: Operation.Auth.RequestToken, as: :new
 
   @doc """
@@ -102,7 +102,7 @@ defmodule Flickrex.Auth do
   * `perms` - Ask for "read", "write", or "delete" privileges. Overrides the
     setting defined in your application's authentication flow.
   """
-  @spec authorize_url(String.t(), Keyword.t()) :: Operation.Auth.AuthorizeUrl.t()
+  @spec authorize_url(String.t(), Keyword.t(String.t())) :: Operation.Auth.AuthorizeUrl.t()
   defdelegate authorize_url(oauth_token, opts \\ []), to: Operation.Auth.AuthorizeUrl, as: :new
 
   @doc """

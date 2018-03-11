@@ -93,14 +93,7 @@ verifier = "..."
   |> Flickrex.request()
 
 # You can now call methods that require authorization
-{:ok, resp} = Flickrex.Flickr.Test.login() |> Flickrex.request(access)
-```
-
-Save `access.oauth_token` and `access.oauth_token_secret`, then later use them
-to configure a request:
-
-```elixir
-config = [oauth_token: "...", oauth_token_secret: "..."]
+config = [oauth_token: access.oauth_token, oauth_token_secret: access.oauth_token_secret]
 {:ok, resp} = Flickrex.Flickr.Test.login() |> Flickrex.request(config)
 ```
 

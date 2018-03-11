@@ -27,7 +27,8 @@ defmodule Flickrex.Auth do
         |> Flickrex.request()
 
       # You can now call methods that require authorization
-      {:ok, resp} = Flickrex.Flickr.Test.login() |> Flickrex.request(access)
+      config = [oauth_token: access.oauth_token, oauth_token_secret: access.oauth_token_secret]
+      {:ok, resp} = Flickrex.Flickr.Test.login() |> Flickrex.request(config)
 
   ### Callback Verification
 

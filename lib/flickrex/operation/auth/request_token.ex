@@ -8,13 +8,14 @@ defmodule Flickrex.Operation.Auth.RequestToken do
     Parsers
   }
 
-  @oauth_callback "oob"
+  @out_of_band "oob"
+  @default_params %{oauth_callback: @out_of_band}
 
   @type t :: %__MODULE__{}
 
   defstruct parser: &Parsers.Auth.parse_request_token/1,
             path: "services/oauth/request_token",
-            params: %{oauth_callback: @oauth_callback},
+            params: @default_params,
             http_headers: %{},
             service: :api
 

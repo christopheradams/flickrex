@@ -97,6 +97,8 @@ defmodule Flickrex.Auth do
   @doc """
   Generates a Flickr authorization URL.
 
+  Takes an `oauth_token` from `request_token/1`.
+
   ## Options
 
   * `perms` - Ask for "read", "write", or "delete" privileges. Overrides the
@@ -107,6 +109,9 @@ defmodule Flickrex.Auth do
 
   @doc """
   Requests an access token from Flickr.
+
+  Takes an `oauth_token` and `oauth_token_secret` from `request_token/1`, and an
+  `oauth_verifier` from an authorizing Flickr account.
   """
   @spec access_token(String.t(), String.t(), String.t()) :: Operation.Auth.AccessToken.t()
   defdelegate access_token(oauth_token, oauth_token_secret, oauth_verifier),

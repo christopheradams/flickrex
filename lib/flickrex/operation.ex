@@ -20,11 +20,11 @@ defprotocol Flickrex.Operation do
   - `Flickrex.Flickr`
 
   The functions in those modules create a data structure that implements this protocol,
-  when you can then call `perform/2` on it.
+  which can be given to `Flickrex.request/2` to configure and perform the operation.
   """
 
   alias Flickrex.Config
 
   @spec perform(t, Config.t()) :: term
-  def perform(operation, request)
+  def perform(operation, config)
 end

@@ -19,6 +19,14 @@ defmodule Flickrex.Operation.Auth.RequestToken do
             http_headers: %{},
             service: :api
 
+  @doc false
+  @spec new(Keyword.t()) :: t()
+  def new(opts \\ []) do
+    %__MODULE__{
+      params: Map.merge(@default_params, Map.new(opts))
+    }
+  end
+
   defimpl Operation do
     alias Flickrex.{
       Config,

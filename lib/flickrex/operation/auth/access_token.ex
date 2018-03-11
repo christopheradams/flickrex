@@ -18,6 +18,16 @@ defmodule Flickrex.Operation.Auth.AccessToken do
             http_headers: %{},
             service: :api
 
+  @doc false
+  @spec new(String.t(), String.t(), String.t()) :: t()
+  def new(oauth_token, oauth_token_secret, oauth_verifier) do
+    %__MODULE__{
+      oauth_token: oauth_token,
+      oauth_token_secret: oauth_token_secret,
+      oauth_verifier: oauth_verifier
+    }
+  end
+
   defimpl Operation do
     alias Flickrex.{
       Config,

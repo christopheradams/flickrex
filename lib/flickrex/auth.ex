@@ -92,10 +92,7 @@ defmodule Flickrex.Auth do
     authentication will default to out-of-band verification.
   """
   @spec request_token(Keyword.t()) :: Operation.Auth.RequestToken.t()
-  def request_token(opts \\ []) do
-    op = %Operation.Auth.RequestToken{}
-    %{op | params: Map.merge(op.params, Map.new(opts))}
-  end
+  defdelegate request_token(opts \\ []), to: Operation.Auth.RequestToken, as: :new
 
   @doc """
   Generates a Flickr authorization URL.
@@ -106,22 +103,13 @@ defmodule Flickrex.Auth do
     setting defined in your application's authentication flow.
   """
   @spec authorize_url(String.t(), Keyword.t()) :: Operation.Auth.AuthorizeUrl.t()
-  def authorize_url(oauth_token, opts \\ []) do
-    %Operation.Auth.AuthorizeUrl{
-      oauth_token: oauth_token,
-      params: Map.new(opts)
-    }
-  end
+  defdelegate authorize_url(oauth_token, opts \\ []), to: Operation.Auth.AuthorizeUrl, as: :new
 
   @doc """
   Requests an access token from Flickr.
   """
   @spec access_token(String.t(), String.t(), String.t()) :: Operation.Auth.AccessToken.t()
-  def access_token(oauth_token, oauth_token_secret, oauth_verifier) do
-    %Operation.Auth.AccessToken{
-      oauth_token: oauth_token,
-      oauth_token_secret: oauth_token_secret,
-      oauth_verifier: oauth_verifier
-    }
-  end
+  defdelegate access_token(oauth_token, oauth_token_secret, oauth_verifier),
+    to: Operation.Auth.AccessToken,
+    as: :new
 end

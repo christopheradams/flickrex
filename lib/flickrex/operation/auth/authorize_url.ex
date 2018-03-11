@@ -12,6 +12,15 @@ defmodule Flickrex.Operation.Auth.AuthorizeUrl do
             params: %{},
             service: :api
 
+  @doc false
+  @spec new(String.t(), Keyword.t()) :: t()
+  def new(oauth_token, opts \\ []) do
+    %__MODULE__{
+      oauth_token: oauth_token,
+      params: Map.new(opts)
+    }
+  end
+
   defimpl Operation do
     alias Flickrex.{
       Config,

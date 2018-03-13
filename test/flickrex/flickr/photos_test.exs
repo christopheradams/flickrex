@@ -7,12 +7,14 @@ defmodule Flickrex.Flickr.PhotosTest do
   @secret "e2dc3b83de"
 
   test "get_info/1 creates a photo info operation" do
-    operation = Flickrex.Flickr.Photos.get_info(photo_id: @photo_id, secret: @secret)
+    assert ExUnit.CaptureIO.capture_io(:stderr, fn ->
+             operation = Flickrex.Flickr.Photos.get_info(photo_id: @photo_id, secret: @secret)
 
-    assert %Operation.Rest{params: params, method: method} = operation
+             assert %Operation.Rest{params: params, method: method} = operation
 
-    assert method == "flickr.photos.getInfo"
-    assert params == %{photo_id: @photo_id, secret: @secret}
+             assert method == "flickr.photos.getInfo"
+             assert params == %{photo_id: @photo_id, secret: @secret}
+           end) =~ "is deprecated"
   end
 
   test "get_info/2 creates a photo info operation" do
@@ -24,13 +26,16 @@ defmodule Flickrex.Flickr.PhotosTest do
     assert params == %{photo_id: @photo_id, secret: @secret}
   end
 
+  @tag :capture_log
   test "add_tags/1 creates an add tags operation" do
-    operation = Flickrex.Flickr.Photos.add_tags(photo_id: @photo_id, tags: "t1,t2")
+    assert ExUnit.CaptureIO.capture_io(:stderr, fn ->
+             operation = Flickrex.Flickr.Photos.add_tags(photo_id: @photo_id, tags: "t1,t2")
 
-    assert %Operation.Rest{params: params, method: method} = operation
+             assert %Operation.Rest{params: params, method: method} = operation
 
-    assert method == "flickr.photos.addTags"
-    assert params == %{photo_id: @photo_id, tags: "t1,t2"}
+             assert method == "flickr.photos.addTags"
+             assert params == %{photo_id: @photo_id, tags: "t1,t2"}
+           end) =~ "is deprecated"
   end
 
   test "add_tags/3 creates an add tags operation" do

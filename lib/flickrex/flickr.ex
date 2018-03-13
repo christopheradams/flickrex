@@ -205,18 +205,23 @@ defmodule Flickrex.Flickr do
             3 -> :post
           end
 
-        # If a function has required params, still allow a function call that
-        # takes all parameters as options
-        if length(required_args) > 0 do
+        function_arity = length(required_args) + 1
+
+        if function_arity > 1 do
           @doc false
           @spec unquote(function)() :: operation
           def unquote(function)() do
-            Flickrex.Rest.unquote(verb)(unquote(method))
+            unquote(function)([])
           end
 
           @doc false
           @spec unquote(function)(opts) :: operation
           def unquote(function)(opts) when is_list(opts) do
+            IO.warn(
+              "calling `#{unquote(function)}/1` with required arguments as options is " <>
+                "deprecated. Use `#{unquote(function)}/#{unquote(function_arity)}` instead."
+            )
+
             Flickrex.Rest.unquote(verb)(unquote(method), opts)
           end
         end

@@ -1,5 +1,19 @@
 # Changelog
 
+## v0.7.0 (2018-03-15)
+
+* Enhancements
+  * [Flickr] Create functions for API methods with required arguments.
+  * [Parsers] Parse 400 error response bodies for tokens.
+
+* Deprecations
+  * [Flickr] Calling an API function with required arguments using just an
+    options list is deprecated.
+  * [Upload] Calling replace with `photo_id` as an option is deprecated.
+
+* Backwards incompatible changes
+  * [Auth] Rename access token `verifier` to `oauth_verifier`.
+
 ## v0.6.0 (2018-02-20)
 
 * Enhancements

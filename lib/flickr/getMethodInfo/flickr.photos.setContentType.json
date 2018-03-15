@@ -106,7 +106,7 @@
       {
         "optional": "0",
         "name": "photo_id",
-        "_content": "The id of the photo to set the adultness of."
+        "_content": "The id of the photo to set the content type of."
       },
       {
         "optional": "0",

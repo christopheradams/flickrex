@@ -21,7 +21,8 @@ defmodule Flickrex.Decoder.XML do
   defp stat(%{"stat" => "fail"}), do: :error
   defp stat(_), do: :ok
 
-  defp parse_data(data) do
+  @doc false
+  def parse_data(data) do
     data
     |> :parsexml.parse()
     |> parse_tag()

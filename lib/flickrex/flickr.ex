@@ -76,6 +76,8 @@ defmodule Flickrex.Flickr do
       |> Module.concat()
 
     defmodule module do
+      alias Flickrex.Decoder
+
       @type arg :: String.Chars.t()
       @type opts :: Flickrex.Rest.args()
       @type operation :: Flickrex.Operation.Rest.t()
@@ -114,6 +116,36 @@ defmodule Flickrex.Flickr do
         needs_login = get_in(method_info, ["method", "needslogin"])
 
         requiredperms = get_in(method_info, ["method", "requiredperms"])
+
+        method_response =
+          case get_in(method_info, ["method", "response", "_content"]) do
+            nil ->
+              nil
+
+            "<?xml" <> _rest = xml_doc ->
+              xml_doc
+
+            "<rsp" <> _rest = rsp_tag ->
+              rsp_tag
+
+            content_tag ->
+              """
+              <rsp stat="ok">
+              #{content_tag}
+              </rsp>
+              """
+          end
+
+        example_response =
+          case method_response do
+            nil ->
+              nil
+
+            response_content ->
+              response_content
+              |> String.replace(~r/<!-- .* -->/U, "")
+              |> Decoder.XML.parse_data()
+          end
 
         permission_code =
           if is_binary(requiredperms) do
@@ -185,12 +217,21 @@ defmodule Flickrex.Flickr do
         <%= for arg <- @optional_args do %>
         * `<%= arg["name"] %>` - <%= arg["_content"] %>
         <% end %>
+
+        <%= unless is_nil(@example_response) do %>
+        ## Example response
+
+        ```elixir
+        <%= inspect(@example_response, pretty: true) %>
+        ```
+        <% end %>
         """
 
         assigns = [
           description: description,
           required_args: required_args,
           optional_args: optional_args,
+          example_response: example_response,
           needs_login: needs_login,
           permission: permission
         ]

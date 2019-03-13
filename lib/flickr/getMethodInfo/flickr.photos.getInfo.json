@@ -1,86 +1,86 @@
 {
-  "stat": "ok",
-  "method": {
-    "response": {
-      "_content": "<photo id=\"2733\" secret=\"123456\" server=\"12\"\n\tisfavorite=\"0\" license=\"3\" rotation=\"90\" \n\toriginalsecret=\"1bc09ce34a\" originalformat=\"png\">\n\t<owner nsid=\"12037949754@N01\" username=\"Bees\"\n\t\trealname=\"Cal Henderson\" location=\"Bedford, UK\" />\n\t<title>orford_castle_taster</title>\n\t<description>hello!</description>\n\t<visibility ispublic=\"1\" isfriend=\"0\" isfamily=\"0\" />\n\t<dates posted=\"1100897479\" taken=\"2004-11-19 12:51:19\"\n\t\ttakengranularity=\"0\" lastupdate=\"1093022469\" />\n\t<permissions permcomment=\"3\" permaddmeta=\"2\" />\n\t<editability cancomment=\"1\" canaddmeta=\"1\" />\n\t<comments>1</comments>\n\t<notes>\n\t\t<note id=\"313\" author=\"12037949754@N01\"\n\t\t\tauthorname=\"Bees\" x=\"10\" y=\"10\"\n\t\t\tw=\"50\" h=\"50\">foo</note>\n\t</notes>\n\t<tags>\n\t\t<tag id=\"1234\" author=\"12037949754@N01\" raw=\"woo yay\">wooyay</tag>\n\t\t<tag id=\"1235\" author=\"12037949754@N01\" raw=\"hoopla\">hoopla</tag>\n\t</tags>\n\t<urls>\n\t\t<url type=\"photopage\">http://www.flickr.com/photos/bees/2733/</url> \n\t</urls>\n</photo>"
-    },
-    "requiredperms": 0,
-    "needssigning": 0,
-    "needslogin": 0,
-    "name": "flickr.photos.getInfo",
-    "explanation": {
-      "_content": "<p>The <code>&lt;permissions&gt;</code> element is only returned for photos owned by the calling user. The <code>isfavorite</code> attribute only makes sense for logged in users who don't own the photo. The <code>rotation</code> attribute is the current clockwise rotation, in degrees, by which the smaller image sizes differ from the original image.</p>\n\n<p>The <code>&lt;date&gt;</code> element's <code>lastupdate</code> attribute is a Unix timestamp indicating the last time the photo, or any of its metadata (tags, comments, etc.) was modified.</p>"
-    },
-    "description": {
-      "_content": "Get information about a photo. The calling user must have permission to view the photo."
-    }
+  "arguments": {
+    "argument": [
+      {
+        "_content": "Your API application key. <a href=\"/services/api/misc.api_keys.html\">See here</a> for more details.",
+        "name": "api_key",
+        "optional": 0
+      },
+      {
+        "_content": "The id of the photo to get information for.",
+        "name": "photo_id",
+        "optional": "0"
+      },
+      {
+        "_content": "The secret for the photo. If the correct secret is passed then permissions checking is skipped. This enables the 'sharing' of individual photos by passing around the id and secret.",
+        "name": "secret",
+        "optional": "1"
+      }
+    ]
   },
   "errors": {
     "error": [
       {
-        "message": "Photo not found.",
+        "_content": "The photo id was either invalid or was for a photo not viewable by the calling user.",
         "code": "1",
-        "_content": "The photo id was either invalid or was for a photo not viewable by the calling user."
+        "message": "Photo not found."
       },
       {
-        "message": "Invalid API Key",
+        "_content": "The API key passed was not valid or has expired.",
         "code": 100,
-        "_content": "The API key passed was not valid or has expired."
+        "message": "Invalid API Key"
       },
       {
-        "message": "Service currently unavailable",
+        "_content": "The requested service is temporarily unavailable.",
         "code": 105,
-        "_content": "The requested service is temporarily unavailable."
+        "message": "Service currently unavailable"
       },
       {
-        "message": "Write operation failed",
+        "_content": "The requested operation failed due to a temporary issue.",
         "code": 106,
-        "_content": "The requested operation failed due to a temporary issue."
+        "message": "Write operation failed"
       },
       {
-        "message": "Format \"xxx\" not found",
+        "_content": "The requested response format was not found.",
         "code": 111,
-        "_content": "The requested response format was not found."
+        "message": "Format \"xxx\" not found"
       },
       {
-        "message": "Method \"xxx\" not found",
+        "_content": "The requested method was not found.",
         "code": 112,
-        "_content": "The requested method was not found."
+        "message": "Method \"xxx\" not found"
       },
       {
-        "message": "Invalid SOAP envelope",
+        "_content": "The SOAP envelope send in the request could not be parsed.",
         "code": 114,
-        "_content": "The SOAP envelope send in the request could not be parsed."
+        "message": "Invalid SOAP envelope"
       },
       {
-        "message": "Invalid XML-RPC Method Call",
+        "_content": "The XML-RPC request document could not be parsed.",
         "code": 115,
-        "_content": "The XML-RPC request document could not be parsed."
+        "message": "Invalid XML-RPC Method Call"
       },
       {
-        "message": "Bad URL found",
+        "_content": "One or more arguments contained a URL that has been used for abuse on Flickr.",
         "code": 116,
-        "_content": "One or more arguments contained a URL that has been used for abuse on Flickr."
+        "message": "Bad URL found"
       }
     ]
   },
-  "arguments": {
-    "argument": [
-      {
-        "optional": 0,
-        "name": "api_key",
-        "_content": "Your API application key. <a href=\"/services/api/misc.api_keys.html\">See here</a> for more details."
-      },
-      {
-        "optional": "0",
-        "name": "photo_id",
-        "_content": "The id of the photo to get information for."
-      },
-      {
-        "optional": "1",
-        "name": "secret",
-        "_content": "The secret for the photo. If the correct secret is passed then permissions checking is skipped. This enables the 'sharing' of individual photos by passing around the id and secret."
-      }
-    ]
-  }
+  "method": {
+    "description": {
+      "_content": "Get information about a photo. The calling user must have permission to view the photo."
+    },
+    "explanation": {
+      "_content": "<p>The <code>&lt;permissions&gt;</code> element is only returned for photos owned by the calling user. The <code>isfavorite</code> attribute only makes sense for logged in users who don't own the photo. The <code>rotation</code> attribute is the current clockwise rotation, in degrees, by which the smaller image sizes differ from the original image.</p>\n\n<p>The <code>&lt;date&gt;</code> element's <code>lastupdate</code> attribute is a Unix timestamp indicating the last time the photo, or any of its metadata (tags, comments, etc.) was modified.</p>"
+    },
+    "name": "flickr.photos.getInfo",
+    "needslogin": 0,
+    "needssigning": 0,
+    "requiredperms": 0,
+    "response": {
+      "_content": "<photo id=\"2733\" secret=\"123456\" server=\"12\"\n\tisfavorite=\"0\" license=\"3\" rotation=\"90\" \n\toriginalsecret=\"1bc09ce34a\" originalformat=\"png\">\n\t<owner nsid=\"12037949754@N01\" username=\"Bees\"\n\t\trealname=\"Cal Henderson\" location=\"Bedford, UK\" />\n\t<title>orford_castle_taster</title>\n\t<description>hello!</description>\n\t<visibility ispublic=\"1\" isfriend=\"0\" isfamily=\"0\" />\n\t<dates posted=\"1100897479\" taken=\"2004-11-19 12:51:19\"\n\t\ttakengranularity=\"0\" lastupdate=\"1093022469\" />\n\t<permissions permcomment=\"3\" permaddmeta=\"2\" />\n\t<editability cancomment=\"1\" canaddmeta=\"1\" />\n\t<comments>1</comments>\n\t<notes>\n\t\t<note id=\"313\" author=\"12037949754@N01\"\n\t\t\tauthorname=\"Bees\" x=\"10\" y=\"10\"\n\t\t\tw=\"50\" h=\"50\">foo</note>\n\t</notes>\n\t<tags>\n\t\t<tag id=\"1234\" author=\"12037949754@N01\" raw=\"woo yay\">wooyay</tag>\n\t\t<tag id=\"1235\" author=\"12037949754@N01\" raw=\"hoopla\">hoopla</tag>\n\t</tags>\n\t<urls>\n\t\t<url type=\"photopage\">http://www.flickr.com/photos/bees/2733/</url> \n\t</urls>\n</photo>"
+    }
+  },
+  "stat": "ok"
 }

@@ -1,5 +1,4 @@
 {
-  "stat": "ok",
   "methods": {
     "method": [
       {
@@ -669,5 +668,6 @@
         "_content": "flickr.urls.lookupUser"
       }
     ]
-  }
+  },
+  "stat": "ok"
 }

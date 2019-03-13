@@ -1,113 +1,113 @@
 {
-  "stat": "ok",
-  "method": {
-    "response": {
-      "_content": "<tags total=\"100\">\n   <tag count=\"31775\">montreal</tag>\n   <tag count=\"20585\">canada</tag>\n   <tag count=\"12319\">montréal</tag>\n   <tag count=\"12154\">quebec</tag>\n   <tag count=\"6471\">québec</tag>\n   <tag count=\"2173\">sylvainmichaud</tag>\n   <tag count=\"2091\">nikon</tag>\n   <tag count=\"1541\">lucbus</tag>\n   <tag count=\"1539\">music</tag>\n   <tag count=\"1479\">urban</tag>\n   <tag count=\"1425\">lucbussieres</tag>\n   <tag count=\"1419\">festival</tag>\n   <!-- and so on -->\n</tags>"
-    },
-    "requiredperms": 0,
-    "needssigning": 0,
-    "needslogin": 0,
-    "name": "flickr.places.tagsForPlace",
-    "description": {
-      "_content": "Return a list of the top 100 unique tags for a Flickr Places or Where on Earth (WOE) ID"
-    }
+  "arguments": {
+    "argument": [
+      {
+        "_content": "Your API application key. <a href=\"/services/api/misc.api_keys.html\">See here</a> for more details.",
+        "name": "api_key",
+        "optional": 0
+      },
+      {
+        "_content": "A Where on Earth identifier to use to filter photo clusters.<br /><br />\n<span style=\"font-style:italic;\">(While optional, you must pass either a valid Places ID or a WOE ID.)</span>",
+        "name": "woe_id",
+        "optional": "1"
+      },
+      {
+        "_content": "A Flickr Places identifier to use to filter photo clusters.<br /><br />\n<span style=\"font-style:italic;\">(While optional, you must pass either a valid Places ID or a WOE ID.)</span>",
+        "name": "place_id",
+        "optional": "1"
+      },
+      {
+        "_content": "Minimum upload date. Photos with an upload date greater than or equal to this value will be returned. The date should be in the form of a unix timestamp.",
+        "name": "min_upload_date",
+        "optional": "1"
+      },
+      {
+        "_content": "Maximum upload date. Photos with an upload date less than or equal to this value will be returned. The date should be in the form of a unix timestamp.",
+        "name": "max_upload_date",
+        "optional": "1"
+      },
+      {
+        "_content": "Minimum taken date. Photos with an taken date greater than or equal to this value will be returned. The date should be in the form of a mysql datetime.",
+        "name": "min_taken_date",
+        "optional": "1"
+      },
+      {
+        "_content": "Maximum taken date. Photos with an taken date less than or equal to this value will be returned. The date should be in the form of a mysql datetime.",
+        "name": "max_taken_date",
+        "optional": "1"
+      }
+    ]
   },
   "errors": {
     "error": [
       {
-        "message": "Required parameter missing",
+        "_content": "One or more parameters was not included with the API request",
         "code": "1",
-        "_content": "One or more parameters was not included with the API request"
+        "message": "Required parameter missing"
       },
       {
-        "message": "Not a valid Places ID",
+        "_content": "An invalid Places (or WOE) identifier was included with your request.",
         "code": "2",
-        "_content": "An invalid Places (or WOE) identifier was included with your request."
+        "message": "Not a valid Places ID"
       },
       {
-        "message": "Place not found",
+        "_content": "An invalid Places (or WOE) identifier was included with your request.",
         "code": "3",
-        "_content": "An invalid Places (or WOE) identifier was included with your request."
+        "message": "Place not found"
       },
       {
-        "message": "Invalid API Key",
+        "_content": "The API key passed was not valid or has expired.",
         "code": 100,
-        "_content": "The API key passed was not valid or has expired."
+        "message": "Invalid API Key"
       },
       {
-        "message": "Service currently unavailable",
+        "_content": "The requested service is temporarily unavailable.",
         "code": 105,
-        "_content": "The requested service is temporarily unavailable."
+        "message": "Service currently unavailable"
       },
       {
-        "message": "Write operation failed",
+        "_content": "The requested operation failed due to a temporary issue.",
         "code": 106,
-        "_content": "The requested operation failed due to a temporary issue."
+        "message": "Write operation failed"
       },
       {
-        "message": "Format \"xxx\" not found",
+        "_content": "The requested response format was not found.",
         "code": 111,
-        "_content": "The requested response format was not found."
+        "message": "Format \"xxx\" not found"
       },
       {
-        "message": "Method \"xxx\" not found",
+        "_content": "The requested method was not found.",
         "code": 112,
-        "_content": "The requested method was not found."
+        "message": "Method \"xxx\" not found"
       },
       {
-        "message": "Invalid SOAP envelope",
+        "_content": "The SOAP envelope send in the request could not be parsed.",
         "code": 114,
-        "_content": "The SOAP envelope send in the request could not be parsed."
+        "message": "Invalid SOAP envelope"
       },
       {
-        "message": "Invalid XML-RPC Method Call",
+        "_content": "The XML-RPC request document could not be parsed.",
         "code": 115,
-        "_content": "The XML-RPC request document could not be parsed."
+        "message": "Invalid XML-RPC Method Call"
       },
       {
-        "message": "Bad URL found",
+        "_content": "One or more arguments contained a URL that has been used for abuse on Flickr.",
         "code": 116,
-        "_content": "One or more arguments contained a URL that has been used for abuse on Flickr."
+        "message": "Bad URL found"
       }
     ]
   },
-  "arguments": {
-    "argument": [
-      {
-        "optional": 0,
-        "name": "api_key",
-        "_content": "Your API application key. <a href=\"/services/api/misc.api_keys.html\">See here</a> for more details."
-      },
-      {
-        "optional": "1",
-        "name": "woe_id",
-        "_content": "A Where on Earth identifier to use to filter photo clusters.<br /><br />\n<span style=\"font-style:italic;\">(While optional, you must pass either a valid Places ID or a WOE ID.)</span>"
-      },
-      {
-        "optional": "1",
-        "name": "place_id",
-        "_content": "A Flickr Places identifier to use to filter photo clusters.<br /><br />\n<span style=\"font-style:italic;\">(While optional, you must pass either a valid Places ID or a WOE ID.)</span>"
-      },
-      {
-        "optional": "1",
-        "name": "min_upload_date",
-        "_content": "Minimum upload date. Photos with an upload date greater than or equal to this value will be returned. The date should be in the form of a unix timestamp."
-      },
-      {
-        "optional": "1",
-        "name": "max_upload_date",
-        "_content": "Maximum upload date. Photos with an upload date less than or equal to this value will be returned. The date should be in the form of a unix timestamp."
-      },
-      {
-        "optional": "1",
-        "name": "min_taken_date",
-        "_content": "Minimum taken date. Photos with an taken date greater than or equal to this value will be returned. The date should be in the form of a mysql datetime."
-      },
-      {
-        "optional": "1",
-        "name": "max_taken_date",
-        "_content": "Maximum taken date. Photos with an taken date less than or equal to this value will be returned. The date should be in the form of a mysql datetime."
-      }
-    ]
-  }
+  "method": {
+    "description": {
+      "_content": "Return a list of the top 100 unique tags for a Flickr Places or Where on Earth (WOE) ID"
+    },
+    "name": "flickr.places.tagsForPlace",
+    "needslogin": 0,
+    "needssigning": 0,
+    "requiredperms": 0,
+    "response": {
+      "_content": "<tags total=\"100\">\n   <tag count=\"31775\">montreal</tag>\n   <tag count=\"20585\">canada</tag>\n   <tag count=\"12319\">montréal</tag>\n   <tag count=\"12154\">quebec</tag>\n   <tag count=\"6471\">québec</tag>\n   <tag count=\"2173\">sylvainmichaud</tag>\n   <tag count=\"2091\">nikon</tag>\n   <tag count=\"1541\">lucbus</tag>\n   <tag count=\"1539\">music</tag>\n   <tag count=\"1479\">urban</tag>\n   <tag count=\"1425\">lucbussieres</tag>\n   <tag count=\"1419\">festival</tag>\n   <!-- and so on -->\n</tags>"
+    }
+  },
+  "stat": "ok"
 }

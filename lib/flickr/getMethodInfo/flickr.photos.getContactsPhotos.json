@@ -1,118 +1,118 @@
 {
-  "stat": "ok",
-  "method": {
-    "response": {
-      "_content": "<photos>\n\t<photo id=\"2801\" owner=\"12037949629@N01\"\n\t\tsecret=\"123456\" server=\"1\"\n\t\tusername=\"Eric is the best\" title=\"grease\" /> \n\t<photo id=\"2499\" owner=\"33853651809@N01\"\n\t\tsecret=\"123456\" server=\"1\"\n\t\tusername=\"cal18\" title=\"36679_o\" /> \n\t<photo id=\"2437\" owner=\"12037951898@N01\"\n\t\tsecret=\"123456\" server=\"1\"\n\t\tusername=\"georgie parker\" title=\"phoenix9_stewart\" /> \n</photos>"
-    },
-    "requiredperms": "1",
-    "needssigning": 1,
-    "needslogin": 1,
-    "name": "flickr.photos.getContactsPhotos",
-    "description": {
-      "_content": "Fetch a list of recent photos from the calling users' contacts."
-    }
+  "arguments": {
+    "argument": [
+      {
+        "_content": "Your API application key. <a href=\"/services/api/misc.api_keys.html\">See here</a> for more details.",
+        "name": "api_key",
+        "optional": 0
+      },
+      {
+        "_content": "Number of photos to return. Defaults to 10, maximum 50. This is only used if <code>single_photo</code> is not passed.",
+        "name": "count",
+        "optional": "1"
+      },
+      {
+        "_content": "set as 1 to only show photos from friends and family (excluding regular contacts).",
+        "name": "just_friends",
+        "optional": "1"
+      },
+      {
+        "_content": "Only fetch one photo (the latest) per contact, instead of all photos in chronological order.",
+        "name": "single_photo",
+        "optional": "1"
+      },
+      {
+        "_content": "Set to 1 to include photos from the calling user.",
+        "name": "include_self",
+        "optional": "1"
+      },
+      {
+        "_content": "A comma-delimited list of extra information to fetch for each returned record. Currently supported fields include: license, date_upload, date_taken, owner_name, icon_server, original_format, last_update. For more information see extras under <a href=\"/services/api/flickr.photos.search.html\">flickr.photos.search</a>.",
+        "name": "extras",
+        "optional": "1"
+      }
+    ]
   },
   "errors": {
     "error": [
       {
-        "message": "SSL is required",
+        "_content": "SSL is required to access the Flickr API.",
         "code": 95,
-        "_content": "SSL is required to access the Flickr API."
+        "message": "SSL is required"
       },
       {
-        "message": "Invalid signature",
+        "_content": "The passed signature was invalid.",
         "code": 96,
-        "_content": "The passed signature was invalid."
+        "message": "Invalid signature"
       },
       {
-        "message": "Missing signature",
+        "_content": "The call required signing but no signature was sent.",
         "code": 97,
-        "_content": "The call required signing but no signature was sent."
+        "message": "Missing signature"
       },
       {
-        "message": "Login failed / Invalid auth token",
+        "_content": "The login details or auth token passed were invalid.",
         "code": 98,
-        "_content": "The login details or auth token passed were invalid."
+        "message": "Login failed / Invalid auth token"
       },
       {
-        "message": "User not logged in / Insufficient permissions",
+        "_content": "The method requires user authentication but the user was not logged in, or the authenticated method call did not have the required permissions.",
         "code": 99,
-        "_content": "The method requires user authentication but the user was not logged in, or the authenticated method call did not have the required permissions."
+        "message": "User not logged in / Insufficient permissions"
       },
       {
-        "message": "Invalid API Key",
+        "_content": "The API key passed was not valid or has expired.",
         "code": 100,
-        "_content": "The API key passed was not valid or has expired."
+        "message": "Invalid API Key"
       },
       {
-        "message": "Service currently unavailable",
+        "_content": "The requested service is temporarily unavailable.",
         "code": 105,
-        "_content": "The requested service is temporarily unavailable."
+        "message": "Service currently unavailable"
       },
       {
-        "message": "Write operation failed",
+        "_content": "The requested operation failed due to a temporary issue.",
         "code": 106,
-        "_content": "The requested operation failed due to a temporary issue."
+        "message": "Write operation failed"
       },
       {
-        "message": "Format \"xxx\" not found",
+        "_content": "The requested response format was not found.",
         "code": 111,
-        "_content": "The requested response format was not found."
+        "message": "Format \"xxx\" not found"
       },
       {
-        "message": "Method \"xxx\" not found",
+        "_content": "The requested method was not found.",
         "code": 112,
-        "_content": "The requested method was not found."
+        "message": "Method \"xxx\" not found"
       },
       {
-        "message": "Invalid SOAP envelope",
+        "_content": "The SOAP envelope send in the request could not be parsed.",
         "code": 114,
-        "_content": "The SOAP envelope send in the request could not be parsed."
+        "message": "Invalid SOAP envelope"
       },
       {
-        "message": "Invalid XML-RPC Method Call",
+        "_content": "The XML-RPC request document could not be parsed.",
         "code": 115,
-        "_content": "The XML-RPC request document could not be parsed."
+        "message": "Invalid XML-RPC Method Call"
       },
       {
-        "message": "Bad URL found",
+        "_content": "One or more arguments contained a URL that has been used for abuse on Flickr.",
         "code": 116,
-        "_content": "One or more arguments contained a URL that has been used for abuse on Flickr."
+        "message": "Bad URL found"
       }
     ]
   },
-  "arguments": {
-    "argument": [
-      {
-        "optional": 0,
-        "name": "api_key",
-        "_content": "Your API application key. <a href=\"/services/api/misc.api_keys.html\">See here</a> for more details."
-      },
-      {
-        "optional": "1",
-        "name": "count",
-        "_content": "Number of photos to return. Defaults to 10, maximum 50. This is only used if <code>single_photo</code> is not passed."
-      },
-      {
-        "optional": "1",
-        "name": "just_friends",
-        "_content": "set as 1 to only show photos from friends and family (excluding regular contacts)."
-      },
-      {
-        "optional": "1",
-        "name": "single_photo",
-        "_content": "Only fetch one photo (the latest) per contact, instead of all photos in chronological order."
-      },
-      {
-        "optional": "1",
-        "name": "include_self",
-        "_content": "Set to 1 to include photos from the calling user."
-      },
-      {
-        "optional": "1",
-        "name": "extras",
-        "_content": "A comma-delimited list of extra information to fetch for each returned record. Currently supported fields include: license, date_upload, date_taken, owner_name, icon_server, original_format, last_update. For more information see extras under <a href=\"/services/api/flickr.photos.search.html\">flickr.photos.search</a>."
-      }
-    ]
-  }
+  "method": {
+    "description": {
+      "_content": "Fetch a list of recent photos from the calling users' contacts."
+    },
+    "name": "flickr.photos.getContactsPhotos",
+    "needslogin": 1,
+    "needssigning": 1,
+    "requiredperms": "1",
+    "response": {
+      "_content": "<photos>\n\t<photo id=\"2801\" owner=\"12037949629@N01\"\n\t\tsecret=\"123456\" server=\"1\"\n\t\tusername=\"Eric is the best\" title=\"grease\" /> \n\t<photo id=\"2499\" owner=\"33853651809@N01\"\n\t\tsecret=\"123456\" server=\"1\"\n\t\tusername=\"cal18\" title=\"36679_o\" /> \n\t<photo id=\"2437\" owner=\"12037951898@N01\"\n\t\tsecret=\"123456\" server=\"1\"\n\t\tusername=\"georgie parker\" title=\"phoenix9_stewart\" /> \n</photos>"
+    }
+  },
+  "stat": "ok"
 }

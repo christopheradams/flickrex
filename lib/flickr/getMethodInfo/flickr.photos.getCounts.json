@@ -1,108 +1,108 @@
 {
-  "stat": "ok",
-  "method": {
-    "response": {
-      "_content": "<photocounts>\n\t<photocount count=\"4\" fromdate=\"1093566950\" todate=\"1093653350\" /> \n\t<photocount count=\"0\" fromdate=\"1093653350\" todate=\"1093739750\" /> \n\t<photocount count=\"0\" fromdate=\"1093739750\" todate=\"1093826150\" /> \n\t<photocount count=\"2\" fromdate=\"1093826150\" todate=\"1093912550\" /> \n\t<photocount count=\"0\" fromdate=\"1093912550\" todate=\"1093998950\" /> \n\t<photocount count=\"0\" fromdate=\"1093998950\" todate=\"1094085350\" /> \n\t<photocount count=\"0\" fromdate=\"1094085350\" todate=\"1094171750\" /> \n</photocounts>\n"
-    },
-    "requiredperms": "1",
-    "needssigning": 1,
-    "needslogin": 1,
-    "name": "flickr.photos.getCounts",
-    "description": {
-      "_content": "Gets a list of photo counts for the given date ranges for the calling user."
-    }
+  "arguments": {
+    "argument": [
+      {
+        "_content": "Your API application key. <a href=\"/services/api/misc.api_keys.html\">See here</a> for more details.",
+        "name": "api_key",
+        "optional": 0
+      },
+      {
+        "_content": "A comma delimited list of unix timestamps, denoting the periods to return counts for. They should be specified <b>smallest first</b>.",
+        "name": "dates",
+        "optional": "1"
+      },
+      {
+        "_content": "A comma delimited list of mysql datetimes, denoting the periods to return counts for. They should be specified <b>smallest first</b>.",
+        "name": "taken_dates",
+        "optional": "1"
+      }
+    ]
   },
   "errors": {
     "error": [
       {
-        "message": "No dates specified",
+        "_content": "Neither dates nor taken_dates were specified.",
         "code": "1",
-        "_content": "Neither dates nor taken_dates were specified."
+        "message": "No dates specified"
       },
       {
-        "message": "SSL is required",
+        "_content": "SSL is required to access the Flickr API.",
         "code": 95,
-        "_content": "SSL is required to access the Flickr API."
+        "message": "SSL is required"
       },
       {
-        "message": "Invalid signature",
+        "_content": "The passed signature was invalid.",
         "code": 96,
-        "_content": "The passed signature was invalid."
+        "message": "Invalid signature"
       },
       {
-        "message": "Missing signature",
+        "_content": "The call required signing but no signature was sent.",
         "code": 97,
-        "_content": "The call required signing but no signature was sent."
+        "message": "Missing signature"
       },
       {
-        "message": "Login failed / Invalid auth token",
+        "_content": "The login details or auth token passed were invalid.",
         "code": 98,
-        "_content": "The login details or auth token passed were invalid."
+        "message": "Login failed / Invalid auth token"
       },
       {
-        "message": "User not logged in / Insufficient permissions",
+        "_content": "The method requires user authentication but the user was not logged in, or the authenticated method call did not have the required permissions.",
         "code": 99,
-        "_content": "The method requires user authentication but the user was not logged in, or the authenticated method call did not have the required permissions."
+        "message": "User not logged in / Insufficient permissions"
       },
       {
-        "message": "Invalid API Key",
+        "_content": "The API key passed was not valid or has expired.",
         "code": 100,
-        "_content": "The API key passed was not valid or has expired."
+        "message": "Invalid API Key"
       },
       {
-        "message": "Service currently unavailable",
+        "_content": "The requested service is temporarily unavailable.",
         "code": 105,
-        "_content": "The requested service is temporarily unavailable."
+        "message": "Service currently unavailable"
       },
       {
-        "message": "Write operation failed",
+        "_content": "The requested operation failed due to a temporary issue.",
         "code": 106,
-        "_content": "The requested operation failed due to a temporary issue."
+        "message": "Write operation failed"
       },
       {
-        "message": "Format \"xxx\" not found",
+        "_content": "The requested response format was not found.",
         "code": 111,
-        "_content": "The requested response format was not found."
+        "message": "Format \"xxx\" not found"
       },
       {
-        "message": "Method \"xxx\" not found",
+        "_content": "The requested method was not found.",
         "code": 112,
-        "_content": "The requested method was not found."
+        "message": "Method \"xxx\" not found"
       },
       {
-        "message": "Invalid SOAP envelope",
+        "_content": "The SOAP envelope send in the request could not be parsed.",
         "code": 114,
-        "_content": "The SOAP envelope send in the request could not be parsed."
+        "message": "Invalid SOAP envelope"
       },
       {
-        "message": "Invalid XML-RPC Method Call",
+        "_content": "The XML-RPC request document could not be parsed.",
         "code": 115,
-        "_content": "The XML-RPC request document could not be parsed."
+        "message": "Invalid XML-RPC Method Call"
       },
       {
-        "message": "Bad URL found",
+        "_content": "One or more arguments contained a URL that has been used for abuse on Flickr.",
         "code": 116,
-        "_content": "One or more arguments contained a URL that has been used for abuse on Flickr."
+        "message": "Bad URL found"
       }
     ]
   },
-  "arguments": {
-    "argument": [
-      {
-        "optional": 0,
-        "name": "api_key",
-        "_content": "Your API application key. <a href=\"/services/api/misc.api_keys.html\">See here</a> for more details."
-      },
-      {
-        "optional": "1",
-        "name": "dates",
-        "_content": "A comma delimited list of unix timestamps, denoting the periods to return counts for. They should be specified <b>smallest first</b>."
-      },
-      {
-        "optional": "1",
-        "name": "taken_dates",
-        "_content": "A comma delimited list of mysql datetimes, denoting the periods to return counts for. They should be specified <b>smallest first</b>."
-      }
-    ]
-  }
+  "method": {
+    "description": {
+      "_content": "Gets a list of photo counts for the given date ranges for the calling user."
+    },
+    "name": "flickr.photos.getCounts",
+    "needslogin": 1,
+    "needssigning": 1,
+    "requiredperms": "1",
+    "response": {
+      "_content": "<photocounts>\n\t<photocount count=\"4\" fromdate=\"1093566950\" todate=\"1093653350\" /> \n\t<photocount count=\"0\" fromdate=\"1093653350\" todate=\"1093739750\" /> \n\t<photocount count=\"0\" fromdate=\"1093739750\" todate=\"1093826150\" /> \n\t<photocount count=\"2\" fromdate=\"1093826150\" todate=\"1093912550\" /> \n\t<photocount count=\"0\" fromdate=\"1093912550\" todate=\"1093998950\" /> \n\t<photocount count=\"0\" fromdate=\"1093998950\" todate=\"1094085350\" /> \n\t<photocount count=\"0\" fromdate=\"1094085350\" todate=\"1094171750\" /> \n</photocounts>\n"
+    }
+  },
+  "stat": "ok"
 }

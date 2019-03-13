@@ -1,120 +1,120 @@
 {
-  "stat": "ok",
-  "method": {
-    "requiredperms": "3",
-    "needssigning": 1,
-    "needslogin": 1,
-    "name": "flickr.groups.discuss.replies.delete",
-    "description": {
-      "_content": "Delete a reply from a group topic."
-    }
+  "arguments": {
+    "argument": [
+      {
+        "_content": "Your API application key. <a href=\"/services/api/misc.api_keys.html\">See here</a> for more details.",
+        "name": "api_key",
+        "optional": 0
+      },
+      {
+        "_content": "Pass in the group id to where the topic belongs. Can be NSID or group alias. Making this parameter optional for legacy reasons, but it is highly recommended to pass this in to get faster performance. ",
+        "name": "group_id",
+        "optional": "0"
+      },
+      {
+        "_content": "The ID of the topic the post is in.",
+        "name": "topic_id",
+        "optional": "0"
+      },
+      {
+        "_content": "The ID of the reply to delete.",
+        "name": "reply_id",
+        "optional": "0"
+      }
+    ]
   },
   "errors": {
     "error": [
       {
-        "message": "Topic not found",
+        "_content": "The topic_id is invalid.",
         "code": "1",
-        "_content": "The topic_id is invalid."
+        "message": "Topic not found"
       },
       {
-        "message": "Reply not found",
+        "_content": "The reply_id is invalid.",
         "code": "2",
-        "_content": "The reply_id is invalid."
+        "message": "Reply not found"
       },
       {
-        "message": "Cannot delete reply",
+        "_content": "Replies can only be edited by their owner.",
         "code": "3",
-        "_content": "Replies can only be edited by their owner."
+        "message": "Cannot delete reply"
       },
       {
-        "message": "SSL is required",
+        "_content": "SSL is required to access the Flickr API.",
         "code": 95,
-        "_content": "SSL is required to access the Flickr API."
+        "message": "SSL is required"
       },
       {
-        "message": "Invalid signature",
+        "_content": "The passed signature was invalid.",
         "code": 96,
-        "_content": "The passed signature was invalid."
+        "message": "Invalid signature"
       },
       {
-        "message": "Missing signature",
+        "_content": "The call required signing but no signature was sent.",
         "code": 97,
-        "_content": "The call required signing but no signature was sent."
+        "message": "Missing signature"
       },
       {
-        "message": "Login failed / Invalid auth token",
+        "_content": "The login details or auth token passed were invalid.",
         "code": 98,
-        "_content": "The login details or auth token passed were invalid."
+        "message": "Login failed / Invalid auth token"
       },
       {
-        "message": "User not logged in / Insufficient permissions",
+        "_content": "The method requires user authentication but the user was not logged in, or the authenticated method call did not have the required permissions.",
         "code": 99,
-        "_content": "The method requires user authentication but the user was not logged in, or the authenticated method call did not have the required permissions."
+        "message": "User not logged in / Insufficient permissions"
       },
       {
-        "message": "Invalid API Key",
+        "_content": "The API key passed was not valid or has expired.",
         "code": 100,
-        "_content": "The API key passed was not valid or has expired."
+        "message": "Invalid API Key"
       },
       {
-        "message": "Service currently unavailable",
+        "_content": "The requested service is temporarily unavailable.",
         "code": 105,
-        "_content": "The requested service is temporarily unavailable."
+        "message": "Service currently unavailable"
       },
       {
-        "message": "Write operation failed",
+        "_content": "The requested operation failed due to a temporary issue.",
         "code": 106,
-        "_content": "The requested operation failed due to a temporary issue."
+        "message": "Write operation failed"
       },
       {
-        "message": "Format \"xxx\" not found",
+        "_content": "The requested response format was not found.",
         "code": 111,
-        "_content": "The requested response format was not found."
+        "message": "Format \"xxx\" not found"
       },
       {
-        "message": "Method \"xxx\" not found",
+        "_content": "The requested method was not found.",
         "code": 112,
-        "_content": "The requested method was not found."
+        "message": "Method \"xxx\" not found"
       },
       {
-        "message": "Invalid SOAP envelope",
+        "_content": "The SOAP envelope send in the request could not be parsed.",
         "code": 114,
-        "_content": "The SOAP envelope send in the request could not be parsed."
+        "message": "Invalid SOAP envelope"
       },
       {
-        "message": "Invalid XML-RPC Method Call",
+        "_content": "The XML-RPC request document could not be parsed.",
         "code": 115,
-        "_content": "The XML-RPC request document could not be parsed."
+        "message": "Invalid XML-RPC Method Call"
       },
       {
-        "message": "Bad URL found",
+        "_content": "One or more arguments contained a URL that has been used for abuse on Flickr.",
         "code": 116,
-        "_content": "One or more arguments contained a URL that has been used for abuse on Flickr."
+        "message": "Bad URL found"
       }
     ]
   },
-  "arguments": {
-    "argument": [
-      {
-        "optional": 0,
-        "name": "api_key",
-        "_content": "Your API application key. <a href=\"/services/api/misc.api_keys.html\">See here</a> for more details."
-      },
-      {
-        "optional": "0",
-        "name": "group_id",
-        "_content": "Pass in the group id to where the topic belongs. Can be NSID or group alias. Making this parameter optional for legacy reasons, but it is highly recommended to pass this in to get faster performance. "
-      },
-      {
-        "optional": "0",
-        "name": "topic_id",
-        "_content": "The ID of the topic the post is in."
-      },
-      {
-        "optional": "0",
-        "name": "reply_id",
-        "_content": "The ID of the reply to delete."
-      }
-    ]
-  }
+  "method": {
+    "description": {
+      "_content": "Delete a reply from a group topic."
+    },
+    "name": "flickr.groups.discuss.replies.delete",
+    "needslogin": 1,
+    "needssigning": 1,
+    "requiredperms": "3"
+  },
+  "stat": "ok"
 }

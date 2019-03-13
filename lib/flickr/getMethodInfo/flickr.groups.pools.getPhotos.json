@@ -1,118 +1,118 @@
 {
-  "stat": "ok",
-  "method": {
-    "response": {
-      "_content": "<photos page=\"1\" pages=\"1\" perpage=\"1\" total=\"1\">\n\t<photo id=\"2645\" owner=\"12037949754@N01\" title=\"36679_o\"\n\tsecret=\"a9f4a06091\" server=\"2\"\n\tispublic=\"1\" isfriend=\"0\" isfamily=\"0\"\n\townername=\"Bees / ?\" dateadded=\"1089918707\" /> \n</photos>"
-    },
-    "requiredperms": 0,
-    "needssigning": 0,
-    "needslogin": 0,
-    "name": "flickr.groups.pools.getPhotos",
-    "description": {
-      "_content": "Returns a list of pool photos for a given group, based on the permissions of the group and the user logged in (if any)."
-    }
+  "arguments": {
+    "argument": [
+      {
+        "_content": "Your API application key. <a href=\"/services/api/misc.api_keys.html\">See here</a> for more details.",
+        "name": "api_key",
+        "optional": 0
+      },
+      {
+        "_content": "The id of the group who's pool you which to get the photo list for.",
+        "name": "group_id",
+        "optional": "0"
+      },
+      {
+        "_content": "A tag to filter the pool with. At the moment only one tag at a time is supported.",
+        "name": "tags",
+        "optional": "1"
+      },
+      {
+        "_content": "The nsid of a user. Specifiying this parameter will retrieve for you only those photos that the user has contributed to the group pool.",
+        "name": "user_id",
+        "optional": "1"
+      },
+      {
+        "_content": "A comma-delimited list of extra information to fetch for each returned record. Currently supported fields are: <code>description</code>, <code>license</code>, <code>date_upload</code>, <code>date_taken</code>, <code>owner_name</code>, <code>icon_server</code>, <code>original_format</code>, <code>last_update</code>, <code>geo</code>, <code>tags</code>, <code>machine_tags</code>, <code>o_dims</code>, <code>views</code>, <code>media</code>, <code>path_alias</code>, <code>url_sq</code>, <code>url_t</code>, <code>url_s</code>, <code>url_q</code>, <code>url_m</code>, <code>url_n</code>, <code>url_z</code>, <code>url_c</code>, <code>url_l</code>, <code>url_o</code>",
+        "name": "extras",
+        "optional": 1
+      },
+      {
+        "_content": "Number of photos to return per page. If this argument is omitted, it defaults to 100. The maximum allowed value is 500.",
+        "name": "per_page",
+        "optional": 1
+      },
+      {
+        "_content": "The page of results to return. If this argument is omitted, it defaults to 1.",
+        "name": "page",
+        "optional": 1
+      }
+    ]
   },
   "errors": {
     "error": [
       {
-        "message": "Group not found",
+        "_content": "The group id passed was not a valid group id.",
         "code": "1",
-        "_content": "The group id passed was not a valid group id."
+        "message": "Group not found"
       },
       {
-        "message": "You don't have permission to view this pool",
+        "_content": "The logged in user (if any) does not have permission to view the pool for this group.",
         "code": "2",
-        "_content": "The logged in user (if any) does not have permission to view the pool for this group."
+        "message": "You don't have permission to view this pool"
       },
       {
-        "message": "Unknown user",
+        "_content": "The user specified by user_id does not exist.",
         "code": "3",
-        "_content": "The user specified by user_id does not exist."
+        "message": "Unknown user"
       },
       {
-        "message": "Group/pool is member only",
+        "_content": "",
         "code": "4",
-        "_content": ""
+        "message": "Group/pool is member only"
       },
       {
-        "message": "Invalid API Key",
+        "_content": "The API key passed was not valid or has expired.",
         "code": 100,
-        "_content": "The API key passed was not valid or has expired."
+        "message": "Invalid API Key"
       },
       {
-        "message": "Service currently unavailable",
+        "_content": "The requested service is temporarily unavailable.",
         "code": 105,
-        "_content": "The requested service is temporarily unavailable."
+        "message": "Service currently unavailable"
       },
       {
-        "message": "Write operation failed",
+        "_content": "The requested operation failed due to a temporary issue.",
         "code": 106,
-        "_content": "The requested operation failed due to a temporary issue."
+        "message": "Write operation failed"
       },
       {
-        "message": "Format \"xxx\" not found",
+        "_content": "The requested response format was not found.",
         "code": 111,
-        "_content": "The requested response format was not found."
+        "message": "Format \"xxx\" not found"
       },
       {
-        "message": "Method \"xxx\" not found",
+        "_content": "The requested method was not found.",
         "code": 112,
-        "_content": "The requested method was not found."
+        "message": "Method \"xxx\" not found"
       },
       {
-        "message": "Invalid SOAP envelope",
+        "_content": "The SOAP envelope send in the request could not be parsed.",
         "code": 114,
-        "_content": "The SOAP envelope send in the request could not be parsed."
+        "message": "Invalid SOAP envelope"
       },
       {
-        "message": "Invalid XML-RPC Method Call",
+        "_content": "The XML-RPC request document could not be parsed.",
         "code": 115,
-        "_content": "The XML-RPC request document could not be parsed."
+        "message": "Invalid XML-RPC Method Call"
       },
       {
-        "message": "Bad URL found",
+        "_content": "One or more arguments contained a URL that has been used for abuse on Flickr.",
         "code": 116,
-        "_content": "One or more arguments contained a URL that has been used for abuse on Flickr."
+        "message": "Bad URL found"
       }
     ]
   },
-  "arguments": {
-    "argument": [
-      {
-        "optional": 0,
-        "name": "api_key",
-        "_content": "Your API application key. <a href=\"/services/api/misc.api_keys.html\">See here</a> for more details."
-      },
-      {
-        "optional": "0",
-        "name": "group_id",
-        "_content": "The id of the group who's pool you which to get the photo list for."
-      },
-      {
-        "optional": "1",
-        "name": "tags",
-        "_content": "A tag to filter the pool with. At the moment only one tag at a time is supported."
-      },
-      {
-        "optional": "1",
-        "name": "user_id",
-        "_content": "The nsid of a user. Specifiying this parameter will retrieve for you only those photos that the user has contributed to the group pool."
-      },
-      {
-        "optional": 1,
-        "name": "extras",
-        "_content": "A comma-delimited list of extra information to fetch for each returned record. Currently supported fields are: <code>description</code>, <code>license</code>, <code>date_upload</code>, <code>date_taken</code>, <code>owner_name</code>, <code>icon_server</code>, <code>original_format</code>, <code>last_update</code>, <code>geo</code>, <code>tags</code>, <code>machine_tags</code>, <code>o_dims</code>, <code>views</code>, <code>media</code>, <code>path_alias</code>, <code>url_sq</code>, <code>url_t</code>, <code>url_s</code>, <code>url_q</code>, <code>url_m</code>, <code>url_n</code>, <code>url_z</code>, <code>url_c</code>, <code>url_l</code>, <code>url_o</code>"
-      },
-      {
-        "optional": 1,
-        "name": "per_page",
-        "_content": "Number of photos to return per page. If this argument is omitted, it defaults to 100. The maximum allowed value is 500."
-      },
-      {
-        "optional": 1,
-        "name": "page",
-        "_content": "The page of results to return. If this argument is omitted, it defaults to 1."
-      }
-    ]
-  }
+  "method": {
+    "description": {
+      "_content": "Returns a list of pool photos for a given group, based on the permissions of the group and the user logged in (if any)."
+    },
+    "name": "flickr.groups.pools.getPhotos",
+    "needslogin": 0,
+    "needssigning": 0,
+    "requiredperms": 0,
+    "response": {
+      "_content": "<photos page=\"1\" pages=\"1\" perpage=\"1\" total=\"1\">\n\t<photo id=\"2645\" owner=\"12037949754@N01\" title=\"36679_o\"\n\tsecret=\"a9f4a06091\" server=\"2\"\n\tispublic=\"1\" isfriend=\"0\" isfamily=\"0\"\n\townername=\"Bees / ?\" dateadded=\"1089918707\" /> \n</photos>"
+    }
+  },
+  "stat": "ok"
 }

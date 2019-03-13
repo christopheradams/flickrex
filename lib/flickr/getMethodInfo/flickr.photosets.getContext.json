@@ -1,91 +1,91 @@
 {
-  "stat": "ok",
-  "method": {
-    "response": {
-      "_content": "<prevphoto id=\"2980\" secret=\"973da1e709\"\n\ttitle=\"boo!\" url=\"/photos/bees/2980/\" /> \n<nextphoto id=\"2985\" secret=\"059b664012\"\n\ttitle=\"Amsterdam Amstel\" url=\"/photos/bees/2985/\" /> "
-    },
-    "requiredperms": 0,
-    "needssigning": 0,
-    "needslogin": 0,
-    "name": "flickr.photosets.getContext",
-    "explanation": {
-      "_content": "<p>See <a href=\"/services/api/flickr.photos.getContext.html\">flickr.photos.getContext</a></p>"
-    },
-    "description": {
-      "_content": "Returns next and previous photos for a photo in a set."
-    }
+  "arguments": {
+    "argument": [
+      {
+        "_content": "Your API application key. <a href=\"/services/api/misc.api_keys.html\">See here</a> for more details.",
+        "name": "api_key",
+        "optional": 0
+      },
+      {
+        "_content": "The id of the photo to fetch the context for.",
+        "name": "photo_id",
+        "optional": "0"
+      },
+      {
+        "_content": "The id of the photoset for which to fetch the photo's context.",
+        "name": "photoset_id",
+        "optional": "0"
+      }
+    ]
   },
   "errors": {
     "error": [
       {
-        "message": "Photo not found",
+        "_content": "The photo id passed was not a valid photo id, or was the id of a photo that the calling user does not have permission to view.",
         "code": "1",
-        "_content": "The photo id passed was not a valid photo id, or was the id of a photo that the calling user does not have permission to view."
+        "message": "Photo not found"
       },
       {
-        "message": "Photo not in set",
+        "_content": "The specified photo is not in the specified set.",
         "code": "2",
-        "_content": "The specified photo is not in the specified set."
+        "message": "Photo not in set"
       },
       {
-        "message": "Invalid API Key",
+        "_content": "The API key passed was not valid or has expired.",
         "code": 100,
-        "_content": "The API key passed was not valid or has expired."
+        "message": "Invalid API Key"
       },
       {
-        "message": "Service currently unavailable",
+        "_content": "The requested service is temporarily unavailable.",
         "code": 105,
-        "_content": "The requested service is temporarily unavailable."
+        "message": "Service currently unavailable"
       },
       {
-        "message": "Write operation failed",
+        "_content": "The requested operation failed due to a temporary issue.",
         "code": 106,
-        "_content": "The requested operation failed due to a temporary issue."
+        "message": "Write operation failed"
       },
       {
-        "message": "Format \"xxx\" not found",
+        "_content": "The requested response format was not found.",
         "code": 111,
-        "_content": "The requested response format was not found."
+        "message": "Format \"xxx\" not found"
       },
       {
-        "message": "Method \"xxx\" not found",
+        "_content": "The requested method was not found.",
         "code": 112,
-        "_content": "The requested method was not found."
+        "message": "Method \"xxx\" not found"
       },
       {
-        "message": "Invalid SOAP envelope",
+        "_content": "The SOAP envelope send in the request could not be parsed.",
         "code": 114,
-        "_content": "The SOAP envelope send in the request could not be parsed."
+        "message": "Invalid SOAP envelope"
       },
       {
-        "message": "Invalid XML-RPC Method Call",
+        "_content": "The XML-RPC request document could not be parsed.",
         "code": 115,
-        "_content": "The XML-RPC request document could not be parsed."
+        "message": "Invalid XML-RPC Method Call"
       },
       {
-        "message": "Bad URL found",
+        "_content": "One or more arguments contained a URL that has been used for abuse on Flickr.",
         "code": 116,
-        "_content": "One or more arguments contained a URL that has been used for abuse on Flickr."
+        "message": "Bad URL found"
       }
     ]
   },
-  "arguments": {
-    "argument": [
-      {
-        "optional": 0,
-        "name": "api_key",
-        "_content": "Your API application key. <a href=\"/services/api/misc.api_keys.html\">See here</a> for more details."
-      },
-      {
-        "optional": "0",
-        "name": "photo_id",
-        "_content": "The id of the photo to fetch the context for."
-      },
-      {
-        "optional": "0",
-        "name": "photoset_id",
-        "_content": "The id of the photoset for which to fetch the photo's context."
-      }
-    ]
-  }
+  "method": {
+    "description": {
+      "_content": "Returns next and previous photos for a photo in a set."
+    },
+    "explanation": {
+      "_content": "<p>See <a href=\"/services/api/flickr.photos.getContext.html\">flickr.photos.getContext</a></p>"
+    },
+    "name": "flickr.photosets.getContext",
+    "needslogin": 0,
+    "needssigning": 0,
+    "requiredperms": 0,
+    "response": {
+      "_content": "<prevphoto id=\"2980\" secret=\"973da1e709\"\n\ttitle=\"boo!\" url=\"/photos/bees/2980/\" /> \n<nextphoto id=\"2985\" secret=\"059b664012\"\n\ttitle=\"Amsterdam Amstel\" url=\"/photos/bees/2985/\" /> "
+    }
+  },
+  "stat": "ok"
 }

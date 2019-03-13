@@ -1,118 +1,118 @@
 {
-  "stat": "ok",
-  "method": {
-    "response": {
-      "_content": "<photoset id=\"4\" primary=\"2483\" page=\"1\" perpage=\"500\" pages=\"1\" total=\"2\">\n\t<photo id=\"2484\" secret=\"123456\" server=\"1\"\n\t\ttitle=\"my photo\" isprimary=\"0\" /> \n\t<photo id=\"2483\" secret=\"123456\" server=\"1\"\n\t\ttitle=\"flickr rocks\" isprimary=\"1\" /> \n</photoset>"
-    },
-    "requiredperms": 0,
-    "needssigning": 0,
-    "needslogin": 0,
-    "name": "flickr.photosets.getPhotos",
-    "description": {
-      "_content": "Get the list of photos in a set."
-    }
+  "arguments": {
+    "argument": [
+      {
+        "_content": "Your API application key. <a href=\"/services/api/misc.api_keys.html\">See here</a> for more details.",
+        "name": "api_key",
+        "optional": 0
+      },
+      {
+        "_content": "The id of the photoset to return the photos for.",
+        "name": "photoset_id",
+        "optional": "0"
+      },
+      {
+        "_content": "The user_id here is the owner of the set passed in photoset_id.",
+        "name": "user_id",
+        "optional": "0"
+      },
+      {
+        "_content": "A comma-delimited list of extra information to fetch for each returned record. Currently supported fields are: license, date_upload, date_taken, owner_name, icon_server, original_format, last_update, geo, tags, machine_tags, o_dims, views, media, path_alias, url_sq, url_t, url_s, url_m, url_o",
+        "name": "extras",
+        "optional": "1"
+      },
+      {
+        "_content": "Number of photos to return per page. If this argument is omitted, it defaults to 500. The maximum allowed value is 500.",
+        "name": "per_page",
+        "optional": "1"
+      },
+      {
+        "_content": "The page of results to return. If this argument is omitted, it defaults to 1.",
+        "name": "page",
+        "optional": "1"
+      },
+      {
+        "_content": "Return photos only matching a certain privacy level. This only applies when making an authenticated call to view a photoset you own. Valid values are:\n<ul>\n<li>1 public photos</li>\n<li>2 private photos visible to friends</li>\n<li>3 private photos visible to family</li>\n<li>4 private photos visible to friends &amp; family</li>\n<li>5 completely private photos</li>\n</ul>\n",
+        "name": "privacy_filter",
+        "optional": "1"
+      },
+      {
+        "_content": "Filter results by media type. Possible values are <code>all</code> (default), <code>photos</code> or <code>videos</code>",
+        "name": "media",
+        "optional": "1"
+      }
+    ]
   },
   "errors": {
     "error": [
       {
-        "message": "Photoset not found",
+        "_content": "The photoset id passed was not a valid photoset id.",
         "code": "1",
-        "_content": "The photoset id passed was not a valid photoset id."
+        "message": "Photoset not found"
       },
       {
-        "message": "User not found",
+        "_content": "",
         "code": "2",
-        "_content": ""
+        "message": "User not found"
       },
       {
-        "message": "Conflicting photoset IDs received",
+        "_content": "Both share_code and photoset_id are provided, and the photoset_id doesn't match the photoset ID referred to by the share_code",
         "code": "3",
-        "_content": "Both share_code and photoset_id are provided, and the photoset_id doesn't match the photoset ID referred to by the share_code"
+        "message": "Conflicting photoset IDs received"
       },
       {
-        "message": "Invalid API Key",
+        "_content": "The API key passed was not valid or has expired.",
         "code": 100,
-        "_content": "The API key passed was not valid or has expired."
+        "message": "Invalid API Key"
       },
       {
-        "message": "Service currently unavailable",
+        "_content": "The requested service is temporarily unavailable.",
         "code": 105,
-        "_content": "The requested service is temporarily unavailable."
+        "message": "Service currently unavailable"
       },
       {
-        "message": "Write operation failed",
+        "_content": "The requested operation failed due to a temporary issue.",
         "code": 106,
-        "_content": "The requested operation failed due to a temporary issue."
+        "message": "Write operation failed"
       },
       {
-        "message": "Format \"xxx\" not found",
+        "_content": "The requested response format was not found.",
         "code": 111,
-        "_content": "The requested response format was not found."
+        "message": "Format \"xxx\" not found"
       },
       {
-        "message": "Method \"xxx\" not found",
+        "_content": "The requested method was not found.",
         "code": 112,
-        "_content": "The requested method was not found."
+        "message": "Method \"xxx\" not found"
       },
       {
-        "message": "Invalid SOAP envelope",
+        "_content": "The SOAP envelope send in the request could not be parsed.",
         "code": 114,
-        "_content": "The SOAP envelope send in the request could not be parsed."
+        "message": "Invalid SOAP envelope"
       },
       {
-        "message": "Invalid XML-RPC Method Call",
+        "_content": "The XML-RPC request document could not be parsed.",
         "code": 115,
-        "_content": "The XML-RPC request document could not be parsed."
+        "message": "Invalid XML-RPC Method Call"
       },
       {
-        "message": "Bad URL found",
+        "_content": "One or more arguments contained a URL that has been used for abuse on Flickr.",
         "code": 116,
-        "_content": "One or more arguments contained a URL that has been used for abuse on Flickr."
+        "message": "Bad URL found"
       }
     ]
   },
-  "arguments": {
-    "argument": [
-      {
-        "optional": 0,
-        "name": "api_key",
-        "_content": "Your API application key. <a href=\"/services/api/misc.api_keys.html\">See here</a> for more details."
-      },
-      {
-        "optional": "0",
-        "name": "photoset_id",
-        "_content": "The id of the photoset to return the photos for."
-      },
-      {
-        "optional": "0",
-        "name": "user_id",
-        "_content": "The user_id here is the owner of the set passed in photoset_id."
-      },
-      {
-        "optional": "1",
-        "name": "extras",
-        "_content": "A comma-delimited list of extra information to fetch for each returned record. Currently supported fields are: license, date_upload, date_taken, owner_name, icon_server, original_format, last_update, geo, tags, machine_tags, o_dims, views, media, path_alias, url_sq, url_t, url_s, url_m, url_o"
-      },
-      {
-        "optional": "1",
-        "name": "per_page",
-        "_content": "Number of photos to return per page. If this argument is omitted, it defaults to 500. The maximum allowed value is 500."
-      },
-      {
-        "optional": "1",
-        "name": "page",
-        "_content": "The page of results to return. If this argument is omitted, it defaults to 1."
-      },
-      {
-        "optional": "1",
-        "name": "privacy_filter",
-        "_content": "Return photos only matching a certain privacy level. This only applies when making an authenticated call to view a photoset you own. Valid values are:\n<ul>\n<li>1 public photos</li>\n<li>2 private photos visible to friends</li>\n<li>3 private photos visible to family</li>\n<li>4 private photos visible to friends &amp; family</li>\n<li>5 completely private photos</li>\n</ul>\n"
-      },
-      {
-        "optional": "1",
-        "name": "media",
-        "_content": "Filter results by media type. Possible values are <code>all</code> (default), <code>photos</code> or <code>videos</code>"
-      }
-    ]
-  }
+  "method": {
+    "description": {
+      "_content": "Get the list of photos in a set."
+    },
+    "name": "flickr.photosets.getPhotos",
+    "needslogin": 0,
+    "needssigning": 0,
+    "requiredperms": 0,
+    "response": {
+      "_content": "<photoset id=\"4\" primary=\"2483\" page=\"1\" perpage=\"500\" pages=\"1\" total=\"2\">\n\t<photo id=\"2484\" secret=\"123456\" server=\"1\"\n\t\ttitle=\"my photo\" isprimary=\"0\" /> \n\t<photo id=\"2483\" secret=\"123456\" server=\"1\"\n\t\ttitle=\"flickr rocks\" isprimary=\"1\" /> \n</photoset>"
+    }
+  },
+  "stat": "ok"
 }

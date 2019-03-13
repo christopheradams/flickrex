@@ -1,173 +1,173 @@
 {
-  "stat": "ok",
-  "method": {
-    "response": {
-      "_content": "<places total=\"1\">\n   <place place_id=\"kH8dLOubBZRvX_YZ\" woeid=\"2487956\"\n               latitude=\"37.779\" longitude=\"-122.420\"\n               place_url=\"/United+States/California/San+Francisco\"\n               place_type=\"locality\"\n               photo_count=\"156\">San Francisco, California</place>\n</places>"
-    },
-    "requiredperms": "1",
-    "needssigning": 1,
-    "needslogin": 1,
-    "name": "flickr.places.placesForContacts",
-    "description": {
-      "_content": "Return a list of the top 100 unique places clustered by a given placetype for a user's contacts. "
-    }
+  "arguments": {
+    "argument": [
+      {
+        "_content": "Your API application key. <a href=\"/services/api/misc.api_keys.html\">See here</a> for more details.",
+        "name": "api_key",
+        "optional": 0
+      },
+      {
+        "_content": "A specific place type to cluster photos by. <br /><br />\n\nValid place types are :\n\n<ul>\n<li><strong>neighbourhood</strong> (and neighborhood)</li>\n<li><strong>locality</strong></li>\n<li><strong>region</strong></li>\n<li><strong>country</strong></li>\n<li><strong>continent</strong></li>\n</ul>\n<br />\n<span style=\"font-style:italic;\">The \"place_type\" argument has been deprecated in favor of the \"place_type_id\" argument. It won't go away but it will not be added to new methods. A complete list of place type IDs is available using the <a href=\"http://www.flickr.com/services/api/flickr.places.getPlaceTypes.html\">flickr.places.getPlaceTypes</a> method. (While optional, you must pass either a valid place type or place type ID.)</span>",
+        "name": "place_type",
+        "optional": "1"
+      },
+      {
+        "_content": "The numeric ID for a specific place type to cluster photos by. <br /><br />\n\nValid place type IDs are :\n\n<ul>\n<li><strong>22</strong>: neighbourhood</li>\n<li><strong>7</strong>: locality</li>\n<li><strong>8</strong>: region</li>\n<li><strong>12</strong>: country</li>\n<li><strong>29</strong>: continent</li>\n</ul>\n<br /><span style=\"font-style:italic;\">(While optional, you must pass either a valid place type or place type ID.)</span>",
+        "name": "place_type_id",
+        "optional": "1"
+      },
+      {
+        "_content": "A Where on Earth identifier to use to filter photo clusters. For example all the photos clustered by <strong>locality</strong> in the United States (WOE ID <strong>23424977</strong>).<br /><br />\n<span style=\"font-style:italic;\">(While optional, you must pass either a valid Places ID or a WOE ID.)</span>",
+        "name": "woe_id",
+        "optional": "1"
+      },
+      {
+        "_content": "A Flickr Places identifier to use to filter photo clusters. For example all the photos clustered by <strong>locality</strong> in the United States (Place ID <strong>4KO02SibApitvSBieQ</strong>).\n<br /><br />\n<span style=\"font-style:italic;\">(While optional, you must pass either a valid Places ID or a WOE ID.)</span>",
+        "name": "place_id",
+        "optional": "1"
+      },
+      {
+        "_content": "The minimum number of photos that a place type must have to be included. If the number of photos is lowered then the parent place type for that place will be used.<br /><br />\n\nFor example if your contacts only have <strong>3</strong> photos taken in the locality of Montreal</strong> (WOE ID 3534) but your threshold is set to <strong>5</strong> then those photos will be \"rolled up\" and included instead with a place record for the region of Quebec (WOE ID 2344924).",
+        "name": "threshold",
+        "optional": "1"
+      },
+      {
+        "_content": "Search your contacts. Either 'all' or 'ff' for just friends and family. (Default is all)",
+        "name": "contacts",
+        "optional": "1"
+      },
+      {
+        "_content": "Minimum upload date. Photos with an upload date greater than or equal to this value will be returned. The date should be in the form of a unix timestamp.",
+        "name": "min_upload_date",
+        "optional": "1"
+      },
+      {
+        "_content": "Maximum upload date. Photos with an upload date less than or equal to this value will be returned. The date should be in the form of a unix timestamp.",
+        "name": "max_upload_date",
+        "optional": "1"
+      },
+      {
+        "_content": "Minimum taken date. Photos with an taken date greater than or equal to this value will be returned. The date should be in the form of a mysql datetime.",
+        "name": "min_taken_date",
+        "optional": "1"
+      },
+      {
+        "_content": "Maximum taken date. Photos with an taken date less than or equal to this value will be returned. The date should be in the form of a mysql datetime.",
+        "name": "max_taken_date",
+        "optional": "1"
+      }
+    ]
   },
   "errors": {
     "error": [
       {
-        "message": "Places for contacts are not available at this time",
+        "_content": "Places for contacts have been disabled or are otherwise not available.",
         "code": "1",
-        "_content": "Places for contacts have been disabled or are otherwise not available."
+        "message": "Places for contacts are not available at this time"
       },
       {
-        "message": "Required parameter missing",
+        "_content": "One or more of the required parameters was not included with your request.",
         "code": "2",
-        "_content": "One or more of the required parameters was not included with your request."
+        "message": "Required parameter missing"
       },
       {
-        "message": "Not a valid place type.",
+        "_content": "An invalid place type was included with your request.",
         "code": "3",
-        "_content": "An invalid place type was included with your request."
+        "message": "Not a valid place type."
       },
       {
-        "message": "Not a valid Place ID",
+        "_content": "An invalid Places (or WOE) identifier was included with your request.",
         "code": "4",
-        "_content": "An invalid Places (or WOE) identifier was included with your request."
+        "message": "Not a valid Place ID"
       },
       {
-        "message": "Not a valid threshold",
+        "_content": "The threshold passed was invalid. ",
         "code": "5",
-        "_content": "The threshold passed was invalid. "
+        "message": "Not a valid threshold"
       },
       {
-        "message": "Not a valid contacts type",
+        "_content": "Contacts must be either \"all\" or \"ff\" (friends and family).",
         "code": "6",
-        "_content": "Contacts must be either \"all\" or \"ff\" (friends and family)."
+        "message": "Not a valid contacts type"
       },
       {
-        "message": "SSL is required",
+        "_content": "SSL is required to access the Flickr API.",
         "code": 95,
-        "_content": "SSL is required to access the Flickr API."
+        "message": "SSL is required"
       },
       {
-        "message": "Invalid signature",
+        "_content": "The passed signature was invalid.",
         "code": 96,
-        "_content": "The passed signature was invalid."
+        "message": "Invalid signature"
       },
       {
-        "message": "Missing signature",
+        "_content": "The call required signing but no signature was sent.",
         "code": 97,
-        "_content": "The call required signing but no signature was sent."
+        "message": "Missing signature"
       },
       {
-        "message": "Login failed / Invalid auth token",
+        "_content": "The login details or auth token passed were invalid.",
         "code": 98,
-        "_content": "The login details or auth token passed were invalid."
+        "message": "Login failed / Invalid auth token"
       },
       {
-        "message": "User not logged in / Insufficient permissions",
+        "_content": "The method requires user authentication but the user was not logged in, or the authenticated method call did not have the required permissions.",
         "code": 99,
-        "_content": "The method requires user authentication but the user was not logged in, or the authenticated method call did not have the required permissions."
+        "message": "User not logged in / Insufficient permissions"
       },
       {
-        "message": "Invalid API Key",
+        "_content": "The API key passed was not valid or has expired.",
         "code": 100,
-        "_content": "The API key passed was not valid or has expired."
+        "message": "Invalid API Key"
       },
       {
-        "message": "Service currently unavailable",
+        "_content": "The requested service is temporarily unavailable.",
         "code": 105,
-        "_content": "The requested service is temporarily unavailable."
+        "message": "Service currently unavailable"
       },
       {
-        "message": "Write operation failed",
+        "_content": "The requested operation failed due to a temporary issue.",
         "code": 106,
-        "_content": "The requested operation failed due to a temporary issue."
+        "message": "Write operation failed"
       },
       {
-        "message": "Format \"xxx\" not found",
+        "_content": "The requested response format was not found.",
         "code": 111,
-        "_content": "The requested response format was not found."
+        "message": "Format \"xxx\" not found"
       },
       {
-        "message": "Method \"xxx\" not found",
+        "_content": "The requested method was not found.",
         "code": 112,
-        "_content": "The requested method was not found."
+        "message": "Method \"xxx\" not found"
       },
       {
-        "message": "Invalid SOAP envelope",
+        "_content": "The SOAP envelope send in the request could not be parsed.",
         "code": 114,
-        "_content": "The SOAP envelope send in the request could not be parsed."
+        "message": "Invalid SOAP envelope"
       },
       {
-        "message": "Invalid XML-RPC Method Call",
+        "_content": "The XML-RPC request document could not be parsed.",
         "code": 115,
-        "_content": "The XML-RPC request document could not be parsed."
+        "message": "Invalid XML-RPC Method Call"
       },
       {
-        "message": "Bad URL found",
+        "_content": "One or more arguments contained a URL that has been used for abuse on Flickr.",
         "code": 116,
-        "_content": "One or more arguments contained a URL that has been used for abuse on Flickr."
+        "message": "Bad URL found"
       }
     ]
   },
-  "arguments": {
-    "argument": [
-      {
-        "optional": 0,
-        "name": "api_key",
-        "_content": "Your API application key. <a href=\"/services/api/misc.api_keys.html\">See here</a> for more details."
-      },
-      {
-        "optional": "1",
-        "name": "place_type",
-        "_content": "A specific place type to cluster photos by. <br /><br />\n\nValid place types are :\n\n<ul>\n<li><strong>neighbourhood</strong> (and neighborhood)</li>\n<li><strong>locality</strong></li>\n<li><strong>region</strong></li>\n<li><strong>country</strong></li>\n<li><strong>continent</strong></li>\n</ul>\n<br />\n<span style=\"font-style:italic;\">The \"place_type\" argument has been deprecated in favor of the \"place_type_id\" argument. It won't go away but it will not be added to new methods. A complete list of place type IDs is available using the <a href=\"http://www.flickr.com/services/api/flickr.places.getPlaceTypes.html\">flickr.places.getPlaceTypes</a> method. (While optional, you must pass either a valid place type or place type ID.)</span>"
-      },
-      {
-        "optional": "1",
-        "name": "place_type_id",
-        "_content": "The numeric ID for a specific place type to cluster photos by. <br /><br />\n\nValid place type IDs are :\n\n<ul>\n<li><strong>22</strong>: neighbourhood</li>\n<li><strong>7</strong>: locality</li>\n<li><strong>8</strong>: region</li>\n<li><strong>12</strong>: country</li>\n<li><strong>29</strong>: continent</li>\n</ul>\n<br /><span style=\"font-style:italic;\">(While optional, you must pass either a valid place type or place type ID.)</span>"
-      },
-      {
-        "optional": "1",
-        "name": "woe_id",
-        "_content": "A Where on Earth identifier to use to filter photo clusters. For example all the photos clustered by <strong>locality</strong> in the United States (WOE ID <strong>23424977</strong>).<br /><br />\n<span style=\"font-style:italic;\">(While optional, you must pass either a valid Places ID or a WOE ID.)</span>"
-      },
-      {
-        "optional": "1",
-        "name": "place_id",
-        "_content": "A Flickr Places identifier to use to filter photo clusters. For example all the photos clustered by <strong>locality</strong> in the United States (Place ID <strong>4KO02SibApitvSBieQ</strong>).\n<br /><br />\n<span style=\"font-style:italic;\">(While optional, you must pass either a valid Places ID or a WOE ID.)</span>"
-      },
-      {
-        "optional": "1",
-        "name": "threshold",
-        "_content": "The minimum number of photos that a place type must have to be included. If the number of photos is lowered then the parent place type for that place will be used.<br /><br />\n\nFor example if your contacts only have <strong>3</strong> photos taken in the locality of Montreal</strong> (WOE ID 3534) but your threshold is set to <strong>5</strong> then those photos will be \"rolled up\" and included instead with a place record for the region of Quebec (WOE ID 2344924)."
-      },
-      {
-        "optional": "1",
-        "name": "contacts",
-        "_content": "Search your contacts. Either 'all' or 'ff' for just friends and family. (Default is all)"
-      },
-      {
-        "optional": "1",
-        "name": "min_upload_date",
-        "_content": "Minimum upload date. Photos with an upload date greater than or equal to this value will be returned. The date should be in the form of a unix timestamp."
-      },
-      {
-        "optional": "1",
-        "name": "max_upload_date",
-        "_content": "Maximum upload date. Photos with an upload date less than or equal to this value will be returned. The date should be in the form of a unix timestamp."
-      },
-      {
-        "optional": "1",
-        "name": "min_taken_date",
-        "_content": "Minimum taken date. Photos with an taken date greater than or equal to this value will be returned. The date should be in the form of a mysql datetime."
-      },
-      {
-        "optional": "1",
-        "name": "max_taken_date",
-        "_content": "Maximum taken date. Photos with an taken date less than or equal to this value will be returned. The date should be in the form of a mysql datetime."
-      }
-    ]
-  }
+  "method": {
+    "description": {
+      "_content": "Return a list of the top 100 unique places clustered by a given placetype for a user's contacts. "
+    },
+    "name": "flickr.places.placesForContacts",
+    "needslogin": 1,
+    "needssigning": 1,
+    "requiredperms": "1",
+    "response": {
+      "_content": "<places total=\"1\">\n   <place place_id=\"kH8dLOubBZRvX_YZ\" woeid=\"2487956\"\n               latitude=\"37.779\" longitude=\"-122.420\"\n               place_url=\"/United+States/California/San+Francisco\"\n               place_type=\"locality\"\n               photo_count=\"156\">San Francisco, California</place>\n</places>"
+    }
+  },
+  "stat": "ok"
 }

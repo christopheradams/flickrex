@@ -1,150 +1,150 @@
 {
-  "stat": "ok",
-  "method": {
-    "requiredperms": "2",
-    "needssigning": 1,
-    "needslogin": 1,
-    "name": "flickr.photos.geo.setLocation",
-    "description": {
-      "_content": "Sets the geo data (latitude and longitude and, optionally, the accuracy level) for a photo.\n\nBefore users may assign location data to a photo they must define who, by default, may view that information. Users can edit this preference at <a href=\"http://www.flickr.com/account/geo/privacy/\">http://www.flickr.com/account/geo/privacy/</a>. If a user has not set this preference, the API method will return an error."
-    }
+  "arguments": {
+    "argument": [
+      {
+        "_content": "Your API application key. <a href=\"/services/api/misc.api_keys.html\">See here</a> for more details.",
+        "name": "api_key",
+        "optional": 0
+      },
+      {
+        "_content": "The id of the photo to set location data for.",
+        "name": "photo_id",
+        "optional": "0"
+      },
+      {
+        "_content": "The latitude whose valid range is -90 to 90. Anything more than 6 decimal places will be truncated.",
+        "name": "lat",
+        "optional": "0"
+      },
+      {
+        "_content": "The longitude whose valid range is -180 to 180. Anything more than 6 decimal places will be truncated.",
+        "name": "lon",
+        "optional": "0"
+      },
+      {
+        "_content": "Recorded accuracy level of the location information. World level is 1, Country is ~3, Region ~6, City ~11, Street ~16. Current range is 1-16. Defaults to 16 if not specified.",
+        "name": "accuracy",
+        "optional": "1"
+      },
+      {
+        "_content": "Context is a numeric value representing the photo's geotagginess beyond latitude and longitude. For example, you may wish to indicate that a photo was taken \"indoors\" or \"outdoors\". <br /><br />\nThe current list of context IDs is :<br /><br/>\n<ul>\n<li><strong>0</strong>, not defined.</li>\n<li><strong>1</strong>, indoors.</li>\n<li><strong>2</strong>, outdoors.</li>\n</ul><br />\nThe default context for geotagged photos is 0, or \"not defined\"\n",
+        "name": "context",
+        "optional": "1"
+      }
+    ]
   },
   "errors": {
     "error": [
       {
-        "message": "Photo not found",
+        "_content": "The photo id was either invalid or was for a photo not viewable by the calling user.",
         "code": "1",
-        "_content": "The photo id was either invalid or was for a photo not viewable by the calling user."
+        "message": "Photo not found"
       },
       {
-        "message": "Required arguments missing.",
+        "_content": "Some or all of the required arguments were not supplied.",
         "code": "2",
-        "_content": "Some or all of the required arguments were not supplied."
+        "message": "Required arguments missing."
       },
       {
-        "message": "Not a valid latitude.",
+        "_content": "The latitude argument failed validation.",
         "code": "3",
-        "_content": "The latitude argument failed validation."
+        "message": "Not a valid latitude."
       },
       {
-        "message": "Not a valid longitude.",
+        "_content": "The longitude argument failed validation.",
         "code": "4",
-        "_content": "The longitude argument failed validation."
+        "message": "Not a valid longitude."
       },
       {
-        "message": "Not a valid accuracy.",
+        "_content": "The accuracy argument failed validation.",
         "code": "5",
-        "_content": "The accuracy argument failed validation."
+        "message": "Not a valid accuracy."
       },
       {
-        "message": "Server error.",
+        "_content": "There was an unexpected problem setting location information to the photo.",
         "code": "6",
-        "_content": "There was an unexpected problem setting location information to the photo."
+        "message": "Server error."
       },
       {
-        "message": "User has not configured default viewing settings for location data.",
+        "_content": "Before users may assign location data to a photo they must define who, by default, may view that information. Users can edit this preference at <a href=\"http://www.flickr.com/account/geo/privacy/\">http://www.flickr.com/account/geo/privacy/</a>",
         "code": "7",
-        "_content": "Before users may assign location data to a photo they must define who, by default, may view that information. Users can edit this preference at <a href=\"http://www.flickr.com/account/geo/privacy/\">http://www.flickr.com/account/geo/privacy/</a>"
+        "message": "User has not configured default viewing settings for location data."
       },
       {
-        "message": "SSL is required",
+        "_content": "SSL is required to access the Flickr API.",
         "code": 95,
-        "_content": "SSL is required to access the Flickr API."
+        "message": "SSL is required"
       },
       {
-        "message": "Invalid signature",
+        "_content": "The passed signature was invalid.",
         "code": 96,
-        "_content": "The passed signature was invalid."
+        "message": "Invalid signature"
       },
       {
-        "message": "Missing signature",
+        "_content": "The call required signing but no signature was sent.",
         "code": 97,
-        "_content": "The call required signing but no signature was sent."
+        "message": "Missing signature"
       },
       {
-        "message": "Login failed / Invalid auth token",
+        "_content": "The login details or auth token passed were invalid.",
         "code": 98,
-        "_content": "The login details or auth token passed were invalid."
+        "message": "Login failed / Invalid auth token"
       },
       {
-        "message": "User not logged in / Insufficient permissions",
+        "_content": "The method requires user authentication but the user was not logged in, or the authenticated method call did not have the required permissions.",
         "code": 99,
-        "_content": "The method requires user authentication but the user was not logged in, or the authenticated method call did not have the required permissions."
+        "message": "User not logged in / Insufficient permissions"
       },
       {
-        "message": "Invalid API Key",
+        "_content": "The API key passed was not valid or has expired.",
         "code": 100,
-        "_content": "The API key passed was not valid or has expired."
+        "message": "Invalid API Key"
       },
       {
-        "message": "Service currently unavailable",
+        "_content": "The requested service is temporarily unavailable.",
         "code": 105,
-        "_content": "The requested service is temporarily unavailable."
+        "message": "Service currently unavailable"
       },
       {
-        "message": "Write operation failed",
+        "_content": "The requested operation failed due to a temporary issue.",
         "code": 106,
-        "_content": "The requested operation failed due to a temporary issue."
+        "message": "Write operation failed"
       },
       {
-        "message": "Format \"xxx\" not found",
+        "_content": "The requested response format was not found.",
         "code": 111,
-        "_content": "The requested response format was not found."
+        "message": "Format \"xxx\" not found"
       },
       {
-        "message": "Method \"xxx\" not found",
+        "_content": "The requested method was not found.",
         "code": 112,
-        "_content": "The requested method was not found."
+        "message": "Method \"xxx\" not found"
       },
       {
-        "message": "Invalid SOAP envelope",
+        "_content": "The SOAP envelope send in the request could not be parsed.",
         "code": 114,
-        "_content": "The SOAP envelope send in the request could not be parsed."
+        "message": "Invalid SOAP envelope"
       },
       {
-        "message": "Invalid XML-RPC Method Call",
+        "_content": "The XML-RPC request document could not be parsed.",
         "code": 115,
-        "_content": "The XML-RPC request document could not be parsed."
+        "message": "Invalid XML-RPC Method Call"
       },
       {
-        "message": "Bad URL found",
+        "_content": "One or more arguments contained a URL that has been used for abuse on Flickr.",
         "code": 116,
-        "_content": "One or more arguments contained a URL that has been used for abuse on Flickr."
+        "message": "Bad URL found"
       }
     ]
   },
-  "arguments": {
-    "argument": [
-      {
-        "optional": 0,
-        "name": "api_key",
-        "_content": "Your API application key. <a href=\"/services/api/misc.api_keys.html\">See here</a> for more details."
-      },
-      {
-        "optional": "0",
-        "name": "photo_id",
-        "_content": "The id of the photo to set location data for."
-      },
-      {
-        "optional": "0",
-        "name": "lat",
-        "_content": "The latitude whose valid range is -90 to 90. Anything more than 6 decimal places will be truncated."
-      },
-      {
-        "optional": "0",
-        "name": "lon",
-        "_content": "The longitude whose valid range is -180 to 180. Anything more than 6 decimal places will be truncated."
-      },
-      {
-        "optional": "1",
-        "name": "accuracy",
-        "_content": "Recorded accuracy level of the location information. World level is 1, Country is ~3, Region ~6, City ~11, Street ~16. Current range is 1-16. Defaults to 16 if not specified."
-      },
-      {
-        "optional": "1",
-        "name": "context",
-        "_content": "Context is a numeric value representing the photo's geotagginess beyond latitude and longitude. For example, you may wish to indicate that a photo was taken \"indoors\" or \"outdoors\". <br /><br />\nThe current list of context IDs is :<br /><br/>\n<ul>\n<li><strong>0</strong>, not defined.</li>\n<li><strong>1</strong>, indoors.</li>\n<li><strong>2</strong>, outdoors.</li>\n</ul><br />\nThe default context for geotagged photos is 0, or \"not defined\"\n"
-      }
-    ]
-  }
+  "method": {
+    "description": {
+      "_content": "Sets the geo data (latitude and longitude and, optionally, the accuracy level) for a photo.\n\nBefore users may assign location data to a photo they must define who, by default, may view that information. Users can edit this preference at <a href=\"http://www.flickr.com/account/geo/privacy/\">http://www.flickr.com/account/geo/privacy/</a>. If a user has not set this preference, the API method will return an error."
+    },
+    "name": "flickr.photos.geo.setLocation",
+    "needslogin": 1,
+    "needssigning": 1,
+    "requiredperms": "2"
+  },
+  "stat": "ok"
 }

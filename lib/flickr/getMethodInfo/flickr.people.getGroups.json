@@ -1,111 +1,111 @@
 {
-  "stat": "ok",
-  "method": {
-    "response": {
-      "_content": "<groups>\n  <group nsid=\"17274427@N00\" name=\"Cream of the Crop - Please read the rules\" iconfarm=\"1\" iconserver=\"1\" admin=\"0\" eighteenplus=\"0\" invitation_only=\"0\" members=\"11935\" pool_count=\"12522\" />\n  <group nsid=\"20083316@N00\" name=\"Apple\" iconfarm=\"1\" iconserver=\"1\" admin=\"0\" eighteenplus=\"0\" invitation_only=\"0\" members=\"11776\" pool_count=\"62438\" />\n  <group nsid=\"34427469792@N01\" name=\"FlickrCentral\" iconfarm=\"1\" iconserver=\"1\" admin=\"0\" eighteenplus=\"0\" invitation_only=\"0\" members=\"168055\" pool_count=\"5280930\" />\n  <group nsid=\"37718678610@N01\" name=\"Typography and Lettering\" iconfarm=\"1\" iconserver=\"1\" admin=\"0\" eighteenplus=\"0\" invitation_only=\"0\" members=\"17318\" pool_count=\"130169\" />\n</groups>"
-    },
-    "requiredperms": "1",
-    "needssigning": 1,
-    "needslogin": 1,
-    "name": "flickr.people.getGroups",
-    "explanation": {
-      "_content": "The admin attribute indicates whether the user is an administrator of the group. The eighteenplus attribute indicates if the group is visible to members over 18 only. The invite_only attribute indicates whether a user can join the group without administrator approval."
-    },
-    "description": {
-      "_content": "Returns the list of groups a user is a member of."
-    }
+  "arguments": {
+    "argument": [
+      {
+        "_content": "Your API application key. <a href=\"/services/api/misc.api_keys.html\">See here</a> for more details.",
+        "name": "api_key",
+        "optional": 0
+      },
+      {
+        "_content": "The NSID of the user to fetch groups for.",
+        "name": "user_id",
+        "optional": "0"
+      },
+      {
+        "_content": "A comma-delimited list of extra information to fetch for each returned record. Currently supported fields are: <code>privacy</code>, <code>throttle</code>, <code>restrictions</code>",
+        "name": "extras",
+        "optional": "1"
+      }
+    ]
   },
   "errors": {
     "error": [
       {
-        "message": "User not found",
+        "_content": "The user id passed did not match a Flickr user.",
         "code": "1",
-        "_content": "The user id passed did not match a Flickr user."
+        "message": "User not found"
       },
       {
-        "message": "SSL is required",
+        "_content": "SSL is required to access the Flickr API.",
         "code": 95,
-        "_content": "SSL is required to access the Flickr API."
+        "message": "SSL is required"
       },
       {
-        "message": "Invalid signature",
+        "_content": "The passed signature was invalid.",
         "code": 96,
-        "_content": "The passed signature was invalid."
+        "message": "Invalid signature"
       },
       {
-        "message": "Missing signature",
+        "_content": "The call required signing but no signature was sent.",
         "code": 97,
-        "_content": "The call required signing but no signature was sent."
+        "message": "Missing signature"
       },
       {
-        "message": "Login failed / Invalid auth token",
+        "_content": "The login details or auth token passed were invalid.",
         "code": 98,
-        "_content": "The login details or auth token passed were invalid."
+        "message": "Login failed / Invalid auth token"
       },
       {
-        "message": "User not logged in / Insufficient permissions",
+        "_content": "The method requires user authentication but the user was not logged in, or the authenticated method call did not have the required permissions.",
         "code": 99,
-        "_content": "The method requires user authentication but the user was not logged in, or the authenticated method call did not have the required permissions."
+        "message": "User not logged in / Insufficient permissions"
       },
       {
-        "message": "Invalid API Key",
+        "_content": "The API key passed was not valid or has expired.",
         "code": 100,
-        "_content": "The API key passed was not valid or has expired."
+        "message": "Invalid API Key"
       },
       {
-        "message": "Service currently unavailable",
+        "_content": "The requested service is temporarily unavailable.",
         "code": 105,
-        "_content": "The requested service is temporarily unavailable."
+        "message": "Service currently unavailable"
       },
       {
-        "message": "Write operation failed",
+        "_content": "The requested operation failed due to a temporary issue.",
         "code": 106,
-        "_content": "The requested operation failed due to a temporary issue."
+        "message": "Write operation failed"
       },
       {
-        "message": "Format \"xxx\" not found",
+        "_content": "The requested response format was not found.",
         "code": 111,
-        "_content": "The requested response format was not found."
+        "message": "Format \"xxx\" not found"
       },
       {
-        "message": "Method \"xxx\" not found",
+        "_content": "The requested method was not found.",
         "code": 112,
-        "_content": "The requested method was not found."
+        "message": "Method \"xxx\" not found"
       },
       {
-        "message": "Invalid SOAP envelope",
+        "_content": "The SOAP envelope send in the request could not be parsed.",
         "code": 114,
-        "_content": "The SOAP envelope send in the request could not be parsed."
+        "message": "Invalid SOAP envelope"
       },
       {
-        "message": "Invalid XML-RPC Method Call",
+        "_content": "The XML-RPC request document could not be parsed.",
         "code": 115,
-        "_content": "The XML-RPC request document could not be parsed."
+        "message": "Invalid XML-RPC Method Call"
       },
       {
-        "message": "Bad URL found",
+        "_content": "One or more arguments contained a URL that has been used for abuse on Flickr.",
         "code": 116,
-        "_content": "One or more arguments contained a URL that has been used for abuse on Flickr."
+        "message": "Bad URL found"
       }
     ]
   },
-  "arguments": {
-    "argument": [
-      {
-        "optional": 0,
-        "name": "api_key",
-        "_content": "Your API application key. <a href=\"/services/api/misc.api_keys.html\">See here</a> for more details."
-      },
-      {
-        "optional": "0",
-        "name": "user_id",
-        "_content": "The NSID of the user to fetch groups for."
-      },
-      {
-        "optional": "1",
-        "name": "extras",
-        "_content": "A comma-delimited list of extra information to fetch for each returned record. Currently supported fields are: <code>privacy</code>, <code>throttle</code>, <code>restrictions</code>"
-      }
-    ]
-  }
+  "method": {
+    "description": {
+      "_content": "Returns the list of groups a user is a member of."
+    },
+    "explanation": {
+      "_content": "The admin attribute indicates whether the user is an administrator of the group. The eighteenplus attribute indicates if the group is visible to members over 18 only. The invite_only attribute indicates whether a user can join the group without administrator approval."
+    },
+    "name": "flickr.people.getGroups",
+    "needslogin": 1,
+    "needssigning": 1,
+    "requiredperms": "1",
+    "response": {
+      "_content": "<groups>\n  <group nsid=\"17274427@N00\" name=\"Cream of the Crop - Please read the rules\" iconfarm=\"1\" iconserver=\"1\" admin=\"0\" eighteenplus=\"0\" invitation_only=\"0\" members=\"11935\" pool_count=\"12522\" />\n  <group nsid=\"20083316@N00\" name=\"Apple\" iconfarm=\"1\" iconserver=\"1\" admin=\"0\" eighteenplus=\"0\" invitation_only=\"0\" members=\"11776\" pool_count=\"62438\" />\n  <group nsid=\"34427469792@N01\" name=\"FlickrCentral\" iconfarm=\"1\" iconserver=\"1\" admin=\"0\" eighteenplus=\"0\" invitation_only=\"0\" members=\"168055\" pool_count=\"5280930\" />\n  <group nsid=\"37718678610@N01\" name=\"Typography and Lettering\" iconfarm=\"1\" iconserver=\"1\" admin=\"0\" eighteenplus=\"0\" invitation_only=\"0\" members=\"17318\" pool_count=\"130169\" />\n</groups>"
+    }
+  },
+  "stat": "ok"
 }

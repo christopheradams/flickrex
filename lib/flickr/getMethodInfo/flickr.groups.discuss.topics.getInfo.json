@@ -1,83 +1,83 @@
 {
-  "stat": "ok",
-  "method": {
-    "response": {
-      "_content": "<?xml version=\"1.0\" encoding=\"utf-8\" ?>\n<rsp stat=\"ok\">\n  <topic id=\"72157607082559966\" subject=\"Who's still around?\" author=\"30134652@N05\" authorname=\"JAMAL'S ACCOUNT\" is_pro=\"0\" role=\"admin\" iconserver=\"0\" iconfarm=\"0\" count_replies=\"1\" can_edit=\"1\" can_delete=\"0\" can_reply=\"0\" is_sticky=\"0\" is_locked=\"0\" datecreate=\"1337975869\" datelastpost=\"1337975921\" last_reply=\"72157607082559968\">\n    <message>Is anyone still around in this group?</message>\n  </topic>\n</rsp>"
-    },
-    "requiredperms": 0,
-    "needssigning": 0,
-    "needslogin": 0,
-    "name": "flickr.groups.discuss.topics.getInfo",
-    "description": {
-      "_content": "Get information about a group discussion topic."
-    }
+  "arguments": {
+    "argument": [
+      {
+        "_content": "Your API application key. <a href=\"/services/api/misc.api_keys.html\">See here</a> for more details.",
+        "name": "api_key",
+        "optional": 0
+      },
+      {
+        "_content": "NSID or group alias of the group to which the topic belongs. Making this parameter optional for legacy reasons, but it is highly recommended to pass this in to get better performance. ",
+        "name": "group_id",
+        "optional": "0"
+      },
+      {
+        "_content": "The ID for the topic to edit.",
+        "name": "topic_id",
+        "optional": "0"
+      }
+    ]
   },
   "errors": {
     "error": [
       {
-        "message": "Topic not found",
+        "_content": "The topic_id is invalid",
         "code": "1",
-        "_content": "The topic_id is invalid"
+        "message": "Topic not found"
       },
       {
-        "message": "Invalid API Key",
+        "_content": "The API key passed was not valid or has expired.",
         "code": 100,
-        "_content": "The API key passed was not valid or has expired."
+        "message": "Invalid API Key"
       },
       {
-        "message": "Service currently unavailable",
+        "_content": "The requested service is temporarily unavailable.",
         "code": 105,
-        "_content": "The requested service is temporarily unavailable."
+        "message": "Service currently unavailable"
       },
       {
-        "message": "Write operation failed",
+        "_content": "The requested operation failed due to a temporary issue.",
         "code": 106,
-        "_content": "The requested operation failed due to a temporary issue."
+        "message": "Write operation failed"
       },
       {
-        "message": "Format \"xxx\" not found",
+        "_content": "The requested response format was not found.",
         "code": 111,
-        "_content": "The requested response format was not found."
+        "message": "Format \"xxx\" not found"
       },
       {
-        "message": "Method \"xxx\" not found",
+        "_content": "The requested method was not found.",
         "code": 112,
-        "_content": "The requested method was not found."
+        "message": "Method \"xxx\" not found"
       },
       {
-        "message": "Invalid SOAP envelope",
+        "_content": "The SOAP envelope send in the request could not be parsed.",
         "code": 114,
-        "_content": "The SOAP envelope send in the request could not be parsed."
+        "message": "Invalid SOAP envelope"
       },
       {
-        "message": "Invalid XML-RPC Method Call",
+        "_content": "The XML-RPC request document could not be parsed.",
         "code": 115,
-        "_content": "The XML-RPC request document could not be parsed."
+        "message": "Invalid XML-RPC Method Call"
       },
       {
-        "message": "Bad URL found",
+        "_content": "One or more arguments contained a URL that has been used for abuse on Flickr.",
         "code": 116,
-        "_content": "One or more arguments contained a URL that has been used for abuse on Flickr."
+        "message": "Bad URL found"
       }
     ]
   },
-  "arguments": {
-    "argument": [
-      {
-        "optional": 0,
-        "name": "api_key",
-        "_content": "Your API application key. <a href=\"/services/api/misc.api_keys.html\">See here</a> for more details."
-      },
-      {
-        "optional": "0",
-        "name": "group_id",
-        "_content": "NSID or group alias of the group to which the topic belongs. Making this parameter optional for legacy reasons, but it is highly recommended to pass this in to get better performance. "
-      },
-      {
-        "optional": "0",
-        "name": "topic_id",
-        "_content": "The ID for the topic to edit."
-      }
-    ]
-  }
+  "method": {
+    "description": {
+      "_content": "Get information about a group discussion topic."
+    },
+    "name": "flickr.groups.discuss.topics.getInfo",
+    "needslogin": 0,
+    "needssigning": 0,
+    "requiredperms": 0,
+    "response": {
+      "_content": "<?xml version=\"1.0\" encoding=\"utf-8\" ?>\n<rsp stat=\"ok\">\n  <topic id=\"72157607082559966\" subject=\"Who's still around?\" author=\"30134652@N05\" authorname=\"JAMAL'S ACCOUNT\" is_pro=\"0\" role=\"admin\" iconserver=\"0\" iconfarm=\"0\" count_replies=\"1\" can_edit=\"1\" can_delete=\"0\" can_reply=\"0\" is_sticky=\"0\" is_locked=\"0\" datecreate=\"1337975869\" datelastpost=\"1337975921\" last_reply=\"72157607082559968\">\n    <message>Is anyone still around in this group?</message>\n  </topic>\n</rsp>"
+    }
+  },
+  "stat": "ok"
 }

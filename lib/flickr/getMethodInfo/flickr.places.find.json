@@ -1,81 +1,81 @@
 {
-  "stat": "ok",
-  "method": {
-    "response": {
-      "_content": "<places query=\"Alabama\" total=\"3\">\n   <place place_id=\"VrrjuESbApjeFS4.\" woeid=\"2347559\"\n               latitude=\"32.614\" longitude=\"-86.680\"\n               place_url=\"/United+States/Alabama\"\n               place_type=\"region\">Alabama, Alabama, United States</place>\n   <place place_id=\"cGHuc0mbApmzEHoP\" woeid=\"2352520\"\n               latitude=\"43.096\" longitude=\"-78.389\"\n               place_url=\"/United+States/New+York/Alabama\"\n               place_type=\"locality\">Alabama, New York, United States</place>\n   <place place_id=\"o4yVPEqYBJvFMP8Q\" woeid=\"1579389\"\n               latitude=\"-26.866\" longitude=\"26.583\"\n               place_url=\"/South+Africa/North+West/Alabama\"\n               place_type=\"locality\">Alabama, North West, South Africa</place>\n</places>"
-    },
-    "requiredperms": 0,
-    "needssigning": 0,
-    "needslogin": 0,
-    "name": "flickr.places.find",
-    "explanation": {
-      "_content": "Each place returned will contain its place ID, corresponding URL (underneath www.flickr.com/places) and place type for disambiguating different locations with the same name."
-    },
-    "description": {
-      "_content": "Return a list of place IDs for a query string.<br /><br />\nThe flickr.places.find method is <b>not</b> a geocoder. It will round <q>up</q> to the nearest place type to which place IDs apply. For example, if you pass it a street level address it will return the city that contains the address rather than the street, or building, itself."
-    }
+  "arguments": {
+    "argument": [
+      {
+        "_content": "Your API application key. <a href=\"/services/api/misc.api_keys.html\">See here</a> for more details.",
+        "name": "api_key",
+        "optional": 0
+      },
+      {
+        "_content": "The query string to use for place ID lookups",
+        "name": "query",
+        "optional": "0"
+      }
+    ]
   },
   "errors": {
     "error": [
       {
-        "message": "Required parameter missing",
+        "_content": "One or more required parameters was not included with the API call.",
         "code": "1",
-        "_content": "One or more required parameters was not included with the API call."
+        "message": "Required parameter missing"
       },
       {
-        "message": "Invalid API Key",
+        "_content": "The API key passed was not valid or has expired.",
         "code": 100,
-        "_content": "The API key passed was not valid or has expired."
+        "message": "Invalid API Key"
       },
       {
-        "message": "Service currently unavailable",
+        "_content": "The requested service is temporarily unavailable.",
         "code": 105,
-        "_content": "The requested service is temporarily unavailable."
+        "message": "Service currently unavailable"
       },
       {
-        "message": "Write operation failed",
+        "_content": "The requested operation failed due to a temporary issue.",
         "code": 106,
-        "_content": "The requested operation failed due to a temporary issue."
+        "message": "Write operation failed"
       },
       {
-        "message": "Format \"xxx\" not found",
+        "_content": "The requested response format was not found.",
         "code": 111,
-        "_content": "The requested response format was not found."
+        "message": "Format \"xxx\" not found"
       },
       {
-        "message": "Method \"xxx\" not found",
+        "_content": "The requested method was not found.",
         "code": 112,
-        "_content": "The requested method was not found."
+        "message": "Method \"xxx\" not found"
       },
       {
-        "message": "Invalid SOAP envelope",
+        "_content": "The SOAP envelope send in the request could not be parsed.",
         "code": 114,
-        "_content": "The SOAP envelope send in the request could not be parsed."
+        "message": "Invalid SOAP envelope"
       },
       {
-        "message": "Invalid XML-RPC Method Call",
+        "_content": "The XML-RPC request document could not be parsed.",
         "code": 115,
-        "_content": "The XML-RPC request document could not be parsed."
+        "message": "Invalid XML-RPC Method Call"
       },
       {
-        "message": "Bad URL found",
+        "_content": "One or more arguments contained a URL that has been used for abuse on Flickr.",
         "code": 116,
-        "_content": "One or more arguments contained a URL that has been used for abuse on Flickr."
+        "message": "Bad URL found"
       }
     ]
   },
-  "arguments": {
-    "argument": [
-      {
-        "optional": 0,
-        "name": "api_key",
-        "_content": "Your API application key. <a href=\"/services/api/misc.api_keys.html\">See here</a> for more details."
-      },
-      {
-        "optional": "0",
-        "name": "query",
-        "_content": "The query string to use for place ID lookups"
-      }
-    ]
-  }
+  "method": {
+    "description": {
+      "_content": "Return a list of place IDs for a query string.<br /><br />\nThe flickr.places.find method is <b>not</b> a geocoder. It will round <q>up</q> to the nearest place type to which place IDs apply. For example, if you pass it a street level address it will return the city that contains the address rather than the street, or building, itself."
+    },
+    "explanation": {
+      "_content": "Each place returned will contain its place ID, corresponding URL (underneath www.flickr.com/places) and place type for disambiguating different locations with the same name."
+    },
+    "name": "flickr.places.find",
+    "needslogin": 0,
+    "needssigning": 0,
+    "requiredperms": 0,
+    "response": {
+      "_content": "<places query=\"Alabama\" total=\"3\">\n   <place place_id=\"VrrjuESbApjeFS4.\" woeid=\"2347559\"\n               latitude=\"32.614\" longitude=\"-86.680\"\n               place_url=\"/United+States/Alabama\"\n               place_type=\"region\">Alabama, Alabama, United States</place>\n   <place place_id=\"cGHuc0mbApmzEHoP\" woeid=\"2352520\"\n               latitude=\"43.096\" longitude=\"-78.389\"\n               place_url=\"/United+States/New+York/Alabama\"\n               place_type=\"locality\">Alabama, New York, United States</place>\n   <place place_id=\"o4yVPEqYBJvFMP8Q\" woeid=\"1579389\"\n               latitude=\"-26.866\" longitude=\"26.583\"\n               place_url=\"/South+Africa/North+West/Alabama\"\n               place_type=\"locality\">Alabama, North West, South Africa</place>\n</places>"
+    }
+  },
+  "stat": "ok"
 }

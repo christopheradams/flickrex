@@ -1,91 +1,91 @@
 {
-  "stat": "ok",
-  "method": {
-    "response": {
-      "_content": "<namespaces page=\"1\" total=\"5\" perpage=\"500\" pages=\"1\">\n  <namespace usage=\"6538\" predicates=\"13\">aero</namespace>\n  <namespace usage=\"9072\" predicates=\"24\">flickr</namespace>\n  <namespace usage=\"670270\" predicates=\"35\">geo</namespace>\n  <namespace usage=\"23903\" predicates=\"36\">taxonomy</namespace>\n  <namespace usage=\"50449\" predicates=\"4\">upcoming</namespace>\n</namespaces>\n"
-    },
-    "requiredperms": 0,
-    "needssigning": 0,
-    "needslogin": 0,
-    "name": "flickr.machinetags.getNamespaces",
-    "explanation": {
-      "_content": "\"Usage\" gives you roughly how popular a machine tags, while \"predicates\" is the count of distinct predicates a namespace has."
-    },
-    "description": {
-      "_content": "Return a list of unique namespaces, optionally limited by a given predicate, in alphabetical order."
-    }
+  "arguments": {
+    "argument": [
+      {
+        "_content": "Your API application key. <a href=\"/services/api/misc.api_keys.html\">See here</a> for more details.",
+        "name": "api_key",
+        "optional": 0
+      },
+      {
+        "_content": "Limit the list of namespaces returned to those that have the following predicate.",
+        "name": "predicate",
+        "optional": "1"
+      },
+      {
+        "_content": "Number of photos to return per page. If this argument is omitted, it defaults to 100. The maximum allowed value is 500.",
+        "name": "per_page",
+        "optional": "1"
+      },
+      {
+        "_content": "The page of results to return. If this argument is omitted, it defaults to 1.",
+        "name": "page",
+        "optional": "1"
+      }
+    ]
   },
   "errors": {
     "error": [
       {
-        "message": "Not a valid predicate.",
+        "_content": "Missing or invalid predicate argument.",
         "code": "1",
-        "_content": "Missing or invalid predicate argument."
+        "message": "Not a valid predicate."
       },
       {
-        "message": "Invalid API Key",
+        "_content": "The API key passed was not valid or has expired.",
         "code": 100,
-        "_content": "The API key passed was not valid or has expired."
+        "message": "Invalid API Key"
       },
       {
-        "message": "Service currently unavailable",
+        "_content": "The requested service is temporarily unavailable.",
         "code": 105,
-        "_content": "The requested service is temporarily unavailable."
+        "message": "Service currently unavailable"
       },
       {
-        "message": "Write operation failed",
+        "_content": "The requested operation failed due to a temporary issue.",
         "code": 106,
-        "_content": "The requested operation failed due to a temporary issue."
+        "message": "Write operation failed"
       },
       {
-        "message": "Format \"xxx\" not found",
+        "_content": "The requested response format was not found.",
         "code": 111,
-        "_content": "The requested response format was not found."
+        "message": "Format \"xxx\" not found"
       },
       {
-        "message": "Method \"xxx\" not found",
+        "_content": "The requested method was not found.",
         "code": 112,
-        "_content": "The requested method was not found."
+        "message": "Method \"xxx\" not found"
       },
       {
-        "message": "Invalid SOAP envelope",
+        "_content": "The SOAP envelope send in the request could not be parsed.",
         "code": 114,
-        "_content": "The SOAP envelope send in the request could not be parsed."
+        "message": "Invalid SOAP envelope"
       },
       {
-        "message": "Invalid XML-RPC Method Call",
+        "_content": "The XML-RPC request document could not be parsed.",
         "code": 115,
-        "_content": "The XML-RPC request document could not be parsed."
+        "message": "Invalid XML-RPC Method Call"
       },
       {
-        "message": "Bad URL found",
+        "_content": "One or more arguments contained a URL that has been used for abuse on Flickr.",
         "code": 116,
-        "_content": "One or more arguments contained a URL that has been used for abuse on Flickr."
+        "message": "Bad URL found"
       }
     ]
   },
-  "arguments": {
-    "argument": [
-      {
-        "optional": 0,
-        "name": "api_key",
-        "_content": "Your API application key. <a href=\"/services/api/misc.api_keys.html\">See here</a> for more details."
-      },
-      {
-        "optional": "1",
-        "name": "predicate",
-        "_content": "Limit the list of namespaces returned to those that have the following predicate."
-      },
-      {
-        "optional": "1",
-        "name": "per_page",
-        "_content": "Number of photos to return per page. If this argument is omitted, it defaults to 100. The maximum allowed value is 500."
-      },
-      {
-        "optional": "1",
-        "name": "page",
-        "_content": "The page of results to return. If this argument is omitted, it defaults to 1."
-      }
-    ]
-  }
+  "method": {
+    "description": {
+      "_content": "Return a list of unique namespaces, optionally limited by a given predicate, in alphabetical order."
+    },
+    "explanation": {
+      "_content": "\"Usage\" gives you roughly how popular a machine tags, while \"predicates\" is the count of distinct predicates a namespace has."
+    },
+    "name": "flickr.machinetags.getNamespaces",
+    "needslogin": 0,
+    "needssigning": 0,
+    "requiredperms": 0,
+    "response": {
+      "_content": "<namespaces page=\"1\" total=\"5\" perpage=\"500\" pages=\"1\">\n  <namespace usage=\"6538\" predicates=\"13\">aero</namespace>\n  <namespace usage=\"9072\" predicates=\"24\">flickr</namespace>\n  <namespace usage=\"670270\" predicates=\"35\">geo</namespace>\n  <namespace usage=\"23903\" predicates=\"36\">taxonomy</namespace>\n  <namespace usage=\"50449\" predicates=\"4\">upcoming</namespace>\n</namespaces>\n"
+    }
+  },
+  "stat": "ok"
 }

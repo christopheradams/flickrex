@@ -1,93 +1,93 @@
 {
-  "stat": "ok",
-  "method": {
-    "response": {
-      "_content": "<shapes total=\"2\" woe_id=\"3534\" place_id=\"4hLQygSaBJ92\" place_type=\"locality\" place_type_id=\"7\">\n   <shapedata created=\"1223513357\" alpha=\"0.012359619140625\"\n      count_points=\"34778\" count_edges=\"52\" is_donuthole=\"0\">\n      <polylines>\n         <polyline>\n            45.427627563477,-73.589645385742 45.428966522217,-73.587898254395, etc...\n         </polyline>\n      </polylines>\n      <urls>\n         <shapefile>\n         http://farm4.static.flickr.com/3228/shapefiles/3534_20081111_0a8afe03c5.tar.gz\n         </shapefile>\n      </urls>\n   </shapedata>\n   <!-- and so on... -->\n</shapes>"
-    },
-    "requiredperms": 0,
-    "needssigning": 0,
-    "needslogin": 0,
-    "name": "flickr.places.getShapeHistory",
-    "description": {
-      "_content": "Return an historical list of all the shape data generated for a Places or Where on Earth (WOE) ID."
-    }
+  "arguments": {
+    "argument": [
+      {
+        "_content": "Your API application key. <a href=\"/services/api/misc.api_keys.html\">See here</a> for more details.",
+        "name": "api_key",
+        "optional": 0
+      },
+      {
+        "_content": "A Flickr Places ID. <span style=\"font-style:italic;\">(While optional, you must pass either a valid Places ID or a WOE ID.)</span>",
+        "name": "place_id",
+        "optional": "1"
+      },
+      {
+        "_content": "A Where On Earth (WOE) ID. <span style=\"font-style:italic;\">(While optional, you must pass either a valid Places ID or a WOE ID.)</span>",
+        "name": "woe_id",
+        "optional": "1"
+      }
+    ]
   },
   "errors": {
     "error": [
       {
-        "message": "Required parameter missing",
+        "_content": "One or more required parameter is missing from the API call.",
         "code": "1",
-        "_content": "One or more required parameter is missing from the API call."
+        "message": "Required parameter missing"
       },
       {
-        "message": "Not a valid Places ID",
+        "_content": "An invalid Places (or WOE) ID was passed with the API call.",
         "code": "2",
-        "_content": "An invalid Places (or WOE) ID was passed with the API call."
+        "message": "Not a valid Places ID"
       },
       {
-        "message": "Place not found",
+        "_content": "No place could be found for the Places (or WOE) ID passed to the API call.",
         "code": "3",
-        "_content": "No place could be found for the Places (or WOE) ID passed to the API call."
+        "message": "Place not found"
       },
       {
-        "message": "Invalid API Key",
+        "_content": "The API key passed was not valid or has expired.",
         "code": 100,
-        "_content": "The API key passed was not valid or has expired."
+        "message": "Invalid API Key"
       },
       {
-        "message": "Service currently unavailable",
+        "_content": "The requested service is temporarily unavailable.",
         "code": 105,
-        "_content": "The requested service is temporarily unavailable."
+        "message": "Service currently unavailable"
       },
       {
-        "message": "Write operation failed",
+        "_content": "The requested operation failed due to a temporary issue.",
         "code": 106,
-        "_content": "The requested operation failed due to a temporary issue."
+        "message": "Write operation failed"
       },
       {
-        "message": "Format \"xxx\" not found",
+        "_content": "The requested response format was not found.",
         "code": 111,
-        "_content": "The requested response format was not found."
+        "message": "Format \"xxx\" not found"
       },
       {
-        "message": "Method \"xxx\" not found",
+        "_content": "The requested method was not found.",
         "code": 112,
-        "_content": "The requested method was not found."
+        "message": "Method \"xxx\" not found"
       },
       {
-        "message": "Invalid SOAP envelope",
+        "_content": "The SOAP envelope send in the request could not be parsed.",
         "code": 114,
-        "_content": "The SOAP envelope send in the request could not be parsed."
+        "message": "Invalid SOAP envelope"
       },
       {
-        "message": "Invalid XML-RPC Method Call",
+        "_content": "The XML-RPC request document could not be parsed.",
         "code": 115,
-        "_content": "The XML-RPC request document could not be parsed."
+        "message": "Invalid XML-RPC Method Call"
       },
       {
-        "message": "Bad URL found",
+        "_content": "One or more arguments contained a URL that has been used for abuse on Flickr.",
         "code": 116,
-        "_content": "One or more arguments contained a URL that has been used for abuse on Flickr."
+        "message": "Bad URL found"
       }
     ]
   },
-  "arguments": {
-    "argument": [
-      {
-        "optional": 0,
-        "name": "api_key",
-        "_content": "Your API application key. <a href=\"/services/api/misc.api_keys.html\">See here</a> for more details."
-      },
-      {
-        "optional": "1",
-        "name": "place_id",
-        "_content": "A Flickr Places ID. <span style=\"font-style:italic;\">(While optional, you must pass either a valid Places ID or a WOE ID.)</span>"
-      },
-      {
-        "optional": "1",
-        "name": "woe_id",
-        "_content": "A Where On Earth (WOE) ID. <span style=\"font-style:italic;\">(While optional, you must pass either a valid Places ID or a WOE ID.)</span>"
-      }
-    ]
-  }
+  "method": {
+    "description": {
+      "_content": "Return an historical list of all the shape data generated for a Places or Where on Earth (WOE) ID."
+    },
+    "name": "flickr.places.getShapeHistory",
+    "needslogin": 0,
+    "needssigning": 0,
+    "requiredperms": 0,
+    "response": {
+      "_content": "<shapes total=\"2\" woe_id=\"3534\" place_id=\"4hLQygSaBJ92\" place_type=\"locality\" place_type_id=\"7\">\n   <shapedata created=\"1223513357\" alpha=\"0.012359619140625\"\n      count_points=\"34778\" count_edges=\"52\" is_donuthole=\"0\">\n      <polylines>\n         <polyline>\n            45.427627563477,-73.589645385742 45.428966522217,-73.587898254395, etc...\n         </polyline>\n      </polylines>\n      <urls>\n         <shapefile>\n         http://farm4.static.flickr.com/3228/shapefiles/3534_20081111_0a8afe03c5.tar.gz\n         </shapefile>\n      </urls>\n   </shapedata>\n   <!-- and so on... -->\n</shapes>"
+    }
+  },
+  "stat": "ok"
 }

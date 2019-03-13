@@ -1,4 +1,6 @@
 defmodule Flickrex.Support.Operation do
+  @moduledoc false
+
   defstruct path: nil,
             service: :api
 

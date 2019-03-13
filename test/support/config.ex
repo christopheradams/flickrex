@@ -1,4 +1,6 @@
 defmodule Flickrex.Support.Config do
+  @moduledoc false
+
   alias Flickrex.Support.Fixtures
 
   def flickr_config(_) do

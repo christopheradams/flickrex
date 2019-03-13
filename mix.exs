@@ -47,7 +47,7 @@ defmodule Flickrex.Mixfile do
     [
       {:oauther, "~> 1.0"},
       {:hackney, "~> 1.8.6 or ~> 1.9 or ~> 1.10"},
-      {:jason, "~> 1.0"},
+      {:jason, "~> 1.1"},
       {:parsexml, "~> 1.0"},
       {:dialyxir, "~> 0.5", only: [:dev], runtime: false},
       {:credo, "~> 1.0", only: [:dev, :test], runtime: false},

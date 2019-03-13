@@ -51,8 +51,7 @@ defmodule Flickrex.Mixfile do
       {:parsexml, "~> 1.0"},
       {:dialyxir, "~> 0.5", only: [:dev], runtime: false},
       {:credo, "~> 1.0", only: [:dev, :test], runtime: false},
-      {:ex_doc, ">= 0.0.0", only: :dev},
-      {:poison, "~> 3.0", only: :dev}
+      {:ex_doc, ">= 0.0.0", only: :dev}
     ]
   end
 

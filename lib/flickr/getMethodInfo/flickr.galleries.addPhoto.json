@@ -37,6 +37,46 @@
         "_content": "Unable to add the photo to the gallery."
       },
       {
+        "message": "Photo not public",
+        "code": "6",
+        "_content": "Only public photos can be added to a gallery"
+      },
+      {
+        "message": "Cannot add your own photo",
+        "code": "7",
+        "_content": "Gallery owner is same as the photo owner."
+      },
+      {
+        "message": "Photo in gallery",
+        "code": "8",
+        "_content": "Photo is already in the gallery"
+      },
+      {
+        "message": "Photo owner opted out",
+        "code": "9",
+        "_content": "The photo owner opted this photo out of this galleries"
+      },
+      {
+        "message": "Gallery is full",
+        "code": "10",
+        "_content": "Gallery has the maximum allowed items."
+      },
+      {
+        "message": "Photo not safe",
+        "code": "11",
+        "_content": "Only Safe photos can be added to a gallery."
+      },
+      {
+        "message": "Gallery owner blocked",
+        "code": "12",
+        "_content": "The photo owner has blocked the gallery owner."
+      },
+      {
+        "message": "Photo owner opted out",
+        "code": "13",
+        "_content": "The photo owner has opted out of all galleries."
+      },
+      {
         "message": "SSL is required",
         "code": 95,
         "_content": "SSL is required to access the Flickr API."

@@ -97,6 +97,31 @@
         "optional": "1",
         "name": "photo_ids",
         "_content": "A comma-separated list of photo ids. If specified along with has_photo in sort_groups, each returned gallery will include a list of these photo ids that are present in the gallery as \"has_requested_photos\""
+      },
+      {
+        "optional": "1",
+        "name": "cover_photos",
+        "_content": "set to 1 if cover photos for galleries should be returned. If primary photo exists, 1 primary photo and 2 other photos will be returned (in order). If not, 6 photos in order will be returned"
+      },
+      {
+        "optional": "1",
+        "name": "primary_photo_cover_size",
+        "_content": "size of primary photo on the cover (if primary photo exists in gallery). will default to 'q' if not set"
+      },
+      {
+        "optional": "1",
+        "name": "cover_photos_size",
+        "_content": "size of cover photos (will default to 'q' if not set)"
+      },
+      {
+        "optional": "1",
+        "name": "limit",
+        "_content": "number of cover photos to fetch for galleries without a primary photo. Default is 6"
+      },
+      {
+        "optional": "0",
+        "name": "short_limit",
+        "_content": "number of cover photos to fetch (excluding primary photo) for galleries with a primary photo. Default is 2."
       }
     ]
   }

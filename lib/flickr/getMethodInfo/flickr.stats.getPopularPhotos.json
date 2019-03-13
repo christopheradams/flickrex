@@ -114,12 +114,12 @@
       {
         "optional": "1",
         "name": "date",
-        "_content": "Stats will be returned for this date. This should be in either be in YYYY-MM-DD or unix timestamp format. \n\nA day according to Flickr Stats starts at midnight GMT for all users, and timestamps will automatically be rounded down to the start of the day.\n\nIf no date is provided, all time view counts will be returned."
+        "_content": "Stats will be returned for this date. This should be in either be in YYYY-MM-DD or unix timestamp format.\n\nA day according to Flickr Stats starts at midnight GMT for all users, and timestamps will automatically be rounded down to the start of the day.\n\nIf no date is provided, all time view counts will be returned."
       },
       {
         "optional": "1",
         "name": "sort",
-        "_content": "The order in which to sort returned photos. Defaults to views. The possible values are views, comments and favorites. \n\nOther sort options are available through <a href=\"/services/api/flickr.photos.search.html\">flickr.photos.search</a>."
+        "_content": "The order in which to sort returned photos. Defaults to views. The possible values are views, comments and favorites.\n\nOther sort options are available through <a href=\"/services/api/flickr.photos.search.html\">flickr.photos.search</a>."
       },
       {
         "optional": "1",

@@ -14,7 +14,7 @@
       {
         "message": "Group not found",
         "code": "1",
-        "_content": "The group by that ID does not exist\r\n"
+        "_content": "The group by that ID does not exist\n"
       },
       {
         "message": "Cannot post to group",

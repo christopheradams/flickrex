@@ -19,7 +19,7 @@
       {
         "message": "Cannot post to group",
         "code": "2",
-        "_content": "Either this account is not a member of the group, or discussion in this group is disabled.\r\n"
+        "_content": "Either this account is not a member of the group, or discussion in this group is disabled.\n"
       },
       {
         "message": "Missing required arguments",

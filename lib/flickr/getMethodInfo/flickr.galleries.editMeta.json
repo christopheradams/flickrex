@@ -22,6 +22,11 @@
         "_content": "The title or description arguments could not be validated."
       },
       {
+        "message": "Failed to edit gallery information",
+        "code": "3",
+        "_content": "Failed to edit gallery information. Please try again."
+      },
+      {
         "message": "SSL is required",
         "code": 95,
         "_content": "SSL is required to access the Flickr API."

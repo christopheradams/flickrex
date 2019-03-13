@@ -17,7 +17,7 @@
       {
         "message": "User not found",
         "code": "1",
-        "_content": "The user NSID passed was not a valid user NSID and the calling user was not logged in.\r\n"
+        "_content": "The user NSID passed was not a valid user NSID and the calling user was not logged in.\n"
       },
       {
         "message": "Invalid API Key",

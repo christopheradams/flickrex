@@ -12,6 +12,16 @@
   "errors": {
     "error": [
       {
+        "message": "Invalid gallery ID",
+        "code": "1",
+        "_content": "The gallery ID provided is not valid"
+      },
+      {
+        "message": "Invalid photo ID",
+        "code": "4",
+        "_content": "The photo ID provided is not valid."
+      },
+      {
         "message": "SSL is required",
         "code": 95,
         "_content": "SSL is required to access the Flickr API."

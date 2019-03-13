@@ -114,7 +114,7 @@
       {
         "optional": "0",
         "name": "date",
-        "_content": "Stats will be returned for this date. This should be in either be in YYYY-MM-DD or unix timestamp format. \n\nA day according to Flickr Stats starts at midnight GMT for all users, and timestamps will automatically be rounded down to the start of the day."
+        "_content": "Stats will be returned for this date. This should be in either be in YYYY-MM-DD or unix timestamp format.\n\nA day according to Flickr Stats starts at midnight GMT for all users, and timestamps will automatically be rounded down to the start of the day."
       },
       {
         "optional": "0",

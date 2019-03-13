@@ -74,7 +74,7 @@
       {
         "optional": "1",
         "name": "continuation",
-        "_content": "Using this parameter indicates to the server that the client is using the new, continuation based pagination rather than the older page/per_page based pagination. \nThe first request must pass the \"continuation\" parameter with the value of \"0\". The server responds back with a response that includes the \"continuation\" field along with the \"per_page\" field in the response. For the subsequent requests, the client must relay the value of the \"continuation\" response field as the value of the \"continuation\" request parameter. On the last page of results, the server will respond with a continuation value of \"-1\"."
+        "_content": "Using this parameter indicates to the server that the client is using the new, continuation based pagination rather than the older page/per_page based pagination.\nThe first request must pass the \"continuation\" parameter with the value of \"0\". The server responds back with a response that includes the \"continuation\" field along with the \"per_page\" field in the response. For the subsequent requests, the client must relay the value of the \"continuation\" response field as the value of the \"continuation\" request parameter. On the last page of results, the server will respond with a continuation value of \"-1\"."
       },
       {
         "optional": "1",

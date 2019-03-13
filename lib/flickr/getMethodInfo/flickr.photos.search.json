@@ -206,7 +206,7 @@
       {
         "optional": "1",
         "name": "accuracy",
-        "_content": "Recorded accuracy level of the location information.  Current range is 1-16 : \n\n<ul>\n<li>World level is 1</li>\n<li>Country is ~3</li>\n<li>Region is ~6</li>\n<li>City is ~11</li>\n<li>Street is ~16</li>\n</ul>\n\nDefaults to maximum value if not specified."
+        "_content": "Recorded accuracy level of the location information.  Current range is 1-16 :\n\n<ul>\n<li>World level is 1</li>\n<li>Country is ~3</li>\n<li>Region is ~6</li>\n<li>City is ~11</li>\n<li>Street is ~16</li>\n</ul>\n\nDefaults to maximum value if not specified."
       },
       {
         "optional": "1",
@@ -241,7 +241,7 @@
       {
         "optional": "1",
         "name": "woe_id",
-        "_content": "A 32-bit identifier that uniquely represents spatial entities. (not used if bbox argument is present). \n<br /><br />\nGeo queries require some sort of limiting agent in order to prevent the database from crying. This is basically like the check against \"parameterless searches\" for queries without a geo component.\n<br /><br />\nA tag, for instance, is considered a limiting agent as are user defined min_date_taken and min_date_upload parameters &mdash; If no limiting factor is passed we return only photos added in the last 12 hours (though we may extend the limit in the future)."
+        "_content": "A 32-bit identifier that uniquely represents spatial entities. (not used if bbox argument is present).\n<br /><br />\nGeo queries require some sort of limiting agent in order to prevent the database from crying. This is basically like the check against \"parameterless searches\" for queries without a geo component.\n<br /><br />\nA tag, for instance, is considered a limiting agent as are user defined min_date_taken and min_date_upload parameters &mdash; If no limiting factor is passed we return only photos added in the last 12 hours (though we may extend the limit in the future)."
       },
       {
         "optional": "1",

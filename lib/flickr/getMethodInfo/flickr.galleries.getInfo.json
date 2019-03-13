@@ -67,6 +67,26 @@
         "optional": "0",
         "name": "gallery_id",
         "_content": "The gallery ID you are requesting information for."
+      },
+      {
+        "optional": "1",
+        "name": "primary_photo_size",
+        "_content": "size of the primary photo"
+      },
+      {
+        "optional": "1",
+        "name": "cover_photos_size",
+        "_content": "size of the cover photos (excluding the primary photo)"
+      },
+      {
+        "optional": "1",
+        "name": "limit",
+        "_content": "number of cover photos to fetch for galleries without a primary photo. Default is 6"
+      },
+      {
+        "optional": "1",
+        "name": "short_limit",
+        "_content": "number of cover photos to fetch (excluding primary photo) for galleries with a primary photo. Default is 2."
       }
     ]
   }

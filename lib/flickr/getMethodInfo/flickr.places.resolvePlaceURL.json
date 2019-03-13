@@ -76,7 +76,7 @@
       {
         "optional": "0",
         "name": "url",
-        "_content": "A Flickr Places URL.  \n<br /><br />\nFlickr Place URLs are of the form /country/region/city"
+        "_content": "A Flickr Places URL.\n<br /><br />\nFlickr Place URLs are of the form /country/region/city"
       }
     ]
   }

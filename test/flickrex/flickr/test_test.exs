@@ -3,6 +3,11 @@ defmodule Flickrex.Flickr.TestTest do
 
   @moduletag :flickr_api
 
+  alias Flickrex.{
+    Flickr,
+    Parsers
+  }
+
   test "test echo/1 in XML" do
     test_format(nil, %{}, "text/xml; charset=utf-8")
     test_format(:rest, %{"_content" => "rest"}, "text/xml; charset=utf-8")
@@ -21,8 +26,8 @@ defmodule Flickrex.Flickr.TestTest do
   test "test 404" do
     {:error, resp} =
       [test: "test"]
-      |> Flickrex.Flickr.Test.echo()
-      |> Map.put(:parser, &Flickrex.Parsers.Rest.parse/2)
+      |> Flickr.Test.echo()
+      |> Map.put(:parser, &Parsers.Rest.parse/2)
       |> Map.put(:path, "services/test")
       |> Flickrex.request()
 
@@ -37,7 +42,7 @@ defmodule Flickrex.Flickr.TestTest do
   def test_format(req_format, resp_format_content, resp_content_type, default_params \\ nil) do
     {:ok, resp} =
       [test: "test"]
-      |> Flickrex.Flickr.Test.echo()
+      |> Flickr.Test.echo()
       |> Map.put(:format, req_format)
       |> Map.update!(:default_params, fn value ->
         case default_params do

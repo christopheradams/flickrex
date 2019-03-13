@@ -43,8 +43,7 @@ defmodule Flickrex.Decoder.XML do
     content
     |> Enum.map(&parse_tag/1)
     |> group_by_tag()
-    |> Enum.map(&unlist_single_element/1)
-    |> Enum.into(%{})
+    |> Enum.into(%{}, &unlist_single_element/1)
   end
 
   defp group_by_tag(content) do

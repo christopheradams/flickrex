@@ -152,6 +152,14 @@ mix flickrex.reflect
 The data files are committed to the repository so that network and API access is
 not required to compile this library.
 
+## Documentation
+
+To build the documentation from source:
+
+```
+MIX_ENV=docs mix docs
+```
+
 ## License
 
 Flickrex copyright &copy; 2017&ndash;2018,

@@ -1,7 +1,10 @@
 defmodule Flickrex.UploadTest do
   use ExUnit.Case
 
-  alias Flickrex.{Upload, Operation}
+  alias Flickrex.{
+    Operation,
+    Upload
+  }
 
   test "upload/2 returns an Upload operation" do
     photo = "test/fixtures/photo.png"

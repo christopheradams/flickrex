@@ -1,7 +1,10 @@
 defmodule Flickrex.RestTest do
   use ExUnit.Case
 
-  alias Flickrex.{Rest, Operation}
+  alias Flickrex.{
+    Operation,
+    Rest
+  }
 
   test "get/2 returns a Rest operation" do
     test_rest(:get)

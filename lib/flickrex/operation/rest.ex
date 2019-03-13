@@ -11,9 +11,9 @@ defmodule Flickrex.Operation.Rest do
 
   alias Flickrex.{
     Config,
-    Request.HttpClient,
     Operation,
-    Parsers
+    Parsers,
+    Request.HttpClient
   }
 
   @json_params %{nojsoncallback: 1}

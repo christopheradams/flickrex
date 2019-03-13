@@ -8,9 +8,9 @@ defmodule Flickrex.Operation.Upload do
 
   alias Flickrex.{
     Config,
-    Request.HttpClient,
     Operation,
-    Parsers
+    Parsers,
+    Request.HttpClient
   }
 
   @type success_t :: HttpClient.success_t()

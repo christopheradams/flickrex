@@ -30,7 +30,7 @@ defmodule Mix.Tasks.Flickrex.Reflect do
       |> Rest.get()
       |> Flickrex.request!()
 
-    pretty_methods_json = Poison.encode!(methods, pretty: true)
+    pretty_methods_json = Jason.encode!(methods, pretty: true)
     :ok = File.write(methods_file, pretty_methods_json)
 
     methods
@@ -48,7 +48,7 @@ defmodule Mix.Tasks.Flickrex.Reflect do
       |> Rest.get(method_name: method)
       |> Flickrex.request!()
 
-    pretty_json = Poison.encode!(info, pretty: true)
+    pretty_json = Jason.encode!(info, pretty: true)
     Mix.shell().info("Saving #{info_file}")
     File.write(info_file, pretty_json)
   end

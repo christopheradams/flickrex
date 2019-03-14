@@ -39,7 +39,7 @@ defmodule Flickrex.Mixfile do
   # local development, and not for package users.
   @lib_paths ["lib/flickr", "lib/flickrex", "lib/flickrex.ex"]
 
-  defp elixirc_paths(:dev), do: ["lib/mix" | @lib_paths]
+  defp elixirc_paths(env) when env in [:dev, :docs], do: ["lib/mix" | @lib_paths]
   defp elixirc_paths(:test), do: ["test/support" | @lib_paths]
   defp elixirc_paths(_), do: @lib_paths
 
@@ -51,7 +51,7 @@ defmodule Flickrex.Mixfile do
       {:parsexml, "~> 1.0"},
       {:dialyxir, "~> 0.5", only: [:dev], runtime: false},
       {:credo, "~> 1.0", only: [:dev, :test], runtime: false},
-      {:ex_doc, ">= 0.0.0", only: :dev}
+      {:ex_doc, "~>  0.19", only: :docs}
     ]
   end
 

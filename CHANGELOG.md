@@ -1,5 +1,10 @@
 # Changelog
 
+## v0.8.0 (2019-03-15)
+
+* Enhancements
+  * [Flickr] Include example responses in Flickr API documentation.
+
 ## v0.7.0 (2018-03-15)
 
 * Enhancements

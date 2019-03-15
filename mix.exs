@@ -5,7 +5,7 @@ defmodule Flickrex.Mixfile do
   Flickr API client library for Elixir
   """
 
-  @version "0.7.0"
+  @version "0.8.0"
   @source_url "https://github.com/christopheradams/flickrex"
 
   def project do

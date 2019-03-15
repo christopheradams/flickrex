@@ -36,7 +36,7 @@ def application do
 end
 
 def deps do
-  [{:flickrex, "~> 0.7"}]
+  [{:flickrex, "~> 0.8"}]
 end
 ```
 
@@ -162,7 +162,7 @@ MIX_ENV=docs mix docs
 
 ## License
 
-Flickrex copyright &copy; 2017&ndash;2018,
+Flickrex copyright &copy; 2017&ndash;2019,
 [Christopher Adams](https://github.com/christopheradams)
 
 Flickrex logo based on Venn Diagram CC-by Eddy Ymeri

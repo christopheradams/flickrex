@@ -61,6 +61,16 @@
         "message": "Maximum number of notes reached"
       },
       {
+        "_content": "The note dimsension provided are larger than the photo dimension. Please reduce the note dimensions to an appropriate size.",
+        "code": "5",
+        "message": "Note would exceed photo dimensions"
+      },
+      {
+        "_content": "The user has reached the limit for number of notes posted during a specific time period.  Wait a bit and try again.",
+        "code": "6",
+        "message": "User is posting notes too fast."
+      },
+      {
         "_content": "SSL is required to access the Flickr API.",
         "code": 95,
         "message": "SSL is required"

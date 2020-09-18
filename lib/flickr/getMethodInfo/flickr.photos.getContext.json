@@ -67,7 +67,7 @@
       "_content": "Returns next and previous photos for a photo in a photostream."
     },
     "explanation": {
-      "_content": "<p>When either the previous of next photo is unavailable, the element is still returned, but contains <code>id=\"0\"</code></p>"
+      "_content": "<p>When either the previous or next photo is unavailable, the element is still returned, but contains <code>id=\"0\"</code></p>"
     },
     "name": "flickr.photos.getContext",
     "needslogin": 0,

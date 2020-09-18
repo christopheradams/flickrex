@@ -12,7 +12,7 @@
         "optional": "1"
       },
       {
-        "_content": "The sort order. One of <code>faves</code>, <code>views</code>, <code>comments</code> or <code>interesting</code>. Deafults to <code>interesting</code>.",
+        "_content": "The sort order. One of <code>faves</code>, <code>views</code>, <code>comments</code> or <code>interesting</code>. Defaults to <code>interesting</code>.",
         "name": "sort",
         "optional": "1"
       },

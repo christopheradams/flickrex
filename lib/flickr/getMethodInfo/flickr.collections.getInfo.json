@@ -89,14 +89,14 @@
   },
   "method": {
     "description": {
-      "_content": "Returns information for a single collection.  Currently can only be called by the collection owner, this may change."
+      "_content": "Returns information for a single collection.  Currently can only be called by the collection owner, this may change.\t\t\n\t\t\t\tNote that the response values of `iconlarge` and `iconsmall` are defunct and will now return empty mosaic grids. For more information on how to \n\t\t\t\tuse the new style of collection mosaics, go <a href=\"https://www.flickr.com/services/api/misc.collections.html\">here</a>."
     },
     "name": "flickr.collections.getInfo",
     "needslogin": 1,
     "needssigning": 1,
     "requiredperms": "1",
     "response": {
-      "_content": "<collection id=\"12-72157594586579649\" child_count=\"6\" datecreate=\"1173812218\" iconlarge=\"http://farm1.static.flickr.com/187/cols/73743fac2cf79_l.jpg\" iconsmall=\"http://farm1.static.flickr.com/187/cols/72157594586579649_43fac2cf79_s.jpg\" server=\"187\" secret=\"36\">\n<title>All My Photos</title>\n<description>Photos!</description>\n<iconphotos>\n<photo id=\"14\" owner=\"12@N01\" secret=\"b57ba5c\" server=\"51\" farm=\"1\" title=\"in full cap and gown\" ispublic=\"1\" isfriend=\"0\" isfamily=\"0\"/>\n<photo id=\"15\" owner=\"12@N01\" secret=\"ba1c2a8\" server=\"58\" farm=\"1\" title=\"Just beyond the door\" ispublic=\"0\" isfriend=\"1\" isfamily=\"0\"/>\n<photo id=\"17\" owner=\"12@N01\" secret=\"0001969\" server=\"73\" farm=\"1\" title=\"IMG_3787.JPG\" ispublic=\"1\" isfriend=\"0\" isfamily=\"0\"/>\n....\n</iconphotos>\n</collection>"
+      "_content": "<collection id=\"12-72157594586579649\" child_count=\"6\" datecreate=\"1173812218\" iconlarge=\"https://combo.staticflickr.com/pw/images/collection_default_l.gif\" iconsmall=\"https://combo.staticflickr.com/pw/images/collection_default_s.gif\" server=\"187\" secret=\"36\">\n<title>All My Photos</title>\n<description>Photos!</description>\n<iconphotos>\n<photo id=\"14\" owner=\"12@N01\" secret=\"b57ba5c\" server=\"51\" farm=\"1\" title=\"in full cap and gown\" ispublic=\"1\" isfriend=\"0\" isfamily=\"0\"/>\n<photo id=\"15\" owner=\"12@N01\" secret=\"ba1c2a8\" server=\"58\" farm=\"1\" title=\"Just beyond the door\" ispublic=\"0\" isfriend=\"1\" isfamily=\"0\"/>\n<photo id=\"17\" owner=\"12@N01\" secret=\"0001969\" server=\"73\" farm=\"1\" title=\"IMG_3787.JPG\" ispublic=\"1\" isfriend=\"0\" isfamily=\"0\"/>\n....\n</iconphotos>\n</collection>"
     }
   },
   "stat": "ok"

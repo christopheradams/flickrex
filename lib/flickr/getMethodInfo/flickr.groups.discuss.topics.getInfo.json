@@ -26,6 +26,11 @@
         "message": "Topic not found"
       },
       {
+        "_content": "The group discussion is unavailable to non-members",
+        "code": "2",
+        "message": "Topic unavailable"
+      },
+      {
         "_content": "The API key passed was not valid or has expired.",
         "code": 100,
         "message": "Invalid API Key"

@@ -12,7 +12,7 @@
         "optional": "1"
       },
       {
-        "_content": "The ID of the account to fetch the collection tree for. Deafults to the calling user.",
+        "_content": "The ID of the account to fetch the collection tree for. Defaults to the calling user.",
         "name": "user_id",
         "optional": "1"
       }
@@ -74,7 +74,7 @@
   },
   "method": {
     "description": {
-      "_content": "Returns a tree (or sub tree) of collections belonging to a given user."
+      "_content": "Returns a tree (or sub tree) of collections belonging to a given user.\n\t\t\t\tNote that the response values of `iconlarge` and `iconsmall` are defunct and will now return empty mosaic grids. For more information on how to \n\t\t\t\tuse the new style of collection mosaics, go <a href=\"https://www.flickr.com/services/api/misc.collections.html\">here</a>."
     },
     "explanation": {
       "_content": "A nested tree of collections, and the collections and sets they contain."
@@ -84,7 +84,7 @@
     "needssigning": 0,
     "requiredperms": 0,
     "response": {
-      "_content": "<collections>\n<collection id=\"12-72157594586579649\" title=\"All My Photos\" description=\"a collection\" iconlarge=\"http://farm1.static.flickr.com/187/cols/37_43fac2cf79_l.jpg\" \niconsmall=\"http://farm1.static.flickr.com/187/cols/56_43fac2cf79_s.jpg\">\n<set id=\"92157594171298291\" title=\"kitesurfing\" description=\"a set\"/>\n<set id=\"72157594247596158\" title=\"faves\" description=\"some favorites.\"/>\n</collection>\n</collections>"
+      "_content": "<collections>\n<collection id=\"12-72157594586579649\" title=\"All My Photos\" description=\"a collection\" iconlarge=\"https://combo.staticflickr.com/pw/images/collection_default_l.gif\" \niconsmall=\"https://combo.staticflickr.com/pw/images/collection_default_s.gif\">\n<set id=\"92157594171298291\" title=\"kitesurfing\" description=\"a set\"/>\n<set id=\"72157594247596158\" title=\"faves\" description=\"some favorites.\"/>\n</collection>\n</collections>"
     }
   },
   "stat": "ok"

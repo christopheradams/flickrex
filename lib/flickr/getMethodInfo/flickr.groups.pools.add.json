@@ -56,7 +56,7 @@
         "message": "Your Photo has already been added to the Pending Queue for this Pool"
       },
       {
-        "_content": "The content has been disallowed from the pool by the group admin(s).",
+        "_content": "The content does not comply with the group's moderation rules.",
         "code": "8",
         "message": "Content not allowed"
       },
@@ -64,6 +64,56 @@
         "_content": "A group pool has reached the upper limit for the number of photos allowed.",
         "code": "10",
         "message": "Maximum number of photos in Group Pool"
+      },
+      {
+        "_content": "The admin of this group has disabled posting photos to the Pool",
+        "code": "11",
+        "message": "Group Pool is disabled"
+      },
+      {
+        "_content": "Group pool only accepts photos.",
+        "code": "21",
+        "message": "Videos not allowed"
+      },
+      {
+        "_content": "Group pool only accepts videos.",
+        "code": "22",
+        "message": "Photos not allowed"
+      },
+      {
+        "_content": "The video is in an invalid state: it is either being processed or it failed to processed correctly.",
+        "code": "23",
+        "message": "Video in invalid state"
+      },
+      {
+        "_content": "The Group pool does not allow photo/video-type of content.",
+        "code": "24",
+        "message": "No photo/video allowed"
+      },
+      {
+        "_content": "The Group pool does not allow screenshot/screencast-type of content.",
+        "code": "25",
+        "message": "No screenshot/screencast allowed"
+      },
+      {
+        "_content": "The Group pool does not allow illustration/art/animation/CGI-type of content.",
+        "code": "26",
+        "message": "No illustration/art/animation/CGI allowed"
+      },
+      {
+        "_content": "This Group pool does not allow restricted content.",
+        "code": "27",
+        "message": "No restricted content allowed"
+      },
+      {
+        "_content": "This Group pool only allows safe content (no restricted or moderate content).",
+        "code": "28",
+        "message": "No restricted or moderate content allowed"
+      },
+      {
+        "_content": "Group pool requires items to be geotagged.",
+        "code": "29",
+        "message": "Items must be geotagged"
       },
       {
         "_content": "SSL is required to access the Flickr API.",

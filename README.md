@@ -157,7 +157,7 @@ not required to compile this library.
 To build the documentation from source:
 
 ```
-MIX_ENV=docs mix docs
+mix docs
 ```
 
 ## License

@@ -116,6 +116,9 @@ Run the test with:
 mix test --only flickr_api
 ```
 
+If testing this package on [Travis CI](https://travis-ci.com/), the same Flickr
+environment variables must be set for the repository.
+
 ### Bypass and Mocks
 
 If you are using the Flickrex package in your own application, you have the

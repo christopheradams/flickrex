@@ -46,7 +46,7 @@ defmodule Flickrex.Mixfile do
   defp deps do
     [
       {:oauther, "~> 1.0"},
-      {:hackney, "~> 1.8.6 or ~> 1.9 or ~> 1.10"},
+      {:hackney, "~> 1.16.0"},
       {:jason, "~> 1.1"},
       {:parsexml, "~> 1.0"},
       {:dialyxir, "~> 0.5", only: [:dev], runtime: false},

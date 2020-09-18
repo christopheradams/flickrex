@@ -1,5 +1,10 @@
 # Changelog
 
+## v0.8.1 (2020-09-18)
+
+* Fixes
+  * [Mix] Update hackney dependency to fix benoitc/hackney#589
+
 ## v0.8.0 (2019-03-15)
 
 * Enhancements

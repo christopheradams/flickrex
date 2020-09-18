@@ -49,7 +49,7 @@ defmodule Flickrex.Mixfile do
       {:hackney, "~> 1.16.0"},
       {:jason, "~> 1.1"},
       {:parsexml, "~> 1.0"},
-      {:dialyxir, "~> 0.5", only: [:dev], runtime: false},
+      {:dialyxir, "~> 1.0", only: [:dev], runtime: false},
       {:credo, "~> 1.0", only: [:dev, :test], runtime: false},
       {:ex_doc, "~>  0.19", only: :docs}
     ]

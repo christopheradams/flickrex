@@ -10,5 +10,5 @@ matrix:
 sudo: false
 
 script:
-  - mix test
+  - mix test --include flickr_api
   - mix credo

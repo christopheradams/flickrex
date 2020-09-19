@@ -14,9 +14,11 @@ The package's main modules are:
 * `Flickrex.Upload` - handles photo uploads.
 * `Flickrex.URL` - generates Flickr URLs for photos, etc.
 
-[Documentation for Flickrex is available on hexdocs](http://hexdocs.pm/flickrex/).<br/>
-[Source code is available on GitHub](https://github.com/christopheradams/flickrex).<br/>
-[Package is available on hex](https://hex.pm/packages/flickrex).
+Install the latest version of Flickrex from [https://hex.pm/packages/flickrex](https://hex.pm/packages/flickrex)
+
+Documentation is available at [http://hexdocs.pm/flickrex](http://hexdocs.pm/flickrex)
+
+Source code is available at [https://github.com/christopheradams/flickrex](https://github.com/christopheradams/flickrex)
 
 ## Hello World
 

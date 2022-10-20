@@ -1,4 +1,4 @@
-use Mix.Config
+import Config
 
 config :flickrex, :config,
   consumer_key: System.get_env("FLICKR_CONSUMER_KEY"),
